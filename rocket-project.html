@@ -46,6 +46,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap; /* Allows wrapping on smaller screens */
         }
 
         .logo {
@@ -195,20 +196,64 @@
             font-size: 0.85rem;
         }
 
+        /* Responsive Mobile Styles */
         @media (max-width: 768px) {
-            .project-header h1 {
-                font-size: 1.8rem;
+            /* Fix Navigation for mobile */
+            nav {
+                padding: 1rem;
+            }
+            
+            nav .container {
+                flex-direction: column;
+                gap: 1rem;
+                justify-content: center;
             }
 
             nav ul {
-                flex-direction: column;
                 gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+            }
+
+            /* Adjust Project Detail Section */
+            .project-detail {
+                padding: 2rem 1.5rem 4rem; /* Less extreme padding */
+            }
+
+            .back-link {
+                margin-bottom: 2rem;
+            }
+
+            .project-header h1 {
+                font-size: 2rem; /* Scaled down header */
+                margin-bottom: 1rem;
+            }
+
+            /* Stack the meta data neatly */
+            .project-meta {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .project-section h2 {
+                font-size: 1.2rem;
+            }
+
+            .project-section ul {
+                margin-left: 1.2rem; /* Bring bullets in slightly on narrow screens */
+            }
+
+            .project-highlight {
+                padding: 1.5rem; /* Tighter padding for the callout box */
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="container">
             <a href="index.html" class="logo">JK</a>
@@ -222,7 +267,6 @@
         </div>
     </nav>
 
-    <!-- Project Detail -->
     <div class="project-detail">
         <div class="container">
             <a href="projects.html" class="back-link">← Back to Projects</a>
@@ -273,7 +317,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Jan Kazimierczak - Engineering Portfolio | Designed with HTML & CSS</p>
     </footer>
