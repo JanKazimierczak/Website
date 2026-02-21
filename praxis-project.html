@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praxis II - Jan Kazimierczak</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #111111;
+            --tertiary-color: #1a1a1a;
+            --accent-color: #ffffff;
+            --text-light: #ffffff;
+            --text-secondary: #d0d0d0;
+            --text-muted: #888888;
+            --border-color: #333333;
+            --hover-color: #262626;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--primary-color);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--text-secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: var(--text-secondary);
+        }
+
+        nav a.active {
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--text-secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Project Detail */
+        .project-detail {
+            padding: 4rem 2rem 6rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-bottom: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            color: var(--text-secondary);
+        }
+
+        .project-header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
+        }
+
+        .project-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .meta-item strong {
+            color: var(--text-secondary);
+        }
+
+        .project-section {
+            margin-bottom: 3rem;
+        }
+
+        .project-section h2 {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .project-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .project-section ul {
+            margin-left: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .project-section li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .project-highlight {
+            background-color: var(--tertiary-color);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            color: var(--text-secondary);
+        }
+
+        .project-highlight strong {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">JK</a>
+            <ul>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="design.html" class="nav-link active">Design</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Detail -->
+    <div class="project-detail">
+        <div class="container">
+            <a href="design.html" class="back-link">← Back to Design Portfolio</a>
+
+            <div class="project-header">
+                <h1>Praxis II</h1>
+                <div class="project-meta">
+                    <div class="meta-item"><strong>Category:</strong> Parametric Design</div>
+                    <div class="meta-item"><strong>Status:</strong> In Progress</div>
+                    <div class="meta-item"><strong>Year:</strong> 2025-2026</div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Project Overview</h2>
+                <p>Advanced parametric design project exploring the intersection of architecture and engineering. Using computational design methods to create complex geometries and optimize spatial configurations.</p>
+                <div class="project-highlight">
+                    <strong>Focus:</strong> Developing parametric models that respond dynamically to design constraints and performance metrics.
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Design Methodology</h2>
+                <ul>
+                    <li>Parametric geometry generation using algorithmic design</li>
+                    <li>Performance-based design optimization</li>
+                    <li>Advanced visualization and rendering techniques</li>
+                    <li>Integration of structural analysis with design process</li>
+                </ul>
+            </div>
+
+            <div class="project-section">
+                <h2>Tools & Skills</h2>
+                <ul>
+                    <li><strong>SolidWorks:</strong> Advanced CAD modeling and parametric design</li>
+                    <li><strong>3D Visualization:</strong> Rendering and presentation techniques</li>
+                    <li><strong>Design Optimization:</strong> Multi-objective design refinement</li>
+                </ul>
+            </div>
+
+            <div class="project-section">
+                <h2>Current Work</h2>
+                <p>Currently developing algorithmic design components and integrating parametric constraints. Focus on creating responsive design systems that automatically adjust to changing input parameters.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Jan Kazimierczak - Engineering Portfolio | Designed with HTML & CSS</p>
+    </footer>
+</body>
+</html>

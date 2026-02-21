@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Jan Kazimierczak</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #111111;
+            --tertiary-color: #1a1a1a;
+            --accent-color: #ffffff;
+            --text-light: #ffffff;
+            --text-secondary: #d0d0d0;
+            --text-muted: #888888;
+            --border-color: #333333;
+            --hover-color: #262626;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--primary-color);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: var(--text-secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: var(--text-secondary);
+        }
+
+        nav a.active {
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--text-secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 2rem;
+            background-color: var(--primary-color);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            text-align: left;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .skill-category h4 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--text-light);
+            padding: 0.6rem 1.2rem;
+            border-radius: 0;
+            margin-right: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--text-secondary);
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .skills {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">JK</a>
+            <ul>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link active">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="design.html" class="nav-link">Design</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Page -->
+    <div class="about">
+        <div class="container">
+            <h1 class="section-title">About</h1>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Engineering Student at University of Toronto</h3>
+                    <p>First-year Engineering Science student with a 3.63 GPA, focused on aerospace engineering and quantitative analysis. Member of UTAT (University of Toronto Aerospace Team), actively developing CAD skills and exploring international aerospace opportunities.</p>
+                    <p>My interests span spacecraft propulsion systems, structural analysis, parametric design, and physics simulations. I'm driven by mathematical rigor and applying engineering principles to solve real-world challenges.</p>
+                    <p>Currently exploring aerospace internship opportunities in Europe and considering advanced studies at institutions like TU Delft.</p>
+                </div>
+                <div>
+                    <div class="skills">
+                        <div class="skill-category">
+                            <h4>Programming</h4>
+                            <div class="skill-tag">Python</div>
+                            <div class="skill-tag">MATLAB</div>
+                            <div class="skill-tag">C/C++</div>
+                            <div class="skill-tag">LaTeX</div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Software & Tools</h4>
+                            <div class="skill-tag">CAD Modeling</div>
+                            <div class="skill-tag">SolidWorks</div>
+                            <div class="skill-tag">ANSYS</div>
+                            <div class="skill-tag">Google Docs</div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Engineering</h4>
+                            <div class="skill-tag">Mechanics</div>
+                            <div class="skill-tag">Structural Analysis</div>
+                            <div class="skill-tag">Propulsion</div>
+                            <div class="skill-tag">Physics</div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Interests</h4>
+                            <div class="skill-tag">Aerospace</div>
+                            <div class="skill-tag">Quantitative Analysis</div>
+                            <div class="skill-tag">Research</div>
+                            <div class="skill-tag">Simulations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Jan Kazimierczak - Engineering Portfolio | Designed with HTML & CSS</p>
+    </footer>
+</body>
+</html>

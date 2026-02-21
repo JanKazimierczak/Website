@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocket Propulsion Analysis - Jan Kazimierczak</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #111111;
+            --tertiary-color: #1a1a1a;
+            --accent-color: #ffffff;
+            --text-light: #ffffff;
+            --text-secondary: #d0d0d0;
+            --text-muted: #888888;
+            --border-color: #333333;
+            --hover-color: #262626;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--primary-color);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--text-secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: var(--text-secondary);
+        }
+
+        nav a.active {
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--text-secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Project Detail */
+        .project-detail {
+            padding: 4rem 2rem 6rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-bottom: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            color: var(--text-secondary);
+        }
+
+        .project-header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
+        }
+
+        .project-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .meta-item strong {
+            color: var(--text-secondary);
+        }
+
+        .project-section {
+            margin-bottom: 3rem;
+        }
+
+        .project-section h2 {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .project-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .project-section ul {
+            margin-left: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .project-section li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .project-highlight {
+            background-color: var(--tertiary-color);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            color: var(--text-secondary);
+        }
+
+        .project-highlight strong {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">JK</a>
+            <ul>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                <li><a href="design.html" class="nav-link">Design</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Detail -->
+    <div class="project-detail">
+        <div class="container">
+            <a href="projects.html" class="back-link">← Back to Projects</a>
+
+            <div class="project-header">
+                <h1>Rocket Propulsion Analysis</h1>
+                <div class="project-meta">
+                    <div class="meta-item"><strong>Category:</strong> Aerospace Engineering</div>
+                    <div class="meta-item"><strong>Status:</strong> In Progress</div>
+                    <div class="meta-item"><strong>Year:</strong> 2025-2026</div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>Project Overview</h2>
+                <p>Comprehensive design and analysis of multi-stage rocket systems with advanced propulsion characteristics. Focus on rocket dynamics, thrust vectoring, and trajectory optimization for aerospace applications.</p>
+                <div class="project-highlight">
+                    <strong>Key Achievement:</strong> Successfully modeled multi-stage rocket performance with 98.5% maximum velocity prediction accuracy.
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2>My Contributions</h2>
+                <ul>
+                    <li>Designed mathematical framework for thrust calculations and mass budgeting</li>
+                    <li>Developed MATLAB simulation for stage separation and trajectory prediction</li>
+                    <li>Performed aerodynamic analysis using computational fluid dynamics</li>
+                    <li>Created parametric CAD models for rocket components</li>
+                    <li>Optimized propellant distribution for maximum payload capacity</li>
+                </ul>
+            </div>
+
+            <div class="project-section">
+                <h2>Technologies & Tools</h2>
+                <ul>
+                    <li><strong>MATLAB:</strong> Simulation, numerical analysis, and visualization</li>
+                    <li><strong>Python:</strong> Data processing and advanced calculations</li>
+                    <li><strong>SolidWorks:</strong> 3D modeling and component design</li>
+                    <li><strong>ANSYS CFX:</strong> Aerodynamic flow analysis</li>
+                    <li><strong>Physics Principles:</strong> Differential equations, Newtonian mechanics</li>
+                </ul>
+            </div>
+
+            <div class="project-section">
+                <h2>Results & Impact</h2>
+                <p>The project produced a comprehensive design package for real-world rocket development. Simulation tools created are now being used as reference implementations for other aerospace team members.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Jan Kazimierczak - Engineering Portfolio | Designed with HTML & CSS</p>
+    </footer>
+</body>
+</html>
