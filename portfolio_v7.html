@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jan Kazimierczak - Engineering Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #111111;
+            --tertiary-color: #1a1a1a;
+            --accent-color: #ffffff;
+            --text-light: #ffffff;
+            --text-secondary: #d0d0d0;
+            --text-muted: #888888;
+            --border-color: #333333;
+            --hover-color: #262626;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--primary-color);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--text-secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: var(--text-secondary);
+        }
+
+        nav a.active {
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--text-secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            background-color: var(--primary-color);
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero-text h2 {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .hero-text p {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .hero-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--tertiary-color) 0%, var(--hover-color) 100%);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-radius: 0;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 2.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border-color: var(--accent-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--text-secondary);
+            border-color: var(--text-secondary);
+            transform: none;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 2rem;
+            background-color: var(--primary-color);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            text-align: left;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .skill-category h4 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--text-light);
+            padding: 0.6rem 1.2rem;
+            border-radius: 0;
+            margin-right: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--text-secondary);
+            color: var(--text-secondary);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 8rem 2rem;
+            background-color: var(--primary-color);
+        }
+
+        .projects-section {
+            margin-bottom: 6rem;
+        }
+
+        .projects-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-card {
+            background-color: transparent;
+            border-radius: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-card:hover {
+            border-color: var(--text-secondary);
+            transform: none;
+        }
+
+        .project-image {
+            height: 200px;
+            background: var(--tertiary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .project-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-badge {
+            background-color: transparent;
+            color: var(--text-secondary);
+            padding: 0.4rem 0.9rem;
+            border-radius: 0;
+            font-size: 0.75rem;
+            border: 1px solid var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .view-btn {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        .view-btn:hover {
+            color: var(--text-secondary);
+        }
+
+        /* Project Detail Page */
+        .project-detail {
+            padding: 4rem 2rem 6rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-bottom: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            color: var(--text-secondary);
+        }
+
+        .project-header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
+        }
+
+        .project-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .meta-item strong {
+            color: var(--text-secondary);
+        }
+
+        .project-section {
+            margin-bottom: 3rem;
+        }
+
+        .project-section h2 {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .project-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .project-section ul {
+            margin-left: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .project-section li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .project-highlight {
+            background-color: var(--tertiary-color);
+            border-left: 1px solid var(--border-color);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0;
+            color: var(--text-secondary);
+        }
+
+        .project-highlight strong {
+            color: var(--accent-color);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 2rem;
+            background-color: var(--primary-color);
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-intro {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-item {
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            background-color: transparent;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .contact-item:hover {
+            border-color: var(--text-secondary);
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1);
+        }
+
+        .contact-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: var(--accent-color);
+            fill: none;
+            stroke-width: 1.5;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon svg {
+            stroke: var(--text-secondary);
+        }
+
+        .contact-item h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .contact-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            word-break: break-all;
+        }
+
+        .contact-item a:hover {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .skills {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo" onclick="showPage('home')">JK</div>
+            <ul>
+                <li><a onclick="showPage('home')" class="nav-link active">Home</a></li>
+                <li><a onclick="showPage('about')" class="nav-link">About</a></li>
+                <li><a onclick="showPage('projects')" class="nav-link">Projects</a></li>
+                <li><a onclick="showPage('contact')" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Jan Kazimierczak</h1>
+                    <h2>Aerospace Engineering</h2>
+                    <p>First-year Engineering Science student at University of Toronto. Passionate about spacecraft propulsion, quantitative analysis, and advanced systems design. Member of UTAT.</p>
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary" onclick="showPage('projects')">View Work</button>
+                        <button class="btn btn-secondary" onclick="showPage('contact')">Contact</button>
+                    </div>
+                </div>
+                <div class="hero-image">📷</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <div class="about">
+            <div class="container">
+                <h1 class="section-title">About</h1>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Engineering Student at University of Toronto</h3>
+                        <p>First-year Engineering Science student with a 3.63 GPA, focused on aerospace engineering and quantitative analysis. Member of UTAT (University of Toronto Aerospace Team), actively developing CAD skills and exploring international aerospace opportunities.</p>
+                        <p>My interests span spacecraft propulsion systems, structural analysis, parametric design, and physics simulations. I'm driven by mathematical rigor and applying engineering principles to solve real-world challenges.</p>
+                        <p>Currently exploring aerospace internship opportunities in Europe and considering advanced studies at institutions like TU Delft.</p>
+                    </div>
+                    <div>
+                        <div class="skills">
+                            <div class="skill-category">
+                                <h4>Programming</h4>
+                                <div class="skill-tag">Python</div>
+                                <div class="skill-tag">MATLAB</div>
+                                <div class="skill-tag">C/C++</div>
+                                <div class="skill-tag">LaTeX</div>
+                            </div>
+                            <div class="skill-category">
+                                <h4>Software & Tools</h4>
+                                <div class="skill-tag">CAD Modeling</div>
+                                <div class="skill-tag">SolidWorks</div>
+                                <div class="skill-tag">ANSYS</div>
+                                <div class="skill-tag">Google Docs</div>
+                            </div>
+                            <div class="skill-category">
+                                <h4>Engineering</h4>
+                                <div class="skill-tag">Mechanics</div>
+                                <div class="skill-tag">Structural Analysis</div>
+                                <div class="skill-tag">Propulsion</div>
+                                <div class="skill-tag">Physics</div>
+                            </div>
+                            <div class="skill-category">
+                                <h4>Interests</h4>
+                                <div class="skill-tag">Aerospace</div>
+                                <div class="skill-tag">Quantitative Analysis</div>
+                                <div class="skill-tag">Research</div>
+                                <div class="skill-tag">Simulations</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Page -->
+    <div id="projects" class="page">
+        <div class="projects">
+            <div class="container">
+                <h1 class="section-title">Projects</h1>
+
+                <!-- Active Projects -->
+                <div class="projects-section">
+                    <h2 class="projects-subtitle">Active Projects</h2>
+                    <div class="projects-grid">
+                        <div class="project-card" onclick="showProjectDetail('rocket')">
+                            <div class="project-image">🚀</div>
+                            <div class="project-content">
+                                <h3>Rocket Propulsion Analysis</h3>
+                                <p>Multi-stage rocket system design with thrust vectoring and trajectory optimization.</p>
+                                <div class="project-tech">
+                                    <span class="tech-badge">MATLAB</span>
+                                    <span class="tech-badge">Physics</span>
+                                    <span class="tech-badge">CAD</span>
+                                </div>
+                                <a class="view-btn" onclick="event.stopPropagation(); showProjectDetail('rocket')">Details →</a>
+                            </div>
+                        </div>
+
+                        <div class="project-card" onclick="showProjectDetail('spacecraft')">
+                            <div class="project-image">🛰️</div>
+                            <div class="project-content">
+                                <h3>CubeSat System Design</h3>
+                                <p>Integrated design of small satellite systems with thermal management.</p>
+                                <div class="project-tech">
+                                    <span class="tech-badge">System Design</span>
+                                    <span class="tech-badge">Thermal Analysis</span>
+                                    <span class="tech-badge">SolidWorks</span>
+                                </div>
+                                <a class="view-btn" onclick="event.stopPropagation(); showProjectDetail('spacecraft')">Details →</a>
+                            </div>
+                        </div>
+
+                        <div class="project-card" onclick="showProjectDetail('control')">
+                            <div class="project-image">🎮</div>
+                            <div class="project-content">
+                                <h3>Control Systems Design</h3>
+                                <p>Feedback control systems with stability analysis and optimization.</p>
+                                <div class="project-tech">
+                                    <span class="tech-badge">Control Theory</span>
+                                    <span class="tech-badge">MATLAB</span>
+                                    <span class="tech-badge">Simulink</span>
+                                </div>
+                                <a class="view-btn" onclick="event.stopPropagation(); showProjectDetail('control')">Details →</a>
+                            </div>
+                        </div>
+
+                        <div class="project-card" onclick="showProjectDetail('parametric')">
+                            <div class="project-image">📐</div>
+                            <div class="project-content">
+                                <h3>Parametric Design Study</h3>
+                                <p>Aircraft wing geometry optimization using parametric modeling.</p>
+                                <div class="project-tech">
+                                    <span class="tech-badge">CAD</span>
+                                    <span class="tech-badge">Optimization</span>
+                                    <span class="tech-badge">SolidWorks</span>
+                                </div>
+                                <a class="view-btn" onclick="event.stopPropagation(); showProjectDetail('parametric')">Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Projects -->
+                <div class="projects-section">
+                    <h2 class="projects-subtitle">Past Projects</h2>
+                    <div class="projects-grid">
+                        <div class="project-card" onclick="showProjectDetail('bridge')">
+                            <div class="project-image">🌉</div>
+                            <div class="project-content">
+                                <h3>Bridge Structural Analysis</h3>
+                                <p>Finite element analysis and load distribution optimization for truss structures.</p>
+                                <div class="project-tech">
+                                    <span class="tech-badge">ANSYS</span>
+                                    <span class="tech-badge">FEA</span>
+                                    <span class="tech-badge">Python</span>
+                                </div>
+                                <a class="view-btn" onclick="event.stopPropagation(); showProjectDetail('bridge')">Details →</a>
+                            </div>
+                        </div>
+
+                        <div class="project-card" onclick="showProjectDetail('simulation')">
+                            <div class="project-image">⚙️</div>
+                            <div class="project-content">
+                                <h3>Physics Simulation Engine</h3>
+                                <p>Custom numerical simulation for dynamics and orbital mechanics using Python.</p>
+                                <div class="project-tech">
+                                    <span class="tech-badge">Python</span>
+                                    <span class="tech-badge">Numerical Methods</span>
+                                    <span class="tech-badge">Mechanics</span>
+                                </div>
+                                <a class="view-btn" onclick="event.stopPropagation(); showProjectDetail('simulation')">Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Details Pages -->
+    <div id="rocket-detail" class="page">
+        <div class="project-detail">
+            <div class="container">
+                <a class="back-link" onclick="showPage('projects')">← Back</a>
+                <div class="project-header">
+                    <h1>Rocket Propulsion Analysis</h1>
+                    <div class="project-meta">
+                        <div class="meta-item"><strong>Category:</strong> Aerospace Engineering</div>
+                        <div class="meta-item"><strong>Status:</strong> In Progress</div>
+                        <div class="meta-item"><strong>Year:</strong> 2025-2026</div>
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h2>Project Overview</h2>
+                    <p>Comprehensive design and analysis of multi-stage rocket systems with advanced propulsion characteristics. Focus on rocket dynamics, thrust vectoring, and trajectory optimization for aerospace applications.</p>
+                    <div class="project-highlight">
+                        <strong>Key Achievement:</strong> Successfully modeled multi-stage rocket performance with 98.5% maximum velocity prediction accuracy.
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h2>My Contributions</h2>
+                    <ul>
+                        <li>Designed mathematical framework for thrust calculations and mass budgeting</li>
+                        <li>Developed MATLAB simulation for stage separation and trajectory prediction</li>
+                        <li>Performed aerodynamic analysis using computational fluid dynamics</li>
+                        <li>Created parametric CAD models for rocket components</li>
+                        <li>Optimized propellant distribution for maximum payload capacity</li>
+                    </ul>
+                </div>
+
+                <div class="project-section">
+                    <h2>Technologies & Tools</h2>
+                    <ul>
+                        <li><strong>MATLAB:</strong> Simulation, numerical analysis, and visualization</li>
+                        <li><strong>Python:</strong> Data processing and advanced calculations</li>
+                        <li><strong>SolidWorks:</strong> 3D modeling and component design</li>
+                        <li><strong>ANSYS CFX:</strong> Aerodynamic flow analysis</li>
+                        <li><strong>Physics Principles:</strong> Differential equations, Newtonian mechanics</li>
+                    </ul>
+                </div>
+
+                <div class="project-section">
+                    <h2>Results & Impact</h2>
+                    <p>The project produced a comprehensive design package for real-world rocket development. Simulation tools created are now being used as reference implementations for other aerospace team members.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bridge-detail" class="page">
+        <div class="project-detail">
+            <div class="container">
+                <a class="back-link" onclick="showPage('projects')">← Back</a>
+                <div class="project-header">
+                    <h1>Bridge Structural Analysis</h1>
+                    <div class="project-meta">
+                        <div class="meta-item"><strong>Category:</strong> Structural Engineering</div>
+                        <div class="meta-item"><strong>Status:</strong> Completed</div>
+                        <div class="meta-item"><strong>Year:</strong> 2024-2025</div>
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h2>Project Overview</h2>
+                    <p>Advanced finite element analysis of truss bridge structures under various loading conditions. Designing an optimized bridge meeting stringent weight and cost constraints while maintaining structural integrity.</p>
+                    <div class="project-highlight">
+                        <strong>Achievement:</strong> Successfully designed a truss bridge with 30% weight reduction compared to baseline design while maintaining safety factors above 2.5.
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h2>My Contributions</h2>
+                    <ul>
+                        <li>Conducted comprehensive load path analysis for distributed and point loads</li>
+                        <li>Performed FEA using ANSYS to verify stress distributions</li>
+                        <li>Optimized truss geometry using Python-based parametric studies</li>
+                        <li>Validated designs against structural codes and safety standards</li>
+                        <li>Created detailed technical reports with stress visualizations</li>
+                    </ul>
+                </div>
+
+                <div class="project-section">
+                    <h2>Technologies & Tools</h2>
+                    <ul>
+                        <li><strong>ANSYS Mechanical:</strong> FEA modeling and stress analysis</li>
+                        <li><strong>Python:</strong> Parametric optimization and data analysis</li>
+                        <li><strong>AutoCAD:</strong> Geometric modeling and drawings</li>
+                        <li><strong>Engineering Mechanics:</strong> Load distribution and structural theory</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="spacecraft-detail" class="page">
+        <div class="project-detail">
+            <div class="container">
+                <a class="back-link" onclick="showPage('projects')">← Back</a>
+                <div class="project-header">
+                    <h1>CubeSat System Design</h1>
+                    <div class="project-meta">
+                        <div class="meta-item"><strong>Category:</strong> Systems Engineering</div>
+                        <div class="meta-item"><strong>Status:</strong> Ongoing</div>
+                        <div class="meta-item"><strong>Year:</strong> 2025-Present</div>
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h2>Project Overview</h2>
+                    <p>Comprehensive design of a 3U CubeSat satellite system including power generation, thermal management, and structural components. Integrating multiple engineering disciplines to create a functional small satellite system.</p>
+                    <div class="project-highlight">
+                        <strong>Objective:</strong> Design a thermally stable, power-efficient CubeSat capable of operating in low Earth orbit for 2+ years.
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h2>System Components</h2>
+                    <ul>
+                        <li><strong>Power Subsystem:</strong> Solar panel arrays with battery backup</li>
+                        <li><strong>Thermal Management:</strong> Multi-layer insulation and radiator design</li>
+                        <li><strong>Structure:</strong> Aluminum frame with vibration isolation mounts</li>
+                        <li><strong>Communications:</strong> RF communication system for data transmission</li>
+                        <li><strong>Propulsion:</strong> Miniature cold-gas thruster for orbital adjustments</li>
+                    </ul>
+                </div>
+
+                <div class="project-section">
+                    <h2>Technical Analysis</h2>
+                    <p>Detailed thermal analysis to predict temperature variations during orbital cycles, power budget calculations to ensure adequate energy availability, and structural analysis to verify frame resilience to launch accelerations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="simulation-detail" class="page">
+        <div class="project-detail">
+            <div class="container">
+                <a class="back-link" onclick="showPage('projects')">← Back</a>
+                <div class="project-header">
+                    <h1>Physics Simulation Engine</h1>
+                    <div class="project-meta">
+                        <div class="meta-item"><strong>Category:</strong> Software Development</div>
+                        <div class="meta-item"><strong>Status:</strong> Completed</div>
+                        <div class="meta-item"><strong>Year:</strong> 2024-2025</div>
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h2>Project Overview</h2>
+                    <p>Custom-built numerical simulation engine for dynamics and orbital mechanics. Python-based tool implementing advanced numerical methods to accurately simulate complex physical systems.</p>
+                    <div class="project-highlight">
+                        <strong>Feature:</strong> Supports n-body gravitational systems, orbital mechanics, and rigid body dynamics with adaptive time-stepping.
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h2>Key Features</h2>
+                    <ul>
+                        <li>Runge-Kutta integration methods for accurate trajectory prediction</li>
+                        <li>N-body gravitational force calculation with optimized algorithms</li>
+                        <li>Orbital mechanics solvers for Kepler problems</li>
+                        <li>Real-time visualization of trajectories and system states</li>
+                        <li>Adaptive error control for maintaining numerical accuracy</li>
+                    </ul>
+                </div>
+
+                <div class="project-section">
+                    <h2>Applications</h2>
+                    <ul>
+                        <li>Predicting satellite orbital decay and re-entry predictions</li>
+                        <li>Analyzing three-body problems in gravitational systems</li>
+                        <li>Educational tool for understanding orbital mechanics</li>
+                        <li>Baseline for comparing commercial simulation software</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="control-detail" class="page">
+        <div class="project-detail">
+            <div class="container">
+                <a class="back-link" onclick="showPage('projects')">← Back</a>
+                <div class="project-header">
+                    <h1>Control Systems Design</h1>
+                    <div class="project-meta">
+                        <div class="meta-item"><strong>Category:</strong> Control Engineering</div>
+                        <div class="meta-item"><strong>Status:</strong> In Progress</div>
+                        <div class="meta-item"><strong>Year:</strong> 2025-2026</div>
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h2>Project Overview</h2>
+                    <p>Development and implementation of feedback control systems for aerospace applications. Designing robust controllers that maintain system stability under various operating conditions.</p>
+                    <div class="project-highlight">
+                        <strong>Goal:</strong> Create stabilizing control systems with response times under 100ms and steady-state error less than 2%.
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h2>Control Approaches</h2>
+                    <ul>
+                        <li><strong>PID Control:</strong> Tuning for setpoint tracking and disturbance rejection</li>
+                        <li><strong>State-Space Design:</strong> Full-state feedback for improved performance</li>
+                        <li><strong>LQR Optimization:</strong> Optimal control with weighted cost functions</li>
+                        <li><strong>Stability Analysis:</strong> Root locus and Bode diagrams for system characterization</li>
+                    </ul>
+                </div>
+
+                <div class="project-section">
+                    <h2>Tools Used</h2>
+                    <ul>
+                        <li>MATLAB and Simulink for simulation and design</li>
+                        <li>Control System Toolbox for analysis functions</li>
+                        <li>Real-Time Workshop for embedded implementation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="parametric-detail" class="page">
+        <div class="project-detail">
+            <div class="container">
+                <a class="back-link" onclick="showPage('projects')">← Back</a>
+                <div class="project-header">
+                    <h1>Parametric Design Study</h1>
+                    <div class="project-meta">
+                        <div class="meta-item"><strong>Category:</strong> Aerodynamic Optimization</div>
+                        <div class="meta-item"><strong>Status:</strong> Active</div>
+                        <div class="meta-item"><strong>Year:</strong> 2025-Present</div>
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h2>Project Overview</h2>
+                    <p>Systematic optimization of aircraft wing geometry using parametric modeling techniques. Exploring the relationship between geometric parameters and aerodynamic performance to identify optimal configurations.</p>
+                    <div class="project-highlight">
+                        <strong>Approach:</strong> Automated parameter sweeps and design space exploration to identify Pareto-optimal solutions balancing lift, drag, and structural weight.
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h2>Parametric Variables</h2>
+                    <ul>
+                        <li>Wing planform area and aspect ratio</li>
+                        <li>Airfoil section and camber distribution</li>
+                        <li>Sweep angle and dihedral</li>
+                        <li>Wing thickness distribution</li>
+                    </ul>
+                </div>
+
+                <div class="project-section">
+                    <h2>Optimization Methodology</h2>
+                    <p>Multi-objective optimization framework combining aerodynamic analysis with structural constraints. Each design variant is evaluated for aerodynamic efficiency, structural mass, and manufacturing feasibility.</p>
+                </div>
+
+                <div class="project-section">
+                    <h2>Outcomes</h2>
+                    <p>Comprehensive database of wing designs with associated performance characteristics, enabling future aircraft design decisions with quantitative support and understanding of trade-offs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <div class="contact">
+            <div class="container">
+                <h1 class="section-title">Contact</h1>
+                <div class="contact-content">
+                    <p class="contact-intro">I'm interested in discussing aerospace engineering projects, collaboration opportunities, and innovative ideas. Reach out anytime.</p>
+
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6" fill="none"/>
+                                </svg>
+                            </div>
+                            <h3>Email</h3>
+                            <p><a href="mailto:jan.kazimierczak@mail.utoronto.ca">jan.kazimierczak@mail.utoronto.ca</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2V17zm-1-8c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm10 8h-2v-4c0-.6-.2-1.5-1-1.5-1 0-1 .8-1 1.5v4h-2v-7h2v1c.3-.4.8-1 2-1 1.5 0 2.6 1 2.6 3.1V17z"/>
+                                </svg>
+                            </div>
+                            <h3>LinkedIn</h3>
+                            <p><a href="https://linkedin.com" target="_blank">linkedin.com/in/jkazimierczak</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Jan Kazimierczak - Engineering Portfolio | Designed with HTML & CSS</p>
+    </footer>
+
+    <script>
+        function showPage(pageName) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            const page = document.getElementById(pageName);
+            if (page) {
+                page.classList.add('active');
+            }
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            if (event && event.target && event.target.classList.contains('nav-link')) {
+                event.target.classList.add('active');
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        function showProjectDetail(projectName) {
+            const detailPageId = projectName + '-detail';
+            showPage(detailPageId);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
