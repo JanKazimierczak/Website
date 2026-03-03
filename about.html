@@ -35,6 +35,28 @@
         #000;
     }
 
+
+.rocket-link:hover {
+  background-color: #163d7a;
+  transform: translateY(-2px);
+}
+    
+/* CSS for the custom link style */
+.custom-link {
+  color: #ba3030;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+.custom-link:hover {
+  color: #c30000;
+  text-decoration: underline;
+}
+
+
+
+
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -276,13 +298,17 @@
     <div class="bio-grid">
       <div class="bio-block">
         <h3>Who I Am</h3>
-        <p>First-year Engineering Science student with a 3.63 GPA, focused on aerospace engineering and quantitative analysis. Member of UTAT (University of Toronto Aerospace Team), actively developing CAD skills and exploring international aerospace opportunities.</p>
+        <p>
+First-year Engineering Science student with a 3.63 GPA, focused on aerospace engineering. 
+Member of UTAT (University of Toronto Aerospace Team), actively developing CAD skills and working on the liquid propulsion team in the 
+<a href="https://www.utat.ca/rocketry" class="custom-link">Discovery</a> project.
+</p>
         <p>My interests span spacecraft propulsion systems, structural analysis, parametric design, and physics simulations. I'm driven by mathematical rigour and applying engineering principles to solve real-world challenges.</p>
       </div>
       <div class="bio-block">
         <h3>Where I'm Headed</h3>
-        <p>Currently exploring aerospace internship opportunities in Europe and considering advanced studies at institutions like TU Delft. I'm particularly drawn to liquid propulsion research and the systems-level thinking required to design reliable, high-performance spacecraft.</p>
-        <p>Outside of coursework I'm developing hands-on experience through UTAT's liquid propulsion division — working on real hardware alongside driven peers.</p>
+        <p>Currently enrolled in the aerospace engineering program at UofT, interested in the aerospace engineering major.</p>
+        <p>Outside coursework I am developing hands on experience in aerospace engineering at UTAT, working with upper year students with a single goal of developing the first ever UofT liquid rocket.</p>
       </div>
     </div>
 
@@ -294,17 +320,17 @@
         <div class="skill-list">
           <div class="skill-item">Python</div>
           <div class="skill-item">MATLAB</div>
-          <div class="skill-item">C / C++</div>
+          <div class="skill-item">C</div>
           <div class="skill-item">LaTeX</div>
         </div>
       </div>
       <div class="skill-col">
         <h4>Software & Tools</h4>
         <div class="skill-list">
-          <div class="skill-item">CAD Modeling</div>
-          <div class="skill-item">SolidWorks</div>
-          <div class="skill-item">ANSYS</div>
-          <div class="skill-item">Simulink</div>
+          <div class="skill-item">Onshape</div>
+          <div class="skill-item">Autodesk Fusion 360</div>
+          <div class="skill-item">Prusa slicer</div>
+          <div class="skill-item">Visual studio code</div>
         </div>
       </div>
       <div class="skill-col">
@@ -313,14 +339,14 @@
           <div class="skill-item">Mechanics</div>
           <div class="skill-item">Structural Analysis</div>
           <div class="skill-item">Propulsion</div>
-          <div class="skill-item">FEA</div>
+          <div class="skill-item">Circuits</div>
         </div>
       </div>
       <div class="skill-col">
         <h4>Interests</h4>
         <div class="skill-list">
-          <div class="skill-item">Aerospace</div>
-          <div class="skill-item">Quant Analysis</div>
+          <div class="skill-item">Propulsion</div>
+          <div class="skill-item">Aerodynamics</div>
           <div class="skill-item">Research</div>
           <div class="skill-item">Simulations</div>
         </div>
@@ -336,10 +362,10 @@
       </div>
       <div class="info-cell">
         <div class="ic-label">GPA &amp; Year</div>
-        <div class="ic-value">3.63 — First Year</div>
+        <div class="ic-value">3.63 — First Semester</div>
       </div>
       <div class="info-cell">
-        <div class="ic-label">Team &amp; Role</div>
+        <div class="ic-label">Team &amp; Division</div>
         <div class="ic-value">UTAT — Liquid Propulsion Division</div>
       </div>
     </div>
