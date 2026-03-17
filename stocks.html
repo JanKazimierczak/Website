@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stocks | Jan Kazimierczak</title>
+  <meta
+    name="description"
+    content="Public stock market dashboard with compact key-market quotes, projected price analytics, charting, and headline feeds."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="stocks.css?v=20260317n">
+</head>
+<body class="market-page">
+  <div class="market-shell">
+    <aside class="market-side-rail" aria-label="Home and quote metrics">
+      <a class="market-home-link" href="index.html" aria-label="Return home">
+        <span class="market-home-mark">JK</span>
+      </a>
+
+      <section class="panel rail-metrics-panel" aria-label="Selected security quote metrics">
+        <div class="panel-head">
+          <span class="panel-title">Quote Board</span>
+        </div>
+        <div class="security-metrics">
+          <div class="security-metric">
+            <span>Open</span>
+            <strong data-metric-open>--</strong>
+          </div>
+          <div class="security-metric">
+            <span>VWAP</span>
+            <strong data-metric-vwap>--</strong>
+          </div>
+          <div class="security-metric">
+            <span>Prev Close</span>
+            <strong data-metric-prev-close>--</strong>
+          </div>
+          <div class="security-metric">
+            <span>Day High</span>
+            <strong data-metric-day-high>--</strong>
+          </div>
+          <div class="security-metric">
+            <span>Day Low</span>
+            <strong data-metric-day-low>--</strong>
+          </div>
+          <div class="security-metric">
+            <span>52W High</span>
+            <strong data-metric-52w-high>--</strong>
+          </div>
+          <div class="security-metric">
+            <span>52W Low</span>
+            <strong data-metric-52w-low>--</strong>
+          </div>
+          <div class="security-metric">
+            <span>Volume</span>
+            <strong data-metric-volume>--</strong>
+          </div>
+        </div>
+      </section>
+    </aside>
+
+    <main class="market-main">
+      <div class="market-container">
+        <section class="quote-strip-panel" aria-labelledby="key-markets-title">
+          <div class="section-bar">
+            <span class="section-label" id="key-markets-title">Key Markets</span>
+            <span class="section-note">Last / % Change</span>
+          </div>
+          <div class="widget-slot tape-slot" data-widget-slot="ticker-tape" aria-live="polite">
+            <div class="panel-message">Loading market tape...</div>
+          </div>
+        </section>
+
+        <section class="dashboard-shell">
+          <header class="dashboard-header">
+            <section class="security-block" aria-labelledby="selected-security-title">
+              <div class="section-bar compact">
+                <span class="section-label" id="selected-security-title">Selected Security</span>
+                <span class="section-note" data-market-state>Live via TradingView</span>
+              </div>
+
+              <div class="security-row">
+                <div class="security-main">
+                  <span class="security-symbol" data-current-symbol>NASDAQ:ALM</span>
+                  <h1 data-current-name>Almonty Industries Inc.</h1>
+                </div>
+
+                <div class="security-price">
+                  <div class="security-last" data-last-price>LIVE</div>
+                  <div class="security-change" data-last-change>Market feed</div>
+                </div>
+              </div>
+
+              <div class="security-meta" data-current-meta>NASDAQ / USD / EQUITY</div>
+            </section>
+
+            <section class="control-block" aria-label="Symbol controls">
+              <form class="symbol-form" data-symbol-form>
+                <label class="field search-field">
+                  <span>Ticker</span>
+                  <input
+                    type="text"
+                    name="ticker"
+                    placeholder="ALM, AAPL, BTC, GOLD"
+                    autocomplete="off"
+                    spellcheck="false"
+                    data-symbol-input
+                  >
+                </label>
+                <button class="button" type="submit">Load</button>
+              </form>
+
+              <div class="quick-picks" data-quick-picks>
+                <button class="symbol-chip" type="button" data-symbol="NASDAQ:ALM">ALM</button>
+                <button class="symbol-chip" type="button" data-symbol="AAPL">AAPL</button>
+                <button class="symbol-chip" type="button" data-symbol="MSFT">MSFT</button>
+                <button class="symbol-chip" type="button" data-symbol="NVDA">NVDA</button>
+                <button class="symbol-chip" type="button" data-symbol="TSLA">TSLA</button>
+                <button class="symbol-chip" type="button" data-symbol="BITSTAMP:BTCUSD">BTC</button>
+              </div>
+            </section>
+          </header>
+
+          <div class="dashboard-grid">
+            <section class="dashboard-primary">
+              <article class="panel chart-panel">
+                <div class="panel-head">
+                  <span class="panel-title">Price Chart</span>
+                  <div class="range-tabs" data-range-tabs>
+                    <button class="range-tab" type="button" data-range="1d">1D</button>
+                    <button class="range-tab" type="button" data-range="5d">5D</button>
+                    <button class="range-tab" type="button" data-range="1mo">1M</button>
+                    <button class="range-tab is-active" type="button" data-range="6mo">6M</button>
+                    <button class="range-tab" type="button" data-range="1y">1Y</button>
+                  </div>
+                </div>
+
+                <div class="chart-stage widget-slot chart-slot" data-widget-slot="advanced-chart">
+                  <div class="panel-message">Loading live chart...</div>
+                </div>
+              </article>
+
+            </section>
+
+            <aside class="dashboard-side">
+              <article class="panel technical-panel">
+                <div class="panel-head">
+                  <span class="panel-title">Technical Read</span>
+                  <span class="panel-note">Live signal</span>
+                </div>
+                <div class="widget-slot technical-slot" data-widget-slot="technical-analysis">
+                  <div class="panel-message">Loading live technical panel...</div>
+                </div>
+              </article>
+
+              <article class="panel breaking-panel">
+                <div class="panel-head">
+                  <span class="panel-title">Breaking News</span>
+                  <span class="panel-note">Markets</span>
+                </div>
+                <div class="news-feed">
+                  <ul class="news-list compact" data-breaking-news-list>
+                    <li class="news-empty">Loading market headlines...</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="panel ticker-news-panel">
+                <div class="panel-head">
+                  <span class="panel-title">Ticker News</span>
+                  <span class="panel-note" data-selected-label>NASDAQ:ALM</span>
+                </div>
+                <div class="news-feed">
+                  <ul class="news-list" data-ticker-news-list>
+                    <li class="news-empty">Loading ticker headlines...</li>
+                  </ul>
+                </div>
+              </article>
+            </aside>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <noscript>
+    <div class="password-gate noscript-gate">
+      <div class="password-panel">
+        <div class="password-label">JavaScript required</div>
+        <h2>This page needs JavaScript enabled.</h2>
+        <p>The chart, quote feed, and news panels all rely on client-side scripts.</p>
+      </div>
+    </div>
+  </noscript>
+
+  <script src="stocks.js?v=20260317n"></script>
+</body>
+</html>
