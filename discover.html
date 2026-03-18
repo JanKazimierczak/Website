@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discover Stocks | Jan Kazimierczak</title>
+  <meta
+    name="description"
+    content="Scanner-style stock discovery page with filtered movers, active names, pullback candidates, earnings radar, value watchlists, and catalyst news."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="stocks.css?v=20260318o">
+</head>
+<body class="market-page">
+  <div class="market-shell">
+    <aside class="market-side-rail" aria-label="Navigation and discovery summary">
+      <section class="panel rail-nav-panel" aria-label="Page navigation">
+        <div class="rail-brand">
+          <a class="market-home-link" href="index.html" aria-label="Return home">
+            <span class="market-home-mark">JK</span>
+          </a>
+          <nav class="rail-nav-links" aria-label="Stocks pages">
+            <a class="rail-nav-link" href="stocks.html">Dash</a>
+            <a class="rail-nav-link is-active" href="discover.html" aria-current="page">Disc</a>
+          </nav>
+        </div>
+      </section>
+
+      <section class="panel discover-summary-panel" aria-label="Scanner summary">
+        <div class="panel-head">
+          <span class="panel-title">Quick Summary</span>
+          <span class="panel-timer" data-discovery-scan-timer>2 min</span>
+        </div>
+        <div class="discover-summary-cards">
+          <div class="discover-summary-item">
+            <span>Tracked</span>
+            <strong data-discovery-universe-count>--</strong>
+          </div>
+          <div class="discover-summary-item">
+            <span>Top Mover</span>
+            <strong data-discovery-summary-mover>--</strong>
+          </div>
+          <div class="discover-summary-item">
+            <span>Top Active</span>
+            <strong data-discovery-summary-active>--</strong>
+          </div>
+          <div class="discover-summary-item">
+            <span>Pullback</span>
+            <strong data-discovery-summary-pullback>--</strong>
+          </div>
+          <div class="discover-summary-item">
+            <span>Earnings</span>
+            <strong data-discovery-summary-earnings>--</strong>
+          </div>
+          <div class="discover-summary-item">
+            <span>Value Watch</span>
+            <strong data-discovery-summary-value>--</strong>
+          </div>
+        </div>
+      </section>
+    </aside>
+
+    <main class="market-main">
+      <div class="market-container">
+        <section class="quote-strip-panel" aria-labelledby="discover-markets-title">
+          <div class="section-bar">
+            <span class="section-label" id="discover-markets-title">Key Markets</span>
+            <span class="section-note">Last / % Change</span>
+          </div>
+          <div class="widget-slot tape-slot" data-widget-slot="discovery-tape" aria-live="polite">
+            <div class="panel-message">Loading market tape...</div>
+          </div>
+        </section>
+
+        <section class="dashboard-shell discover-shell is-scanner">
+          <header class="discover-hero panel">
+            <div class="discover-hero-copy">
+              <span class="section-label">Stock Discovery</span>
+              <h1>Find names worth opening right now.</h1>
+              <p class="discover-hero-note">
+                Track real top movers, broad volume leaders, earnings setups, IPOs, pullbacks, value resets,
+                and live catalyst flow. Open the dashboard only when a name is worth drilling into.
+              </p>
+            </div>
+
+            <div class="discover-controls">
+              <form class="symbol-form discover-search-form" data-discovery-open-form>
+                <label class="field search-field">
+                  <span>Ticker</span>
+                  <input
+                    type="text"
+                    name="ticker"
+                    placeholder="ALM, NVDA, NYSE:JPM, BTC"
+                    autocomplete="off"
+                    spellcheck="false"
+                    data-discovery-open-input
+                  >
+                </label>
+                <button class="button" type="submit">Open</button>
+              </form>
+              <div class="section-note-group">
+                <span class="section-note">Broad market scans + catalyst feeds</span>
+                <span class="panel-timer" data-discovery-news-timer>90 sec</span>
+              </div>
+            </div>
+          </header>
+
+          <div class="discover-board">
+            <div class="discover-panel-grid">
+              <article class="panel scanner-panel" aria-labelledby="discovery-movers-title">
+                <div class="panel-head">
+                  <span class="panel-title" id="discovery-movers-title">Top Movers</span>
+                  <span class="panel-note">Real broad-market gainers</span>
+                </div>
+                <div class="scanner-feed">
+                  <ul class="scanner-list" data-discovery-list="movers">
+                    <li class="scanner-empty">Loading top movers...</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="panel scanner-panel" aria-labelledby="discovery-active-title">
+                <div class="panel-head">
+                  <span class="panel-title" id="discovery-active-title">Most Active</span>
+                  <span class="panel-note">Broad market volume leaders</span>
+                </div>
+                <div class="scanner-feed">
+                  <ul class="scanner-list" data-discovery-list="active">
+                    <li class="scanner-empty">Loading active names...</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="panel scanner-panel" aria-labelledby="discovery-earnings-title">
+                <div class="panel-head">
+                  <span class="panel-title" id="discovery-earnings-title">Earnings Radar</span>
+                  <span class="panel-note">Earnings + guidance headlines</span>
+                </div>
+                <div class="scanner-feed">
+                  <ul class="scanner-list" data-discovery-list="earnings">
+                    <li class="scanner-empty">Loading earnings radar...</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="panel scanner-panel" aria-labelledby="discovery-pullback-title">
+                <div class="panel-head">
+                  <span class="panel-title" id="discovery-pullback-title">Pullback Watch</span>
+                  <span class="panel-note">Large-cap resets</span>
+                </div>
+                <div class="scanner-feed">
+                  <ul class="scanner-list" data-discovery-list="pullback">
+                    <li class="scanner-empty">Loading pullback candidates...</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="panel scanner-panel" aria-labelledby="discovery-value-title">
+                <div class="panel-head">
+                  <span class="panel-title" id="discovery-value-title">Value Watch</span>
+                  <span class="panel-note">52W discount + stabilization</span>
+                </div>
+                <div class="scanner-feed">
+                  <ul class="scanner-list" data-discovery-list="value">
+                    <li class="scanner-empty">Loading value watch...</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="panel scanner-panel" aria-labelledby="discovery-ipo-title">
+                <div class="panel-head">
+                  <span class="panel-title" id="discovery-ipo-title">IPO Watch</span>
+                  <span class="panel-note">New issues + listing headlines</span>
+                </div>
+                <div class="scanner-feed">
+                  <ul class="scanner-list" data-discovery-list="ipo">
+                    <li class="scanner-empty">Loading IPO watch...</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="panel scanner-panel scanner-panel-double" aria-labelledby="discovery-news-title">
+                <div class="panel-head">
+                  <span class="panel-title" id="discovery-news-title">Catalyst News</span>
+                  <span class="panel-note" data-discovery-news-note>Markets + flagged names</span>
+                </div>
+                <div class="scanner-news-feed">
+                  <ul class="scanner-list" data-discovery-news-list>
+                    <li class="scanner-empty">Loading catalyst headlines...</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="panel scanner-panel" aria-labelledby="discovery-focus-title">
+                <div class="panel-head">
+                  <span class="panel-title" id="discovery-focus-title">Focus List</span>
+                  <span class="panel-note">Cross-panel rank</span>
+                </div>
+                <div class="scanner-feed">
+                  <ul class="scanner-list" data-discovery-list="focus">
+                    <li class="scanner-empty">Loading focus list...</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <noscript>
+    <div class="password-gate noscript-gate">
+      <div class="password-panel">
+        <div class="password-label">JavaScript required</div>
+        <h2>This page needs JavaScript enabled.</h2>
+        <p>The scanner rankings, market tape, and catalyst news all rely on client-side scripts.</p>
+      </div>
+    </div>
+  </noscript>
+
+  <script src="discover.js?v=20260318r"></script>
+</body>
+</html>

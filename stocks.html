@@ -14,14 +14,22 @@
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap"
     rel="stylesheet"
   >
-  <link rel="stylesheet" href="stocks.css?v=20260318f">
+  <link rel="stylesheet" href="stocks.css?v=20260318o">
 </head>
 <body class="market-page">
   <div class="market-shell">
-    <aside class="market-side-rail" aria-label="Home and quote metrics">
-      <a class="market-home-link" href="index.html" aria-label="Return home">
-        <span class="market-home-mark">JK</span>
-      </a>
+    <aside class="market-side-rail" aria-label="Navigation and quote metrics">
+      <section class="panel rail-nav-panel" aria-label="Page navigation">
+        <div class="rail-brand">
+          <a class="market-home-link" href="index.html" aria-label="Return home">
+            <span class="market-home-mark">JK</span>
+          </a>
+          <nav class="rail-nav-links" aria-label="Stocks pages">
+            <a class="rail-nav-link is-active" href="stocks.html" aria-current="page">Dash</a>
+            <a class="rail-nav-link" href="discover.html">Disc</a>
+          </nav>
+        </div>
+      </section>
 
       <section class="panel rail-metrics-panel" aria-label="Selected security quote metrics">
         <div class="panel-head">
@@ -84,6 +92,8 @@
                 <span class="section-label" id="selected-security-title">Selected Security</span>
                 <div class="section-note-group">
                   <span class="section-note" data-market-state>Live via TradingView</span>
+                  <span class="section-note" data-market-session>Loading session</span>
+                  <span class="section-note" data-market-clock>--:--:-- --</span>
                   <span class="panel-timer" data-quote-refresh-timer>30 sec</span>
                 </div>
               </div>
@@ -101,6 +111,9 @@
               </div>
 
               <div class="security-meta" data-current-meta>NASDAQ / USD / EQUITY</div>
+              <div class="security-submeta">
+                <span class="security-submeta-item" data-security-earnings>Next earnings: loading...</span>
+              </div>
             </section>
 
             <section class="control-block" aria-label="Symbol controls">
@@ -136,10 +149,14 @@
                 <div class="panel-head">
                   <span class="panel-title">Price Chart</span>
                   <div class="range-tabs" data-range-tabs>
-                    <button class="range-tab" type="button" data-range="1d">1D</button>
+                    <button class="range-tab" type="button" data-range="30m">30M</button>
+                    <button class="range-tab" type="button" data-range="1h">1H</button>
+                    <button class="range-tab" type="button" data-range="3h">3H</button>
+                    <button class="range-tab" type="button" data-range="6h">6H</button>
+                    <button class="range-tab is-active" type="button" data-range="1d">1D</button>
                     <button class="range-tab" type="button" data-range="5d">5D</button>
                     <button class="range-tab" type="button" data-range="1mo">1M</button>
-                    <button class="range-tab is-active" type="button" data-range="6mo">6M</button>
+                    <button class="range-tab" type="button" data-range="6mo">6M</button>
                     <button class="range-tab" type="button" data-range="1y">1Y</button>
                   </div>
                 </div>
@@ -157,24 +174,62 @@
                   <span class="panel-title" data-secondary-title>Technical Read</span>
                   <div class="panel-head-controls">
                     <div class="view-tabs" role="tablist" aria-label="Secondary panel view">
-                      <button class="view-tab is-active" type="button" data-secondary-view="technical" aria-pressed="true">Tech</button>
-                      <button class="view-tab" type="button" data-secondary-view="ticker" aria-pressed="false">Ticker</button>
+                      <button class="view-tab is-active" type="button" data-secondary-view="ticker" aria-pressed="true">Ticker</button>
+                      <button class="view-tab" type="button" data-secondary-view="technical" aria-pressed="false">Tech</button>
+                      <button class="view-tab" type="button" data-secondary-view="financial" aria-pressed="false">Fin</button>
                     </div>
                     <div class="panel-note-group">
-                      <span class="panel-note" data-secondary-note>Live signal</span>
-                      <span class="panel-note is-hidden" data-selected-label>NASDAQ:ALM</span>
-                      <span class="panel-timer is-hidden" data-ticker-refresh-timer>90 sec</span>
+                      <span class="panel-note is-hidden" data-secondary-note>Live signal</span>
+                      <span class="panel-note" data-selected-label>NASDAQ:ALM</span>
+                      <span class="panel-note is-hidden" data-financial-label>Core financials</span>
+                      <span class="panel-timer" data-ticker-refresh-timer>90 sec</span>
                     </div>
                   </div>
                 </div>
                 <div class="secondary-stage">
-                  <div class="widget-slot technical-slot" data-widget-slot="technical-analysis" data-secondary-panel="technical">
-                    <div class="panel-message">Loading live technical panel...</div>
-                  </div>
-                  <div class="news-feed is-hidden" data-secondary-panel="ticker">
+                  <div class="news-feed" data-secondary-panel="ticker">
                     <ul class="news-list" data-ticker-news-list>
                       <li class="news-empty">Loading ticker headlines...</li>
                     </ul>
+                  </div>
+                  <div class="widget-slot technical-slot is-hidden" data-widget-slot="technical-analysis" data-secondary-panel="technical">
+                    <div class="panel-message">Loading live technical panel...</div>
+                  </div>
+                  <div class="financial-panel is-hidden" data-secondary-panel="financial">
+                    <div class="financial-grid">
+                      <div class="financial-metric">
+                        <span>Market Cap</span>
+                        <strong data-financial-market-cap>--</strong>
+                      </div>
+                      <div class="financial-metric">
+                        <span>Trailing P/E</span>
+                        <strong data-financial-trailing-pe>--</strong>
+                      </div>
+                      <div class="financial-metric">
+                        <span>Forward P/E</span>
+                        <strong data-financial-forward-pe>--</strong>
+                      </div>
+                      <div class="financial-metric">
+                        <span>Price / Book</span>
+                        <strong data-financial-price-book>--</strong>
+                      </div>
+                      <div class="financial-metric">
+                        <span>EPS</span>
+                        <strong data-financial-eps>--</strong>
+                      </div>
+                      <div class="financial-metric">
+                        <span>Revenue Growth</span>
+                        <strong data-financial-revenue-growth>--</strong>
+                      </div>
+                      <div class="financial-metric">
+                        <span>Profit Margin</span>
+                        <strong data-financial-profit-margin>--</strong>
+                      </div>
+                      <div class="financial-metric">
+                        <span>Debt / Equity</span>
+                        <strong data-financial-debt-equity>--</strong>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </article>
@@ -210,6 +265,7 @@
     </div>
   </noscript>
 
-  <script src="stocks.js?v=20260318d"></script>
+  <script src="stocks.js?v=20260318t"></script>
+  <script src="stocks-extra.js?v=20260318t"></script>
 </body>
 </html>

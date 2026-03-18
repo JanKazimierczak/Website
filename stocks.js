@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Change `defaultSymbol` if you want a different main ticker on first load.
   const DASHBOARD_CONFIG = {
     defaultSymbol: "NASDAQ:ALM",
-    defaultRange: "6mo"
+    defaultRange: "1d"
   };
 
   const RSS2JSON_API = "https://api.rss2json.com/v1/api.json?rss_url=";
@@ -45,8 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const AUTO_NEWS_REFRESH_MS = 90 * 1000;
   const NEWS_TIMEOUT_MS = 4500;
   const NEWS_CACHE_TTL_MS = 60 * 1000;
-  const QUOTE_TIMEOUT_MS = 5500;
+  const QUOTE_TIMEOUT_MS = 3200;
+  const MARKET_TIMEZONE = "America/New_York";
   const MIRROR_PREFIX = "https://r.jina.ai/http://";
+  const QUOTE_CACHE_PREFIX = "stocks.quote";
+  const MARKET_NEWS_CACHE_KEY = "stocks.news.market";
+  const TICKER_NEWS_CACHE_PREFIX = "stocks.news.ticker";
+  const PERSISTED_NEWS_CACHE_TTL_MS = 5 * 60 * 1000;
 
   const YAHOO_SYMBOL_OVERRIDES = {
     "NASDAQ:ALM": "ALM",
@@ -142,6 +147,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const RANGE_TO_INTERVAL = {
+    "30m": "1",
+    "1h": "1",
+    "3h": "1",
+    "6h": "5",
     "1d": "5",
     "5d": "30",
     "1mo": "60",
@@ -155,6 +164,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentNameNode = document.querySelector("[data-current-name]");
   const currentMetaNode = document.querySelector("[data-current-meta]");
   const marketStateNode = document.querySelector("[data-market-state]");
+  const marketSessionNode = document.querySelector("[data-market-session]");
+  const marketClockNode = document.querySelector("[data-market-clock]");
   const quoteRefreshTimerNode = document.querySelector("[data-quote-refresh-timer]");
   const quoteBoardRefreshTimerNode = document.querySelector("[data-quote-board-refresh-timer]");
   const lastPriceNode = document.querySelector("[data-last-price]");
@@ -193,6 +204,17 @@ document.addEventListener("DOMContentLoaded", () => {
   let lastNewsRefreshAt = 0;
   let currentSecondaryView = "technical";
   const newsCache = new Map();
+  const quoteSnapshotCache = new Map();
+  const pendingQuoteRequests = new Map();
+  const MARKET_WEEKDAY_INDEX = {
+    Sun: 0,
+    Mon: 1,
+    Tue: 2,
+    Wed: 3,
+    Thu: 4,
+    Fri: 5,
+    Sat: 6
+  };
 
   function normalizeSymbol(value) {
     const cleaned = (value || "").trim().toUpperCase().replace(/\s+/g, "");
@@ -303,6 +325,43 @@ document.addEventListener("DOMContentLoaded", () => {
     return `${MIRROR_PREFIX}${upstream}`;
   }
 
+  function readStorageCache(key, ttlMs) {
+    try {
+      const raw = window.sessionStorage.getItem(key);
+      if (!raw) {
+        return null;
+      }
+
+      const parsed = JSON.parse(raw);
+      if (!parsed || !Number.isFinite(parsed.timestamp) || Date.now() - parsed.timestamp > ttlMs) {
+        return null;
+      }
+
+      return parsed.value ?? null;
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  function writeStorageCache(key, value) {
+    try {
+      window.sessionStorage.setItem(key, JSON.stringify({
+        timestamp: Date.now(),
+        value
+      }));
+    } catch (_error) {
+      // Ignore storage failures.
+    }
+  }
+
+  function getQuoteCacheKey(symbol) {
+    return `${QUOTE_CACHE_PREFIX}:${symbol}`;
+  }
+
+  function getTickerNewsCacheKey(symbol) {
+    return `${TICKER_NEWS_CACHE_PREFIX}:${symbol}`;
+  }
+
   function extractMirrorJson(rawValue) {
     const text = typeof rawValue === "string" ? rawValue : rawValue?.contents || "";
     const jsonStart = text.indexOf("{");
@@ -345,6 +404,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function fetchQuoteSnapshot(symbol) {
+    const cacheKey = getQuoteCacheKey(symbol);
+    const cached = quoteSnapshotCache.get(cacheKey) || readStorageCache(cacheKey, AUTO_QUOTE_REFRESH_MS);
+    if (cached) {
+      quoteSnapshotCache.set(cacheKey, cached);
+    }
+
+    if (pendingQuoteRequests.has(cacheKey)) {
+      return pendingQuoteRequests.get(cacheKey);
+    }
+
     const mirrorUrl = buildMirrorUrl(symbol, "1m", "1d");
     const candidateRequests = [
       () => fetchJsonWithTimeout(`https://api.allorigins.win/get?url=${encodeURIComponent(mirrorUrl)}`, QUOTE_TIMEOUT_MS),
@@ -352,21 +421,36 @@ document.addEventListener("DOMContentLoaded", () => {
       () => fetchTextWithTimeout(mirrorUrl, QUOTE_TIMEOUT_MS)
     ];
 
-    let lastError = null;
+    const request = Promise.any(
+      candidateRequests.map((runRequest) =>
+        Promise.resolve()
+          .then(runRequest)
+          .then((payload) => {
+            const parsed = extractMirrorJson(payload);
+            const result = parsed?.chart?.result?.[0];
+            if (!result) {
+              throw new Error("Quote data is unavailable");
+            }
 
-    for (const runRequest of candidateRequests) {
-      try {
-        const payload = extractMirrorJson(await runRequest());
-        const result = payload?.chart?.result?.[0];
-        if (result) {
-          return result;
+            quoteSnapshotCache.set(cacheKey, result);
+            writeStorageCache(cacheKey, result);
+            return result;
+          })
+      )
+    )
+      .catch((error) => {
+        if (cached) {
+          return cached;
         }
-      } catch (error) {
-        lastError = error;
-      }
-    }
 
-    throw lastError || new Error("Quote data is unavailable");
+        throw error?.errors?.[0] || error || new Error("Quote data is unavailable");
+      })
+      .finally(() => {
+        pendingQuoteRequests.delete(cacheKey);
+      });
+
+    pendingQuoteRequests.set(cacheKey, request);
+    return request;
   }
 
   function computeSessionVwap(result) {
@@ -474,18 +558,126 @@ document.addEventListener("DOMContentLoaded", () => {
     setMetricValue(metricVolumeNode, formatVolume(volume));
   }
 
+  function parseFeedDate(value) {
+    const raw = String(value || "").trim();
+    if (!raw) {
+      return null;
+    }
+
+    const naiveMatch = raw.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?$/);
+    if (naiveMatch) {
+      const [, year, month, day, hour, minute, second = "00"] = naiveMatch;
+      return new Date(Date.UTC(
+        Number(year),
+        Number(month) - 1,
+        Number(day),
+        Number(hour),
+        Number(minute),
+        Number(second)
+      ));
+    }
+
+    const parsed = new Date(raw);
+    return Number.isNaN(parsed.getTime()) ? null : parsed;
+  }
+
   function formatNewsDate(value) {
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) {
+    const date = parseFeedDate(value);
+    if (!date) {
       return "Recent";
     }
 
-    return new Intl.DateTimeFormat("en-US", {
+    return `${new Intl.DateTimeFormat("en-US", {
+      timeZone: MARKET_TIMEZONE,
       month: "short",
       day: "numeric",
       hour: "numeric",
       minute: "2-digit"
-    }).format(date);
+    }).format(date)} ET`;
+  }
+
+  function getMarketParts(date = new Date()) {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: MARKET_TIMEZONE,
+      weekday: "short",
+      hour: "numeric",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false
+    }).formatToParts(date);
+
+    const map = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+    return {
+      weekdayShort: map.weekday || "Mon",
+      hour: Number(map.hour || 0),
+      minute: Number(map.minute || 0),
+      second: Number(map.second || 0)
+    };
+  }
+
+  function formatMarketClock(date = new Date()) {
+    return `${new Intl.DateTimeFormat("en-US", {
+      timeZone: MARKET_TIMEZONE,
+      hour: "numeric",
+      minute: "2-digit",
+      second: "2-digit"
+    }).format(date)} ET`;
+  }
+
+  function getNextWeekdayLabel(weekdayIndex) {
+    if (weekdayIndex === 5) {
+      return "Mon";
+    }
+
+    if (weekdayIndex === 6) {
+      return "Mon";
+    }
+
+    return "Tomorrow";
+  }
+
+  function getMarketSessionLabel(symbol, date = new Date()) {
+    if (symbol.startsWith("BITSTAMP:")) {
+      return "Open · 24/7 market";
+    }
+
+    if (symbol.startsWith("FOREXCOM:")) {
+      const { weekdayShort } = getMarketParts(date);
+      const weekdayIndex = MARKET_WEEKDAY_INDEX[weekdayShort] ?? 1;
+      return weekdayIndex === 0 || weekdayIndex === 6 ? "Closed · global market reopens Sun" : "Open · global market";
+    }
+
+    if (symbol.startsWith("TVC:")) {
+      const { weekdayShort } = getMarketParts(date);
+      const weekdayIndex = MARKET_WEEKDAY_INDEX[weekdayShort] ?? 1;
+      return weekdayIndex === 0 || weekdayIndex === 6 ? "Closed · global session resumes Sun" : "Open · global session";
+    }
+
+    const { weekdayShort, hour, minute } = getMarketParts(date);
+    const weekdayIndex = MARKET_WEEKDAY_INDEX[weekdayShort] ?? 1;
+    const totalMinutes = hour * 60 + minute;
+    const openMinutes = 9 * 60 + 30;
+    const closeMinutes = 16 * 60;
+
+    if (weekdayIndex >= 1 && weekdayIndex <= 5 && totalMinutes >= openMinutes && totalMinutes < closeMinutes) {
+      return "Open · closes 4:00 PM ET";
+    }
+
+    if (weekdayIndex >= 1 && weekdayIndex <= 5 && totalMinutes < openMinutes) {
+      return "Closed · opens 9:30 AM ET";
+    }
+
+    return `Closed · opens ${getNextWeekdayLabel(weekdayIndex)} 9:30 AM ET`;
+  }
+
+  function updateMarketClock() {
+    if (marketClockNode) {
+      marketClockNode.textContent = formatMarketClock();
+    }
+
+    if (marketSessionNode) {
+      marketSessionNode.textContent = getMarketSessionLabel(currentSymbol);
+    }
   }
 
   function formatCountdownLabel(milliseconds) {
@@ -509,6 +701,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateRefreshCountdowns() {
+    updateMarketClock();
+
     const remainingQuoteMs = AUTO_QUOTE_REFRESH_MS - (Date.now() - lastQuoteRefreshAt);
 
     if (quoteRefreshTimerNode) {
@@ -913,6 +1107,8 @@ document.addEventListener("DOMContentLoaded", () => {
       symbolInput.value = getShortTicker(symbol);
     }
 
+    updateMarketClock();
+
     if (currentQuoteSnapshot?.symbol === symbol) {
       lastPriceNode.textContent = formatPrice(currentQuoteSnapshot.currentPrice);
       lastChangeNode.textContent = `${formatSignedPrice(currentQuoteSnapshot.change)} (${formatPercent(currentQuoteSnapshot.percentChange)})`;
@@ -978,22 +1174,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderChart(symbol) {
-    renderWidget("advanced-chart", "embed-widget-advanced-chart.js", {
-      autosize: true,
-      symbol,
-      interval: RANGE_TO_INTERVAL[currentRange] || "D",
-      timezone: "America/Toronto",
-      theme: "dark",
-      style: "1",
-      locale: "en",
-      enable_publishing: false,
-      hide_side_toolbar: true,
-      allow_symbol_change: false,
-      withdateranges: false,
-      save_image: false,
-      calendar: false,
-      support_host: "https://www.tradingview.com"
-    });
+    void symbol;
+    // The page uses the custom chart from stocks-extra.js. Do not load the
+    // TradingView advanced-chart widget underneath it.
   }
 
   function renderTechnical(symbol) {
@@ -1014,6 +1197,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const thisRender = ++quoteRenderId;
     lastQuoteRefreshAt = Date.now();
     updateRefreshCountdowns();
+
+    const cached = quoteSnapshotCache.get(getQuoteCacheKey(symbol)) || readStorageCache(getQuoteCacheKey(symbol), AUTO_QUOTE_REFRESH_MS);
+    if (cached) {
+      quoteSnapshotCache.set(getQuoteCacheKey(symbol), cached);
+      applyQuoteSnapshot(symbol, cached);
+    }
 
     try {
       const result = await fetchQuoteSnapshot(symbol);
@@ -1040,9 +1229,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const ticker = getShortTicker(symbol);
     lastNewsRefreshAt = Date.now();
     updateRefreshCountdowns();
+    const cachedMarketNews = readStorageCache(MARKET_NEWS_CACHE_KEY, PERSISTED_NEWS_CACHE_TTL_MS);
+    const cachedTickerNews = readStorageCache(getTickerNewsCacheKey(symbol), PERSISTED_NEWS_CACHE_TTL_MS);
 
-    renderNewsMessage(breakingNewsList, "Loading market headlines...");
-    renderNewsMessage(tickerNewsList, `Loading ${ticker} headlines...`);
+    if (cachedMarketNews?.length) {
+      renderNewsItems(breakingNewsList, cachedMarketNews, "No market headlines are available right now.");
+    } else if (!breakingNewsList?.children.length) {
+      renderNewsMessage(breakingNewsList, "Loading market headlines...");
+    }
+
+    if (cachedTickerNews?.length) {
+      renderNewsItems(tickerNewsList, cachedTickerNews, `No current headlines were found for ${ticker}.`);
+    } else if (!tickerNewsList?.children.length) {
+      renderNewsMessage(tickerNewsList, `Loading ${ticker} headlines...`);
+    }
 
     const [marketResult, tickerResult] = await Promise.allSettled([
       fetchMarketNews(12),
@@ -1054,6 +1254,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (marketResult.status === "fulfilled") {
+      writeStorageCache(MARKET_NEWS_CACHE_KEY, marketResult.value);
       renderNewsItems(
         breakingNewsList,
         marketResult.value,
@@ -1064,6 +1265,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (tickerResult.status === "fulfilled") {
+      writeStorageCache(getTickerNewsCacheKey(symbol), tickerResult.value);
       renderNewsItems(
         tickerNewsList,
         tickerResult.value,
@@ -1139,6 +1341,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener("focus", () => {
+      refreshQuoteIfNeeded(true);
+      refreshNewsIfNeeded(true);
+    });
+
+    window.addEventListener("pageshow", () => {
       refreshQuoteIfNeeded(true);
       refreshNewsIfNeeded(true);
     });
