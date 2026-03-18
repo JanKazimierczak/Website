@@ -219,6 +219,16 @@ button {
   gap: 8px;
 }
 
+.section-note-group,
+.panel-note-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
 .section-bar {
   margin-bottom: 4px;
 }
@@ -261,6 +271,16 @@ button {
 .summary-chip span,
 .signal-label {
   color: var(--text-dim);
+}
+
+.panel-timer {
+  color: var(--text-soft);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .widget-slot {
@@ -309,7 +329,7 @@ button {
 
 .dashboard-shell {
   display: grid;
-  grid-template-rows: 78px minmax(0, 1fr);
+  grid-template-rows: 88px minmax(0, 1fr);
   gap: 4px;
   padding: 4px;
 }
@@ -365,7 +385,7 @@ button {
 .security-main h1 {
   margin: 0;
   font-size: clamp(1.05rem, 1.55vw, 1.55rem);
-  line-height: 0.95;
+  line-height: 1.08;
   letter-spacing: -0.045em;
   white-space: nowrap;
   overflow: hidden;
@@ -398,7 +418,7 @@ button {
   z-index: 1;
   color: var(--text-soft);
   font-size: 0.64rem;
-  line-height: 1.2;
+  line-height: 1.3;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -592,7 +612,7 @@ button {
 }
 
 .dashboard-side {
-  grid-template-rows: 252px 120px minmax(0, 1fr);
+  grid-template-rows: 278px minmax(0, 1fr);
 }
 
 .panel {
@@ -612,6 +632,64 @@ button {
 
 .dashboard-side .panel-head {
   margin-bottom: 1px;
+}
+
+.panel-head-controls {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.view-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.view-tab {
+  height: 20px;
+  padding: 0 7px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, #121821, #0a0e13);
+  color: var(--text-dim);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.view-tab:hover,
+.view-tab:focus-visible {
+  outline: none;
+  border-color: rgba(241, 190, 67, 0.42);
+  color: var(--text);
+}
+
+.view-tab.is-active {
+  border-color: rgba(241, 190, 67, 0.38);
+  background: rgba(241, 190, 67, 0.14);
+  color: var(--text);
+}
+
+.secondary-stage {
+  position: relative;
+  z-index: 1;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.secondary-stage > .widget-slot,
+.secondary-stage > .news-feed {
+  height: 100%;
+}
+
+.is-hidden {
+  display: none !important;
 }
 
 .chart-stage {
@@ -728,12 +806,24 @@ button {
   line-height: 1.35;
 }
 
+.secondary-panel .news-feed {
+  overflow: auto;
+}
+
+.secondary-panel .news-item a {
+  -webkit-line-clamp: 3;
+}
+
 .breaking-panel .news-feed {
   overflow: auto;
 }
 
 .breaking-panel .news-item a {
   -webkit-line-clamp: 2;
+}
+
+.breaking-panel {
+  margin-top: -12px;
 }
 
 .ticker-news-panel .news-feed {

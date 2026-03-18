@@ -7,7 +7,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const RSS2JSON_API = "https://api.rss2json.com/v1/api.json?rss_url=";
   const MARKET_NEWS_QUERY = "stock market OR bitcoin OR gold OR federal reserve";
+  const MARKET_NEWS_QUERY_VARIANTS = [
+    MARKET_NEWS_QUERY,
+    "stocks OR equities OR earnings OR inflation OR treasury yields"
+  ];
+  const MAJOR_NEWS_SITES = [
+    "reuters.com",
+    "cnbc.com",
+    "bloomberg.com",
+    "wsj.com",
+    "marketwatch.com",
+    "barrons.com",
+    "finance.yahoo.com",
+    "seekingalpha.com",
+    "foxbusiness.com",
+    "investing.com"
+  ];
+  const DIRECT_MARKET_RSS_FEEDS = [
+    {
+      url: "https://seekingalpha.com/market_currents.xml",
+      source: "Seeking Alpha"
+    },
+    {
+      url: "https://moxie.foxbusiness.com/google-publisher/markets.xml",
+      source: "Fox Business"
+    },
+    {
+      url: "https://www.investing.com/rss/news_25.rss",
+      source: "Investing.com"
+    },
+    {
+      url: "https://www.investing.com/rss/news_11.rss",
+      source: "Investing.com"
+    }
+  ];
+  const AUTO_QUOTE_REFRESH_MS = 30 * 1000;
+  const AUTO_NEWS_REFRESH_MS = 90 * 1000;
   const NEWS_TIMEOUT_MS = 4500;
+  const NEWS_CACHE_TTL_MS = 60 * 1000;
   const QUOTE_TIMEOUT_MS = 5500;
   const MIRROR_PREFIX = "https://r.jina.ai/http://";
 
@@ -118,6 +155,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentNameNode = document.querySelector("[data-current-name]");
   const currentMetaNode = document.querySelector("[data-current-meta]");
   const marketStateNode = document.querySelector("[data-market-state]");
+  const quoteRefreshTimerNode = document.querySelector("[data-quote-refresh-timer]");
+  const quoteBoardRefreshTimerNode = document.querySelector("[data-quote-board-refresh-timer]");
   const lastPriceNode = document.querySelector("[data-last-price]");
   const lastChangeNode = document.querySelector("[data-last-change]");
   const headerSymbolNode = document.querySelector("[data-header-symbol]");
@@ -130,8 +169,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const metric52WeekHighNode = document.querySelector("[data-metric-52w-high]");
   const metric52WeekLowNode = document.querySelector("[data-metric-52w-low]");
   const metricVolumeNode = document.querySelector("[data-metric-volume]");
+  const secondaryTitleNode = document.querySelector("[data-secondary-title]");
+  const secondaryNoteNode = document.querySelector("[data-secondary-note]");
+  const secondaryPanels = Array.from(document.querySelectorAll("[data-secondary-panel]"));
+  const secondaryViewButtons = Array.from(document.querySelectorAll("[data-secondary-view]"));
   const breakingNewsList = document.querySelector("[data-breaking-news-list]");
+  const breakingRefreshTimerNode = document.querySelector("[data-breaking-refresh-timer]");
   const tickerNewsList = document.querySelector("[data-ticker-news-list]");
+  const tickerRefreshTimerNode = document.querySelector("[data-ticker-refresh-timer]");
   const quickPickButtons = Array.from(document.querySelectorAll("[data-symbol]"));
   const rangeButtons = Array.from(document.querySelectorAll("[data-range]"));
 
@@ -141,6 +186,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let newsRenderId = 0;
   let quoteRenderId = 0;
   let currentQuoteSnapshot = null;
+  let quoteIntervalId = null;
+  let newsIntervalId = null;
+  let refreshCountdownIntervalId = null;
+  let lastQuoteRefreshAt = 0;
+  let lastNewsRefreshAt = 0;
+  let currentSecondaryView = "technical";
+  const newsCache = new Map();
 
   function normalizeSymbol(value) {
     const cleaned = (value || "").trim().toUpperCase().replace(/\s+/g, "");
@@ -436,18 +488,110 @@ document.addEventListener("DOMContentLoaded", () => {
     }).format(date);
   }
 
-  function buildNewsUrl(query) {
-    const rssUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
+  function formatCountdownLabel(milliseconds) {
+    if (!Number.isFinite(milliseconds) || milliseconds <= 0) {
+      return "Now";
+    }
+
+    const totalSeconds = Math.ceil(milliseconds / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    if (minutes > 0) {
+      if (seconds === 0) {
+        return `${minutes} min`;
+      }
+
+      return `${minutes} min ${seconds} sec`;
+    }
+
+    return `${totalSeconds} sec`;
+  }
+
+  function updateRefreshCountdowns() {
+    const remainingQuoteMs = AUTO_QUOTE_REFRESH_MS - (Date.now() - lastQuoteRefreshAt);
+
+    if (quoteRefreshTimerNode) {
+      quoteRefreshTimerNode.textContent = formatCountdownLabel(remainingQuoteMs);
+    }
+
+    if (quoteBoardRefreshTimerNode) {
+      quoteBoardRefreshTimerNode.textContent = formatCountdownLabel(remainingQuoteMs);
+    }
+
+    const remainingNewsMs = AUTO_NEWS_REFRESH_MS - (Date.now() - lastNewsRefreshAt);
+
+    if (breakingRefreshTimerNode) {
+      breakingRefreshTimerNode.textContent = formatCountdownLabel(remainingNewsMs);
+    }
+
+    if (tickerRefreshTimerNode) {
+      tickerRefreshTimerNode.textContent = formatCountdownLabel(remainingNewsMs);
+    }
+  }
+
+  function setSecondaryView(view) {
+    currentSecondaryView = view === "ticker" ? "ticker" : "technical";
+
+    secondaryPanels.forEach((panel) => {
+      panel.classList.toggle("is-hidden", panel.dataset.secondaryPanel !== currentSecondaryView);
+    });
+
+    secondaryViewButtons.forEach((button) => {
+      const isActive = button.dataset.secondaryView === currentSecondaryView;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+
+    if (secondaryTitleNode) {
+      secondaryTitleNode.textContent = currentSecondaryView === "ticker" ? "Ticker News" : "Technical Read";
+    }
+
+    if (secondaryNoteNode) {
+      secondaryNoteNode.textContent = "Live signal";
+      secondaryNoteNode.classList.toggle("is-hidden", currentSecondaryView === "ticker");
+    }
+
+    if (selectedLabelNode) {
+      selectedLabelNode.classList.toggle("is-hidden", currentSecondaryView !== "ticker");
+    }
+
+    if (tickerRefreshTimerNode) {
+      tickerRefreshTimerNode.classList.toggle("is-hidden", currentSecondaryView !== "ticker");
+    }
+  }
+
+  function buildRssProxyUrl(rssUrl) {
     return `${RSS2JSON_API}${encodeURIComponent(rssUrl)}`;
   }
 
-  async function fetchNews(query, limit) {
+  function buildGoogleNewsRssUrl(query) {
+    return `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
+  }
+
+  function buildYahooFinanceNewsRssUrl(symbol) {
+    return `https://feeds.finance.yahoo.com/rss/2.0/headline?s=${encodeURIComponent(getYahooSymbol(symbol))}&region=US&lang=en-US`;
+  }
+
+  function buildSeekingAlphaTickerNewsRssUrl(symbol) {
+    return `https://seekingalpha.com/api/sa/combined/${encodeURIComponent(getYahooSymbol(symbol))}.xml`;
+  }
+
+  async function fetchRssFeed(rssUrl, limit, sourceOverride = "") {
+    const cacheKey = `${rssUrl}::${limit}::${sourceOverride}`;
+    const cached = newsCache.get(cacheKey);
+    const now = Date.now();
+
+    if (cached && now - cached.timestamp < NEWS_CACHE_TTL_MS) {
+      return cached.items;
+    }
+
     const controller = new AbortController();
     const timeoutId = window.setTimeout(() => controller.abort(), NEWS_TIMEOUT_MS);
     let response;
 
     try {
-      response = await fetch(buildNewsUrl(query), {
+      response = await fetch(buildRssProxyUrl(rssUrl), {
         headers: {
           Accept: "application/json"
         },
@@ -464,12 +608,210 @@ document.addEventListener("DOMContentLoaded", () => {
     const payload = await response.json();
     const items = Array.isArray(payload.items) ? payload.items.slice(0, limit) : [];
 
-    return items.map((item) => ({
+    const parsedItems = items.map((item) => ({
       title: decodeHtml(item.title || "Headline"),
       link: item.link || "#",
-      source: decodeHtml(item.author || payload.feed?.title || "Google News"),
+      source: decodeHtml(sourceOverride || item.author || payload.feed?.title || "Google News"),
       date: item.pubDate || ""
     }));
+
+    newsCache.set(cacheKey, {
+      timestamp: now,
+      items: parsedItems
+    });
+
+    return parsedItems;
+  }
+
+  async function fetchGoogleNews(query, limit) {
+    return fetchRssFeed(buildGoogleNewsRssUrl(query), limit);
+  }
+
+  async function fetchYahooFinanceNews(symbol, limit) {
+    return fetchRssFeed(buildYahooFinanceNewsRssUrl(symbol), limit, "Yahoo Finance");
+  }
+
+  async function fetchSeekingAlphaTickerNews(symbol, limit) {
+    return fetchRssFeed(buildSeekingAlphaTickerNewsRssUrl(symbol), limit, "Seeking Alpha");
+  }
+
+  async function fetchDirectFeed(feed, limit) {
+    return fetchRssFeed(feed.url, limit, feed.source);
+  }
+
+  function normalizeNewsUrl(value) {
+    if (!value) {
+      return "";
+    }
+
+    try {
+      const url = new URL(value);
+      url.hash = "";
+
+      [
+        "utm_source",
+        "utm_medium",
+        "utm_campaign",
+        "utm_term",
+        "utm_content",
+        "guccounter",
+        "guce_referrer",
+        "guce_referrer_sig"
+      ].forEach((key) => {
+        url.searchParams.delete(key);
+      });
+
+      const search = url.searchParams.toString();
+      return `${url.origin}${url.pathname}${search ? `?${search}` : ""}`.replace(/\/$/, "");
+    } catch (error) {
+      return value.trim();
+    }
+  }
+
+  function normalizeNewsTitle(value) {
+    return decodeHtml(value || "")
+      .toLowerCase()
+      .replace(/&/g, " and ")
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
+  }
+
+  function getNewsTimestamp(item) {
+    const timestamp = Date.parse(item?.date || "");
+    return Number.isFinite(timestamp) ? timestamp : 0;
+  }
+
+  function getNewsSourcePriority(item) {
+    const source = (item?.source || "").toLowerCase();
+
+    if (source.includes("reuters") || source.includes("bloomberg") || source.includes("cnbc")) {
+      return 5;
+    }
+
+    if (
+      source.includes("wall street journal") ||
+      source.includes("wsj") ||
+      source.includes("marketwatch") ||
+      source.includes("barron") ||
+      source.includes("financial times")
+    ) {
+      return 4;
+    }
+
+    if (
+      source.includes("seeking alpha") ||
+      source.includes("fox business") ||
+      source.includes("investing.com")
+    ) {
+      return 3;
+    }
+
+    if (source.includes("yahoo")) {
+      return 2;
+    }
+
+    if (source.includes("google news")) {
+      return 1;
+    }
+
+    return 0;
+  }
+
+  function dedupeAndSortNews(items, limit) {
+    const sorted = [...items].sort((left, right) => {
+      const timeDelta = getNewsTimestamp(right) - getNewsTimestamp(left);
+      if (timeDelta !== 0) {
+        return timeDelta;
+      }
+
+      return getNewsSourcePriority(right) - getNewsSourcePriority(left);
+    });
+
+    const seenLinks = new Set();
+    const seenTitles = new Set();
+    const merged = [];
+
+    sorted.forEach((item) => {
+      if (!item?.title) {
+        return;
+      }
+
+      const linkKey = normalizeNewsUrl(item.link);
+      const titleKey = normalizeNewsTitle(item.title);
+
+      if ((linkKey && seenLinks.has(linkKey)) || (titleKey && seenTitles.has(titleKey))) {
+        return;
+      }
+
+      if (linkKey) {
+        seenLinks.add(linkKey);
+      }
+
+      if (titleKey) {
+        seenTitles.add(titleKey);
+      }
+
+      merged.push(item);
+    });
+
+    return merged.slice(0, limit);
+  }
+
+  async function fetchMergedNews(loaders, limit) {
+    const settled = await Promise.allSettled(loaders.map((loader) => loader()));
+    const fulfilled = settled.filter((result) => result.status === "fulfilled");
+
+    if (!fulfilled.length) {
+      throw new Error("No news feeds are available");
+    }
+
+    const items = fulfilled
+      .filter((result) => result.status === "fulfilled")
+      .flatMap((result) => result.value);
+
+    return dedupeAndSortNews(items, limit);
+  }
+
+  function buildPublisherQueries(baseQuery) {
+    return MAJOR_NEWS_SITES.map((site) => `${baseQuery} site:${site}`);
+  }
+
+  function buildTickerNewsQueries(symbol) {
+    const meta = getSymbolMeta(symbol);
+    const ticker = getShortTicker(symbol);
+
+    return [
+      `${meta.name} OR ${ticker} stock`,
+      `"${meta.name}" OR "${ticker}" earnings OR "${ticker}" guidance`
+    ];
+  }
+
+  async function fetchMarketNews(limit) {
+    const perFeedLimit = Math.max(limit, 6);
+    const loaders = [
+      ...MARKET_NEWS_QUERY_VARIANTS.map((query, index) => () => fetchGoogleNews(query, index === 0 ? limit * 2 : perFeedLimit)),
+      ...MARKET_NEWS_QUERY_VARIANTS.flatMap((query) =>
+        buildPublisherQueries(query).map((publisherQuery) => () => fetchGoogleNews(publisherQuery, perFeedLimit))
+      ),
+      ...DIRECT_MARKET_RSS_FEEDS.map((feed) => () => fetchDirectFeed(feed, perFeedLimit))
+    ];
+
+    return fetchMergedNews(loaders, limit);
+  }
+
+  async function fetchTickerNews(symbol, limit) {
+    const perFeedLimit = Math.max(limit, 6);
+    const tickerQueries = buildTickerNewsQueries(symbol);
+    const loaders = [
+      ...tickerQueries.map((query, index) => () => fetchGoogleNews(query, index === 0 ? limit * 2 : perFeedLimit)),
+      ...tickerQueries.flatMap((query) =>
+        buildPublisherQueries(query).map((publisherQuery) => () => fetchGoogleNews(publisherQuery, perFeedLimit))
+      ),
+      () => fetchYahooFinanceNews(symbol, perFeedLimit),
+      () => fetchSeekingAlphaTickerNews(symbol, perFeedLimit)
+    ];
+
+    return fetchMergedNews(loaders, limit);
   }
 
   function renderNewsMessage(node, message) {
@@ -670,6 +1012,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadQuotePanel(symbol) {
     const thisRender = ++quoteRenderId;
+    lastQuoteRefreshAt = Date.now();
+    updateRefreshCountdowns();
 
     try {
       const result = await fetchQuoteSnapshot(symbol);
@@ -693,15 +1037,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadNewsPanels(symbol) {
     const thisRender = ++newsRenderId;
-    const meta = getSymbolMeta(symbol);
     const ticker = getShortTicker(symbol);
+    lastNewsRefreshAt = Date.now();
+    updateRefreshCountdowns();
 
     renderNewsMessage(breakingNewsList, "Loading market headlines...");
     renderNewsMessage(tickerNewsList, `Loading ${ticker} headlines...`);
 
     const [marketResult, tickerResult] = await Promise.allSettled([
-      fetchNews(MARKET_NEWS_QUERY, 8),
-      fetchNews(`${meta.name} OR ${ticker} stock`, 12)
+      fetchMarketNews(12),
+      fetchTickerNews(symbol, 20)
     ]);
 
     if (thisRender !== newsRenderId) {
@@ -727,6 +1072,76 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       renderNewsMessage(tickerNewsList, `Ticker headlines could not be loaded for ${ticker}.`);
     }
+  }
+
+  function refreshQuoteIfNeeded(force = false) {
+    if (!dashboardInitialized) {
+      return;
+    }
+
+    if (document.hidden && !force) {
+      return;
+    }
+
+    if (!force && Date.now() - lastQuoteRefreshAt < AUTO_QUOTE_REFRESH_MS - 1000) {
+      return;
+    }
+
+    loadQuotePanel(currentSymbol);
+  }
+
+  function refreshNewsIfNeeded(force = false) {
+    if (!dashboardInitialized) {
+      return;
+    }
+
+    if (document.hidden && !force) {
+      return;
+    }
+
+    if (!force && Date.now() - lastNewsRefreshAt < AUTO_NEWS_REFRESH_MS - 1000) {
+      return;
+    }
+
+    loadNewsPanels(currentSymbol);
+  }
+
+  function startAutoRefresh() {
+    if (quoteIntervalId) {
+      window.clearInterval(quoteIntervalId);
+    }
+
+    if (newsIntervalId) {
+      window.clearInterval(newsIntervalId);
+    }
+
+    quoteIntervalId = window.setInterval(() => {
+      refreshQuoteIfNeeded();
+    }, AUTO_QUOTE_REFRESH_MS);
+
+    newsIntervalId = window.setInterval(() => {
+      refreshNewsIfNeeded();
+    }, AUTO_NEWS_REFRESH_MS);
+
+    if (refreshCountdownIntervalId) {
+      window.clearInterval(refreshCountdownIntervalId);
+    }
+
+    refreshCountdownIntervalId = window.setInterval(() => {
+      updateRefreshCountdowns();
+    }, 1000);
+
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        refreshQuoteIfNeeded(true);
+        refreshNewsIfNeeded(true);
+      }
+    });
+
+    window.addEventListener("focus", () => {
+      refreshQuoteIfNeeded(true);
+      refreshNewsIfNeeded(true);
+    });
   }
 
   function renderDashboard(rawSymbol) {
@@ -772,9 +1187,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     });
+
+    secondaryViewButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setSecondaryView(button.dataset.secondaryView || "technical");
+      });
+    });
   }
 
   bindEvents();
   dashboardInitialized = true;
+  setSecondaryView(currentSecondaryView);
   renderDashboard(getInitialSymbol());
+  startAutoRefresh();
+  updateRefreshCountdowns();
 });

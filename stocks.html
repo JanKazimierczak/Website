@@ -14,7 +14,7 @@
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap"
     rel="stylesheet"
   >
-  <link rel="stylesheet" href="stocks.css?v=20260317n">
+  <link rel="stylesheet" href="stocks.css?v=20260318f">
 </head>
 <body class="market-page">
   <div class="market-shell">
@@ -26,6 +26,7 @@
       <section class="panel rail-metrics-panel" aria-label="Selected security quote metrics">
         <div class="panel-head">
           <span class="panel-title">Quote Board</span>
+          <span class="panel-timer" data-quote-board-refresh-timer>30 sec</span>
         </div>
         <div class="security-metrics">
           <div class="security-metric">
@@ -81,7 +82,10 @@
             <section class="security-block" aria-labelledby="selected-security-title">
               <div class="section-bar compact">
                 <span class="section-label" id="selected-security-title">Selected Security</span>
-                <span class="section-note" data-market-state>Live via TradingView</span>
+                <div class="section-note-group">
+                  <span class="section-note" data-market-state>Live via TradingView</span>
+                  <span class="panel-timer" data-quote-refresh-timer>30 sec</span>
+                </div>
               </div>
 
               <div class="security-row">
@@ -148,36 +152,44 @@
             </section>
 
             <aside class="dashboard-side">
-              <article class="panel technical-panel">
+              <article class="panel secondary-panel">
                 <div class="panel-head">
-                  <span class="panel-title">Technical Read</span>
-                  <span class="panel-note">Live signal</span>
+                  <span class="panel-title" data-secondary-title>Technical Read</span>
+                  <div class="panel-head-controls">
+                    <div class="view-tabs" role="tablist" aria-label="Secondary panel view">
+                      <button class="view-tab is-active" type="button" data-secondary-view="technical" aria-pressed="true">Tech</button>
+                      <button class="view-tab" type="button" data-secondary-view="ticker" aria-pressed="false">Ticker</button>
+                    </div>
+                    <div class="panel-note-group">
+                      <span class="panel-note" data-secondary-note>Live signal</span>
+                      <span class="panel-note is-hidden" data-selected-label>NASDAQ:ALM</span>
+                      <span class="panel-timer is-hidden" data-ticker-refresh-timer>90 sec</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="widget-slot technical-slot" data-widget-slot="technical-analysis">
-                  <div class="panel-message">Loading live technical panel...</div>
+                <div class="secondary-stage">
+                  <div class="widget-slot technical-slot" data-widget-slot="technical-analysis" data-secondary-panel="technical">
+                    <div class="panel-message">Loading live technical panel...</div>
+                  </div>
+                  <div class="news-feed is-hidden" data-secondary-panel="ticker">
+                    <ul class="news-list" data-ticker-news-list>
+                      <li class="news-empty">Loading ticker headlines...</li>
+                    </ul>
+                  </div>
                 </div>
               </article>
 
               <article class="panel breaking-panel">
                 <div class="panel-head">
                   <span class="panel-title">Breaking News</span>
-                  <span class="panel-note">Markets</span>
+                  <div class="panel-note-group">
+                    <span class="panel-note">Markets</span>
+                    <span class="panel-timer" data-breaking-refresh-timer>90 sec</span>
+                  </div>
                 </div>
                 <div class="news-feed">
                   <ul class="news-list compact" data-breaking-news-list>
                     <li class="news-empty">Loading market headlines...</li>
-                  </ul>
-                </div>
-              </article>
-
-              <article class="panel ticker-news-panel">
-                <div class="panel-head">
-                  <span class="panel-title">Ticker News</span>
-                  <span class="panel-note" data-selected-label>NASDAQ:ALM</span>
-                </div>
-                <div class="news-feed">
-                  <ul class="news-list" data-ticker-news-list>
-                    <li class="news-empty">Loading ticker headlines...</li>
                   </ul>
                 </div>
               </article>
@@ -198,6 +210,6 @@
     </div>
   </noscript>
 
-  <script src="stocks.js?v=20260317n"></script>
+  <script src="stocks.js?v=20260318d"></script>
 </body>
 </html>
