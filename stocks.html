@@ -14,7 +14,7 @@
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap"
     rel="stylesheet"
   >
-  <link rel="stylesheet" href="stocks.css?v=20260318o">
+  <link rel="stylesheet" href="stocks.css?v=20260324d">
 </head>
 <body class="market-page">
   <div class="market-shell">
@@ -91,7 +91,6 @@
               <div class="section-bar compact">
                 <span class="section-label" id="selected-security-title">Selected Security</span>
                 <div class="section-note-group">
-                  <span class="section-note" data-market-state>Live via TradingView</span>
                   <span class="section-note" data-market-session>Loading session</span>
                   <span class="section-note" data-market-clock>--:--:-- --</span>
                   <span class="panel-timer" data-quote-refresh-timer>30 sec</span>
@@ -100,8 +99,8 @@
 
               <div class="security-row">
                 <div class="security-main">
-                  <span class="security-symbol" data-current-symbol>NASDAQ:ALM</span>
-                  <h1 data-current-name>Almonty Industries Inc.</h1>
+                  <span class="security-symbol" data-current-symbol>AMEX:SPY</span>
+                  <h1 data-current-name>SPDR S&amp;P 500 ETF Trust</h1>
                 </div>
 
                 <div class="security-price">
@@ -110,7 +109,7 @@
                 </div>
               </div>
 
-              <div class="security-meta" data-current-meta>NASDAQ / USD / EQUITY</div>
+              <div class="security-meta" data-current-meta>AMEX / USD / ETF</div>
               <div class="security-submeta">
                 <span class="security-submeta-item" data-security-earnings>Next earnings: loading...</span>
               </div>
@@ -123,7 +122,7 @@
                   <input
                     type="text"
                     name="ticker"
-                    placeholder="ALM, AAPL, BTC, GOLD"
+                    placeholder="SPY, ALM, AAPL, BTC, GOLD"
                     autocomplete="off"
                     spellcheck="false"
                     data-symbol-input
@@ -133,7 +132,7 @@
               </form>
 
               <div class="quick-picks" data-quick-picks>
-                <button class="symbol-chip" type="button" data-symbol="NASDAQ:ALM">ALM</button>
+                <button class="symbol-chip" type="button" data-symbol="AMEX:SPY">SPY</button>
                 <button class="symbol-chip" type="button" data-symbol="AAPL">AAPL</button>
                 <button class="symbol-chip" type="button" data-symbol="MSFT">MSFT</button>
                 <button class="symbol-chip" type="button" data-symbol="NVDA">NVDA</button>
@@ -171,22 +170,34 @@
             <aside class="dashboard-side">
               <article class="panel secondary-panel">
                 <div class="panel-head">
-                  <span class="panel-title" data-secondary-title>Technical Read</span>
+                  <span class="panel-title" data-secondary-title>Company Summary</span>
                   <div class="panel-head-controls">
                     <div class="view-tabs" role="tablist" aria-label="Secondary panel view">
-                      <button class="view-tab is-active" type="button" data-secondary-view="ticker" aria-pressed="true">Ticker</button>
+                      <button class="view-tab is-active" type="button" data-secondary-view="summary" aria-pressed="true">About</button>
+                      <button class="view-tab" type="button" data-secondary-view="ticker" aria-pressed="false">Ticker</button>
                       <button class="view-tab" type="button" data-secondary-view="technical" aria-pressed="false">Tech</button>
                       <button class="view-tab" type="button" data-secondary-view="financial" aria-pressed="false">Fin</button>
                     </div>
                     <div class="panel-note-group">
-                      <span class="panel-note is-hidden" data-secondary-note>Live signal</span>
-                      <span class="panel-note" data-selected-label>NASDAQ:ALM</span>
+                      <span class="panel-note" data-secondary-note>Business summary</span>
+                      <span class="panel-note is-hidden" data-selected-label>AMEX:SPY</span>
                       <span class="panel-note is-hidden" data-financial-label>Core financials</span>
-                      <span class="panel-timer" data-ticker-refresh-timer>90 sec</span>
+                      <span class="panel-timer is-hidden" data-ticker-refresh-timer>90 sec</span>
                     </div>
                   </div>
                 </div>
                 <div class="secondary-stage">
+                  <div class="company-summary-panel" data-secondary-panel="summary">
+                    <div class="company-summary-overview">
+                      <div class="company-summary-copy" data-company-summary>
+                        Loading company summary...
+                      </div>
+                      <div class="company-summary-website">
+                        <span>Website</span>
+                        <a href="#" target="_blank" rel="noreferrer" class="company-summary-link" data-company-website>--</a>
+                      </div>
+                    </div>
+                  </div>
                   <div class="news-feed" data-secondary-panel="ticker">
                     <ul class="news-list" data-ticker-news-list>
                       <li class="news-empty">Loading ticker headlines...</li>
@@ -265,7 +276,7 @@
     </div>
   </noscript>
 
-  <script src="stocks.js?v=20260318t"></script>
-  <script src="stocks-extra.js?v=20260318t"></script>
+  <script src="stocks.js?v=20260324b"></script>
+  <script src="stocks-extra.js?v=20260325a"></script>
 </body>
 </html>

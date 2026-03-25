@@ -6,8 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const MARKET_TIMEZONE = "America/New_York";
   const MIRROR_PREFIX = "https://r.jina.ai/http://";
   const STOCK_ANALYSIS_BASE = "https://stockanalysis.com";
+  const WIKIPEDIA_API_BASE = "https://en.wikipedia.org/w/api.php";
+  const WIKIPEDIA_SUMMARY_BASE = "https://en.wikipedia.org/api/rest_v1/page/summary";
+  const WIKIDATA_API_BASE = "https://www.wikidata.org/w/api.php";
   const CHART_CACHE_PREFIX = "stocks.custom-chart";
-  const SUPPLEMENTAL_CACHE_PREFIX = "stocks.supplemental";
+  const SUPPLEMENTAL_CACHE_PREFIX = "stocks.supplemental.v2";
   const CHART_CACHE_TTL_MS = 20 * 1000;
   const LONG_RANGE_CHART_CACHE_TTL_MS = 5 * 60 * 1000;
   const SUPPLEMENTAL_CACHE_TTL_MS = 6 * 60 * 60 * 1000;
@@ -35,11 +38,17 @@ document.addEventListener("DOMContentLoaded", () => {
     "FOREXCOM:SPXUSD": "^GSPC",
     "FOREXCOM:DJI": "^DJI"
   };
+  const COMPANY_PROFILE_FALLBACKS = {
+    "AMEX:SPY": {
+      summary:
+        "SPDR S&P 500 ETF Trust is an exchange-traded fund designed to track the performance of the S&P 500 Index, giving investors broad exposure to large-cap U.S. equities.",
+      website: "ssga.com"
+    }
+  };
 
   const currentSymbolNode = document.querySelector("[data-current-symbol]");
   const currentNameNode = document.querySelector("[data-current-name]");
   const lastPriceNode = document.querySelector("[data-last-price]");
-  const marketStateNode = document.querySelector("[data-market-state]");
   const securityEarningsNode = document.querySelector("[data-security-earnings]");
   const secondaryTitleNode = document.querySelector("[data-secondary-title]");
   const secondaryNoteNode = document.querySelector("[data-secondary-note]");
@@ -50,6 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const secondaryViewButtons = Array.from(document.querySelectorAll("[data-secondary-view]"));
   const rangeButtons = Array.from(document.querySelectorAll("[data-range]"));
   const chartSlot = document.querySelector('[data-widget-slot="advanced-chart"]');
+  const companySummaryNodes = {
+    summary: document.querySelector("[data-company-summary]"),
+    website: document.querySelector("[data-company-website]")
+  };
   const financialNodes = {
     marketCap: document.querySelector("[data-financial-market-cap]"),
     trailingPe: document.querySelector("[data-financial-trailing-pe]"),
@@ -62,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   let currentSymbol = readCurrentSymbol();
-  let currentSecondaryView = "ticker";
+  let currentSecondaryView = "summary";
   let chartRefreshIntervalId = null;
   let lastFundamentalRefreshAt = 0;
   let currentSupplementalRenderId = 0;
@@ -75,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const pendingSupplementalRequests = new Map();
 
   function readCurrentSymbol() {
-    return (currentSymbolNode?.textContent || "NASDAQ:ALM").trim();
+    return (currentSymbolNode?.textContent || "AMEX:SPY").trim();
   }
 
   function getCurrentRange() {
@@ -338,6 +351,12 @@ document.addEventListener("DOMContentLoaded", () => {
       .replace(/[ \t]+\n/g, "\n");
   }
 
+  function isLikelyNotFoundPage(text) {
+    return /(?:^|\n)# 404 - Page not found\b|Page Not Found - 404|This isn't the page you're looking for/i.test(
+      normalizeMarkdownText(text)
+    );
+  }
+
   function findLineValue(text, label) {
     const match = normalizeMarkdownText(text).match(
       new RegExp(`(?:^|\\n)${escapeRegExp(label)}\\s*([^\\n]+)`, "i")
@@ -367,6 +386,56 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     return "";
+  }
+
+  function extractTradingViewAboutSection(text) {
+    const normalized = normalizeMarkdownText(text);
+    const match = normalized.match(/(?:^|\n)## About ([^\n]+)\n+([\s\S]*?)(?=\n(?:## |\[## |\# ))/i);
+
+    if (!match) {
+      return {
+        aboutName: "",
+        sectionBody: "",
+        summary: ""
+      };
+    }
+
+    const aboutName = match[1].trim();
+    const sectionBody = match[2].trim();
+    const lines = sectionBody
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+    const summaryCandidates = lines.filter(
+      (line) =>
+        line.length >= 80 &&
+        /[.!?]$/.test(line) &&
+        !/^(Sector|Industry|CEO|Website|Headquarters|Founded|IPO date|Identifiers|ISIN)\b/i.test(line)
+    );
+
+    return {
+      aboutName,
+      sectionBody,
+      summary: summaryCandidates.sort((left, right) => right.length - left.length)[0] || ""
+    };
+  }
+
+  function extractMarkdownLinkValue(text, label) {
+    const match = text.match(
+      new RegExp(`${escapeRegExp(label)}\\s*\\n+\\[([^\\]]+)\\]\\((https?:\\/\\/[^)]+)\\)`, "i")
+    );
+
+    if (!match) {
+      return {
+        label: "",
+        href: ""
+      };
+    }
+
+    return {
+      label: match[1].trim(),
+      href: match[2].trim()
+    };
   }
 
   function parseDisplayNumber(value) {
@@ -494,7 +563,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function buildTradingViewSymbolUrl(symbol) {
-    const [exchange = "NASDAQ", ticker = "ALM"] = symbol.split(":");
+    const [exchange = "AMEX", ticker = "SPY"] = symbol.split(":");
     const tradingViewExchange = exchange.replace("NYSEARCA", "AMEX");
     return `https://www.tradingview.com/symbols/${tradingViewExchange}-${ticker}/`;
   }
@@ -507,8 +576,26 @@ document.addEventListener("DOMContentLoaded", () => {
     return `${STOCK_ANALYSIS_BASE}/stocks/${getShortTicker(symbol).toLowerCase()}/statistics/`;
   }
 
+  function buildWikipediaSearchUrl(query) {
+    return `${WIKIPEDIA_API_BASE}?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&srlimit=1&origin=*`;
+  }
+
+  function buildWikipediaSummaryUrl(title) {
+    return `${WIKIPEDIA_SUMMARY_BASE}/${encodeURIComponent(title)}`;
+  }
+
+  function buildWikidataWebsiteUrl(entityId) {
+    return `${WIKIDATA_API_BASE}?action=wbgetclaims&entity=${encodeURIComponent(entityId)}&property=P856&format=json&origin=*`;
+  }
+
   function parseTradingViewData(text) {
+    const aboutSection = extractTradingViewAboutSection(text);
+    const websiteLink = extractMarkdownLinkValue(text, "Website");
+
     return {
+      companyName: aboutSection.aboutName,
+      aboutSummary: aboutSection.summary,
+      website: websiteLink.href || websiteLink.label,
       nextReportDate: findFollowingValue(text, "Next report date"),
       reportPeriod: findFollowingValue(text, "Report period"),
       epsEstimate: findFollowingValue(text, "EPS estimate"),
@@ -518,18 +605,131 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function parseOverviewData(text) {
+    if (isLikelyNotFoundPage(text)) {
+      return {};
+    }
+
+    const normalized = normalizeMarkdownText(text);
     const revenueLine = findLineValue(text, "Revenue (ttm)");
     const revenueGrowthMatch = revenueLine.match(/([+-]?\d+(?:\.\d+)?%)/);
+    const aboutMatch = normalized.match(
+      /(?:^|\n)## About [^\n]+\n+([\s\S]*?)(?=\n(?:Industry|Sector|CEO|Employees|Stock Exchange|Ticker Symbol|Website)\b|\n## )/i
+    );
+    const aboutSummary = aboutMatch
+      ? aboutMatch[1]
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean)
+          .join(" ")
+      : "";
 
     return {
       marketCap: findLineValue(text, "Market Cap"),
       revenueGrowth: revenueGrowthMatch ? revenueGrowthMatch[1] : "",
       eps: findLineValue(text, "EPS"),
-      forwardPe: findLineValue(text, "Forward PE")
+      forwardPe: findLineValue(text, "Forward PE"),
+      aboutSummary,
+      industry: findLineValue(text, "Industry"),
+      sector: findLineValue(text, "Sector"),
+      ceo: findLineValue(text, "CEO"),
+      employees: findLineValue(text, "Employees"),
+      website: findLineValue(text, "Website").replace(/\/+\s*$/, "")
     };
   }
 
+  function parseWikipediaSearchTitle(payload) {
+    return payload?.query?.search?.[0]?.title || "";
+  }
+
+  function parseWikipediaSummaryData(payload) {
+    return {
+      title: payload?.title || "",
+      summary: String(payload?.extract || "").trim(),
+      entityId: String(payload?.wikibase_item || "").trim()
+    };
+  }
+
+  function parseWikidataWebsite(payload) {
+    const claims = payload?.claims?.P856;
+    if (!Array.isArray(claims)) {
+      return "";
+    }
+
+    const preferred = claims.find((claim) => claim?.rank === "preferred") || claims[0];
+    return String(preferred?.mainsnak?.datavalue?.value || "").trim();
+  }
+
+  function buildWikipediaSearchTerms(symbol) {
+    const rawName = String(currentNameNode?.textContent || "").trim();
+    const cleanedName = rawName
+      .replace(/\b(incorporated|inc\.?|corporation|corp\.?|company|co\.?|limited|ltd\.?|plc|n\.v\.|ab\s*\(publ\)|\(publ\)|ab|s\.a\.|ag|holdings?)\b/gi, "")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+
+    return Array.from(
+      new Set(
+        [
+          rawName,
+          cleanedName,
+          cleanedName ? `${cleanedName} company` : "",
+          cleanedName ? `${cleanedName} corporation` : "",
+          rawName.replace(/[.,]/g, "").trim()
+        ].filter((value) => value && value.length >= 3)
+      )
+    );
+  }
+
+  async function fetchWikipediaCompanyProfile(symbol) {
+    const staticFallback = COMPANY_PROFILE_FALLBACKS[symbol];
+    if (staticFallback) {
+      return {
+        description: staticFallback.summary || "",
+        website: staticFallback.website || ""
+      };
+    }
+
+    const searchTerms = buildWikipediaSearchTerms(symbol);
+    for (const term of searchTerms) {
+      try {
+        const searchPayload = await fetchJsonWithTimeout(buildWikipediaSearchUrl(term), QUOTE_TIMEOUT_MS);
+        const title = parseWikipediaSearchTitle(searchPayload);
+        if (!title) {
+          continue;
+        }
+
+        const summaryPayload = await fetchJsonWithTimeout(buildWikipediaSummaryUrl(title), QUOTE_TIMEOUT_MS);
+        const summaryData = parseWikipediaSummaryData(summaryPayload);
+        if (!summaryData.summary) {
+          continue;
+        }
+
+        let website = "";
+        if (summaryData.entityId) {
+          try {
+            const websitePayload = await fetchJsonWithTimeout(buildWikidataWebsiteUrl(summaryData.entityId), QUOTE_TIMEOUT_MS);
+            website = parseWikidataWebsite(websitePayload);
+          } catch (_websiteError) {
+            website = "";
+          }
+        }
+
+        return {
+          description: summaryData.summary,
+          website
+        };
+      } catch (_error) {
+        // Continue to next search candidate.
+      }
+    }
+
+    return {};
+  }
+
   function parseStatisticsData(text) {
+    if (isLikelyNotFoundPage(text)) {
+      return {};
+    }
+
     return {
       earningsDate: findLineValue(text, "Earnings Date"),
       trailingPe: findLineValue(text, "P/E Ratio") || findLineValue(text, "PE Ratio"),
@@ -548,12 +748,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function setCompanySummaryValue(node, value, fallback = "--") {
+    if (node) {
+      node.textContent = value || fallback;
+    }
+  }
+
+  function setCompanyWebsite(url) {
+    if (!companySummaryNodes.website) {
+      return;
+    }
+
+    const cleanUrl = String(url || "").trim();
+    if (!cleanUrl || cleanUrl === "--" || cleanUrl === "n/a") {
+      companySummaryNodes.website.textContent = cleanUrl || "--";
+      companySummaryNodes.website.removeAttribute("href");
+      return;
+    }
+
+    const href = /^https?:\/\//i.test(cleanUrl) ? cleanUrl : `https://${cleanUrl}`;
+    companySummaryNodes.website.textContent = cleanUrl.replace(/^https?:\/\//i, "");
+    companySummaryNodes.website.href = href;
+  }
+
   function resetSupplementalPanels(symbol) {
+    const fallback = COMPANY_PROFILE_FALLBACKS[symbol] || null;
+
     if (securityEarningsNode) {
       securityEarningsNode.textContent = isCorporateSecurity(symbol)
         ? "Next earnings: loading..."
         : "Next earnings: n/a for this asset";
     }
+
+    if (companySummaryNodes.summary) {
+      companySummaryNodes.summary.textContent = isCorporateSecurity(symbol)
+        ? fallback?.summary || "Loading company summary..."
+        : "Company summary is not available for this asset.";
+    }
+
+    setCompanyWebsite(fallback?.website || (isCorporateSecurity(symbol) ? "" : "n/a"));
 
     Object.values(financialNodes).forEach((node) => {
       if (node) {
@@ -606,10 +839,52 @@ document.addEventListener("DOMContentLoaded", () => {
     return `Next earnings: ${nextDateLabel}${details.length ? ` · ${details.join(" · ")}` : ""}`;
   }
 
-  function applySupplementalData(symbol, overviewData, statisticsData, tradingViewData) {
+  function pickFirstNonEmpty(...values) {
+    return values.find((value) => String(value || "").trim()) || "";
+  }
+
+  function buildFallbackSummary(symbol, companyProfileData, overviewData) {
+    const staticFallback = COMPANY_PROFILE_FALLBACKS[symbol];
+    if (staticFallback?.summary) {
+      return staticFallback.summary;
+    }
+
+    const companyName = String(currentNameNode?.textContent || "").trim();
+    const industry = pickFirstNonEmpty(overviewData.industry);
+    const sector = pickFirstNonEmpty(overviewData.sector);
+
+    if (companyName && industry && sector) {
+      return `${companyName} operates in the ${industry} industry within the ${sector} sector.`;
+    }
+
+    return "Company summary is not available right now.";
+  }
+
+  function applySupplementalData(symbol, companyProfileData, overviewData, statisticsData, tradingViewData) {
+    const staticFallback = COMPANY_PROFILE_FALLBACKS[symbol] || {};
+
+    const shortTicker = getShortTicker(symbol);
+    const currentName = String(currentNameNode?.textContent || "").trim();
+    if (
+      currentNameNode &&
+      tradingViewData.companyName &&
+      (!currentName || currentName.toUpperCase() === shortTicker.toUpperCase())
+    ) {
+      currentNameNode.textContent = tradingViewData.companyName;
+    }
+
     if (securityEarningsNode) {
       securityEarningsNode.textContent = buildEarningsLabel(symbol, tradingViewData, statisticsData);
     }
+
+    if (companySummaryNodes.summary) {
+      companySummaryNodes.summary.textContent =
+        pickFirstNonEmpty(tradingViewData.aboutSummary, companyProfileData.description, overviewData.aboutSummary) ||
+        buildFallbackSummary(symbol, companyProfileData, overviewData);
+    }
+    setCompanyWebsite(
+      pickFirstNonEmpty(tradingViewData.website, companyProfileData.website, overviewData.website, staticFallback.website)
+    );
 
     const lastPrice = parseDisplayNumber(lastPriceNode?.textContent || "");
     const bookValuePerShare = parseDisplayNumber(statisticsData.bookValuePerShare);
@@ -653,7 +928,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function setSecondaryView(view) {
-    currentSecondaryView = view === "financial" ? "financial" : view === "technical" ? "technical" : "ticker";
+    currentSecondaryView =
+      view === "financial"
+        ? "financial"
+        : view === "technical"
+          ? "technical"
+          : view === "ticker"
+            ? "ticker"
+            : "summary";
 
     secondaryPanels.forEach((panel) => {
       panel.classList.toggle("is-hidden", panel.dataset.secondaryPanel !== currentSecondaryView);
@@ -667,15 +949,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (secondaryTitleNode) {
       secondaryTitleNode.textContent =
-        currentSecondaryView === "ticker"
-          ? "Ticker News"
-          : currentSecondaryView === "financial"
-            ? "Financial Data"
-            : "Technical Read";
+        currentSecondaryView === "summary"
+          ? "Company Summary"
+          : currentSecondaryView === "ticker"
+            ? "Ticker News"
+            : currentSecondaryView === "financial"
+              ? "Financial Data"
+              : "Technical Read";
     }
 
     if (secondaryNoteNode) {
-      secondaryNoteNode.textContent = currentSecondaryView === "technical" ? "Live signal" : "Core financials";
+      secondaryNoteNode.textContent =
+        currentSecondaryView === "summary"
+          ? "Business summary"
+          : currentSecondaryView === "technical"
+            ? "Live signal"
+            : "Core financials";
       secondaryNoteNode.classList.toggle("is-hidden", currentSecondaryView === "ticker");
     }
 
@@ -1034,7 +1323,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const cached = getCachedSupplemental(symbol);
     if (cached) {
-      applySupplementalData(symbol, cached.overviewData || {}, cached.statisticsData || {}, cached.tradingViewData || {});
+      applySupplementalData(
+        symbol,
+        cached.companyProfileData || {},
+        cached.overviewData || {},
+        cached.statisticsData || {},
+        cached.tradingViewData || {}
+      );
     } else if (!hasSupplementalValues() || symbolChanged) {
       resetSupplementalPanels(symbol);
     }
@@ -1050,6 +1345,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const renderId = ++currentSupplementalRenderId;
     lastFundamentalRefreshAt = Date.now();
     const request = Promise.allSettled([
+      fetchWikipediaCompanyProfile(symbol),
       fetchTextShared(buildProxyUrl(buildStockAnalysisOverviewUrl(symbol))),
       fetchTextShared(buildProxyUrl(buildStockAnalysisStatisticsUrl(symbol))),
       fetchTextShared(buildProxyUrl(buildTradingViewSymbolUrl(symbol)))
@@ -1059,18 +1355,20 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        const overviewData = results[0].status === "fulfilled" ? parseOverviewData(results[0].value) : {};
-        const statisticsData = results[1].status === "fulfilled" ? parseStatisticsData(results[1].value) : {};
-        const tradingViewData = results[2].status === "fulfilled" ? parseTradingViewData(results[2].value) : {};
+        const companyProfileData = results[0].status === "fulfilled" ? results[0].value || {} : {};
+        const overviewData = results[1].status === "fulfilled" ? parseOverviewData(results[1].value) : {};
+        const statisticsData = results[2].status === "fulfilled" ? parseStatisticsData(results[2].value) : {};
+        const tradingViewData = results[3].status === "fulfilled" ? parseTradingViewData(results[3].value) : {};
 
         const payload = {
+          companyProfileData,
           overviewData,
           statisticsData,
           tradingViewData
         };
 
         setCachedSupplemental(symbol, payload);
-        applySupplementalData(symbol, overviewData, statisticsData, tradingViewData);
+        applySupplementalData(symbol, companyProfileData, overviewData, statisticsData, tradingViewData);
       })
       .finally(() => {
         pendingSupplementalRequests.delete(symbol);
@@ -1086,7 +1384,7 @@ document.addEventListener("DOMContentLoaded", () => {
         (event) => {
           event.preventDefault();
           event.stopImmediatePropagation();
-          setSecondaryView(button.dataset.secondaryView || "ticker");
+          setSecondaryView(button.dataset.secondaryView || "summary");
         },
         true
       );
@@ -1155,11 +1453,7 @@ document.addEventListener("DOMContentLoaded", () => {
   bindSecondaryTabs();
   bindChartRefresh();
   observeSymbolChanges();
-  if (marketStateNode) {
-    marketStateNode.textContent = "";
-    marketStateNode.classList.add("is-hidden");
-  }
-  setSecondaryView("ticker");
+  setSecondaryView("summary");
   refreshSupplementalData(true);
   queueChartRefresh(20);
 });

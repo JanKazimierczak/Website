@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Change `defaultSymbol` if you want a different main ticker on first load.
   const DASHBOARD_CONFIG = {
-    defaultSymbol: "NASDAQ:ALM",
+    defaultSymbol: "AMEX:SPY",
     defaultRange: "1d"
   };
 
@@ -163,7 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentSymbolNode = document.querySelector("[data-current-symbol]");
   const currentNameNode = document.querySelector("[data-current-name]");
   const currentMetaNode = document.querySelector("[data-current-meta]");
-  const marketStateNode = document.querySelector("[data-market-state]");
   const marketSessionNode = document.querySelector("[data-market-session]");
   const marketClockNode = document.querySelector("[data-market-clock]");
   const quoteRefreshTimerNode = document.querySelector("[data-quote-refresh-timer]");
@@ -180,10 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const metric52WeekHighNode = document.querySelector("[data-metric-52w-high]");
   const metric52WeekLowNode = document.querySelector("[data-metric-52w-low]");
   const metricVolumeNode = document.querySelector("[data-metric-volume]");
-  const secondaryTitleNode = document.querySelector("[data-secondary-title]");
-  const secondaryNoteNode = document.querySelector("[data-secondary-note]");
-  const secondaryPanels = Array.from(document.querySelectorAll("[data-secondary-panel]"));
-  const secondaryViewButtons = Array.from(document.querySelectorAll("[data-secondary-view]"));
   const breakingNewsList = document.querySelector("[data-breaking-news-list]");
   const breakingRefreshTimerNode = document.querySelector("[data-breaking-refresh-timer]");
   const tickerNewsList = document.querySelector("[data-ticker-news-list]");
@@ -202,7 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let refreshCountdownIntervalId = null;
   let lastQuoteRefreshAt = 0;
   let lastNewsRefreshAt = 0;
-  let currentSecondaryView = "technical";
   const newsCache = new Map();
   const quoteSnapshotCache = new Map();
   const pendingQuoteRequests = new Map();
@@ -544,10 +538,6 @@ document.addEventListener("DOMContentLoaded", () => {
       lastChangeNode.className = `security-change ${getTrendClass(change).replace("metric", "change")}`;
     }
 
-    if (marketStateNode) {
-      marketStateNode.textContent = "Live via TradingView + quote feed";
-    }
-
     setMetricValue(metricOpenNode, formatPrice(openingPrice));
     setMetricValue(metricVwapNode, formatPrice(vwap));
     setMetricValue(metricPrevCloseNode, formatPrice(previousClose), getTrendClass(change));
@@ -721,37 +711,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (tickerRefreshTimerNode) {
       tickerRefreshTimerNode.textContent = formatCountdownLabel(remainingNewsMs);
-    }
-  }
-
-  function setSecondaryView(view) {
-    currentSecondaryView = view === "ticker" ? "ticker" : "technical";
-
-    secondaryPanels.forEach((panel) => {
-      panel.classList.toggle("is-hidden", panel.dataset.secondaryPanel !== currentSecondaryView);
-    });
-
-    secondaryViewButtons.forEach((button) => {
-      const isActive = button.dataset.secondaryView === currentSecondaryView;
-      button.classList.toggle("is-active", isActive);
-      button.setAttribute("aria-pressed", String(isActive));
-    });
-
-    if (secondaryTitleNode) {
-      secondaryTitleNode.textContent = currentSecondaryView === "ticker" ? "Ticker News" : "Technical Read";
-    }
-
-    if (secondaryNoteNode) {
-      secondaryNoteNode.textContent = "Live signal";
-      secondaryNoteNode.classList.toggle("is-hidden", currentSecondaryView === "ticker");
-    }
-
-    if (selectedLabelNode) {
-      selectedLabelNode.classList.toggle("is-hidden", currentSecondaryView !== "ticker");
-    }
-
-    if (tickerRefreshTimerNode) {
-      tickerRefreshTimerNode.classList.toggle("is-hidden", currentSecondaryView !== "ticker");
     }
   }
 
@@ -1091,10 +1050,6 @@ document.addEventListener("DOMContentLoaded", () => {
       currentMetaNode.textContent = meta.meta;
     }
 
-    if (marketStateNode) {
-      marketStateNode.textContent = "Live via TradingView";
-    }
-
     if (headerSymbolNode) {
       headerSymbolNode.textContent = symbol;
     }
@@ -1395,16 +1350,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    secondaryViewButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        setSecondaryView(button.dataset.secondaryView || "technical");
-      });
-    });
   }
 
   bindEvents();
   dashboardInitialized = true;
-  setSecondaryView(currentSecondaryView);
   renderDashboard(getInitialSymbol());
   startAutoRefresh();
   updateRefreshCountdowns();

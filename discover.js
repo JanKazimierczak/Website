@@ -931,41 +931,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return `stocks.html?symbol=${encodeURIComponent(symbol)}`;
   }
 
-  function buildMoverRows(snapshots) {
-    return snapshots
-      .filter((snapshot) =>
-        Number.isFinite(snapshot.currentPrice) &&
-        snapshot.currentPrice >= 2 &&
-        Number.isFinite(snapshot.changePercent) &&
-        Number.isFinite(snapshot.dollarVolume) &&
-        snapshot.dollarVolume >= 25e6
-      )
-      .sort((left, right) => {
-        const changeDelta = (right.changePercent || 0) - (left.changePercent || 0);
-        if (changeDelta !== 0) {
-          return changeDelta;
-        }
-
-        return (right.dollarVolume || 0) - (left.dollarVolume || 0);
-      })
-      .slice(0, 8)
-      .map((snapshot) => ({
-        symbolLabel: snapshot.ticker,
-        primaryText: `${formatPercent(snapshot.changePercent)} · ${formatPrice(snapshot.currentPrice)}`,
-        primaryClass: getTrendClass(snapshot.changeValue),
-        nameText: snapshot.name,
-        metaParts: [
-          `${formatDollarVolume(snapshot.dollarVolume)} $vol`,
-          `${formatVolume(snapshot.volume)} shares`
-        ],
-        footerParts: [
-          Number.isFinite(snapshot.oneMonthReturn) ? `1M ${formatPercent(snapshot.oneMonthReturn)}` : "1M --",
-          "Open dashboard"
-        ],
-        href: buildDashboardUrl(snapshot.symbol)
-      }));
-  }
-
   function parseTradingViewMoverRows(text, limit) {
     const pattern = /(?:!\[Image[^\]]*\]\([^)]+\))?[A-Z]?\[([A-Z0-9.\-]+)\]\(https:\/\/www\.tradingview\.com\/symbols\/([A-Z]+)-([A-Z0-9.\-]+)\/[^)]*\)\[([^\]]+)\]\(https:\/\/www\.tradingview\.com\/symbols\/[A-Z]+-[A-Z0-9.\-]+\/[^)]*\)\s*D([+-]\d+(?:\.\d+)?)%([\d,]+(?:\.\d+)?)\s*USD\s*([\d,]+(?:\.\d+)?)\s*([KMBT])?/g;
     const rows = [];
@@ -1594,9 +1559,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return items.slice(0, limit);
   }
 
-  function updateSummaryPanel(screenedSnapshots) {
+  function updateSummaryPanel(screenedCount) {
     if (summaryUniverseNode) {
-      summaryUniverseNode.textContent = String(screenedSnapshots.length);
+      summaryUniverseNode.textContent = String(screenedCount);
     }
 
     if (summaryMoverNode) {
@@ -1708,28 +1673,11 @@ document.addEventListener("DOMContentLoaded", () => {
     ])
       .then(async ([snapshotResult, moverResult, activeResult]) => {
         const snapshots = snapshotResult.status === "fulfilled" ? snapshotResult.value : [];
-        const fallbackMovers = buildMoverRows(snapshots).map((row, index) => ({
-          ...snapshots
-            .filter((snapshot) =>
-              Number.isFinite(snapshot.currentPrice) &&
-              snapshot.currentPrice >= 2 &&
-              Number.isFinite(snapshot.changePercent) &&
-              Number.isFinite(snapshot.dollarVolume) &&
-              snapshot.dollarVolume >= 25e6
-            )
-            .sort((left, right) => {
-              const changeDelta = (right.changePercent || 0) - (left.changePercent || 0);
-              if (changeDelta !== 0) {
-                return changeDelta;
-              }
-              return (right.dollarVolume || 0) - (left.dollarVolume || 0);
-            })[index],
-          ...row
-        }));
-
-        currentPanels.movers = moverResult.status === "fulfilled" && moverResult.value.length
-          ? moverResult.value
-          : fallbackMovers;
+        if (moverResult.status === "fulfilled" && moverResult.value.length) {
+          currentPanels.movers = moverResult.value;
+        } else if (!Array.isArray(currentPanels.movers)) {
+          currentPanels.movers = [];
+        }
 
         const fallbackActive = buildActiveRows(snapshots).map((row, index) => ({
           ...snapshots
@@ -1768,7 +1716,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderScannerPanel("pullback", currentPanels.pullback, "No clean pullback setups are available right now.");
         renderScannerPanel("value", currentPanels.value, "No range-discount candidates passed the current filter.");
         renderScannerPanel("focus", currentPanels.focus, "No cross-panel setups are available right now.");
-        updateSummaryPanel(snapshots);
+        updateSummaryPanel(snapshots.length);
 
         if (newsNoteNode) {
           const moverLead = currentPanels.movers[0]?.ticker || "markets";
@@ -1789,7 +1737,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderScannerPanel("pullback", [], "Market scan is unavailable right now.");
         renderScannerPanel("value", [], "Market scan is unavailable right now.");
         renderScannerPanel("focus", [], "Market scan is unavailable right now.");
-        updateSummaryPanel([]);
+        updateSummaryPanel(0);
       });
   }
 
@@ -1839,12 +1787,12 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       updateSummaryPanel(
-        Array.from(new Set([
+        new Set([
           ...currentPanels.movers.map((item) => item.symbol),
           ...currentPanels.active.map((item) => item.symbol),
           ...currentPanels.pullback.map((item) => item.symbol),
           ...currentPanels.value.map((item) => item.symbol)
-        ])).map((symbol) => ({ symbol }))
+        ]).size
       );
     });
   }
