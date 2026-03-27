@@ -3,405 +3,240 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jan Kazimierczak — Engineering Portfolio</title>
+  <title>Jan Kazimierczak | Engineering Portfolio</title>
+  <meta name="description" content="Engineering portfolio for Jan Kazimierczak, focused on aerospace, structural analysis, and engineering design at the University of Toronto.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #000000;
-      --border: rgba(255,255,255,0.18);
-      --text: #ffffff;
-      --muted: rgba(255,255,255,0.55);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── BACKGROUNDS ── */
-    #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-    .space-bg {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 80% 60% at 75% 40%, rgba(30,35,60,0.90) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 80% at 85% 50%, rgba(15,20,45,0.80) 0%, transparent 60%),
-        #000;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2rem; height: 60px; background: transparent;
-    }
-    nav::after {
-      content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-    }
-    .nav-logo {
-      font-size: 1rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--text); text-decoration: none; transition: opacity 200ms; flex-shrink: 0;
-    }
-    .nav-logo:hover { opacity: 0.7; }
-    .nav-links { display: flex; list-style: none; }
-    .nav-links a {
-      display: block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none;
-      padding: 0 1rem; line-height: 60px; transition: color 200ms;
-    }
-    .nav-links a:hover { color: #fff; }
-    .nav-links a.active { color: #fff; }
-
-    .hamburger {
-      display: none; flex-direction: column; justify-content: center;
-      gap: 5px; width: 40px; height: 40px; padding: 8px;
-      background: transparent; border: 1px solid rgba(255,255,255,0.20);
-      cursor: pointer; flex-shrink: 0;
-    }
-    .hamburger span { display: block; height: 1px; background: #fff; transition: all 250ms ease; }
-    .hamburger.open span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
-    .hamburger.open span:nth-child(2){ opacity:0; transform:scaleX(0); }
-    .hamburger.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
-
-    .mobile-nav {
-      display: none; flex-direction: column;
-      position: fixed; top: 60px; left: 0; right: 0;
-      background: rgba(0,0,0,0.97);
-      border-bottom: 1px solid rgba(255,255,255,0.12); z-index: 99;
-    }
-    .mobile-nav.open { display: flex; }
-    .mobile-nav a {
-      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.65); text-decoration: none;
-      padding: 1rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.07); transition: color 160ms;
-    }
-    .mobile-nav a:last-child { border-bottom: none; }
-    .mobile-nav a:hover, .mobile-nav a.active { color: #fff; }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative; z-index: 2;
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      padding: 80px 2rem 60px;
-    }
-
-    .hero-inner {
-      max-width: 1100px; width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    /* Text side */
-    .hero-label {
-      font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(255,255,255,0.40);
-      margin-bottom: 1.4rem;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .hero-label::before {
-      content: ""; display: block; width: 20px; height: 1px;
-      background: rgba(255,255,255,0.30);
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 5.5vw, 4rem);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      line-height: 1.05;
-      color: #fff;
-      margin-bottom: 1.2rem;
-    }
-
-    .hero-role {
-      font-size: clamp(0.82rem, 1.6vw, 1rem);
-      font-weight: 400;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 1.8rem;
-    }
-
-    .hero-bio {
-      font-size: clamp(0.82rem, 1.5vw, 0.93rem);
-      color: rgba(255,255,255,0.50);
-      font-weight: 300;
-      line-height: 1.80;
-      max-width: 46ch;
-      margin-bottom: 2.8rem;
-      letter-spacing: 0.02em;
-    }
-
-    /* CTA buttons */
-    .cta-row {
-      display: flex; gap: 10px; flex-wrap: wrap;
-    }
-    .cta-btn {
-      display: inline-flex; align-items: center; gap: 9px;
-      height: 48px; padding: 0 2rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.70rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      text-decoration: none; cursor: pointer;
-      transition: all 220ms ease;
-    }
-    .cta-btn.primary {
-      background: #fff; color: #000;
-      border: 1px solid #fff;
-    }
-    .cta-btn.primary:hover { background: rgba(255,255,255,0.85); }
-    .cta-btn.secondary {
-      background: transparent; color: #fff;
-      border: 1px solid rgba(255,255,255,0.40);
-    }
-    .cta-btn.secondary:hover { border-color: #fff; background: rgba(255,255,255,0.06); }
-
-    /* Photo side */
-    .hero-photo {
-      position: relative;
-    }
-    .photo-frame {
-      width: 100%;
-      aspect-ratio: 3 / 4;
-      border: 1px solid rgba(255,255,255,0.15);
-      overflow: hidden;
-      position: relative;
-      background: rgba(255,255,255,0.03);
-    }
-    .photo-frame img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center top;
-      display: block;
-    }
-    /* Subtle vignette on photo */
-    .photo-frame::after {
-      content: "";
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom,
-        transparent 60%,
-        rgba(0,0,0,0.55) 100%
-      );
-    }
-
-    /* Stats strip below photo */
-    .stats-row {
-      display: flex; gap: 0;
-      border: 1px solid rgba(255,255,255,0.10);
-      border-top: none;
-    }
-    .stat {
-      flex: 1;
-      padding: 1rem 1.2rem;
-      border-right: 1px solid rgba(255,255,255,0.10);
-    }
-    .stat:last-child { border-right: none; }
-    .stat-val {
-      font-size: 1.1rem; font-weight: 700;
-      letter-spacing: 0.04em; color: #fff;
-      margin-bottom: 3px;
-    }
-    .stat-label {
-      font-size: 0.62rem; font-weight: 500;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-    }
-
-    /* Scroll hint */
-    .scroll-hint {
-      position: absolute; bottom: 2rem; left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      color: rgba(255,255,255,0.30);
-      animation: bounce 2.5s ease-in-out infinite;
-    }
-    .scroll-hint svg { width: 22px; height: 22px; }
-    @keyframes bounce {
-      0%,100%{ transform: translateX(-50%) translateY(0); }
-      50%    { transform: translateX(-50%) translateY(8px); }
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      position: relative; z-index: 2;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 1.5rem 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
-    }
-    footer span { font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.30); }
-    footer a {
-      font-size: 0.72rem; letter-spacing: 0.10em; text-transform: uppercase;
-      color: rgba(255,255,255,0.35); text-decoration: none; transition: color 200ms;
-    }
-    footer a:hover { color: rgba(255,255,255,0.70); }
-
-    /* ── RESPONSIVE ── */
-    @media(max-width:860px){
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      nav { padding: 0 1.25rem; }
-      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .hero-photo { max-width: 340px; margin: 0 auto; width: 100%; }
-      h1 { font-size: clamp(2rem, 8vw, 3rem); }
-      .hero-bio { max-width: 100%; }
-    }
-    @media(max-width:520px){
-      .hero { padding: 90px 1.25rem 60px; }
-      .cta-row { flex-direction: column; }
-      .cta-btn { width: 100%; justify-content: center; }
-      footer { flex-direction: column; align-items: center; text-align: center; }
-      .stats-row { flex-direction: column; border: 1px solid rgba(255,255,255,0.10); }
-      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.10); }
-      .stat:last-child { border-bottom: none; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container">
+        <nav class="site-nav" aria-label="Primary">
+          <div class="brand">
+            <a class="brand-mark-link" href="index.html" aria-label="Go to homepage" data-brand-mark-link>
+              <span class="brand-mark" data-brand-mark>JK</span>
+            </a>
+            <a class="brand-copy-link" href="index.html" aria-label="Go to homepage">
+              <span class="brand-copy">
+                <span class="brand-name">Jan Kazimierczak</span>
+                <span class="brand-role">Engineering Portfolio</span>
+              </span>
+            </a>
+          </div>
+          <ul class="nav-links">
+            <li><a class="active" href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="design.html">Design</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+            <span></span><span></span><span></span>
+          </button>
+        </nav>
+        <div class="mobile-nav" data-mobile-nav>
+          <a class="active" href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="design.html">Design</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </header>
 
-  <div class="space-bg" aria-hidden="true"></div>
-  <canvas id="stars" aria-hidden="true"></canvas>
+    <main>
+      <div class="container">
+        <!-- Hidden generated draft content for public launch. Restore when final copy is ready.
+        <section class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">University of Toronto Engineering Science</div>
+            <h1>Building toward aerospace through design, analysis, and careful engineering work.</h1>
+            <p>
+              I am a first-year Engineering Science student at the University of Toronto. My main
+              interests are aerospace, propulsion, structural reasoning, and engineering design
+              carried out with real discipline. This site collects the work and ideas that best
+              show how I currently approach engineering problems.
+            </p>
+            <div class="cta-row">
+              <a class="button" href="projects.html">View projects</a>
+              <a class="button-secondary" href="about.html">Read background</a>
+              <a class="button-ghost" href="contact.html">Get in touch</a>
+            </div>
+          </div>
 
-  <nav>
-    <a href="index.html" class="nav-logo">JK</a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="design.html">Design</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+          <div class="hero-panel">
+            <div class="portrait">
+              <img src="Picture.jpeg" alt="Portrait of Jan Kazimierczak">
+            </div>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-label">Program</div>
+                <div class="stat-value">EngSci</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Team</div>
+                <div class="stat-value">UTAT</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Focus</div>
+                <div class="stat-value">Aerospace</div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-  <div class="mobile-nav" id="mobile-nav">
-    <a href="index.html" class="active">Home</a>
-    <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-    <a href="design.html">Design</a>
-    <a href="contactv1.html">Contact</a>
+        <section>
+          <div class="section-heading">
+            <div class="eyebrow">Profile</div>
+            <h2>What drives the work on this site</h2>
+            <p>My interest in engineering started with the first Falcon Heavy launch. Since then, I have been most drawn to work that combines precision, physical reasoning, and the possibility of building something that genuinely improves the world around us.</p>
+          </div>
+          <div class="cards-grid">
+            <article class="card">
+              <div class="card-kicker">Origin</div>
+              <h3 class="card-title">Falcon Heavy and aerospace interest</h3>
+              <p class="card-copy">Seeing the two Falcon Heavy boosters land with that level of precision was the moment that made engineering feel serious and worth pursuing long-term.</p>
+            </article>
+            <article class="card">
+              <div class="card-kicker">Approach</div>
+              <h3 class="card-title">Systematic and cautious by default</h3>
+              <p class="card-copy">I prefer careful planning, due diligence, and design choices that can be defended under real constraints rather than rushed decisions or improvised fixes.</p>
+            </article>
+            <article class="card">
+              <div class="card-kicker">Team work</div>
+              <h3 class="card-title">Compromise without losing standards</h3>
+              <p class="card-copy">In group projects, I try to hear other perspectives, make reasonable compromises, and still raise concerns when a method seems weak or risky.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="split-grid">
+          <div>
+            <div class="section-heading">
+              <div class="eyebrow">Current interests</div>
+              <h2>Technical areas I want to develop further</h2>
+            </div>
+            <ul class="list">
+              <li>Liquid propulsion systems and supporting aerospace analysis work.</li>
+              <li>Structural mechanics, load paths, and design validation.</li>
+              <li>Computational tools that support engineering decision-making.</li>
+              <li>CAD-driven design workflows from concept to prototype.</li>
+            </ul>
+          </div>
+          <div class="note-card">
+            <div class="small-label">Professional direction</div>
+            <h3 class="panel-title">I want to keep building toward propulsion and aerospace systems.</h3>
+            <p class="panel-copy">
+              My current coursework and UTAT involvement are pushing me toward work where
+              analysis, hardware, and testing all matter together. The goal is not just to study
+              aerospace systems, but to contribute meaningfully to them.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-heading">
+            <div class="eyebrow">Featured pages</div>
+            <h2>Where to start on the site</h2>
+          </div>
+          <div class="projects-grid">
+            <a class="project-card card" href="projects.html">
+              <div class="project-image">
+                <img src="BEEM.png" alt="Bridge project preview">
+              </div>
+              <div class="tag-row">
+                <span class="status-chip live">Projects</span>
+                <span class="tag">Engineering</span>
+                <span class="tag">Case studies</span>
+              </div>
+              <h3 class="card-title">Projects</h3>
+              <p class="card-copy">Course and technical projects in structures, propulsion, controls, and applied engineering analysis.</p>
+            </a>
+
+            <a class="project-card card" href="design.html">
+              <div class="project-image">
+                <img src="Praxis-1-basket.png" alt="Design project preview">
+              </div>
+              <div class="tag-row">
+                <span class="status-chip live">Design</span>
+                <span class="tag">Praxis</span>
+                <span class="tag">Process</span>
+              </div>
+              <h3 class="card-title">Design</h3>
+              <p class="card-copy">My ESC102 design portfolio page, including my position statement and the three assignment projects tied to it.</p>
+            </a>
+          </div>
+
+          <article class="note-card">
+            <div class="small-label">Private tools</div>
+            <h3 class="panel-title">Protected market dashboard</h3>
+            <p class="panel-copy">
+              A password-gated stock market page with live indexes, a focused ticker workflow, an interactive chart, and a side news rail for the selected symbol.
+            </p>
+            <div class="cta-row">
+              <a class="button-secondary" href="market-dashboard.html">Open dashboard</a>
+            </div>
+          </article>
+        </section>
+        -->
+
+        <section class="page-hero">
+          <div class="eyebrow">University of Toronto Engineering Science</div>
+          <h1>Jan Kazimierczak</h1>
+          <p>Public homepage content is coming soon.</p>
+        </section>
+
+        <section class="support-grid">
+          <div class="image-frame">
+            <img src="Picture.jpeg" alt="Portrait of Jan Kazimierczak">
+          </div>
+          <article class="note-card coming-soon-block">
+            <div class="small-label">Coming soon</div>
+            <h2 class="panel-title">This homepage is being updated.</h2>
+            <p class="panel-copy">More public-facing homepage content will be added soon.</p>
+          </article>
+        </section>
+
+        <section>
+          <div class="section-heading">
+            <div class="eyebrow">Quick links</div>
+            <h2>Available pages</h2>
+          </div>
+          <div class="projects-grid">
+            <a class="project-card card" href="projects.html">
+              <h3 class="card-title">Projects</h3>
+              <p class="card-copy">Coming soon.</p>
+            </a>
+            <a class="project-card card" href="design.html">
+              <h3 class="card-title">Design</h3>
+              <p class="card-copy">Coming soon.</p>
+            </a>
+            <a class="project-card card" href="about.html">
+              <h3 class="card-title">About</h3>
+              <p class="card-copy">Coming soon.</p>
+            </a>
+            <a class="project-card card" href="contact.html">
+              <h3 class="card-title">Contact</h3>
+              <p class="card-copy">Coming soon.</p>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <span class="footer-copyright">
+          <button class="copyright-toggle" type="button" aria-label="Toggle JK link to stocks" aria-pressed="false" data-brand-toggle>&copy;</button>
+          <span><span data-year></span> Jan Kazimierczak</span>
+        </span>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
   </div>
-
-  <section class="hero">
-    <div class="hero-inner">
-
-      <!-- Text -->
-      <div class="hero-text">
-        <div class="hero-label">Engineering Portfolio</div>
-        <h1>Jan<br>Kazimierczak</h1>
-        <div class="hero-role">Engineering Science — University of Toronto</div>
-        <p class="hero-bio">
-          First-year Engineering Science student passionate about aerospace.
-          Member of UTAT — Division of Liquid Propulsion. Interested in spacecraft
-          propulsion, structural analysis, and pushing the boundaries of what flies.
-        </p>
-        <div class="cta-row">
-          <a href="projects.html" class="cta-btn primary">View Work</a>
-          <a href="contact.html" class="cta-btn secondary">Contact</a>
-        </div>
-      </div>
-
-      <!-- Photo -->
-      <div class="hero-photo">
-        <div class="photo-frame">
-          <img src="Picture.jpeg" alt="Jan Kazimierczak"
-               onerror="this.style.display='none'; this.parentElement.style.background='rgba(255,255,255,0.04)';">
-        </div>
-        <!-- Stats (optional, can be removed if not relevant)
-        <div class="stats-row">
-          <div class="stat">
-            <div class="stat-val">3.63</div>
-            <div class="stat-label">GPA</div>
-          </div>
-          <div class="stat">
-            <div class="stat-val">UTAT</div>
-            <div class="stat-label">Member</div>
-          </div>
-          <div class="stat">
-            <div class="stat-val">UofT</div>
-            <div class="stat-label">Year 1</div>
-          </div>
-        </div>
-      </div>
-    -->
-    </div>
-
-    <div class="scroll-hint" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="6 9 12 15 18 9"/>
-      </svg>
-    </div>
-  </section>
-
-  <footer>
-    <span>&copy; <span id="year"></span> Jan Kazimierczak — Engineering Portfolio</span>
-    <a href="contact.html">Contact →</a>
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const hamburger = document.getElementById("hamburger");
-    const mobileNav = document.getElementById("mobile-nav");
-    hamburger.addEventListener("click", () => {
-      const open = mobileNav.classList.toggle("open");
-      hamburger.classList.toggle("open", open);
-      hamburger.setAttribute("aria-expanded", open);
-    });
-    mobileNav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
-      mobileNav.classList.remove("open");
-      hamburger.classList.remove("open");
-      hamburger.setAttribute("aria-expanded", false);
-    }));
-
-    /* Star field */
-    (function() {
-      const canvas = document.getElementById("stars");
-      const ctx = canvas.getContext("2d");
-      let stars = [];
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        stars = [];
-        const n = Math.floor((canvas.width * canvas.height) / 4000);
-        for (let i = 0; i < n; i++) stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 1.1 + 0.2,
-          a: Math.random() * 0.7 + 0.15,
-          sp: Math.random() * 0.003 + 0.001,
-          ph: Math.random() * Math.PI * 2
-        });
-      }
-      let f = 0;
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        f++;
-        stars.forEach(s => {
-          const t = s.a * (0.6 + 0.4 * Math.sin(f * s.sp + s.ph));
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255,255,255,${t})`;
-          ctx.fill();
-        });
-        requestAnimationFrame(draw);
-      }
-      window.addEventListener("resize", resize);
-      resize(); draw();
-    })();
-  </script>
+  <script src="site.js"></script>
 </body>
 </html>

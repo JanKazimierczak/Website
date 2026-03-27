@@ -1,0 +1,205 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const yearNode = document.querySelector("[data-year]");
+  if (yearNode) {
+    yearNode.textContent = new Date().getFullYear();
+  }
+
+  const toggle = document.querySelector("[data-nav-toggle]");
+  const mobileNav = document.querySelector("[data-mobile-nav]");
+  if (toggle && mobileNav) {
+    const closeMenu = () => {
+      toggle.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      mobileNav.classList.remove("is-open");
+    };
+
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.classList.toggle("is-open", !expanded);
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      mobileNav.classList.toggle("is-open", !expanded);
+    });
+
+    mobileNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 820) {
+        closeMenu();
+      }
+    });
+  }
+
+  const onScroll = () => {
+    document.body.classList.toggle("nav-scrolled", window.scrollY > 12);
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  const brandMark = document.querySelector("[data-brand-mark]");
+  const brandMarkLink = document.querySelector("[data-brand-mark-link]");
+  const brandToggle = document.querySelector("[data-brand-toggle]");
+
+  if (brandMark && brandMarkLink && brandToggle) {
+    let stockMode = false;
+
+    const syncBrandMode = () => {
+      brandMark.classList.toggle("is-stock-link", stockMode);
+      brandMarkLink.href = stockMode ? "stocks.html" : "index.html";
+      brandMarkLink.setAttribute("aria-label", stockMode ? "Go to stocks" : "Go to homepage");
+      brandToggle.classList.toggle("is-active", stockMode);
+      brandToggle.setAttribute("aria-pressed", String(stockMode));
+    };
+
+    syncBrandMode();
+
+    brandToggle.addEventListener("click", () => {
+      stockMode = !stockMode;
+      syncBrandMode();
+    });
+  }
+
+  const lightbox = document.querySelector("[data-lightbox]");
+  const lightboxImage = document.querySelector("[data-lightbox-image]");
+  const lightboxTitle = document.querySelector("[data-lightbox-title]");
+  const lightboxCaption = document.querySelector("[data-lightbox-caption]");
+  const lightboxClose = document.querySelector("[data-lightbox-close]");
+  const zoomItems = document.querySelectorAll("[data-zoom-image]");
+
+  if (lightbox && lightboxImage && zoomItems.length) {
+    const closeLightbox = () => {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImage.src = "";
+      lightboxImage.alt = "";
+    };
+
+    zoomItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        lightboxImage.src = item.getAttribute("data-zoom-image") || "";
+        lightboxImage.alt = item.getAttribute("data-zoom-alt") || "";
+        if (lightboxTitle) {
+          lightboxTitle.textContent = item.getAttribute("data-zoom-title") || "Expanded image";
+        }
+        if (lightboxCaption) {
+          lightboxCaption.textContent = item.getAttribute("data-zoom-caption") || "";
+        }
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+      });
+    });
+
+    if (lightboxClose) {
+      lightboxClose.addEventListener("click", closeLightbox);
+    }
+
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+        closeLightbox();
+      }
+    });
+  }
+
+  const form = document.querySelector("[data-contact-form]");
+  if (!form) {
+    return;
+  }
+
+  const statusNode = form.querySelector("[data-form-status]");
+  const submitButton = form.querySelector("[data-submit-button]");
+  const submitLabel = form.querySelector("[data-submit-label]");
+  const formPanel = document.querySelector("[data-form-panel]");
+  const successPanel = document.querySelector("[data-form-success]");
+  const resetButton = document.querySelector("[data-reset-form]");
+  const WEB3FORMS_KEY = "5ad3db76-ab4a-462e-a12d-24ffc97a4ac6";
+
+  const setStatus = (message, type) => {
+    if (!statusNode) {
+      return;
+    }
+    statusNode.textContent = message;
+    statusNode.className = `form-message ${type}`;
+    statusNode.hidden = !message;
+  };
+
+  const restoreSubmit = () => {
+    if (submitButton) {
+      submitButton.disabled = false;
+    }
+    if (submitLabel) {
+      submitLabel.textContent = "Send message";
+    }
+  };
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    setStatus("", "error");
+
+    const name = form.querySelector("#fname")?.value.trim() || "";
+    const email = form.querySelector("#femail")?.value.trim() || "";
+    const subject = form.querySelector("#fsubject")?.value.trim() || "Portfolio enquiry";
+    const topic = form.querySelector("#ftype")?.value || "General enquiry";
+    const message = form.querySelector("#fmessage")?.value.trim() || "";
+
+    if (!name || !email || !message) {
+      setStatus("Enter your name, email address, and message.", "error");
+      return;
+    }
+
+    if (submitButton) {
+      submitButton.disabled = true;
+    }
+    if (submitLabel) {
+      submitLabel.textContent = "Sending...";
+    }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          name,
+          email,
+          subject,
+          message: `Topic: ${topic}\n\n${message}`
+        })
+      });
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error("Form submission failed");
+      }
+
+      form.reset();
+      if (formPanel) {
+        formPanel.hidden = true;
+      }
+      if (successPanel) {
+        successPanel.hidden = false;
+      }
+      restoreSubmit();
+    } catch (error) {
+      setStatus("Message delivery failed. Retry or use direct email instead.", "error");
+      restoreSubmit();
+    }
+  });
+
+  if (resetButton) {
+    resetButton.addEventListener("click", () => {
+      if (successPanel) {
+        successPanel.hidden = true;
+      }
+      if (formPanel) {
+        formPanel.hidden = false;
+      }
+      setStatus("", "error");
+    });
+  }
+});

@@ -3,429 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Jan Kazimierczak</title>
+  <title>About | Jan Kazimierczak</title>
+  <meta name="description" content="Background, interests, skills, and engineering direction for Jan Kazimierczak.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #000000;
-      --border: rgba(255,255,255,0.18);
-      --text: #ffffff;
-      --muted: rgba(255,255,255,0.55);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-    .space-bg {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 80% 60% at 75% 40%, rgba(30,35,60,0.90) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 80% at 85% 50%, rgba(15,20,45,0.80) 0%, transparent 60%),
-        #000;
-    }
-
-
-.rocket-link:hover {
-  background-color: #163d7a;
-  transform: translateY(-2px);
-}
-    
-/* CSS for the custom link style */
-.custom-link {
-  color: #ba3030;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease-in-out;
-}
-
-.custom-link:hover {
-  color: #c30000;
-  text-decoration: underline;
-}
-
-
-
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2rem; height: 60px; background: transparent;
-    }
-    nav::after {
-      content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-    }
-    .nav-logo {
-      font-size: 1rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--text); text-decoration: none; transition: opacity 200ms; flex-shrink: 0;
-    }
-    .nav-logo:hover { opacity: 0.7; }
-    .nav-links { display: flex; list-style: none; }
-    .nav-links a {
-      display: block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none;
-      padding: 0 1rem; line-height: 60px; transition: color 200ms;
-    }
-    .nav-links a:hover { color: #fff; }
-    .nav-links a.active { color: #fff; }
-
-    .hamburger {
-      display: none; flex-direction: column; justify-content: center;
-      gap: 5px; width: 40px; height: 40px; padding: 8px;
-      background: transparent; border: 1px solid rgba(255,255,255,0.20);
-      cursor: pointer; flex-shrink: 0;
-    }
-    .hamburger span { display: block; height: 1px; background: #fff; transition: all 250ms ease; }
-    .hamburger.open span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
-    .hamburger.open span:nth-child(2){ opacity:0; transform:scaleX(0); }
-    .hamburger.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
-
-    .mobile-nav {
-      display: none; flex-direction: column;
-      position: fixed; top: 60px; left: 0; right: 0;
-      background: rgba(0,0,0,0.97);
-      border-bottom: 1px solid rgba(255,255,255,0.12); z-index: 99;
-    }
-    .mobile-nav.open { display: flex; }
-    .mobile-nav a {
-      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.65); text-decoration: none;
-      padding: 1rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.07); transition: color 160ms;
-    }
-    .mobile-nav a:last-child { border-bottom: none; }
-    .mobile-nav a:hover, .mobile-nav a.active { color: #fff; }
-
-    /* ── MAIN ── */
-    main {
-      position: relative; z-index: 2;
-      max-width: 1200px; margin: 0 auto;
-      padding: 140px 2rem 100px;
-    }
-
-    /* ── PAGE TITLE ── */
-    .page-title {
-      font-size: clamp(2.2rem, 6vw, 4.2rem);
-      font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: #fff; margin-bottom: 1rem; line-height: 1;
-    }
-    .page-subtitle {
-      font-size: clamp(0.82rem, 1.8vw, 0.95rem);
-      color: rgba(255,255,255,0.50); font-weight: 300;
-      line-height: 1.75; max-width: 56ch;
-      margin-bottom: 5rem; letter-spacing: 0.02em;
-    }
-
-    /* ── SECTION LABEL ── */
-    .section-label {
-      display: flex; align-items: center; gap: 1rem;
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em;
-      text-transform: uppercase; color: rgba(255,255,255,0.40);
-      margin-bottom: 1.5rem;
-    }
-    .section-label::after {
-      content: ""; flex: 1; height: 1px; background: rgba(255,255,255,0.10);
-    }
-
-    /* ── BIO SECTION ── */
-    .bio-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      border: 1px solid rgba(255,255,255,0.10);
-      margin-bottom: 5rem;
-    }
-    .bio-block {
-      padding: 2.5rem;
-      background: rgba(255,255,255,0.02);
-      border-right: 1px solid rgba(255,255,255,0.10);
-    }
-    .bio-block:last-child { border-right: none; }
-    .bio-block h3 {
-      font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.20em; text-transform: uppercase;
-      color: rgba(255,255,255,0.40); margin-bottom: 1.2rem;
-    }
-    .bio-block p {
-      font-size: 0.88rem; color: rgba(255,255,255,0.58);
-      font-weight: 300; line-height: 1.80; letter-spacing: 0.02em;
-    }
-    .bio-block p + p { margin-top: 1rem; }
-
-    /* ── SKILLS GRID ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      border: 1px solid rgba(255,255,255,0.10);
-      margin-bottom: 5rem;
-    }
-    .skill-col {
-      padding: 2rem 1.8rem;
-      background: rgba(255,255,255,0.02);
-      border-right: 1px solid rgba(255,255,255,0.10);
-    }
-    .skill-col:last-child { border-right: none; }
-    .skill-col h4 {
-      font-size: 0.65rem; font-weight: 600;
-      letter-spacing: 0.20em; text-transform: uppercase;
-      color: rgba(255,255,255,0.38); margin-bottom: 1.4rem;
-    }
-    .skill-list { display: flex; flex-direction: column; gap: 0; }
-    .skill-item {
-      font-size: 0.82rem; font-weight: 400;
-      color: rgba(255,255,255,0.65);
-      padding: 0.65rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      letter-spacing: 0.02em;
-      transition: color 160ms;
-    }
-    .skill-item:last-child { border-bottom: none; }
-    .skill-item:hover { color: #fff; }
-
-    /* ── INFO STRIP ── */
-    .info-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      border: 1px solid rgba(255,255,255,0.10);
-    }
-    .info-cell {
-      padding: 1.8rem 2rem;
-      background: rgba(255,255,255,0.02);
-      border-right: 1px solid rgba(255,255,255,0.10);
-    }
-    .info-cell:last-child { border-right: none; }
-    .info-cell .ic-label {
-      font-size: 0.62rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(255,255,255,0.32); margin-bottom: 0.5rem;
-    }
-    .info-cell .ic-value {
-      font-size: 0.88rem; color: rgba(255,255,255,0.72);
-      font-weight: 400; line-height: 1.5;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      position: relative; z-index: 2;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 1.5rem 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
-    }
-    footer span { font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.30); }
-    footer a {
-      font-size: 0.72rem; letter-spacing: 0.10em; text-transform: uppercase;
-      color: rgba(255,255,255,0.35); text-decoration: none; transition: color 200ms;
-    }
-    footer a:hover { color: rgba(255,255,255,0.70); }
-
-    /* ── RESPONSIVE ── */
-    @media(max-width:860px){
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      nav { padding: 0 1.25rem; }
-      .bio-grid { grid-template-columns: 1fr; }
-      .bio-block { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.10); }
-      .bio-block:last-child { border-bottom: none; }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
-      .skill-col:nth-child(2n) { border-right: none; }
-      .skill-col { border-bottom: 1px solid rgba(255,255,255,0.10); }
-      .skill-col:nth-child(3), .skill-col:nth-child(4) { border-bottom: none; }
-      .info-strip { grid-template-columns: 1fr; }
-      .info-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.10); }
-      .info-cell:last-child { border-bottom: none; }
-    }
-    @media(max-width:520px){
-      main { padding: 100px 1.25rem 80px; }
-      .page-subtitle { margin-bottom: 3rem; }
-      .skills-grid { grid-template-columns: 1fr; }
-      .skill-col:nth-child(2n) { border-right: none; }
-      .skill-col { border-bottom: 1px solid rgba(255,255,255,0.10); border-right: none; }
-      .skill-col:last-child { border-bottom: none; }
-      .bio-block { padding: 1.8rem 1.5rem; }
-      footer { flex-direction: column; align-items: center; text-align: center; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container">
+        <nav class="site-nav" aria-label="Primary">
+          <a class="brand" href="index.html">
+            <span class="brand-mark">JK</span>
+            <span class="brand-copy">
+              <span class="brand-name">Jan Kazimierczak</span>
+              <span class="brand-role">Engineering Portfolio</span>
+            </span>
+          </a>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a class="active" href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="design.html">Design</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+            <span></span><span></span><span></span>
+          </button>
+        </nav>
+        <div class="mobile-nav" data-mobile-nav>
+          <a href="index.html">Home</a>
+          <a class="active" href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="design.html">Design</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </header>
 
-  <div class="space-bg" aria-hidden="true"></div>
-  <canvas id="stars" aria-hidden="true"></canvas>
+    <main>
+      <div class="container">
+        <!-- Hidden generated draft content for public launch. Restore when final copy is ready.
+        <section class="page-hero">
+          <div class="eyebrow">About</div>
+          <h1>Background, interests, and working direction.</h1>
+          <p>I am currently building my foundation as a student engineer with the goal of moving deeper into aerospace, propulsion, structural analysis, and rigorous engineering design.</p>
+        </section>
 
-  <nav>
-    <a href="index.html" class="nav-logo">JK</a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="design.html">Design</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+        <section class="split-grid">
+          <article class="card">
+            <div class="card-kicker">Current position</div>
+            <h2 class="card-title">Engineering Science student building aerospace depth</h2>
+            <p class="card-copy">
+              I am a first-year Engineering Science student at the University of Toronto with a focus on aerospace engineering. My work so far has centered on propulsion, structural thinking, design process, and the technical discipline needed to move from concept to tested result.
+            </p>
+            <p class="card-copy">
+              Outside coursework, I am involved with UTAT on the liquid propulsion side. That environment has made it clear to me that I want to keep developing both analytical skills and the ability to contribute effectively within technically demanding teams.
+            </p>
+          </article>
 
-  <div class="mobile-nav" id="mobile-nav">
-    <a href="index.html">Home</a>
-    <a href="about.html" class="active">About</a>
-    <a href="projects.html">Projects</a>
-    <a href="design.html">Design</a>
-    <a href="contact.html">Contact</a>
+          <article class="card">
+            <div class="card-kicker">What I value</div>
+            <h2 class="card-title">Technical clarity over presentation noise</h2>
+            <ul class="list">
+              <li>Careful planning before execution.</li>
+              <li>Direct communication when a design choice looks weak or risky.</li>
+              <li>Design work that is defendable, not just visually appealing.</li>
+              <li>Steady improvement through hands-on engineering work.</li>
+            </ul>
+          </article>
+        </section>
+
+        <section>
+          <div class="section-heading">
+            <div class="eyebrow">Skills</div>
+            <h2>Working toolkit</h2>
+          </div>
+          <div class="skills-grid">
+            <article class="card skill-group">
+              <h3>Programming</h3>
+              <div class="skill-stack">
+                <span class="tag">Python</span>
+                <span class="tag">MATLAB</span>
+                <span class="tag">C</span>
+                <span class="tag">LaTeX</span>
+              </div>
+            </article>
+            <article class="card skill-group">
+              <h3>CAD and software</h3>
+              <div class="skill-stack">
+                <span class="tag">Onshape</span>
+                <span class="tag">Fusion 360</span>
+                <span class="tag">PrusaSlicer</span>
+                <span class="tag">VS Code</span>
+              </div>
+            </article>
+            <article class="card skill-group">
+              <h3>Engineering areas</h3>
+              <div class="skill-stack">
+                <span class="tag">Mechanics</span>
+                <span class="tag">Structural analysis</span>
+                <span class="tag">Propulsion</span>
+                <span class="tag">Circuits</span>
+              </div>
+            </article>
+            <article class="card skill-group">
+              <h3>Interests</h3>
+              <div class="skill-stack">
+                <span class="tag">Aerospace</span>
+                <span class="tag">Simulation</span>
+                <span class="tag">Research</span>
+                <span class="tag">Design process</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-heading">
+            <div class="eyebrow">At a glance</div>
+            <h2>Key context</h2>
+          </div>
+          <div class="cards-grid">
+            <article class="card">
+              <div class="small-label">Institution</div>
+              <h3 class="card-title">University of Toronto</h3>
+              <p class="card-copy">Engineering Science program, building toward aerospace-focused work.</p>
+            </article>
+            <article class="card">
+              <div class="small-label">Academic standing</div>
+              <h3 class="card-title">3.63 GPA</h3>
+              <p class="card-copy">Early-stage academic performance with room to build stronger project evidence over time.</p>
+            </article>
+            <article class="card">
+              <div class="small-label">Team environment</div>
+              <h3 class="card-title">UTAT Liquid Propulsion</h3>
+              <p class="card-copy">Hands-on team involvement that aligns directly with long-term technical interests.</p>
+            </article>
+          </div>
+        </section>
+        -->
+
+        <section class="page-hero">
+          <div class="eyebrow">About</div>
+          <h1>Background and profile.</h1>
+          <p>Public-facing background content is coming soon.</p>
+        </section>
+
+        <section>
+          <article class="note-card coming-soon-block">
+            <div class="small-label">Coming soon</div>
+            <h2 class="panel-title">This page is being updated.</h2>
+            <p class="panel-copy">More public-facing background content will be added soon.</p>
+          </article>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <span>&copy; <span data-year></span> Jan Kazimierczak</span>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
   </div>
-
-  <main>
-    <h1 class="page-title">About</h1>
-    <p class="page-subtitle">
-      Engineering Science student at the University of Toronto, focused on aerospace engineering.
-    </p>
-
-    <!-- Bio -->
-    <div class="section-label">Background</div>
-    <div class="bio-grid">
-      <div class="bio-block">
-        <h3>Who I Am</h3>
-        <p>
-First-year Engineering Science student with a 3.63 GPA, focused on aerospace engineering. 
-Member of UTAT (University of Toronto Aerospace Team), actively developing CAD skills and working on the liquid propulsion team in the 
-<a href="https://www.utat.ca/rocketry" class="custom-link">Discovery</a> project.
-</p>
-        <p>My interests span spacecraft propulsion systems, structural analysis, parametric design, and physics simulations. I'm driven by mathematical rigour and applying engineering principles to solve real-world challenges.</p>
-      </div>
-      <div class="bio-block">
-        <h3>Where I'm Headed</h3>
-        <p>Currently enrolled in the aerospace engineering program at UofT, interested in the aerospace engineering major.</p>
-        <p>Outside coursework I am developing hands on experience in aerospace engineering at UTAT, working with upper year students with a single goal of developing the first ever UofT liquid rocket.</p>
-      </div>
-    </div>
-
-    <!-- Skills -->
-    <div class="section-label">Skills & Tools</div>
-    <div class="skills-grid">
-      <div class="skill-col">
-        <h4>Programming</h4>
-        <div class="skill-list">
-          <div class="skill-item">Python</div>
-          <div class="skill-item">MATLAB</div>
-          <div class="skill-item">C</div>
-          <div class="skill-item">LaTeX</div>
-        </div>
-      </div>
-      <div class="skill-col">
-        <h4>Software & Tools</h4>
-        <div class="skill-list">
-          <div class="skill-item">Onshape</div>
-          <div class="skill-item">Autodesk Fusion 360</div>
-          <div class="skill-item">Prusa slicer</div>
-          <div class="skill-item">Visual studio code</div>
-        </div>
-      </div>
-      <div class="skill-col">
-        <h4>Engineering</h4>
-        <div class="skill-list">
-          <div class="skill-item">Mechanics</div>
-          <div class="skill-item">Structural Analysis</div>
-          <div class="skill-item">Propulsion</div>
-          <div class="skill-item">Circuits</div>
-        </div>
-      </div>
-      <div class="skill-col">
-        <h4>Interests</h4>
-        <div class="skill-list">
-          <div class="skill-item">Propulsion</div>
-          <div class="skill-item">Aerodynamics</div>
-          <div class="skill-item">Research</div>
-          <div class="skill-item">Simulations</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Info strip -->
-    <div class="section-label">At a Glance</div>
-    <div class="info-strip">
-      <div class="info-cell">
-        <div class="ic-label">Institution</div>
-        <div class="ic-value">University of Toronto<br>Engineering Science</div>
-      </div>
-      <div class="info-cell">
-        <div class="ic-label">GPA &amp; Year</div>
-        <div class="ic-value">3.63 — First Year</div>
-      </div>
-      <div class="info-cell">
-        <div class="ic-label">Team &amp; Division</div>
-        <div class="ic-value">UTAT — Liquid Propulsion Division</div>
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    <span>&copy; <span id="year"></span> Jan Kazimierczak — Engineering Portfolio</span>
-    <a href="contact.html">Contact →</a>
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const hamburger = document.getElementById("hamburger");
-    const mobileNav = document.getElementById("mobile-nav");
-    hamburger.addEventListener("click", () => {
-      const open = mobileNav.classList.toggle("open");
-      hamburger.classList.toggle("open", open);
-      hamburger.setAttribute("aria-expanded", open);
-    });
-    mobileNav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
-      mobileNav.classList.remove("open");
-      hamburger.classList.remove("open");
-      hamburger.setAttribute("aria-expanded", false);
-    }));
-
-    (function() {
-      const canvas = document.getElementById("stars");
-      const ctx = canvas.getContext("2d");
-      let stars = [];
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        stars = [];
-        const n = Math.floor((canvas.width * canvas.height) / 4000);
-        for (let i = 0; i < n; i++) stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 1.1 + 0.2,
-          a: Math.random() * 0.7 + 0.15,
-          sp: Math.random() * 0.003 + 0.001,
-          ph: Math.random() * Math.PI * 2
-        });
-      }
-      let f = 0;
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        f++;
-        stars.forEach(s => {
-          const t = s.a * (0.6 + 0.4 * Math.sin(f * s.sp + s.ph));
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255,255,255,${t})`;
-          ctx.fill();
-        });
-        requestAnimationFrame(draw);
-      }
-      window.addEventListener("resize", resize);
-      resize(); draw();
-    })();
-  </script>
+  <script src="site.js"></script>
 </body>
 </html>

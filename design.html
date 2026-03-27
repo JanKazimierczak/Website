@@ -3,386 +3,292 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Design — Jan Kazimierczak</title>
+  <title>Design | Jan Kazimierczak</title>
+  <meta name="description" content="Design approach, engineering position, and selected design projects by Jan Kazimierczak.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #000000;
-      --border: rgba(255,255,255,0.18);
-      --text: #ffffff;
-      --muted: rgba(255,255,255,0.55);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-    .space-bg {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 80% 60% at 75% 40%, rgba(30,35,60,0.90) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 80% at 85% 50%, rgba(15,20,45,0.80) 0%, transparent 60%),
-        #000;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2rem; height: 60px; background: transparent;
-    }
-    nav::after {
-      content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-    }
-    .nav-logo {
-      font-size: 1rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--text); text-decoration: none; transition: opacity 200ms; flex-shrink: 0;
-    }
-    .nav-logo:hover { opacity: 0.7; }
-    .nav-links { display: flex; list-style: none; }
-    .nav-links a {
-      display: block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none;
-      padding: 0 1rem; line-height: 60px; transition: color 200ms;
-    }
-    .nav-links a:hover { color: #fff; }
-    .nav-links a.active { color: #fff; }
-
-    .hamburger {
-      display: none; flex-direction: column; justify-content: center;
-      gap: 5px; width: 40px; height: 40px; padding: 8px;
-      background: transparent; border: 1px solid rgba(255,255,255,0.20);
-      cursor: pointer; flex-shrink: 0;
-    }
-    .hamburger span { display: block; height: 1px; background: #fff; transition: all 250ms ease; }
-    .hamburger.open span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
-    .hamburger.open span:nth-child(2){ opacity:0; transform:scaleX(0); }
-    .hamburger.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
-
-    .mobile-nav {
-      display: none; flex-direction: column;
-      position: fixed; top: 60px; left: 0; right: 0;
-      background: rgba(0,0,0,0.97);
-      border-bottom: 1px solid rgba(255,255,255,0.12); z-index: 99;
-    }
-    .mobile-nav.open { display: flex; }
-    .mobile-nav a {
-      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.65); text-decoration: none;
-      padding: 1rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.07); transition: color 160ms;
-    }
-    .mobile-nav a:last-child { border-bottom: none; }
-    .mobile-nav a:hover, .mobile-nav a.active { color: #fff; }
-
-    /* ── MAIN ── */
-    main {
-      position: relative; z-index: 2;
-      max-width: 1200px; margin: 0 auto;
-      padding: 140px 2rem 100px;
-    }
-
-    .page-title {
-      font-size: clamp(2.2rem, 6vw, 4.2rem);
-      font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: #fff; margin-bottom: 1rem; line-height: 1;
-    }
-    .page-subtitle {
-      font-size: clamp(0.82rem, 1.8vw, 0.95rem);
-      color: rgba(255,255,255,0.50); font-weight: 300;
-      line-height: 1.75; max-width: 56ch;
-      margin-bottom: 5rem; letter-spacing: 0.02em;
-    }
-
-    .section-label {
-      display: flex; align-items: center; gap: 1rem;
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em;
-      text-transform: uppercase; color: rgba(255,255,255,0.40);
-      margin-bottom: 1.5rem;
-    }
-    .section-label::after {
-      content: ""; flex: 1; height: 1px; background: rgba(255,255,255,0.10);
-    }
-
-    /* ── DESIGN GRID ── */
-    .design-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      border: 1px solid rgba(255,255,255,0.10);
-      margin-bottom: 5rem;
-    }
-
-    .design-card {
-      position: relative;
-      background: rgba(255,255,255,0.02);
-      border-right: 1px solid rgba(255,255,255,0.10);
-      border-bottom: 1px solid rgba(255,255,255,0.10);
-      text-decoration: none; color: inherit;
-      transition: background 220ms ease;
-      display: flex; flex-direction: column;
-      overflow: hidden;
-    }
-    .design-card:hover { background: rgba(255,255,255,0.055); }
-    .design-card:hover .card-arrow { color: rgba(255,255,255,0.70); transform: translateX(3px); }
-
-    /* Thumbnail area */
-    .card-thumb {
-      height: 160px;
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .card-thumb .g1 { background: linear-gradient(135deg, rgba(140,82,255,0.60), rgba(255,120,170,0.45)); }
-    .card-thumb .g2 { background: linear-gradient(135deg, rgba(40,201,255,0.55), rgba(0,255,168,0.40)); }
-    .card-thumb .g3 { background: linear-gradient(135deg, rgba(255,190,40,0.50), rgba(140,82,255,0.50)); }
-    .thumb-fill {
-      width: 100%; height: 100%;
-    }
-    .card-thumb::after {
-      content: ""; position: absolute; inset: 0;
-      background: radial-gradient(500px 160px at 20% 0%, rgba(255,255,255,0.10), transparent 55%);
-    }
-    .thumb-badge {
-      position: absolute; bottom: 10px; left: 10px; z-index: 1;
-      font-size: 0.60rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.72); background: rgba(0,0,0,0.45);
-      padding: 4px 10px; border: 1px solid rgba(255,255,255,0.15);
-    }
-
-    .card-body { padding: 1.6rem; flex: 1; display: flex; flex-direction: column; gap: 0.7rem; }
-    .card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-    .ctag {
-      font-size: 0.60rem; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase;
-      color: rgba(255,255,255,0.40); border: 1px solid rgba(255,255,255,0.12);
-      padding: 3px 8px;
-    }
-    .card-title { font-size: 0.92rem; font-weight: 600; color: #fff; line-height: 1.3; }
-    .card-desc {
-      font-size: 0.78rem; color: rgba(255,255,255,0.42);
-      font-weight: 300; line-height: 1.60; flex: 1;
-    }
-    .card-foot {
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 0.68rem; color: rgba(255,255,255,0.30); margin-top: 0.5rem;
-    }
-    .card-arrow { transition: color 200ms, transform 200ms; }
-
-    /* ── UNDER CONSTRUCTION ── */
-    .uc-box {
-      border: 1px solid rgba(255,255,255,0.10);
-      padding: 2.5rem;
-      display: flex; align-items: flex-start; gap: 1.8rem;
-      background: rgba(255,255,255,0.02); flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
-    .uc-icon { font-size: 1.8rem; flex-shrink: 0; opacity: 0.50; padding-top: 0.1rem; }
-    .uc-text h2 {
-      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(255,255,255,0.40); margin-bottom: 0.5rem;
-    }
-    .uc-text p {
-      font-size: 0.82rem; color: rgba(255,255,255,0.30);
-      font-weight: 300; line-height: 1.7; max-width: 60ch;
-    }
-    .uc-text a { color: rgba(255,255,255,0.50); text-underline-offset: 3px; }
-
-    /* ── FOOTER ── */
-    footer {
-      position: relative; z-index: 2;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 1.5rem 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
-    }
-    footer span { font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.30); }
-    footer a {
-      font-size: 0.72rem; letter-spacing: 0.10em; text-transform: uppercase;
-      color: rgba(255,255,255,0.35); text-decoration: none; transition: color 200ms;
-    }
-    footer a:hover { color: rgba(255,255,255,0.70); }
-
-    /* ── RESPONSIVE ── */
-    @media(max-width:860px){
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      nav { padding: 0 1.25rem; }
-      .design-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media(max-width:560px){
-      main { padding: 100px 1.25rem 80px; }
-      .page-subtitle { margin-bottom: 3rem; }
-      .design-grid { grid-template-columns: 1fr; }
-      .uc-box { padding: 1.8rem 1.2rem; }
-      footer { flex-direction: column; align-items: center; text-align: center; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container">
+        <nav class="site-nav" aria-label="Primary">
+          <a class="brand" href="index.html">
+            <span class="brand-mark">JK</span>
+            <span class="brand-copy">
+              <span class="brand-name">Jan Kazimierczak</span>
+              <span class="brand-role">Engineering Portfolio</span>
+            </span>
+          </a>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a class="active" href="design.html">Design</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+            <span></span><span></span><span></span>
+          </button>
+        </nav>
+        <div class="mobile-nav" data-mobile-nav>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a class="active" href="design.html">Design</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </header>
 
-  <div class="space-bg" aria-hidden="true"></div>
-  <canvas id="stars" aria-hidden="true"></canvas>
+    <main>
+      <div class="container">
+        <section class="page-hero">
+          <div class="eyebrow">Design</div>
+          <h1>Design portfolio materials are coming soon.</h1>
+          <p>This section is being prepared for public release.</p>
+        </section>
 
-  <nav>
-    <a href="index.html" class="nav-logo">JK</a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="design.html" class="active">Design</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+        <section>
+          <article class="note-card coming-soon-block">
+            <div class="small-label">Coming soon</div>
+            <h2 class="panel-title">Design case studies and assignment materials are coming soon.</h2>
+            <p class="panel-copy">The public version of this page will be added after the design material is finalized.</p>
+          </article>
+        </section>
+      </div>
+    </main>
 
-  <div class="mobile-nav" id="mobile-nav">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-    <a href="design.html" class="active">Design</a>
-    <a href="contact.html">Contact</a>
+    <!--
+    Archived design page content for later restoration.
+
+    <main>
+      <div class="container">
+        <section class="page-hero">
+          <div class="eyebrow">ESC102 Assignment</div>
+          <h1>Student Engineer Design Portfolio</h1>
+          [archived note] Hidden generated draft content for public launch.
+          <p>This page presents my position on engineering design and connects it to the three selected projects for the assignment: the backpack project, the bridge project, and the screw sorting project.</p>
+          <p>Supporting page commentary is coming soon.</p>
+        </section>
+
+        <section>
+          <div class="section-heading">
+            <div class="eyebrow">Position statement</div>
+            <h2>My position on engineering design</h2>
+            [archived note] Hidden generated draft content for public launch.
+            <p>This section presents the position statement in a long-form format while keeping the same visual language as the rest of the page.</p>
+            <p>My position statement is included below.</p>
+          </div>
+          <article class="card statement-card">
+            <div class="statement-copy">
+              <section>
+                <h3>Introduction</h3>
+                <p>My name is Jan Kazimierczak and I’m a first-year student at the University of Toronto Engineering Science program. My interest in engineering started when I was around 13 years old with the first Falcon Heavy launch. Seeing both boosters land with so great precision was one of the most beautiful things I saw and it changed my life. Since then, I see engineering as a means of changing our world for the better. I understand engineering design to be the structured and efficient approach to solving an opportunity by modifying the world around us.</p>
+              </section>
+
+              <section>
+                <h3>Ethical stance on engineering design + background</h3>
+                <p>My ethical stance on engineering design comes from my background. I am Polish and thus I come from a Catholic background. Being Catholic, I want the wellbeing of every human being, but I believe that unfortunately in engineering projects this is not always possible. I believe this is not possible due to the complexity of human nature and human interaction. Due to this I take more of a utilitarian approach with it being closer to ethics of “minimums”, the minimums being these red lines: Cannot interfere with the freedom nor life of an innocent person. I understand these red lines will not apply in Praxis II, but as a future engineer they are important to define early on. Also, I believe my work to be my duty which requires full commitment, thus it is important for me that when I take part in engineering design, everything must be done with intention and hard work, rejecting shortcuts and sloppiness.</p>
+              </section>
+
+              <section>
+                <h3>Practices in engineering design</h3>
+                <p>Regarding my practices in engineering design, I can pinpoint 3 distinct events or projects that have shaped my approach to engineering design. These three are: Highschool science symposium project, Highschool musical stage construction and the Praxis I project.</p>
+                <ol>
+                  <li>My grandfather who is an engineer himself helped me with the science symposium project for which we had to build a wind tunnel 3 meters long to perform some experiments. Having no experience, I started construction without really having any concrete plan, which meant that it would not have been as good as it could’ve. My grandfather taught me to always have control on what you are designing and building and to always proceed with caution, patience and due diligence.</li>
+                  <li>The second experience that shaped my approach to engineering design is the stage construction for my high school’s musical. In this case I was no longer the “Authority” in the project, as opposed to the science symposium project, but here we had no say on the decisions regarding the construction. While working on it I noticed that the decisions they made regarding the method of construction would mean that the set would probably fail when people stood on it, and it turned out that I was right. I did mention it, but because I saw myself as with no “Authority” I did not insist on it. After this experience I decided that for future engineering design projects I would raise concerns about methods or ideas to reduce potential harm done.</li>
+                  <li>The last experience ties closely to the stage design project. When working on the Praxis I project, it was the first time where I worked together in a team where we all were “authorities” without a single “Authority” that would present us tasks. This taught me to make compromises regarding decisions and to try to hear everyone’s perspective regarding decisions on the project.</li>
+                </ol>
+              </section>
+
+              <section>
+                <h3>My position on engineering design</h3>
+                <ol>
+                  <li>Following my grandfather’s example and advice I spend a considerable amount of time on careful planning and design so that everything works as intended on the first try. This means that my approach is systematic and cautious.</li>
+                  <li>While working on a project I will voice my concerns regarding decisions that I deem to be wrong or dangerous. Due diligence is crucial in engineering design so I believe we all should contribute to it.</li>
+                  <li>I try to consider all team members’ ideas and find compromises between them while working on a group project. This position lies closer to the “authorities” concept in praxis rather than one big “Authority”.</li>
+                </ol>
+              </section>
+
+              <section>
+                <h3>Approach to engineering design (Conclusion)</h3>
+                <p>Having covered all these points, I can express my approach to engineering design in the following way [Figure 1]: Coming from a Catholic background I want the product of engineering design to benefit the most people possible. While working on a project I take the planning and designing stage very seriously to ensure the projects are completed with due diligence and efficiency. When encountering a problem or potential risk I raise my concern so we can work together to find a solution. And finally, when working in a group I find compromises on ideas so we can develop a good working environment to explore all ideas and solution proposals.</p>
+              </section>
+            </div>
+          </article>
+        </section>
+
+        <section>
+          <div class="section-heading">
+            <div class="eyebrow">Figure 1</div>
+            <h2>Approach to engineering design</h2>
+            [archived note] Hidden generated draft content for public launch.
+            <p>The flowchart below summarizes the process described in the position statement. It links ethical checks, careful planning, raising concerns, compromise, iteration, and delivery into one design approach.</p>
+            <p>Figure commentary is coming soon.</p>
+          </div>
+          [archived note] Hidden generated draft content for public launch. Restore when final copy is ready.
+          <div class="support-grid" style="align-items:start;">
+            <div class="image-frame zoom-frame flowchart-frame" data-zoom-image="Praxispositionstatementflowchart.png" data-zoom-alt="Flowchart of Jan Kazimierczak's engineering design approach" data-zoom-title="Approach to Engineering Design" data-zoom-caption="Figure 1: Simplified flowchart of the design approach described in the position statement.">
+              <img src="Praxispositionstatementflowchart.png" alt="Flowchart of Jan Kazimierczak's engineering design approach">
+            </div>
+            <article class="card">
+              <div class="card-kicker">How to read the figure</div>
+              <p class="card-copy">
+                The flow begins by defining the opportunity, checking red lines, planning carefully, building and testing, and then delivering. It also includes the loops that matter most in my position statement: raising concerns when something appears wrong, and compromising with others when working through decisions in a team.
+              </p>
+              <p class="card-copy">
+                This is why the process is not just linear execution. It is a combination of ethics, due diligence, reflection, and collaboration.
+              </p>
+            </article>
+          </div>
+          <div class="support-grid" style="align-items:start;">
+            <div class="image-frame zoom-frame flowchart-frame" data-zoom-image="Praxispositionstatementflowchart.png" data-zoom-alt="Flowchart of Jan Kazimierczak's engineering design approach" data-zoom-title="Approach to Engineering Design" data-zoom-caption="Figure 1: Flowchart image.">
+              <img src="Praxispositionstatementflowchart.png" alt="Flowchart of Jan Kazimierczak's engineering design approach">
+            </div>
+            <article class="note-card coming-soon-block">
+              <div class="small-label">Coming soon</div>
+              <h3 class="panel-title">Figure commentary is coming soon.</h3>
+              <p class="panel-copy">A shorter public explanation for this figure will be added soon.</p>
+            </article>
+          </div>
+        </section>
+
+        [archived note] Hidden generated draft content for public launch. Restore when final copy is ready.
+        <section>
+          <div class="section-heading">
+            <div class="eyebrow">Selected projects</div>
+            <h2>The three projects included in the portfolio</h2>
+            <p>Each project reflects a different part of the position statement: compromise in team work, careful planning and performance evaluation, and systematic design through iteration.</p>
+          </div>
+          <div class="projects-grid">
+            <a class="project-card card" href="praxis-I.html">
+              <div class="project-image">
+                <img src="Praxis-1-basket.png" alt="BikePack Buddy project image">
+              </div>
+              <div class="tag-row">
+                <span class="status-chip live">Praxis I</span>
+                <span class="tag">Design</span>
+                <span class="tag">Prototyping</span>
+                <span class="tag">CAD</span>
+              </div>
+              <h3 class="card-title">BikePack Buddy</h3>
+              <p class="card-copy">A practical transport solution designed to reduce rider strain by moving backpack load from the body to the bicycle system. This project connects especially well to compromise, shared decision-making, and iterative design work.</p>
+            </a>
+
+            <a class="project-card card" href="CIV102Bridge.html">
+              <div class="project-image">
+                <img src="BEEM.png" alt="Bridge project image">
+              </div>
+              <div class="tag-row">
+                <span class="status-chip live">CIV102</span>
+                <span class="tag">Structures</span>
+                <span class="tag">Testing</span>
+                <span class="tag">Analysis</span>
+              </div>
+              <h3 class="card-title">Bridge design project</h3>
+              <p class="card-copy">A bridge project centered on material constraints, structural behavior, and performance under load. It reflects careful planning, due diligence, and the responsibility to understand whether a design is actually safe and effective.</p>
+            </a>
+
+            <a class="project-card card" href="praxis-II.html">
+              <div class="project-image">
+                <img src="Praxispositionstatementflowchart.png" alt="Praxis II project image">
+              </div>
+              <div class="tag-row">
+                <span class="status-chip live">Praxis II</span>
+                <span class="tag">Mechanism design</span>
+                <span class="tag">Automation</span>
+                <span class="tag">Iteration</span>
+              </div>
+              <h3 class="card-title">Automated screw sorting device</h3>
+              <p class="card-copy">A compact device concept built around a specific physical task and the logic needed to perform it reliably. It represents a more systematic design problem where planning, mechanism choices, and iteration all matter.</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="split-grid">
+          <article class="note-card">
+            <div class="small-label">Connection to the statement</div>
+            <h2 class="panel-title">What the project selection shows</h2>
+            <ul class="list">
+              <li>The portfolio is intentionally limited to the three projects relevant to the assignment.</li>
+              <li>The page connects the projects back to planning, due diligence, compromise, and raising concerns.</li>
+              <li>The structure is meant to support the position statement rather than distract from it.</li>
+            </ul>
+          </article>
+          <article class="note-card">
+            <div class="small-label">Conclusion</div>
+            <p class="panel-copy">
+              Overall, this page presents engineering design the way it is described in my Praxis II statement: as work that should benefit people where possible, stay within ethical red lines, be approached carefully and systematically, and improve through both technical judgment and collaborative compromise.
+            </p>
+          </article>
+        </section>
+
+        <section>
+          <div class="section-heading">
+            <div class="eyebrow">Selected projects</div>
+            <h2>Assignment project links</h2>
+            <p>Detailed project summaries are coming soon.</p>
+          </div>
+          <div class="projects-grid">
+            <a class="project-card card" href="praxis-I.html">
+              <div class="project-image">
+                <img src="Praxis-1-basket.png" alt="BikePack Buddy project image">
+              </div>
+              <h3 class="card-title">BikePack Buddy</h3>
+              <p class="card-copy">Coming soon.</p>
+            </a>
+            <a class="project-card card" href="CIV102Bridge.html">
+              <div class="project-image">
+                <img src="BEEM.png" alt="Bridge project image">
+              </div>
+              <h3 class="card-title">Bridge design project</h3>
+              <p class="card-copy">Coming soon.</p>
+            </a>
+            <a class="project-card card" href="praxis-II.html">
+              <div class="project-image">
+                <img src="Praxispositionstatementflowchart.png" alt="Praxis II project image">
+              </div>
+              <h3 class="card-title">Automated screw sorting device</h3>
+              <p class="card-copy">Coming soon.</p>
+            </a>
+          </div>
+        </section>
+
+        <section>
+          <article class="note-card coming-soon-block">
+            <div class="small-label">Coming soon</div>
+            <h2 class="panel-title">Supporting commentary is coming soon.</h2>
+            <p class="panel-copy">Additional public-facing notes for this assignment page will be added soon.</p>
+          </article>
+        </section>
+      </div>
+    </main>
+    -->
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <span>&copy; <span data-year></span> Jan Kazimierczak</span>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
   </div>
-
-  <main>
-    <h1 class="page-title">Design</h1>
-    <p class="page-subtitle">
-      UI and visual design work — interfaces, case studies, and digital products.
-      Full write-ups coming soon.
-    </p>
-
-    <div class="section-label">Selected Work</div>
-
-    <div class="design-grid">
-
-      <!-- Card 1 — placeholder / link to existing portfolio page -->
-      <div class="project-card" style="cursor:default; opacity:0.35; pointer-events:none;">
-        <div class="card-icon" style="opacity:0.4;">⚙️</div>
-        <div class="card-title">Projects Loading…</div>
-        <div class="card-desc">Uncomment the card blocks above to display your in-progress projects here.</div>
+  <div class="lightbox" data-lightbox aria-hidden="true">
+    <div class="lightbox-panel">
+      <div class="lightbox-media">
+        <img src="" alt="" data-lightbox-image>
       </div>
-
-    </div>
-
-      <!-- ─── DESIGN CARD TEMPLATE ──────────────────────────
-           To add a new card: uncomment this block, fill in details,
-           and set the correct href.
-
-      <a class="design-card" href="your-project.html">
-        <div class="card-thumb"><div class="thumb-fill g2"></div><span class="thumb-badge">Your Label</span></div>
-        <div class="card-body">
-          <div class="card-tags">
-            <span class="ctag">Tag One</span>
-            <span class="ctag">Tag Two</span>
-          </div>
-          <div class="card-title">Project Title</div>
-          <div class="card-desc">Short description of the project and what makes it interesting.</div>
-          <div class="card-foot"><span>2026</span><span class="card-arrow">Case study →</span></div>
+      <div class="lightbox-footer">
+        <div class="lightbox-copy">
+          <strong data-lightbox-title>Expanded image</strong>
+          <span data-lightbox-caption></span>
         </div>
-      </a>
-
-      ─── END TEMPLATE ────────────────────────────────────── -->
-
-
-      <!-- ─── DESIGN CARD TEMPLATE (gradient 3) ────────────
-           Duplicate as needed. Change g2/g3 for different colours.
-
-      <a class="design-card" href="your-project.html">
-        <div class="card-thumb"><div class="thumb-fill g3"></div><span class="thumb-badge">Your Label</span></div>
-        <div class="card-body">
-          <div class="card-tags">
-            <span class="ctag">Tag One</span>
-          </div>
-          <div class="card-title">Project Title</div>
-          <div class="card-desc">Short description of the project.</div>
-          <div class="card-foot"><span>2026</span><span class="card-arrow">Case study →</span></div>
-        </div>
-      </a>
-
-      ─── END TEMPLATE ────────────────────────────────────── -->
-
-    </div>
-
-    <!-- Under construction notice -->
-    <div class="uc-box">
-      <div class="uc-icon">🛠</div>
-      <div class="uc-text">
-        <h2>More Work Coming Soon</h2>
-        <p>
-          Additional design case studies are being prepared. In the meantime,
-          <a href="contact.html">get in touch</a> if you'd like to see more or discuss a project.
-        </p>
+        <button class="lightbox-close" type="button" data-lightbox-close>Close</button>
       </div>
     </div>
-
-  </main>
-
-  <footer>
-    <span>&copy; <span id="year"></span> Jan Kazimierczak — Engineering Portfolio</span>
-    <a href="contact.html">Contact →</a>
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const hamburger = document.getElementById("hamburger");
-    const mobileNav = document.getElementById("mobile-nav");
-    hamburger.addEventListener("click", () => {
-      const open = mobileNav.classList.toggle("open");
-      hamburger.classList.toggle("open", open);
-      hamburger.setAttribute("aria-expanded", open);
-    });
-    mobileNav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
-      mobileNav.classList.remove("open");
-      hamburger.classList.remove("open");
-      hamburger.setAttribute("aria-expanded", false);
-    }));
-
-    (function() {
-      const canvas = document.getElementById("stars");
-      const ctx = canvas.getContext("2d");
-      let stars = [];
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        stars = [];
-        const n = Math.floor((canvas.width * canvas.height) / 4000);
-        for (let i = 0; i < n; i++) stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 1.1 + 0.2,
-          a: Math.random() * 0.7 + 0.15,
-          sp: Math.random() * 0.003 + 0.001,
-          ph: Math.random() * Math.PI * 2
-        });
-      }
-      let f = 0;
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        f++;
-        stars.forEach(s => {
-          const t = s.a * (0.6 + 0.4 * Math.sin(f * s.sp + s.ph));
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255,255,255,${t})`;
-          ctx.fill();
-        });
-        requestAnimationFrame(draw);
-      }
-      window.addEventListener("resize", resize);
-      resize(); draw();
-    })();
-  </script>
+  </div>
+  <script src="site.js"></script>
 </body>
 </html>
