@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">BikePack Buddy stakeholder analysis</title>
+  <desc id="desc">Stakeholder analysis diagram for BikePack Buddy using the same bubble layout as the provided sketch.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#39424e" />
+    </marker>
+    <style>
+      .bg { fill: #fffdf8; }
+      .line { stroke: #39424e; stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+      .title { font: 700 38px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f2b38; }
+      .node { stroke: #39424e; stroke-width: 4; }
+      .primary { fill: #dfeaff; }
+      .secondary { fill: #fff1d6; }
+      .tertiary { fill: #dff5e7; }
+      .need { fill: #f5efe4; }
+      .eyebrow { font: 700 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #5d6773; letter-spacing: 1.5px; text-transform: uppercase; }
+      .main { font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f2b38; }
+      .small { font: 600 22px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f2b38; }
+      .needtext { font: 700 26px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f2b38; }
+      .caption { font: 500 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #5d6773; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="900" rx="20" />
+
+  <text class="title" x="135" y="85">BikePack Buddy Stakeholder Analysis</text>
+  <text class="caption" x="135" y="116">Bubble layout preserved from the sketch, with BikePack Buddy stakeholders inserted.</text>
+
+  <!-- connectors -->
+  <path class="line" d="M640 160 C640 205, 620 230, 610 250" />
+  <path class="line" d="M780 150 C835 150, 875 145, 920 130" />
+  <path class="line" d="M600 350 C560 390, 530 420, 470 470" />
+  <path class="line" d="M640 358 C705 370, 780 385, 910 420" />
+  <path class="line" d="M610 365 C610 415, 610 465, 610 515" />
+  <path class="line" d="M355 525 C305 575, 250 605, 180 615" />
+  <path class="line" d="M620 610 C620 665, 620 700, 620 735" />
+
+  <!-- top secondary -->
+  <rect class="node secondary" x="530" y="90" width="250" height="78" rx="24" />
+  <text class="eyebrow" x="560" y="125">Secondary</text>
+  <text class="small" x="560" y="151">Toronto drivers</text>
+
+  <!-- top tertiary -->
+  <ellipse class="node tertiary" cx="970" cy="120" rx="105" ry="58" />
+  <text class="eyebrow" x="912" y="112">Tertiary</text>
+  <text class="small" x="900" y="142">Government of</text>
+  <text class="small" x="928" y="170">Ontario</text>
+
+  <!-- primary 1 -->
+  <ellipse class="node primary" cx="610" cy="285" rx="118" ry="78" />
+  <text class="eyebrow" x="552" y="255">Primary 1</text>
+  <text class="small" x="533" y="294">Praxis I students</text>
+
+  <!-- need -->
+  <ellipse class="node need" cx="430" cy="465" rx="90" ry="78" />
+  <text class="eyebrow" x="392" y="430">Need</text>
+  <text class="needtext" x="380" y="468">Carry bag on</text>
+  <text class="needtext" x="364" y="502">TBS without</text>
+  <text class="needtext" x="368" y="536">back pain</text>
+
+  <!-- right secondary -->
+  <rect class="node secondary" x="760" y="386" width="280" height="120" rx="26" />
+  <text class="eyebrow" x="792" y="425">Secondary</text>
+  <text class="small" x="792" y="456">Other Toronto Bike</text>
+  <text class="small" x="792" y="487">Share users</text>
+
+  <!-- left tertiary -->
+  <rect class="node tertiary" x="105" y="555" width="195" height="92" rx="24" />
+  <text class="eyebrow" x="138" y="592">Tertiary</text>
+  <text class="small" x="138" y="622">Toronto Bike</text>
+  <text class="small" x="138" y="651">Share</text>
+
+  <!-- primary 2 -->
+  <ellipse class="node primary" cx="610" cy="575" rx="122" ry="80" />
+  <text class="eyebrow" x="552" y="545">Primary 2</text>
+  <text class="small" x="514" y="586">Engineering</text>
+  <text class="small" x="492" y="617">Science students</text>
+
+  <!-- bottom tertiary -->
+  <rect class="node tertiary" x="500" y="730" width="255" height="94" rx="24" />
+  <text class="eyebrow" x="534" y="768">Tertiary</text>
+  <text class="small" x="534" y="799">Road and safety</text>
+  <text class="small" x="534" y="829">regulators</text>
+
+  <text class="caption" x="135" y="860">Stakeholder names sourced from Group 20 - The BikePack Buddy. The extra bottom tertiary node is used for the regulatory stakeholder context in the sketch.</text>
+</svg>
