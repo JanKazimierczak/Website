@@ -155,7 +155,9 @@ document.addEventListener("DOMContentLoaded", () => {
     "5d": "30",
     "1mo": "60",
     "6mo": "D",
-    "1y": "W"
+    ytd: "D",
+    "1y": "W",
+    "5y": "W"
   };
 
   const symbolForm = document.querySelector("[data-symbol-form]");

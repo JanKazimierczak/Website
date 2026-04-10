@@ -65,9 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const lightboxTitle = document.querySelector("[data-lightbox-title]");
   const lightboxCaption = document.querySelector("[data-lightbox-caption]");
   const lightboxClose = document.querySelector("[data-lightbox-close]");
-  const zoomItems = document.querySelectorAll("[data-zoom-image]");
 
-  if (lightbox && lightboxImage && zoomItems.length) {
+  if (lightbox && lightboxImage) {
     const closeLightbox = () => {
       lightbox.classList.remove("is-open");
       lightbox.setAttribute("aria-hidden", "true");
@@ -75,19 +74,22 @@ document.addEventListener("DOMContentLoaded", () => {
       lightboxImage.alt = "";
     };
 
-    zoomItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        lightboxImage.src = item.getAttribute("data-zoom-image") || "";
-        lightboxImage.alt = item.getAttribute("data-zoom-alt") || "";
-        if (lightboxTitle) {
-          lightboxTitle.textContent = item.getAttribute("data-zoom-title") || "Expanded image";
-        }
-        if (lightboxCaption) {
-          lightboxCaption.textContent = item.getAttribute("data-zoom-caption") || "";
-        }
-        lightbox.classList.add("is-open");
-        lightbox.setAttribute("aria-hidden", "false");
-      });
+    document.addEventListener("click", (event) => {
+      const zoomTarget = event.target.closest("[data-zoom-image]");
+      if (!zoomTarget) {
+        return;
+      }
+
+      lightboxImage.src = zoomTarget.getAttribute("data-zoom-image") || "";
+      lightboxImage.alt = zoomTarget.getAttribute("data-zoom-alt") || "";
+      if (lightboxTitle) {
+        lightboxTitle.textContent = zoomTarget.getAttribute("data-zoom-title") || "Expanded image";
+      }
+      if (lightboxCaption) {
+        lightboxCaption.textContent = zoomTarget.getAttribute("data-zoom-caption") || "";
+      }
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
     });
 
     if (lightboxClose) {
@@ -103,6 +105,62 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
         closeLightbox();
+      }
+    });
+  }
+
+  const ctmfModal = document.querySelector("[data-ctmf-modal]");
+  const ctmfModalBody = document.querySelector("[data-ctmf-modal-body]");
+  const ctmfModalTitle = document.querySelector("[data-ctmf-modal-title]");
+  const ctmfModalClose = document.querySelector("[data-ctmf-close]");
+
+  if (ctmfModal && ctmfModalBody) {
+    const closeCtmfModal = () => {
+      ctmfModal.classList.remove("is-open");
+      ctmfModal.setAttribute("aria-hidden", "true");
+      if (ctmfModalTitle) {
+        ctmfModalTitle.textContent = "CTMF detail";
+      }
+      ctmfModalBody.innerHTML = "";
+      document.body.classList.remove("modal-locked");
+    };
+
+    document.addEventListener("click", (event) => {
+      const trigger = event.target.closest("[data-ctmf-open]");
+      if (!trigger) {
+        return;
+      }
+
+      const templateId = trigger.getAttribute("data-ctmf-open");
+      const template = templateId ? document.getElementById(templateId) : null;
+      if (!template || !(template instanceof HTMLTemplateElement)) {
+        return;
+      }
+
+      ctmfModalBody.innerHTML = "";
+      ctmfModalBody.appendChild(template.content.cloneNode(true));
+      if (ctmfModalTitle) {
+        ctmfModalTitle.textContent = trigger.getAttribute("data-ctmf-title") || "CTMF detail";
+      }
+      ctmfModal.classList.add("is-open");
+      ctmfModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-locked");
+      ctmfModalBody.scrollTop = 0;
+    });
+
+    if (ctmfModalClose) {
+      ctmfModalClose.addEventListener("click", closeCtmfModal);
+    }
+
+    ctmfModal.addEventListener("click", (event) => {
+      if (event.target === ctmfModal) {
+        closeCtmfModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && ctmfModal.classList.contains("is-open")) {
+        closeCtmfModal();
       }
     });
   }

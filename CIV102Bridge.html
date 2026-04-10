@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CIV102 Bridge | Jan Kazimierczak</title>
+  <title>JK | CIV102 Bridge</title>
+  <link rel="icon" type="image/svg+xml" href="jk-favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -14,7 +15,7 @@
     <header class="site-header">
       <div class="container">
         <nav class="site-nav" aria-label="Primary">
-          <a class="brand" href="index.html">
+          <a class="brand" href="design.html">
             <span class="brand-mark">JK</span>
             <span class="brand-copy">
               <span class="brand-name">Jan Kazimierczak</span>
@@ -22,22 +23,14 @@
             </span>
           </a>
           <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="projects.html">Projects</a></li>
             <li><a class="active" href="design.html">Design</a></li>
-            <li><a href="contact.html">Contact</a></li>
           </ul>
           <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
             <span></span><span></span><span></span>
           </button>
         </nav>
         <div class="mobile-nav" data-mobile-nav>
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="projects.html">Projects</a>
           <a class="active" href="design.html">Design</a>
-          <a href="contact.html">Contact</a>
         </div>
       </div>
     </header>
@@ -50,10 +43,12 @@
             <a class="back-link" href="design.html"><span>Back to design</span></a>
           </div>
           <h1>Bridge design and analysis</h1>
-          <p>Detailed case-study content is coming soon.</p>
+          <p>A bridge design project where we had to use engineering knowledge and our engineering jugment to design and build a bridge.</p>
+          <div class="cta-row report-link-row">
+            <a class="button-secondary" href="reports/civ102-design-report.pdf" target="_blank" rel="noopener">Open final report (PDF)</a>
+          </div>
         </section>
 
-        <!-- Hidden generated draft content for public launch. Restore when final copy is ready.
         <section class="support-grid">
           <div class="image-frame">
             <img src="BEEM.png" alt="Bridge project image">
@@ -62,40 +57,32 @@
             <div class="card-kicker">Project summary</div>
             <h2 class="card-title">A strong case study for rigorous engineering reasoning</h2>
             <p class="card-copy">
-              This project is strongest when read as an example of structural judgment under
-              explicit constraints: span requirements, material behaviour, likely failure modes,
-              and the relationship between prediction and physical testing.
+              The project consisted on designing and building a bridge that would support weight. We 
+              were given a base design that we had to iterate on to achieve maximum weight/strength ratio.
+              We had to use knowledge and skills learned in class about not only construction and handling of materials, but also technical 
+              analysis, beam structural analysis, and everything that derives from there. 
+            </p>
+            <p>
+              At first we calculated all the parameters and the maximum strength of design 0, which is the design givem by the teaching team.
+              Around this design we developed a python code, that allowed the user to introduce parameters such as number of side panels, or 
+              height of the beam, and the program would run simulations of the train moving along the track and would caclulate the maximum amount
+              of weight that would be supported. Using this code we were able to perform multiple simulations and therefore arrive at the best design 
+              for us to build. 
+            </p>
+            <p>
+              When we had the final design chosen, we started with the building process. As the material being used was just a thick piece of paper, we 
+              had to plan the cutting very carefully. When we had everything prepared we began the cutting. The individual pieces of paper were then taken
+              and assembled together using the provided glue. Safety measures where used in the process of building the bridge. When the parts were assembled 
+              together the bridge was left to dry for 24 hours before the testing. Weight was placed on the bridge, to ensure that the construction is secure.
+
             </p>
             <div class="tag-row">
-              <span class="status-chip live">Completed</span>
+              <span class="status-chip live">CIV102</span>
               <span class="tag">Structures</span>
-              <span class="tag">CIV102</span>
               <span class="tag">Testing</span>
             </div>
           </article>
         </section>
-
-        <section class="split-grid">
-          <article class="card">
-            <div class="card-kicker">Overview</div>
-            <h2 class="card-title">What the project had to prove</h2>
-            <p class="card-copy">
-              The bridge had to do more than hold load. It had to satisfy course constraints,
-              direct forces through a believable structural strategy, and make sense analytically
-              before testing validated or challenged the prediction.
-            </p>
-          </article>
-          <article class="card">
-            <div class="card-kicker">What matters most</div>
-            <ul class="list">
-              <li>How the brief was translated into structural requirements and assumptions.</li>
-              <li>How alternative geometries or load paths were explored before commitment.</li>
-              <li>How calculations and expected failure modes informed the final design.</li>
-              <li>How predictions and testing results can be represented clearly and honestly.</li>
-            </ul>
-          </article>
-        </section>
-
         <section class="gallery-canvas">
           <div class="section-heading">
             <div class="eyebrow">Pictures</div>
@@ -104,486 +91,114 @@
           </div>
           <div class="gallery-grid">
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="BEEM.png" data-zoom-alt="Bridge project overall image" data-zoom-title="Bridge Project Overview" data-zoom-caption="Overall image used for the bridge project.">
-                <img src="BEEM.png" alt="Bridge project overall image">
+              <div class="image-frame" data-zoom-image="civ102-assets/bridge-plan.png" data-zoom-alt="Bridge design plan drawing" data-zoom-title="Cutting Plan" data-zoom-caption="Plan drawing showing the cutting plan and key dimensions.">
+                <img src="civ102-assets/bridge-plan.png" alt="Bridge design plan drawing">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="BEEM.png" data-zoom-alt="Bridge project structure detail" data-zoom-title="Bridge Structure Detail" data-zoom-caption="Current project image used to focus on the bridge geometry.">
-                <img src="BEEM.png" alt="Bridge project structure detail" style="object-position:50% 42%;">
+              <div class="image-frame" data-zoom-image="civ102-assets/sheet-layout-markup.png" data-zoom-alt="Marked sheet layout for bridge fabrication" data-zoom-title="Sheet cutting plan" data-zoom-caption="The picture shows the cutting part of the construction process.">
+                <img src="civ102-assets/sheet-layout-markup.png" alt="Marked sheet layout for bridge fabrication">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="BEEM.png" data-zoom-alt="Bridge project presentation detail" data-zoom-title="Bridge Presentation Detail" data-zoom-caption="Current project image used to highlight presentation and composition.">
-                <img src="BEEM.png" alt="Bridge project presentation detail" style="object-position:68% 52%;">
+              <div class="image-frame" data-zoom-image="civ102-assets/material-cut-layout.png" data-zoom-alt="Material cut layout for bridge pieces" data-zoom-title="Individual bridge components" data-zoom-caption="The picture shows the individual pieces of the bridge before assembly.">
+                <img src="civ102-assets/material-cut-layout.png" alt="Material cut layout for bridge pieces">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="BEEM.png" data-zoom-alt="Bridge project front crop" data-zoom-title="Bridge Front Crop" data-zoom-caption="Crop used to emphasize the forward structural composition.">
-                <img src="BEEM.png" alt="Bridge project front crop" style="object-position:20% 50%;">
+              <div class="image-frame" data-zoom-image="civ102-assets/glued-bridge-component.png" data-zoom-alt="Bridge component during gluing and assembly" data-zoom-title="Weight on recently glued bridge." data-zoom-caption="The picture shows how weight was applied to the recently glued bridge, to ensure proper adhesion.">
+                <img src="civ102-assets/glued-bridge-component.png" alt="Bridge component during gluing and assembly">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="BEEM.png" data-zoom-alt="Bridge project midspan crop" data-zoom-title="Bridge Midspan Crop" data-zoom-caption="Crop used to focus on the center region of the bridge design.">
-                <img src="BEEM.png" alt="Bridge project midspan crop" style="object-position:40% 50%;">
+              <div class="image-frame" data-zoom-image="civ102-assets/bridge-carrying-photo.png" data-zoom-alt="Team carrying the completed bridge" data-zoom-title="Gluing process" data-zoom-caption="The picture shows the team after applying the glue to the bridge, proper protective equipment is used.">
+                <img src="civ102-assets/bridge-carrying-photo.png" alt="Team carrying the completed bridge">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="BEEM.png" data-zoom-alt="Bridge project right crop" data-zoom-title="Bridge Right Crop" data-zoom-caption="Crop used to emphasize the right-side project framing.">
-                <img src="BEEM.png" alt="Bridge project right crop" style="object-position:79% 50%;">
+              <div class="image-frame" data-zoom-image="civ102-assets/team-work-session.png" data-zoom-alt="Team work session for bridge project" data-zoom-title="Team Work Session" data-zoom-caption="A project work session during the bridge construction process. We are waiting for the glue to settle.">
+                <img src="civ102-assets/team-work-session.png" alt="Team work session for bridge project">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="BEEM.png" data-zoom-alt="Bridge project structural form" data-zoom-title="Bridge Structural Form" data-zoom-caption="Crop used to discuss overall structural form.">
-                <img src="BEEM.png" alt="Bridge project structural form" style="object-position:33% 30%;">
+              <div class="image-frame" data-zoom-image="civ102-assets/load-test-setup.png" data-zoom-alt="Bridge load test setup" data-zoom-title="Night before testing" data-zoom-caption="The night before testing weight was applied to the bridge, to ensure proper adhesion of the glue.">
+                <img src="civ102-assets/load-test-setup.png" alt="Bridge load test setup">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="BEEM.png" data-zoom-alt="Bridge project geometry crop" data-zoom-title="Bridge Geometry Crop" data-zoom-caption="Crop used to focus on geometry and arrangement.">
-                <img src="BEEM.png" alt="Bridge project geometry crop" style="object-position:61% 38%;">
-              </div>
-            </div>
-            <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="BEEM.png" data-zoom-alt="Bridge project composition crop" data-zoom-title="Bridge Composition Crop" data-zoom-caption="Alternate crop used to vary the gallery canvas composition.">
-                <img src="BEEM.png" alt="Bridge project composition crop" style="object-position:48% 68%;">
-              </div>
-            </div>
-            <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="BEEM.png" data-zoom-alt="Bridge project detail crop" data-zoom-title="Bridge Detail Crop" data-zoom-caption="Crop used to create a tighter detail view for the gallery.">
-                <img src="BEEM.png" alt="Bridge project detail crop" style="object-position:72% 30%;">
-              </div>
-            </div>
-            <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="BEEM.png" data-zoom-alt="Bridge project alternate detail" data-zoom-title="Bridge Alternate Detail" data-zoom-caption="Alternate detail crop used to complete the gallery rhythm.">
-                <img src="BEEM.png" alt="Bridge project alternate detail" style="object-position:26% 74%;">
-              </div>
-            </div>
-            <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="BEEM.png" data-zoom-alt="Bridge project final tile" data-zoom-title="Bridge Final Tile" data-zoom-caption="Additional tile used to complete the 12-image gallery layout.">
-                <img src="BEEM.png" alt="Bridge project final tile" style="object-position:88% 62%;">
+              <div class="image-frame" data-zoom-image="civ102-assets/top-view-bridge.png" data-zoom-alt="Top view of completed bridge" data-zoom-title="Weight applied for glue adhesion" data-zoom-caption="A picture showing even more weight being applied to the bridge to ensure that the glue is properly set.">
+                <img src="civ102-assets/top-view-bridge.png" alt="Top view of completed bridge">
               </div>
             </div>
           </div>
         </section>
-
-        <section>
-          <div class="section-heading">
-            <div class="eyebrow">Development</div>
-            <h2>Interpret the bridge as engineering process, not only as a final artifact</h2>
-            <p>
-              The assignment requires each project to be annotated in context. For this bridge,
-              the important story is how requirements, analysis, and team decisions shaped the
-              structure and how testing should be used to assess the reasoning behind it.
-            </p>
-          </div>
-          <div class="cards-grid">
-            <article class="card">
-              <div class="small-label">Interpretation</div>
-              <p class="card-copy">
-                The project should show how structural judgment developed, not just what the final
-                bridge looked like.
-              </p>
-            </article>
-            <article class="card">
-              <div class="small-label">CTMF coverage</div>
-              <p class="card-copy">
-                The deep dive below records CTMFs across the full process so the project works as
-                a handbook entry as well as a portfolio page.
-              </p>
-            </article>
-            <article class="card">
-              <div class="small-label">Evidence trail</div>
-              <p class="card-copy">
-                The most useful evidence is where calculations, predicted failures, and test
-                outcomes can be linked directly to the design choices that were made.
-              </p>
-            </article>
-          </div>
-        </section>
-
         <section class="project-deep-dive">
           <div class="section-heading">
             <div class="eyebrow">Annotated process</div>
-            <h2>Deep dive into the bridge process and its CTMFs</h2>
+            <h2>Three CTMFs that best explain the bridge process</h2>
             <p>
-              This section follows the assignment brief by documenting how the bridge was framed,
-              developed, selected, and represented, while also assessing the usefulness and fit of
-              the relevant CTMFs.
+              For the bridge page, the three clearest CTMFs are the ones that define the
+              structural problem, widen the geometry options, and justify the final design through
+              analysis. Open each widget for the full annotated discussion.
             </p>
           </div>
-
-          <div class="deep-dive-layout">
-            <aside class="deep-dive-sidebar">
-              <article class="widget-panel">
-                <div class="small-label">Project at a glance</div>
-                <ul class="widget-list">
-                  <li>
-                    <strong>Context</strong>
-                    <span>CIV102 bridge design constrained by span, material, and testing requirements.</span>
-                  </li>
-                  <li>
-                    <strong>Main challenge</strong>
-                    <span>Translate structural theory into a bridge that is both efficient and testable.</span>
-                  </li>
-                  <li>
-                    <strong>Main evidence</strong>
-                    <span>Geometry choices, assumptions, calculations, predicted weak points, and testing interpretation.</span>
-                  </li>
-                </ul>
-                <div class="project-credit">
-                  <strong>Credit and scope</strong>
-                  This bridge was team work. The annotations below focus on the structural methods,
-                  critiques, and communication choices that I can honestly connect to the shared
-                  design and testing process.
-                </div>
-              </article>
-
-              <article class="widget-panel">
-                <div class="small-label">Design approach</div>
-                <p>
-                  This project reflects my position most clearly in careful planning, due diligence
-                  around likely failure, and the willingness to challenge assumptions before a
-                  bridge is built and tested.
-                </p>
-              </article>
-
-              <article class="widget-panel stage-links">
-                <div class="small-label">Process strands</div>
-                <a href="#bridge-scoping">Scoping / Frame</a>
-                <a href="#bridge-diverging">Diverging</a>
-                <a href="#bridge-converging">Converging</a>
-                <a href="#bridge-representation">Representation</a>
-              </article>
-            </aside>
-
-            <div class="stage-stack">
-              <section class="stage-section" id="bridge-scoping">
-                <div class="stage-heading">
-                  <div class="eyebrow">Scoping / Frame</div>
-                  <h3>Translate the brief into structural requirements and a failure-aware frame</h3>
-                  <p class="stage-copy">
-                    The project had to begin with the right engineering frame: span, allowable
-                    materials, loading setup, scoring or efficiency targets, and the failure
-                    behaviours most likely to govern the final bridge.
-                  </p>
-                  <div class="stage-meta">
-                    <span class="tag">CTMF: requirement interpretation</span>
-                    <span class="tag">CTMF: load-path framing</span>
-                    <span class="tag">CTMF: failure envelope</span>
-                  </div>
-                </div>
-                <div class="annotation-grid">
-                  <article class="annotation-card">
-                    <h4>Explanation</h4>
-                    <p>
-                      I framed the project by converting the assignment brief into structural
-                      requirements and assumptions: what the bridge had to span, what it could be
-                      made from, and which weaknesses could dominate performance.
-                    </p>
-                  </article>
-                  <article class="annotation-card">
-                    <h4>Evidence of use</h4>
-                    <p>
-                      The design discussion centers on performance, efficiency, and expected weak
-                      regions rather than appearance, which shows the bridge was understood as a
-                      structural system from the start.
-                    </p>
-                  </article>
-                  <article class="annotation-card">
-                    <h4>Assessment of utility</h4>
-                    <p>
-                      This was useful because it gave the project real boundaries. It prevented the
-                      team from exploring geometries that looked plausible but did not fit the
-                      actual loading and material context.
-                    </p>
-                  </article>
-                  <article class="annotation-card">
-                    <h4>Assessment of fit</h4>
-                    <p>
-                      This CTMF fits my position because it depends on caution, patience, and due
-                      diligence. Poor framing early in a structural project creates avoidable risk
-                      later.
-                    </p>
-                  </article>
-                </div>
-              </section>
-
-              <section class="stage-section" id="bridge-diverging">
-                <div class="stage-heading">
-                  <div class="eyebrow">Diverging</div>
-                  <h3>Explore structural layouts instead of treating one geometry as inevitable</h3>
-                  <p class="stage-copy">
-                    Divergence in this project means exploring different load paths, truss depths,
-                    member arrangements, and structural strategies before one configuration is
-                    accepted as the final bridge.
-                  </p>
-                  <div class="stage-meta">
-                    <span class="tag">CTMF: topology exploration</span>
-                    <span class="tag">CTMF: load-path comparison</span>
-                    <span class="tag">CTMF: span-depth variation</span>
-                    <span class="tag">CTMF: buckling brainstorm</span>
-                  </div>
-                </div>
-                <div class="ctmf-window-grid">
-                  <article class="ctmf-window">
-                    <div class="small-label">CTMF 01</div>
-                    <h4>Structural topology sketches</h4>
-                    <div class="image-frame" data-zoom-image="ctmf-placeholder.svg" data-zoom-alt="Placeholder for bridge topology sketches" data-zoom-title="Bridge - Structural Topology Sketches" data-zoom-caption="Placeholder for early bridge layout sketches comparing truss and beam strategies.">
-                      <img src="ctmf-placeholder.svg" alt="Placeholder for bridge topology sketches">
-                    </div>
-                    <p>
-                      Sketching several structural topologies created alternatives before one
-                      geometry became the default answer.
-                    </p>
-                    <ul class="window-points">
-                      <li><strong>Evidence:</strong> alternate layouts with different member arrangements and support logic.</li>
-                      <li><strong>Utility:</strong> broadens the search space before calculation fixes the design too early.</li>
-                      <li><strong>Fit:</strong> supports my view that strong design begins with controlled exploration.</li>
-                    </ul>
-                  </article>
-
-                  <article class="ctmf-window">
-                    <div class="small-label">CTMF 02</div>
-                    <h4>Load-path comparison</h4>
-                    <div class="image-frame" data-zoom-image="ctmf-placeholder.svg" data-zoom-alt="Placeholder for bridge load-path comparison" data-zoom-title="Bridge - Load-Path Comparison" data-zoom-caption="Placeholder for diagrams comparing how different bridge concepts route forces to supports.">
-                      <img src="ctmf-placeholder.svg" alt="Placeholder for bridge load-path comparison">
-                    </div>
-                    <p>
-                      Comparing load paths helped distinguish layouts that merely looked efficient
-                      from those that actually moved force in a believable way.
-                    </p>
-                    <ul class="window-points">
-                      <li><strong>Evidence:</strong> arrows, member roles, and support reactions annotated across concepts.</li>
-                      <li><strong>Utility:</strong> reveals whether a geometry is structurally coherent before detailed analysis.</li>
-                      <li><strong>Fit:</strong> aligns with my preference for understanding what a design is doing physically.</li>
-                    </ul>
-                  </article>
-
-                  <article class="ctmf-window">
-                    <div class="small-label">CTMF 03</div>
-                    <h4>Span-depth variation</h4>
-                    <div class="image-frame" data-zoom-image="ctmf-placeholder.svg" data-zoom-alt="Placeholder for bridge span-depth studies" data-zoom-title="Bridge - Span-Depth Variation" data-zoom-caption="Placeholder for comparison studies of bridge depth, member length, and stiffness implications.">
-                      <img src="ctmf-placeholder.svg" alt="Placeholder for bridge span-depth studies">
-                    </div>
-                    <p>
-                      Varying overall depth and member proportions made the tradeoff between
-                      stiffness, weight, and buckling risk more explicit.
-                    </p>
-                    <ul class="window-points">
-                      <li><strong>Evidence:</strong> side-by-side proportion studies with notes on stiffness and slenderness.</li>
-                      <li><strong>Utility:</strong> prevents the final proportions from being arbitrary.</li>
-                      <li><strong>Fit:</strong> fits my systematic approach because it forces comparison on real structural parameters.</li>
-                    </ul>
-                  </article>
-
-                  <article class="ctmf-window">
-                    <div class="small-label">CTMF 04</div>
-                    <h4>Buckling concern brainstorm</h4>
-                    <div class="image-frame" data-zoom-image="ctmf-placeholder.svg" data-zoom-alt="Placeholder for bridge buckling brainstorm" data-zoom-title="Bridge - Buckling Concern Brainstorm" data-zoom-caption="Placeholder for notes identifying likely compression failures and weak regions across alternatives.">
-                      <img src="ctmf-placeholder.svg" alt="Placeholder for bridge buckling brainstorm">
-                    </div>
-                    <p>
-                      A focused buckling brainstorm helped the team identify which members were
-                      likely to become critical before locking in the structure.
-                    </p>
-                    <ul class="window-points">
-                      <li><strong>Evidence:</strong> marked-up concepts showing compression-sensitive members and lateral instability concerns.</li>
-                      <li><strong>Utility:</strong> catches likely failure behaviour while ideas are still easy to change.</li>
-                      <li><strong>Fit:</strong> directly supports my habit of raising concerns when a method appears weak.</li>
-                    </ul>
-                  </article>
-                </div>
-              </section>
-
-              <section class="stage-section" id="bridge-converging">
-                <div class="stage-heading">
-                  <div class="eyebrow">Converging</div>
-                  <h3>Use analysis and predicted failure to justify the selected structure</h3>
-                  <p class="stage-copy">
-                    Convergence in the bridge project is where structural reasoning becomes most
-                    visible: calculations, simplified models, and likely failure modes are used to
-                    defend one arrangement over the others.
-                  </p>
-                  <div class="stage-meta">
-                    <span class="tag">CTMF: hand calculation</span>
-                    <span class="tag">CTMF: failure mode screening</span>
-                    <span class="tag">CTMF: material allocation matrix</span>
-                    <span class="tag">CTMF: test alignment review</span>
-                  </div>
-                </div>
-                <div class="ctmf-window-grid">
-                  <article class="ctmf-window">
-                    <div class="small-label">CTMF 01</div>
-                    <h4>Member force calculations</h4>
-                    <div class="image-frame" data-zoom-image="ctmf-placeholder.svg" data-zoom-alt="Placeholder for bridge member calculations" data-zoom-title="Bridge - Member Force Calculations" data-zoom-caption="Placeholder for force tables, section checks, and hand-calculation sheets used during bridge selection.">
-                      <img src="ctmf-placeholder.svg" alt="Placeholder for bridge member calculations">
-                    </div>
-                    <p>
-                      Hand calculations converted structural intuition into a defensible argument
-                      for which bridge should move forward.
-                    </p>
-                    <ul class="window-points">
-                      <li><strong>Evidence:</strong> member force estimates, compression checks, and simplified section reasoning.</li>
-                      <li><strong>Utility:</strong> identifies where the bridge is genuinely stressed instead of relying on guesswork.</li>
-                      <li><strong>Fit:</strong> fits my preference for careful, rigorous design decisions.</li>
-                    </ul>
-                  </article>
-
-                  <article class="ctmf-window">
-                    <div class="small-label">CTMF 02</div>
-                    <h4>Failure mode screening</h4>
-                    <div class="image-frame" data-zoom-image="ctmf-placeholder.svg" data-zoom-alt="Placeholder for bridge failure screening" data-zoom-title="Bridge - Failure Mode Screening" data-zoom-caption="Placeholder for a review of likely failure modes such as buckling, crushing, and joint failure.">
-                      <img src="ctmf-placeholder.svg" alt="Placeholder for bridge failure screening">
-                    </div>
-                    <p>
-                      Screening the bridge by likely failure modes kept convergence tied to risk
-                      rather than to appearance or habit.
-                    </p>
-                    <ul class="window-points">
-                      <li><strong>Evidence:</strong> likely weak zones and failure types ranked against each candidate structure.</li>
-                      <li><strong>Utility:</strong> makes the final choice more honest about what could actually go wrong.</li>
-                      <li><strong>Fit:</strong> directly supports my commitment to voicing concerns about weak methods.</li>
-                    </ul>
-                  </article>
-
-                  <article class="ctmf-window">
-                    <div class="small-label">CTMF 03</div>
-                    <h4>Material allocation matrix</h4>
-                    <div class="image-frame" data-zoom-image="ctmf-placeholder.svg" data-zoom-alt="Placeholder for bridge material allocation matrix" data-zoom-title="Bridge - Material Allocation Matrix" data-zoom-caption="Placeholder for tables showing where extra material helps performance and where it adds unnecessary weight.">
-                      <img src="ctmf-placeholder.svg" alt="Placeholder for bridge material allocation matrix">
-                    </div>
-                    <p>
-                      Material allocation turned the bridge into an efficiency problem: where more
-                      material improved reliability and where it simply added dead weight.
-                    </p>
-                    <ul class="window-points">
-                      <li><strong>Evidence:</strong> comparisons of reinforcement needs across members and joints.</li>
-                      <li><strong>Utility:</strong> improves the bridge by linking weight directly to structural purpose.</li>
-                      <li><strong>Fit:</strong> aligns with my desire to make choices that can be defended under real constraints.</li>
-                    </ul>
-                  </article>
-
-                  <article class="ctmf-window">
-                    <div class="small-label">CTMF 04</div>
-                    <h4>Test-alignment review</h4>
-                    <div class="image-frame" data-zoom-image="ctmf-placeholder.svg" data-zoom-alt="Placeholder for bridge test alignment review" data-zoom-title="Bridge - Test-Alignment Review" data-zoom-caption="Placeholder for documents comparing predicted behaviour with the actual planned testing setup.">
-                      <img src="ctmf-placeholder.svg" alt="Placeholder for bridge test alignment review">
-                    </div>
-                    <p>
-                      Reviewing the design against the planned test setup ensured the selected
-                      bridge was being optimized for the real evaluation context.
-                    </p>
-                    <ul class="window-points">
-                      <li><strong>Evidence:</strong> checks tying load application, supports, and measurement method to the chosen design.</li>
-                      <li><strong>Utility:</strong> closes the gap between analysis and how the bridge will actually be judged.</li>
-                      <li><strong>Fit:</strong> fits my view that engineering decisions should be validated against real use conditions.</li>
-                    </ul>
-                  </article>
-                </div>
-              </section>
-
-              <section class="stage-section" id="bridge-representation">
-                <div class="stage-heading">
-                  <div class="eyebrow">Representation</div>
-                  <h3>Represent geometry, predictions, and testing in a way others can audit</h3>
-                  <p class="stage-copy">
-                    In a structural project, representation is not decoration. It is the means by
-                    which someone else can follow the design, check assumptions, and understand
-                    why the bridge performed the way it did in testing.
-                  </p>
-                  <div class="stage-meta">
-                    <span class="tag">CTMF: annotated diagrams</span>
-                    <span class="tag">CTMF: results tables</span>
-                    <span class="tag">CTMF: failure explanation</span>
-                  </div>
-                </div>
-                <div class="annotation-grid">
-                  <article class="annotation-card">
-                    <h4>Explanation</h4>
-                    <p>
-                      I treat representation as the structured communication of the bridge:
-                      geometry, loading assumptions, predicted weak points, and final testing
-                      outcomes.
-                    </p>
-                  </article>
-                  <article class="annotation-card">
-                    <h4>Evidence of use</h4>
-                    <p>
-                      The bridge page is strongest when visuals are paired with explanation:
-                      diagrams of load path, labels on likely failure zones, and a comparison
-                      between expected and actual behaviour during testing.
-                    </p>
-                  </article>
-                  <article class="annotation-card">
-                    <h4>Assessment of utility</h4>
-                    <p>
-                      Good representation makes the project reusable. It lets teammates, assessors,
-                      and my future self understand not only what was built, but how the design
-                      logic held up under testing.
-                    </p>
-                  </article>
-                  <article class="annotation-card">
-                    <h4>Assessment of fit</h4>
-                    <p>
-                      This CTMF fits both the assignment and my position because it supports clear,
-                      concise engineering communication and makes claims easier to verify.
-                    </p>
-                  </article>
-                </div>
-              </section>
-            </div>
+          <div class="ctmf-overview-grid">
+            <button class="card ctmf-trigger" type="button" data-ctmf-open="bridge-ctmf-frame" data-ctmf-title="CIV102 Bridge - Diverging">
+              <div class="small-label">CTMF 04</div>
+              <h3>Diverging</h3>
+              <p>
+                This section will explain how the problem was framed by our group by the analysis of the Design 0.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Diverging</span>
+              </div>
+              <div class="expand-hint" aria-hidden="true"></div>
+            </button>
+            <button class="card ctmf-trigger" type="button" data-ctmf-open="bridge-ctmf-topology" data-ctmf-title="CIV102 Bridge - Converging">
+              <div class="small-label">CTMF 05</div>
+              <h3>Prototype by calculations</h3>
+              <p>
+                When the team decided on one design it performed manual calculations to ensure
+                that the design is valid and the code did not make any mistakes.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Converging</span>
+              </div>
+              <div class="expand-hint" aria-hidden="true"></div>
+            </button>
+            <button class="card ctmf-trigger" type="button" data-ctmf-open="bridge-ctmf-calcs" data-ctmf-title="CIV102 Bridge - Failure analysis">
+              <div class="small-label">CTMF 06</div>
+              <h3>Failure analysis</h3>
+              <p>
+                How calculations and failure prediction were used to defend the selected bridge
+                rather than relying on intuition alone.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Research</span>
+              </div>
+              <div class="expand-hint" aria-hidden="true"></div>
+            </button>
           </div>
+          <p class="ctmf-overview-note">Click any CTMF card to open the full annotated review, figures, and assessment.</p>
         </section>
 
         <section>
           <div class="section-heading">
             <div class="eyebrow">Position statement reflection</div>
             <h2>How this project contributed to my position on engineering design</h2>
-            <p>
-              Use this section to explain how the bridge project and its structural reasoning
-              shaped your current position on planning, due diligence, safety, and accountable
-              engineering judgment.
-            </p>
+ 
           </div>
           <div class="cards-grid">
             <article class="card">
               <div class="small-label">Planning and diligence</div>
               <p class="card-copy">
-                Explain how calculations, assumptions, and prediction in this project strengthened
-                your belief that engineering work should be systematic and cautious from the start.
-              </p>
-            </article>
-            <article class="card">
-              <div class="small-label">Responsibility and concern</div>
-              <p class="card-copy">
-                Explain how the bridge project relates to your commitment to speak up when a method
-                or design decision seems weak, risky, or structurally unreliable.
-              </p>
-            </article>
-            <article class="card">
-              <div class="small-label">Team process</div>
-              <p class="card-copy">
-                Explain how this project shaped the way you think about working in a team while
-                still maintaining technical standards and personal responsibility.
+                The project required careful planning and execution as there was only one chance
+                at the testing part. We had to ensure that all our calculations were correct, 
+                that the construction quality was good and that all conditions were accounted for. This 
+                connects to my statements about the importance of thorough preparation and validation in engineering design.
               </p>
             </article>
           </div>
-          <article class="note-card">
-            <div class="small-label">Closing reflection</div>
-            <p class="panel-copy">
-              Add a short concluding paragraph here on how this project contributed to your
-              position statement as a future engineer overall.
-            </p>
-          </article>
-        </section>
-        -->
-
-        <section>
-          <article class="note-card coming-soon-block">
-            <div class="small-label">Coming soon</div>
-            <h2 class="panel-title">This case study is being updated.</h2>
-            <p class="panel-copy">A shorter public version of this case study will be added soon.</p>
-          </article>
         </section>
       </div>
     </main>
@@ -595,6 +210,168 @@
       </div>
     </footer>
   </div>
+
+  <div class="ctmf-modal" data-ctmf-modal aria-hidden="true">
+    <div class="ctmf-modal-panel">
+      <div class="ctmf-modal-header">
+        <strong data-ctmf-modal-title>CTMF detail</strong>
+        <button class="ctmf-close" type="button" data-ctmf-close>Close</button>
+      </div>
+      <div class="ctmf-modal-body" data-ctmf-modal-body></div>
+    </div>
+  </div>
+
+  <template id="bridge-ctmf-frame">
+    <div class="ctmf-modal-copy">
+      <section class="ctmf-modal-section">
+        <div class="small-label">CTMF 04</div>
+        <h3>Code for rapid iterations</h3>
+        <p>
+          Python scripts were used to rapidly iterate on bridge designs to find the optimal one.
+        </p>
+      </section>
+      <section class="ctmf-modal-section">
+        <div class="small-label">Explanation of the CTMF</div>
+        <p>
+          To automate the process of calculations, and to be able to rapidly iterate on the designs of the 
+          different bridges we created a python script that gets the input on the dimensions and style of the bridge
+          and performs all the neccessary calculations. It also ouptuts the performance graphs for rapid visualizations.
+        </p>
+      </section>
+      <section class="ctmf-modal-section">
+        <div class="small-label">How it appeared in the project</div>
+        <div class="ctmf-modal-figure-grid">
+          <div class="image-frame" data-zoom-image="civ102-assets/ctmf4-base-load-case-2.png" data-zoom-alt="Bridge base load case 2 safety-check output" data-zoom-title="Base Load Case 2 Safety Check" data-zoom-caption="Code output from the bridge calculations showing the base load case results, stress values, and safety checks used to evaluate the design.">
+            <img src="civ102-assets/ctmf4-base-load-case-2.png" alt="Bridge base load case 2 safety-check output">
+          </div>
+        </div>
+        <ul>
+          <p>
+            Code was used to automate the calculations and generate performance graphs for each design. 
+            The code was personalized to work exactly how we needed it to. It calculated basing the 
+            parameters on the inputs we gave it, and even calculated the safety factors for each type of
+            failure. It then outputed the max weight it supports if it showed structural failure.
+          </p>
+        </ul>
+      </section>
+      <section class="ctmf-modal-section">
+        <div class="small-label">Why it was useful</div>
+        <p>
+          The use of code allowed the team to spend much less time performing manual calculations and 
+          it ensured that no "stupid" mistakes were done in the process, as it was all automatic.
+        </p>
+      </section>
+      <section class="ctmf-modal-section">
+        <div class="small-label">Why it fits my position statement</div>
+        <p>
+          The use of code allowed us to ensure that no "stupid" mistakes were done in the process of calculating
+          everything, therefore we could ensure that the final design was the best we could make it. This contributed
+          in the concept of due dilligence.
+        </p>
+      </section>
+    </div>
+  </template>
+
+  <template id="bridge-ctmf-topology">
+    <div class="ctmf-modal-copy">
+      <section class="ctmf-modal-section">
+        <div class="small-label">CTMF 05</div>
+        <h3>Prototype by calculations</h3>
+        <p>
+          This CTMF consists in performing calculations to verify the design.
+        </p>
+      </section>
+      <section class="ctmf-modal-section">
+        <div class="small-label">Explanation of the CTMF</div>
+        <p>
+          As said before a crucial process in engineering design is the concept of prototyping. You create
+          prototypes to verify that a design actually performs as expected. This specific CTMF consists of 
+          performing calculations to verify a design. These calculations must be performed accurately to ensure 
+          the proper verification of the design.
+        </p>
+      </section>
+      <section class="ctmf-modal-section">
+        <div class="small-label">How it appeared in the project</div>
+        <div class="ctmf-modal-figure-grid">
+          <div class="image-frame" data-zoom-image="civ102-assets/ctmf5-final-design-calculations.png" data-zoom-alt="Final bridge design calculations page" data-zoom-title="Final Design Calculations" data-zoom-caption="Handwritten final-design calculations showing the chosen cross-section geometry, centroid location, second moment of area, and safety-factor checks.">
+            <img src="civ102-assets/ctmf5-final-design-calculations.png" alt="Final bridge design calculations page">
+          </div>
+        </div>
+        <p>
+          The calculations performed during this CTMF were crucial for the final verification of the design. The code served for rapid development
+          and divergence, but it was not certified to provide final results. We had to conduct manual calculations
+          to ensure that the bridge design was actually valid and that the code did not make any mistakes. This process was a crucial step in the project, as it was the final check before building the bridge. It was the point where we had to be sure that our design was actually good and that we were not missing any critical failure modes or risks.
+        </p>
+      </section>
+      <section class="ctmf-modal-section">
+        <div class="small-label">Why it fits my position statement</div>
+        <p>
+          This CTMF fits perfectly with my position statement because it emphasizes the importance of thorough verification and validation in the design process. By requiring manual calculations alongside automated tools, it ensures that all potential risks are identified and addressed before moving forward.
+          This is an important part of my care for due diligence.
+        </p>
+      </section>
+    </div>
+  </template>
+
+  <template id="bridge-ctmf-calcs">
+    <div class="ctmf-modal-copy">
+      <section class="ctmf-modal-section">
+        <div class="small-label">CTMF 06</div>
+        <h3>Failure analysis</h3>
+        <p>
+          This CTMF combines convergence and research to understand the failure points of
+          past designs with the goal of improving them.
+        </p>
+      </section>
+      <section class="ctmf-modal-section">
+        <div class="small-label">Explanation of the CTMF</div>
+        <p>
+          This consists in developing prototypes that are meant to fail to see how they behave under 
+          real world conditions and even under higher stresss than the one found in a real use case.
+          Similar to how SpaceX operates with its Star Ship program, where rapid iteration and testing
+          are key to identifying potential failure modes early in the design process. They launch rockets
+          knowing they will fail, just to see how the design behaves. 
+        </p>
+        <p>
+          This is a very important step in engineering design, and I would say neccessary if you have 
+          the means of doing it.
+        </p>
+      </section>
+      <section class="ctmf-modal-section">
+        <div class="small-label">How it appeared in the project</div>
+        <div class="ctmf-modal-figure-grid">
+          <div class="image-frame" data-zoom-image="civ102-assets/ctmf6-bridge-teardown.jpg" data-zoom-alt="Top view of the bridge during failure analysis" data-zoom-title="Bridge Failure Analysis View" data-zoom-caption="A top-down picture during the process of construction showing the internal diaphragm distribution and the location of the splice where the design failed during testing.">
+            <img src="civ102-assets/ctmf6-bridge-teardown.jpg" alt="Top view of the bridge during failure analysis">
+          </div>
+        </div>
+        <p>
+          This CTMF appeared in the project during the testing phase. When the design was chosen,
+          the calculations performed and the design built we had to test our bridge. The tests were
+          performed by professor Bentz. They consisted in applying various loads to the bridge
+          under the form of a train passing by, therefore loads were changing and the stress was 
+          different all along the bridge. After our design failed we could clearly see that the breaking
+          point was the splice location.
+        </p>
+      </section>
+      <section class="ctmf-modal-section">
+        <div class="small-label">Why it was useful</div>
+        <p>
+          This post testing analysis was really useful, because it allowed us to identify the failure
+          mode of our bridge, and learn that even though the calculations performed for a "perfect" construction
+          showed that the bridge would fail under compression, the actual failure being glue failure at the splice
+          showed that the design can be really good, but if the construction quality is not good enough, it can lead to
+          catastrophic failures.
+        </p>
+      </section>
+      <section class="ctmf-modal-section">
+        <div class="small-label">Why it fits my position statement</div>
+        <p>
+          This CTMF connects to my position statement by emphasizing the importance of rigorous testing and analysis in the engineering design process. It highlights the need to not only rely on theoretical calculations but also to validate designs through
+          real world testing to ensure that they perform as the theory shows, and that there arent any unexpected failure modes. 
+        </p>
+      </section>
+    </div>
+  </template>
 
   <div class="lightbox" data-lightbox aria-hidden="true">
     <div class="lightbox-panel">

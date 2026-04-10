@@ -23,7 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
     "5d": { interval: "5m", range: "5d", label: "5D" },
     "1mo": { interval: "30m", range: "1mo", label: "1M" },
     "6mo": { interval: "1d", range: "6mo", label: "6M" },
-    "1y": { interval: "1d", range: "1y", label: "1Y" }
+    ytd: { interval: "1d", range: "ytd", label: "YTD" },
+    "1y": { interval: "1d", range: "1y", label: "1Y" },
+    "5y": { interval: "1wk", range: "5y", label: "5Y" }
   };
   const YAHOO_SYMBOL_OVERRIDES = {
     "NASDAQ:ALM": "ALM",

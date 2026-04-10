@@ -134,13 +134,18 @@ textarea {
   display: grid;
   place-items: center;
   border-radius: 14px;
-  border: 1px solid var(--line-strong);
-  background: rgba(255, 255, 255, 0.58);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(17, 63, 83, 0.28);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0)),
+    linear-gradient(135deg, #17384a 0%, #2e6c85 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 10px 24px rgba(17, 63, 83, 0.16);
   font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
   font-size: 0.94rem;
   font-weight: 700;
   letter-spacing: 0.14em;
+  color: #f7f1e8;
   transition: border-color 160ms ease, background 160ms ease, color 160ms ease, box-shadow 160ms ease;
 }
 
@@ -328,6 +333,19 @@ section {
   color: var(--text-soft);
 }
 
+.copy-link {
+  color: var(--accent-strong);
+  text-decoration-color: rgba(17, 63, 83, 0.32);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+
+.copy-link:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
 .hero-copy p,
 .page-hero p {
   max-width: 62ch;
@@ -346,6 +364,10 @@ section {
   flex-wrap: wrap;
   gap: 0.9rem;
   margin-top: 1.8rem;
+}
+
+.report-link-row {
+  justify-content: flex-end;
 }
 
 .button,
@@ -504,6 +526,10 @@ section {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.cards-grid + .note-card {
+  margin-top: 1.8rem;
+}
+
 .projects-grid + .note-card {
   margin-top: 1.2rem;
 }
@@ -624,6 +650,17 @@ section {
 .image-frame img {
   width: 100%;
   height: auto;
+}
+
+.bikepack-hero-frame {
+  aspect-ratio: 3 / 2;
+}
+
+.bikepack-hero-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .zoom-frame {
@@ -998,6 +1035,222 @@ section {
   text-transform: uppercase;
 }
 
+.ctmf-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.4rem;
+}
+
+.ctmf-trigger {
+  width: 100%;
+  border: 1px solid rgba(32, 90, 113, 0.12);
+  text-align: left;
+  cursor: pointer;
+}
+
+.ctmf-trigger .small-label {
+  margin-bottom: 0.85rem;
+}
+
+.ctmf-trigger h3 {
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  line-height: 1.02;
+  color: var(--text-strong);
+}
+
+.ctmf-trigger p {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.ctmf-trigger .tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.ctmf-trigger .tag {
+  background: rgba(32, 90, 113, 0.08);
+}
+
+.ctmf-trigger .expand-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  color: var(--accent-strong);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.ctmf-trigger .expand-hint::after {
+  content: "Open detailed review";
+  display: inline-block;
+  border-bottom: 1px solid currentColor;
+  line-height: 1.2;
+}
+
+.ctmf-trigger .expand-hint::before {
+  content: "+";
+  font-size: 1rem;
+}
+
+.ctmf-overview-note {
+  margin-top: 0.95rem;
+  color: var(--text-soft);
+  font-size: 0.96rem;
+}
+
+.ctmf-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(8, 10, 14, 0.78);
+  z-index: 75;
+}
+
+.ctmf-modal.is-open {
+  display: flex;
+}
+
+.ctmf-modal-panel {
+  width: min(1180px, 100%);
+  max-height: calc(100vh - 3rem);
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid rgba(14, 33, 56, 0.16);
+  background: #fbf7ef;
+  box-shadow: 0 30px 120px rgba(0, 0, 0, 0.3);
+}
+
+.ctmf-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.3rem 1.4rem;
+  border-bottom: 1px solid rgba(32, 90, 113, 0.12);
+}
+
+.ctmf-modal-header strong {
+  color: var(--text-strong);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ctmf-close {
+  border: 1px solid rgba(32, 90, 113, 0.18);
+  border-radius: 999px;
+  padding: 0.72rem 1rem;
+  background: rgba(32, 90, 113, 0.08);
+  color: var(--accent-strong);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ctmf-modal-body {
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+  padding: 2rem 2.25rem 2.4rem;
+}
+
+.ctmf-modal-copy {
+  display: block;
+  max-width: 980px;
+}
+
+.ctmf-modal-copy h3,
+.ctmf-modal-copy h4 {
+  margin: 0 0 0.9rem;
+  color: var(--text-strong);
+}
+
+.ctmf-modal-copy h3 {
+  font-size: clamp(2.2rem, 4vw, 3.35rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.15rem;
+}
+
+.ctmf-modal-copy h4 {
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
+  line-height: 1.14;
+  margin-bottom: 0.85rem;
+}
+
+.ctmf-modal-copy p,
+.ctmf-modal-copy li {
+  color: var(--text-soft);
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.ctmf-modal-copy p,
+.ctmf-modal-copy ul {
+  margin: 0 0 1rem;
+}
+
+.ctmf-modal-copy ul {
+  padding-left: 1.3rem;
+}
+
+.ctmf-modal-section {
+  display: block;
+  margin-bottom: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.ctmf-modal-section .small-label {
+  margin: 0 0 0.75rem;
+  font-size: 1.08rem;
+  letter-spacing: 0.11em;
+  color: var(--text-strong);
+}
+
+.ctmf-modal-figure-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0 0 1.3rem;
+}
+
+.ctmf-modal-figure-grid .image-frame,
+.ctmf-modal-copy .image-frame {
+  aspect-ratio: 16 / 10;
+  cursor: zoom-in;
+}
+
+.ctmf-modal-list {
+  margin: 0;
+  padding-left: 1.35rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.ctmf-modal-list li {
+  margin: 0;
+}
+
+.ctmf-modal-copy .image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-locked {
+  overflow: hidden;
+}
+
 .lightbox {
   position: fixed;
   inset: 0;
@@ -1006,7 +1259,7 @@ section {
   justify-content: center;
   padding: 2rem;
   background: rgba(8, 10, 14, 0.82);
-  z-index: 70;
+  z-index: 90;
 }
 
 .lightbox.is-open {
@@ -1082,6 +1335,13 @@ section {
 .contact-method-card {
   text-decoration: none;
   color: inherit;
+}
+
+@media (max-width: 980px) {
+  .ctmf-overview-grid,
+  .ctmf-modal-figure-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .field-grid {
