@@ -50,88 +50,90 @@
           </div>
         </section>
 
-        <section class="support-grid">
-          <article class="card">
-            <div class="card-kicker">Project summary</div>
-            <h2 class="card-title">Screwed.</h2>
-            <p class="card-copy">
-              The final design consists of a box smaller than the required 30x30x30 cm. Inside the mechanism
-              is divided into 3 different sections:
-              <ol>
-                <li>A feed system to introduce screws into the device. The user dumps batches of unorganized
-                  screws and the feeder orients them for the sorting mechanism.
-                </li>
-                <li>A head shape sorting mechanism, that sorts the screws one by one into the corresponding
-                  head shape: flat head, oval head and round washer.
-                </li>
-                <li>A length sorting mechanism that receives the corresponding head shape and sorts 
-                  these screws by length into different bins.
-                </li>
-              </ol>
-              For the feeder we chose to use a drum feeder that we verified by comparison. We found a reference design that 
-              worked exactly as we wanted, therefore we knew that this is a valid approach. For the head shape sorting
-              we used a raspberry pi module with a camera, we trained a machine learning model and tested it with various screw samples to ensure accuracy. 
-              For the length sorting we used a "piano box" design, where screws would roll down a slope and fall 
-              into their respective hole, depending on the screw length.  
-            </p>
-            <div class="tag-row">
-              <span class="status-chip live">Praxis II</span>
-              <span class="tag">Machine learning</span>
-              <span class="tag">Showcase</span>
-              <span class="tag">CAD</span>
-            </div>
-          </article>
-          <div class="image-frame">
-            <img src="praxis2-assets/summary-cad-enclosure.png" alt="CAD enclosure view of the automated screw sorting device">
-          </div>
-        </section>
+        <div class="design-layout">
+          <div class="design-content">
+            <section id="screw-summary" class="support-grid" data-section-track>
+              <article class="card">
+                <div class="card-kicker">Project summary</div>
+                <h2 class="card-title">Screwed.</h2>
+                <p class="card-copy">
+                  The final design consists of a box smaller than the required 30x30x30 cm. Inside the mechanism
+                  is divided into 3 different sections:
+                  <ol>
+                    <li>A feed system to introduce screws into the device. The user dumps batches of unorganized
+                      screws and the feeder orients them for the sorting mechanism.
+                    </li>
+                    <li>A head shape sorting mechanism, that sorts the screws one by one into the corresponding
+                      head shape: flat head, oval head and round washer.
+                    </li>
+                    <li>A length sorting mechanism that receives the corresponding head shape and sorts 
+                      these screws by length into different bins.
+                    </li>
+                  </ol>
+                  For the feeder we chose to use a drum feeder that we verified by comparison. We found a reference design that 
+                  worked exactly as we wanted, therefore we knew that this is a valid approach. For the head shape sorting
+                  we used a raspberry pi module with a camera, we trained a machine learning model and tested it with various screw samples to ensure accuracy. 
+                  For the length sorting we used a "piano box" design, where screws would roll down a slope and fall 
+                  into their respective hole, depending on the screw length.  
+                </p>
+                <div class="tag-row">
+                  <span class="status-chip live">Praxis II</span>
+                  <span class="tag">Machine learning</span>
+                  <span class="tag">Showcase</span>
+                  <span class="tag">CAD</span>
+                </div>
+              </article>
+              <div class="image-frame">
+                <img src="praxis2-assets/summary-cad-enclosure.png" alt="CAD enclosure view of the automated screw sorting device">
+              </div>
+            </section>
 
-        <section>
-          <div class="section-heading">
-            <div class="eyebrow">Context</div>
-            <h2>Need and stakeholders</h2>
-            <p>
-              This section should explain why the device was worth building in the first place and
-              who would be affected by the final design. It works best when the problem is stated
-              as a real need with practical users, constraints, and consequences for failure.
-            </p>
-          </div>
-          <div class="cards-grid">
-            <article class="card">
-              <div class="small-label">Need</div>
-              <p class="card-copy">
-                The need presented in the RFP was to sort a mixed batch of screws for 
-                Mr. Ginsberg's workshop. The screws had to be sorted by head shape and length.
-              </p>
-            </article>
-            <article class="card">
-              <div class="small-label">Primary stakeholders</div>
-              <p class="card-copy">
-                The primary stakeholder is Mr. Ginsberg, the workshop owner who requires the screw sorting system.
-              </p>
-            </article>
-            <article class="card">
-              <div class="small-label">Design constraints</div>
-              <p class="card-copy">
-                The main constraints were:
-                <ul>
-                  <li>Reliability: The system must consistently sort screws without failure.</li>
-                  <li>Sorting accuracy: The system must accurately identify and sort screws by head shape and length.</li>
-                  <li>Simple usage: The device had to work without human interaction apart from introducing the screws.</li>
-                  <li>Economic: The device had to be cost-effective to build and operate.</li>
-                </ul>
-              </p>
-            </article>
-          </div>
-        </section>
+            <section id="screw-context" data-section-track>
+              <div class="section-heading">
+                <div class="eyebrow">Context</div>
+                <h2>Need and stakeholders</h2>
+                <p>
+                  This section should explain why the device was worth building in the first place and
+                  who would be affected by the final design. It works best when the problem is stated
+                  as a real need with practical users, constraints, and consequences for failure.
+                </p>
+              </div>
+              <div class="cards-grid">
+                <article class="card">
+                  <div class="small-label">Need</div>
+                  <p class="card-copy">
+                    The need presented in the RFP was to sort a mixed batch of screws for 
+                    Mr. Ginsberg's workshop. The screws had to be sorted by head shape and length.
+                  </p>
+                </article>
+                <article class="card">
+                  <div class="small-label">Primary stakeholders</div>
+                  <p class="card-copy">
+                    The primary stakeholder is Mr. Ginsberg, the workshop owner who requires the screw sorting system.
+                  </p>
+                </article>
+                <article class="card">
+                  <div class="small-label">Design constraints</div>
+                  <p class="card-copy">
+                    The main constraints were:
+                    <ul>
+                      <li>Reliability: The system must consistently sort screws without failure.</li>
+                      <li>Sorting accuracy: The system must accurately identify and sort screws by head shape and length.</li>
+                      <li>Simple usage: The device had to work without human interaction apart from introducing the screws.</li>
+                      <li>Economic: The device had to be cost-effective to build and operate.</li>
+                    </ul>
+                  </p>
+                </article>
+              </div>
+            </section>
 
-        <section class="gallery-canvas">
-          <div class="section-heading">
-            <div class="eyebrow">Pictures</div>
-            <h2>Screens &amp; details</h2>
-            <p>Click any tile to open a larger view.</p>
-          </div>
-          <div class="gallery-grid">
+            <section id="screw-gallery" class="gallery-canvas" data-section-track>
+              <div class="section-heading">
+                <div class="eyebrow">Pictures</div>
+                <h2>Screens &amp; details</h2>
+                <p>Click any tile to open a larger view.</p>
+              </div>
+              <div class="gallery-grid">
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="praxis2-assets/cad-sorter-wheel.png" data-zoom-alt="CAD concept for the rotating screw sorter wheel" data-zoom-title="Drum feeder CAD" data-zoom-caption="A CAD concept showing the drum feeder mechanism used to orient and separate screws within the system.">
                 <img src="praxis2-assets/cad-sorter-wheel.png" alt="CAD concept for the rotating screw sorter wheel">
@@ -187,124 +189,140 @@
                 <img src="praxis2-assets/team-poster-photo.png" alt="Praxis II team presenting their screw sorting poster">
               </div>
             </div>
-          </div>
-        </section>
-
-        <section>
-          <div class="section-heading">
-            <div class="eyebrow">Development</div>
-            <h2>Three main components</h2>
-            <p>
-              This part can be used to explain how the final concept was split into three major
-              components.
-            </p>
-          </div>
-          <div class="cards-grid">
-            <article class="card">
-              <div class="small-label">Feeder</div>
-              <p class="card-copy">
-               The final design uses a drum feeder to feed the screws into the system.
-               The feeder orients the screws and delivers them one by one into the next stage.
-               It works by having a rotating bowl that drops the screws into a v-shaped channel that
-               orients them upright.
-              </p>
-            </article>
-            <article class="card">
-              <div class="small-label">Camera sorting</div>
-              <p class="card-copy">
-                For the head shape sorting we bought a raspberry pi and a camera. We used this system to 
-                capture images of the screws and process them to detect the shape. To classify the screws
-                we created a machine learning model that used a CNN classifier. We trained the model by taking
-                pictures of the screws sitting on the prototype and processing them using synthetic image
-                augmentation algorithms for data diversification.
-              </p>
-            </article>
-            <article class="card">
-              <div class="small-label">Length sorting</div>
-              <p class="card-copy">
-                The length sorting was achieved using a simple mechanical solution. We designed a "piano box"
-                system, where the screws would roll down a slope and fall into their respective hole, depending on the screw length.
-                The angles at which it is most efficient is at around 10 degrees.
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <section class="project-deep-dive">
-          <div class="section-heading">
-            <div class="eyebrow">Annotated process</div>
-            <h2>Three CTMFs that best explain the screw sorting process</h2>
-            <p>
-              For this project, the clearest CTMFs are the ones that define the system, widen the
-              architecture options, and justify the final mechanism through structured selection.
-              Open each widget for the full annotated review.
-            </p>
-          </div>
-          <div class="ctmf-overview-grid">
-            <button class="card ctmf-trigger" type="button" data-ctmf-open="screw-ctmf-functions" data-ctmf-title="Praxis II - Morph Chart">
-              <div class="small-label">CTMF 07</div>
-              <h3>Morph chart</h3>
-              <p>
-                How different subsystem options were explored before the team committed to a final
-                device architecture.
-              </p>
-              <div class="tag-row">
-                <span class="tag">Diverging</span>
               </div>
-              <div class="expand-hint" aria-hidden="true"></div>
-            </button>
-            <button class="card ctmf-trigger" type="button" data-ctmf-open="screw-ctmf-morph" data-ctmf-title="Praxis II - Pugh Chart">
-              <div class="small-label">CTMF 08</div>
-              <h3>Pugh chart</h3>
-              <p>
-                How the team compared candidate concepts against defined criteria in order to
-                justify the final design choice.
-              </p>
-              <div class="tag-row">
-                <span class="tag">Converging</span>
-              </div>
-              <div class="expand-hint" aria-hidden="true"></div>
-            </button>
-            <button class="card ctmf-trigger" type="button" data-ctmf-open="screw-ctmf-selection" data-ctmf-title="Praxis II - Verification Testing">
-              <div class="small-label">CTMF 09</div>
-              <h3>Verification testing</h3>
-              <p>
-                How the physical and software tests were used to represent system performance and
-                confirm whether the selected concept actually worked.
-              </p>
-              <div class="tag-row">
-                <span class="tag">Representing</span>
-              </div>
-              <div class="expand-hint" aria-hidden="true"></div>
-            </button>
-          </div>
-          <p class="ctmf-overview-note">Click any CTMF card to open the full annotated review, figures, and assessment.</p>
-        </section>
+            </section>
 
-        <section>
-          <div class="section-heading">
-            <div class="eyebrow">Position statement reflection</div>
-            <h2>How this project contributed to my position on engineering design</h2>
+            <section id="screw-components" data-section-track>
+              <div class="section-heading">
+                <div class="eyebrow">Development</div>
+                <h2>Three main components</h2>
+                <p>
+                  This part can be used to explain how the final concept was split into three major
+                  components.
+                </p>
+              </div>
+              <div class="cards-grid">
+                <article class="card">
+                  <div class="small-label">Feeder</div>
+                  <p class="card-copy">
+                   The final design uses a drum feeder to feed the screws into the system.
+                   The feeder orients the screws and delivers them one by one into the next stage.
+                   It works by having a rotating bowl that drops the screws into a v-shaped channel that
+                   orients them upright.
+                  </p>
+                </article>
+                <article class="card">
+                  <div class="small-label">Camera sorting</div>
+                  <p class="card-copy">
+                    For the head shape sorting we bought a raspberry pi and a camera. We used this system to 
+                    capture images of the screws and process them to detect the shape. To classify the screws
+                    we created a machine learning model that used a CNN classifier. We trained the model by taking
+                    pictures of the screws sitting on the prototype and processing them using synthetic image
+                    augmentation algorithms for data diversification.
+                  </p>
+                </article>
+                <article class="card">
+                  <div class="small-label">Length sorting</div>
+                  <p class="card-copy">
+                    The length sorting was achieved using a simple mechanical solution. We designed a "piano box"
+                    system, where the screws would roll down a slope and fall into their respective hole, depending on the screw length.
+                    The angles at which it is most efficient is at around 10 degrees.
+                  </p>
+                </article>
+              </div>
+            </section>
+
+            <section id="screw-ctmfs" class="project-deep-dive" data-section-track>
+              <div class="section-heading">
+                <div class="eyebrow">Annotated process</div>
+                <h2>Three CTMFs that best explain the screw sorting process</h2>
+                <p>
+                  For this project, the clearest CTMFs are the ones that define the system, widen the
+                  architecture options, and justify the final mechanism through structured selection.
+                  Open each widget for the full annotated review.
+                </p>
+              </div>
+              <div class="ctmf-overview-grid">
+                <button class="card ctmf-trigger" type="button" data-ctmf-open="screw-ctmf-functions" data-ctmf-title="Praxis II - Morph Chart">
+                  <div class="small-label">CTMF 07</div>
+                  <h3>Morph chart</h3>
+                  <p>
+                    How different subsystem options were explored before the team committed to a final
+                    device architecture.
+                  </p>
+                  <div class="tag-row">
+                    <span class="tag">Diverging</span>
+                  </div>
+                  <div class="expand-hint" aria-hidden="true"></div>
+                </button>
+                <button class="card ctmf-trigger" type="button" data-ctmf-open="screw-ctmf-morph" data-ctmf-title="Praxis II - Pugh Chart">
+                  <div class="small-label">CTMF 08</div>
+                  <h3>Pugh chart</h3>
+                  <p>
+                    How the team compared candidate concepts against defined criteria in order to
+                    justify the final design choice.
+                  </p>
+                  <div class="tag-row">
+                    <span class="tag">Converging</span>
+                  </div>
+                  <div class="expand-hint" aria-hidden="true"></div>
+                </button>
+                <button class="card ctmf-trigger" type="button" data-ctmf-open="screw-ctmf-selection" data-ctmf-title="Praxis II - Verification Testing">
+                  <div class="small-label">CTMF 09</div>
+                  <h3>Verification testing</h3>
+                  <p>
+                    How the physical and software tests were used to represent system performance and
+                    confirm whether the selected concept actually worked.
+                  </p>
+                  <div class="tag-row">
+                    <span class="tag">Representing</span>
+                  </div>
+                  <div class="expand-hint" aria-hidden="true"></div>
+                </button>
+              </div>
+              <p class="ctmf-overview-note">Click any CTMF card to open the full annotated review, figures, and assessment.</p>
+            </section>
+
+            <section id="screw-reflection" data-section-track>
+              <div class="section-heading">
+                <div class="eyebrow">Position statement reflection</div>
+                <h2>How this project contributed to my position on engineering design</h2>
+              </div>
+              <div class="cards-grid">
+                <article class="card">
+                  <div class="small-label">Exploring all designs</div>
+                  <p class="card-copy">
+                    Especially due to the use of the morph chart, the team explored a wide range of
+                    designs and ideas, taking into account various factors and potential solutions. This is 
+                    core to my ideal of careful planning and intentional execution.
+                  </p>
+                </article>
+                <article class="card">
+                  <div class="small-label">Compromise in a team</div>
+                  <p class="card-copy">
+                    By working in a team of high achieving people, everyone had different ideas and 
+                    considerations on how the design should work, and what approaches to take. This 
+                    experience allowed me to grow as an engineer and appreciate the value of diverse perspectives.
+                  </p>
+                </article>
+              </div>
+            </section>
           </div>
-          <div class="cards-grid">
-            <article class="card">
-              <div class="small-label">Exploring all designs</div>
-              <p class="card-copy">
-                Especially due to the use of the morph chart, the team explored a wide range of
-                designs and ideas, taking into account various factors and potential solutions. This is 
-                core to my ideal of careful planning and intentional execution.
-              </p>
-            </article>
-            <article class="card">
-              <div class="small-label">Compromise in a team</div>
-              <p class="card-copy">
-                By working in a team of high achieving people, everyone had different ideas and 
-                considerations on how the design should work, and what approaches to take. This 
-                experience allowed me to grow as an engineer and appreciate the value of diverse perspectives.
-              </p>
-            </article>
-          </div>
-        </section>
+
+          <aside class="design-nav-shell" aria-label="Section navigation">
+            <div class="widget-panel design-nav-panel">
+              <div class="small-label">On this page</div>
+              <nav class="design-nav-links" data-section-nav>
+                <a href="#screw-summary" data-section-link="screw-summary">Summary</a>
+                <a href="#screw-context" data-section-link="screw-context">Need &amp; stakeholders</a>
+                <a href="#screw-gallery" data-section-link="screw-gallery">Gallery</a>
+                <a href="#screw-components" data-section-link="screw-components">Components</a>
+                <a href="#screw-ctmfs" data-section-link="screw-ctmfs">CTMFs</a>
+                <a href="#screw-reflection" data-section-link="screw-reflection">Reflection</a>
+              </nav>
+            </div>
+          </aside>
+        </div>
       </div>
     </main>
 

@@ -49,47 +49,49 @@
           </div>
         </section>
 
-        <section class="support-grid">
-          <div class="image-frame">
-            <img src="BEEM.png" alt="Bridge project image">
-          </div>
-          <article class="card">
-            <div class="card-kicker">Project summary</div>
-            <h2 class="card-title">A strong case study for rigorous engineering reasoning</h2>
-            <p class="card-copy">
-              The project consisted on designing and building a bridge that would support weight. We 
-              were given a base design that we had to iterate on to achieve maximum weight/strength ratio.
-              We had to use knowledge and skills learned in class about not only construction and handling of materials, but also technical 
-              analysis, beam structural analysis, and everything that derives from there. 
-            </p>
-            <p>
-              At first we calculated all the parameters and the maximum strength of design 0, which is the design givem by the teaching team.
-              Around this design we developed a python code, that allowed the user to introduce parameters such as number of side panels, or 
-              height of the beam, and the program would run simulations of the train moving along the track and would caclulate the maximum amount
-              of weight that would be supported. Using this code we were able to perform multiple simulations and therefore arrive at the best design 
-              for us to build. 
-            </p>
-            <p>
-              When we had the final design chosen, we started with the building process. As the material being used was just a thick piece of paper, we 
-              had to plan the cutting very carefully. When we had everything prepared we began the cutting. The individual pieces of paper were then taken
-              and assembled together using the provided glue. Safety measures where used in the process of building the bridge. When the parts were assembled 
-              together the bridge was left to dry for 24 hours before the testing. Weight was placed on the bridge, to ensure that the construction is secure.
+        <div class="design-layout">
+          <div class="design-content">
+            <section id="bridge-summary" class="support-grid" data-section-track>
+              <div class="image-frame">
+                <img src="BEEM.png" alt="Bridge project image">
+              </div>
+              <article class="card">
+                <div class="card-kicker">Project summary</div>
+                <h2 class="card-title">A strong case study for rigorous engineering reasoning</h2>
+                <p class="card-copy">
+                  The project consisted on designing and building a bridge that would support weight. We 
+                  were given a base design that we had to iterate on to achieve maximum weight/strength ratio.
+                  We had to use knowledge and skills learned in class about not only construction and handling of materials, but also technical 
+                  analysis, beam structural analysis, and everything that derives from there. 
+                </p>
+                <p>
+                  At first we calculated all the parameters and the maximum strength of design 0, which is the design givem by the teaching team.
+                  Around this design we developed a python code, that allowed the user to introduce parameters such as number of side panels, or 
+                  height of the beam, and the program would run simulations of the train moving along the track and would caclulate the maximum amount
+                  of weight that would be supported. Using this code we were able to perform multiple simulations and therefore arrive at the best design 
+                  for us to build. 
+                </p>
+                <p>
+                  When we had the final design chosen, we started with the building process. As the material being used was just a thick piece of paper, we 
+                  had to plan the cutting very carefully. When we had everything prepared we began the cutting. The individual pieces of paper were then taken
+                  and assembled together using the provided glue. Safety measures where used in the process of building the bridge. When the parts were assembled 
+                  together the bridge was left to dry for 24 hours before the testing. Weight was placed on the bridge, to ensure that the construction is secure.
 
-            </p>
-            <div class="tag-row">
-              <span class="status-chip live">CIV102</span>
-              <span class="tag">Structures</span>
-              <span class="tag">Testing</span>
-            </div>
-          </article>
-        </section>
-        <section class="gallery-canvas">
-          <div class="section-heading">
-            <div class="eyebrow">Pictures</div>
-            <h2>Screens &amp; details</h2>
-            <p>Click any tile to open a larger view.</p>
-          </div>
-          <div class="gallery-grid">
+                </p>
+                <div class="tag-row">
+                  <span class="status-chip live">CIV102</span>
+                  <span class="tag">Structures</span>
+                  <span class="tag">Testing</span>
+                </div>
+              </article>
+            </section>
+            <section id="bridge-gallery" class="gallery-canvas" data-section-track>
+              <div class="section-heading">
+                <div class="eyebrow">Pictures</div>
+                <h2>Screens &amp; details</h2>
+                <p>Click any tile to open a larger view.</p>
+              </div>
+              <div class="gallery-grid">
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="civ102-assets/bridge-plan.png" data-zoom-alt="Bridge design plan drawing" data-zoom-title="Cutting Plan" data-zoom-caption="Plan drawing showing the cutting plan and key dimensions.">
                 <img src="civ102-assets/bridge-plan.png" alt="Bridge design plan drawing">
@@ -130,76 +132,90 @@
                 <img src="civ102-assets/top-view-bridge.png" alt="Top view of completed bridge">
               </div>
             </div>
-          </div>
-        </section>
-        <section class="project-deep-dive">
-          <div class="section-heading">
-            <div class="eyebrow">Annotated process</div>
-            <h2>Three CTMFs that best explain the bridge process</h2>
-            <p>
-              For the bridge page, the three clearest CTMFs are the ones that define the
-              structural problem, widen the geometry options, and justify the final design through
-              analysis. Open each widget for the full annotated discussion.
-            </p>
-          </div>
-          <div class="ctmf-overview-grid">
-            <button class="card ctmf-trigger" type="button" data-ctmf-open="bridge-ctmf-frame" data-ctmf-title="CIV102 Bridge - Diverging">
-              <div class="small-label">CTMF 04</div>
-              <h3>Diverging</h3>
-              <p>
-                This section will explain how the problem was framed by our group by the analysis of the Design 0.
-              </p>
-              <div class="tag-row">
-                <span class="tag">Diverging</span>
               </div>
-              <div class="expand-hint" aria-hidden="true"></div>
-            </button>
-            <button class="card ctmf-trigger" type="button" data-ctmf-open="bridge-ctmf-topology" data-ctmf-title="CIV102 Bridge - Converging">
-              <div class="small-label">CTMF 05</div>
-              <h3>Prototype by calculations</h3>
-              <p>
-                When the team decided on one design it performed manual calculations to ensure
-                that the design is valid and the code did not make any mistakes.
-              </p>
-              <div class="tag-row">
-                <span class="tag">Converging</span>
+            </section>
+            <section id="bridge-ctmfs" class="project-deep-dive" data-section-track>
+              <div class="section-heading">
+                <div class="eyebrow">Annotated process</div>
+                <h2>Three CTMFs that best explain the bridge process</h2>
+                <p>
+                  For the bridge page, the three clearest CTMFs are the ones that define the
+                  structural problem, widen the geometry options, and justify the final design through
+                  analysis. Open each widget for the full annotated discussion.
+                </p>
               </div>
-              <div class="expand-hint" aria-hidden="true"></div>
-            </button>
-            <button class="card ctmf-trigger" type="button" data-ctmf-open="bridge-ctmf-calcs" data-ctmf-title="CIV102 Bridge - Failure analysis">
-              <div class="small-label">CTMF 06</div>
-              <h3>Failure analysis</h3>
-              <p>
-                How calculations and failure prediction were used to defend the selected bridge
-                rather than relying on intuition alone.
-              </p>
-              <div class="tag-row">
-                <span class="tag">Research</span>
+              <div class="ctmf-overview-grid">
+                <button class="card ctmf-trigger" type="button" data-ctmf-open="bridge-ctmf-frame" data-ctmf-title="CIV102 Bridge - Diverging">
+                  <div class="small-label">CTMF 04</div>
+                  <h3>Diverging</h3>
+                  <p>
+                    This section will explain how the problem was framed by our group by the analysis of the Design 0.
+                  </p>
+                  <div class="tag-row">
+                    <span class="tag">Diverging</span>
+                  </div>
+                  <div class="expand-hint" aria-hidden="true"></div>
+                </button>
+                <button class="card ctmf-trigger" type="button" data-ctmf-open="bridge-ctmf-topology" data-ctmf-title="CIV102 Bridge - Converging">
+                  <div class="small-label">CTMF 05</div>
+                  <h3>Prototype by calculations</h3>
+                  <p>
+                    When the team decided on one design it performed manual calculations to ensure
+                    that the design is valid and the code did not make any mistakes.
+                  </p>
+                  <div class="tag-row">
+                    <span class="tag">Converging</span>
+                  </div>
+                  <div class="expand-hint" aria-hidden="true"></div>
+                </button>
+                <button class="card ctmf-trigger" type="button" data-ctmf-open="bridge-ctmf-calcs" data-ctmf-title="CIV102 Bridge - Failure analysis">
+                  <div class="small-label">CTMF 06</div>
+                  <h3>Failure analysis</h3>
+                  <p>
+                    How calculations and failure prediction were used to defend the selected bridge
+                    rather than relying on intuition alone.
+                  </p>
+                  <div class="tag-row">
+                    <span class="tag">Research</span>
+                  </div>
+                  <div class="expand-hint" aria-hidden="true"></div>
+                </button>
               </div>
-              <div class="expand-hint" aria-hidden="true"></div>
-            </button>
-          </div>
-          <p class="ctmf-overview-note">Click any CTMF card to open the full annotated review, figures, and assessment.</p>
-        </section>
+              <p class="ctmf-overview-note">Click any CTMF card to open the full annotated review, figures, and assessment.</p>
+            </section>
 
-        <section>
-          <div class="section-heading">
-            <div class="eyebrow">Position statement reflection</div>
-            <h2>How this project contributed to my position on engineering design</h2>
+            <section id="bridge-reflection" data-section-track>
+              <div class="section-heading">
+                <div class="eyebrow">Position statement reflection</div>
+                <h2>How this project contributed to my position on engineering design</h2>
  
+              </div>
+              <div class="cards-grid">
+                <article class="card">
+                  <div class="small-label">Planning and diligence</div>
+                  <p class="card-copy">
+                    The project required careful planning and execution as there was only one chance
+                    at the testing part. We had to ensure that all our calculations were correct, 
+                    that the construction quality was good and that all conditions were accounted for. This 
+                    connects to my statements about the importance of thorough preparation and validation in engineering design.
+                  </p>
+                </article>
+              </div>
+            </section>
           </div>
-          <div class="cards-grid">
-            <article class="card">
-              <div class="small-label">Planning and diligence</div>
-              <p class="card-copy">
-                The project required careful planning and execution as there was only one chance
-                at the testing part. We had to ensure that all our calculations were correct, 
-                that the construction quality was good and that all conditions were accounted for. This 
-                connects to my statements about the importance of thorough preparation and validation in engineering design.
-              </p>
-            </article>
-          </div>
-        </section>
+
+          <aside class="design-nav-shell" aria-label="Section navigation">
+            <div class="widget-panel design-nav-panel">
+              <div class="small-label">On this page</div>
+              <nav class="design-nav-links" data-section-nav>
+                <a href="#bridge-summary" data-section-link="bridge-summary">Summary</a>
+                <a href="#bridge-gallery" data-section-link="bridge-gallery">Gallery</a>
+                <a href="#bridge-ctmfs" data-section-link="bridge-ctmfs">CTMFs</a>
+                <a href="#bridge-reflection" data-section-link="bridge-reflection">Reflection</a>
+              </nav>
+            </div>
+          </aside>
+        </div>
       </div>
     </main>
 

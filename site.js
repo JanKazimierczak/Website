@@ -165,6 +165,96 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const sectionNav = document.querySelector("[data-section-nav]");
+  if (sectionNav) {
+    const sectionLinks = Array.from(sectionNav.querySelectorAll("[data-section-link]"));
+    const trackedSections = sectionLinks
+      .map((link) => {
+        const sectionId = link.getAttribute("data-section-link");
+        return sectionId ? document.getElementById(sectionId) : null;
+      })
+      .filter((section) => section instanceof HTMLElement);
+
+    const setActiveSection = (activeId) => {
+      sectionLinks.forEach((link) => {
+        const isActive = link.getAttribute("data-section-link") === activeId;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    const getTrackingLine = () => {
+      const headerHeight = document.querySelector(".site-header")?.offsetHeight || 0;
+      if (window.innerWidth <= 1399) {
+        const navHeight = sectionNav.closest(".design-nav-shell")?.offsetHeight || 0;
+        const mobileDepth = Math.min(Math.max(window.innerHeight * 0.18, 96), 160);
+        return headerHeight + navHeight + mobileDepth;
+      }
+      const desktopDepth = Math.min(Math.max(window.innerHeight * 0.24, 150), 260);
+      return headerHeight + desktopDepth;
+    };
+
+    const syncActiveSection = () => {
+      if (!trackedSections.length) {
+        return;
+      }
+
+      const trackingLine = getTrackingLine();
+      const sectionRects = trackedSections.map((section) => ({
+        id: section.id,
+        rect: section.getBoundingClientRect()
+      }));
+      let activeId = sectionRects[0].id;
+
+      const containingSection = sectionRects.find(({ rect }) => rect.top <= trackingLine && rect.bottom >= trackingLine);
+      if (containingSection) {
+        activeId = containingSection.id;
+      } else if (trackingLine < sectionRects[0].rect.top) {
+        activeId = sectionRects[0].id;
+      } else {
+        const nearestSection = sectionRects.reduce(
+          (closest, current) => {
+            const distance = current.rect.top > trackingLine
+              ? current.rect.top - trackingLine
+              : trackingLine - current.rect.bottom;
+
+            if (distance < closest.distance) {
+              return { id: current.id, distance };
+            }
+
+            return closest;
+          },
+          { id: sectionRects[0].id, distance: Number.POSITIVE_INFINITY }
+        );
+
+        activeId = nearestSection.id;
+      }
+
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 16) {
+        activeId = trackedSections[trackedSections.length - 1].id;
+      }
+
+      setActiveSection(activeId);
+    };
+
+    syncActiveSection();
+    window.addEventListener("scroll", syncActiveSection, { passive: true });
+    window.addEventListener("resize", syncActiveSection);
+
+    sectionLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        const activeId = link.getAttribute("data-section-link");
+        if (activeId) {
+          setActiveSection(activeId);
+        }
+      });
+    });
+  }
+
   const form = document.querySelector("[data-contact-form]");
   if (!form) {
     return;
