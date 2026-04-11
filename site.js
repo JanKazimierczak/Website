@@ -167,6 +167,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const sectionNav = document.querySelector("[data-section-nav]");
   if (sectionNav) {
+    const sectionNavShell = sectionNav.closest(".design-nav-shell");
+    const siteNav = document.querySelector(".site-nav");
+    const sectionNavMarker = document.createElement("div");
+    sectionNavMarker.hidden = true;
+    if (sectionNavShell?.parentNode) {
+      sectionNavShell.parentNode.insertBefore(sectionNavMarker, sectionNavShell);
+    }
+
     const sectionLinks = Array.from(sectionNav.querySelectorAll("[data-section-link]"));
     const trackedSections = sectionLinks
       .map((link) => {
@@ -187,13 +195,39 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     };
 
+    const syncSectionNavPlacement = () => {
+      if (!sectionNavShell || !siteNav || !sectionNavMarker.parentNode) {
+        return;
+      }
+
+      const shouldInlineHeader = window.innerWidth <= 1700;
+      if (shouldInlineHeader) {
+        const navLinks = siteNav.querySelector(".nav-links");
+        const navToggle = siteNav.querySelector("[data-nav-toggle]");
+        const insertionPoint = navLinks || navToggle || null;
+
+        if (sectionNavShell.parentElement !== siteNav) {
+          siteNav.insertBefore(sectionNavShell, insertionPoint);
+        }
+        sectionNavShell.classList.add("is-inline-header");
+        siteNav.classList.add("has-inline-section-nav");
+        return;
+      }
+
+      if (sectionNavShell.parentElement !== sectionNavMarker.parentNode || sectionNavMarker.nextSibling !== sectionNavShell) {
+        sectionNavMarker.parentNode.insertBefore(sectionNavShell, sectionNavMarker.nextSibling);
+      }
+      sectionNavShell.classList.remove("is-inline-header");
+      siteNav.classList.remove("has-inline-section-nav");
+    };
+
     const getTrackingLine = () => {
       const headerHeight = document.querySelector(".site-header")?.offsetHeight || 0;
-      if (window.innerWidth <= 1399) {
-        const navHeight = sectionNav.closest(".design-nav-shell")?.offsetHeight || 0;
-        const mobileDepth = Math.min(Math.max(window.innerHeight * 0.18, 96), 160);
-        return headerHeight + navHeight + mobileDepth;
+      if (sectionNavShell?.classList.contains("is-inline-header")) {
+        const inlineDepth = Math.min(Math.max(window.innerHeight * 0.16, 88), 140);
+        return headerHeight + inlineDepth;
       }
+
       const desktopDepth = Math.min(Math.max(window.innerHeight * 0.24, 150), 260);
       return headerHeight + desktopDepth;
     };
@@ -241,9 +275,13 @@ document.addEventListener("DOMContentLoaded", () => {
       setActiveSection(activeId);
     };
 
+    syncSectionNavPlacement();
     syncActiveSection();
     window.addEventListener("scroll", syncActiveSection, { passive: true });
-    window.addEventListener("resize", syncActiveSection);
+    window.addEventListener("resize", () => {
+      syncSectionNavPlacement();
+      syncActiveSection();
+    });
 
     sectionLinks.forEach((link) => {
       link.addEventListener("click", () => {
