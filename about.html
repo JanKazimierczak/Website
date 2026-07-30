@@ -6,16 +6,19 @@
   <title>About | Jan Kazimierczak</title>
   <meta name="description" content="Background, project-grounded capabilities, and engineering design principles of University of Toronto Engineering Science student Jan Kazimierczak.">
   <meta name="theme-color" content="#f4f0e8">
+  <link rel="canonical" href="https://jan.kazimierczak.eu/about.html">
   <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://jan.kazimierczak.eu/about.html">
   <meta property="og:title" content="About | Jan Kazimierczak">
   <meta property="og:description" content="Engineering Science background, technical evidence, and design principles.">
-  <meta property="og:image" content="assets/social-preview.png">
+  <meta property="og:image" content="https://jan.kazimierczak.eu/assets/social-preview.png">
+  <meta property="og:image:alt" content="Jan Kazimierczak Engineering Science portfolio">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="jk-favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20260716e">
+  <link rel="stylesheet" href="site.css?v=20260730a">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -28,16 +31,17 @@
             <span class="brand-copy"><span class="brand-name">Jan Kazimierczak</span><span class="brand-role">Engineering Science</span></span>
           </a>
           <ul class="nav-links">
-            <li><a href="projects.html">Work</a></li>
-            <li><a href="design.html">Approach</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="class-projects.html">Coursework</a></li>
+            <li><a href="individual-projects.html">Independent</a></li>
             <li><a class="active" aria-current="page" href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a class="nav-contact" href="contact.html">Contact</a></li>
           </ul>
           <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
         </nav>
-        <div class="mobile-nav" id="mobile-menu" data-mobile-nav>
-          <a href="projects.html">Work</a><a href="design.html">Approach</a><a class="active" aria-current="page" href="about.html">About</a><a href="contact.html">Contact</a>
-        </div>
+        <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile" data-mobile-nav>
+          <a href="projects.html">Projects</a><a href="class-projects.html">Coursework</a><a href="individual-projects.html">Independent</a><a class="active" aria-current="page" href="about.html">About</a><a href="contact.html">Contact</a>
+        </nav>
       </div>
     </header>
 
@@ -46,16 +50,20 @@
         <section class="about-hero">
           <div class="about-hero-copy">
             <div class="eyebrow">About</div>
-            <h1>Precision matters before the test—and after it.</h1>
-            <p>I’m Jan Kazimierczak, an Engineering Science student at the University of Toronto. I’m developing an engineering practice grounded in careful planning, technical analysis, physical evidence, and direct communication about what did and did not work.</p>
+            <h1>I care about what survives contact with evidence.</h1>
+            <p>I’m Jan Kazimierczak, an Engineering Science student at the University of Toronto. I work across physical systems and software, with an emphasis on careful planning, technical analysis, observable behavior, and direct communication about what did and did not work.</p>
             <div class="cta-row">
-              <a class="button" href="projects.html">See the evidence</a>
+              <a class="button" href="projects.html">Explore the project library</a>
               <a class="button-secondary" href="contact.html">Get in touch</a>
             </div>
           </div>
-          <figure class="about-portrait">
-            <img src="assets/jan-kazimierczak.jpg" width="800" height="800" alt="Portrait of Jan Kazimierczak" fetchpriority="high" decoding="async">
-            <figcaption>University of Toronto · Engineering Science</figcaption>
+          <figure class="about-work-mosaic">
+            <div class="about-work-mosaic-grid">
+              <img src="assets/bridge-overview.jpg" width="1600" height="1200" alt="Top view of the completed CIV102 bridge" fetchpriority="high" decoding="async">
+              <img src="assets/market-dashboard-preview.png" width="1280" height="720" alt="Market dashboard showing a custom price chart and quote data" decoding="async">
+              <img src="assets/screw-sorter-overview.png" width="1200" height="973" alt="CAD enclosure of the automated screw sorting device" decoding="async">
+            </div>
+            <figcaption>Structures · Software · Mechanisms</figcaption>
           </figure>
         </section>
 
@@ -64,7 +72,7 @@
             <div><div class="eyebrow">Background</div><h2>Why engineering became the direction.</h2></div>
             <div class="prose-stack">
               <p>My interest in engineering began around age 13 with the first Falcon Heavy launch. Watching both boosters land with precision made engineering feel tangible: careful reasoning could produce something difficult, coordinated, and real.</p>
-              <p>The project work documented here is smaller in scale, but it reflects the same attraction to systems where analysis, design choices, physical constraints, and testing have to agree.</p>
+              <p>The work documented here is smaller in scale, but it reflects the same attraction to systems where analysis, design choices, physical constraints, software behavior, and testing have to agree.</p>
             </div>
           </div>
         </section>
@@ -124,6 +132,12 @@
               <div class="tag-row"><span class="tag">Prototyping</span><span class="tag">Proxy testing</span><span class="tag">Fabrication</span></div>
               <a href="projects.html">Compare validation methods</a>
             </article>
+            <article>
+              <div class="capability-heading"><span>05</span><h3>Interface and web systems</h3></div>
+              <p>The independent projects cover client-side data integration, custom SVG charting, information architecture, responsive interaction, accessibility, and production validation.</p>
+              <div class="tag-row"><span class="tag">JavaScript</span><span class="tag">SVG</span><span class="tag">Accessibility</span></div>
+              <a href="individual-projects.html">View independent systems</a>
+            </article>
           </div>
         </section>
 
@@ -151,11 +165,11 @@
     <footer class="site-footer">
       <div class="container footer-grid">
         <div><span class="footer-name">Jan Kazimierczak</span><p>Engineering Science portfolio · University of Toronto</p></div>
-        <nav aria-label="Footer"><a href="projects.html">Work</a><a href="design.html">Approach</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+        <nav aria-label="Footer"><a href="projects.html">Projects</a><a href="class-projects.html">Coursework</a><a href="individual-projects.html">Independent</a><a href="design.html">Design philosophy</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
         <p class="footer-meta">© <span data-year></span> Jan Kazimierczak</p>
       </div>
     </footer>
   </div>
-  <script src="site.js?v=20260716e"></script>
+  <script src="site.js?v=20260730a"></script>
 </body>
 </html>

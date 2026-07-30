@@ -5,6 +5,47 @@ const args = process.argv.slice(2);
 const strict = args.includes("--strict");
 const rootArg = args.find((arg) => !arg.startsWith("--")) || ".";
 const root = path.resolve(rootArg);
+const siteOrigin = "https://jan.kazimierczak.eu";
+
+const indexablePages = [
+  "index.html",
+  "projects.html",
+  "class-projects.html",
+  "individual-projects.html",
+  "market-dashboard-project.html",
+  "portfolio-system.html",
+  "about.html",
+  "contact.html",
+  "design.html",
+  "praxis-I.html",
+  "praxis-II.html",
+  "CIV102Bridge.html",
+  "stocks.html",
+  "discover.html"
+];
+
+const requiredFiles = [
+  ...indexablePages,
+  "404.html",
+  "bridge-project.html",
+  "praxis-project.html",
+  "market-dashboard.html",
+  "rocket-project.html",
+  "control-project.html",
+  "arch-project.html",
+  "site.css",
+  "site.js",
+  "stocks.css",
+  "stocks.js",
+  "stocks-extra.js",
+  "discover.js",
+  "assets/social-preview.png",
+  "assets/market-dashboard-preview.png",
+  "assets/market-discovery-preview.png",
+  "CNAME",
+  "robots.txt",
+  "sitemap.xml"
+];
 
 const htmlFiles = (await readdir(root))
   .filter((file) => file.endsWith(".html"))
@@ -28,10 +69,14 @@ const exists = async (file) => {
   }
 };
 
+for (const file of requiredFiles) {
+  record(await exists(path.join(root, file)), `${file}: required production file is missing`);
+}
+
 for (const file of htmlFiles) {
   const absolute = path.join(root, file);
   const html = await readFile(absolute, "utf8");
-  const isRedirect = html.includes("http-equiv=\"refresh\"");
+  const isRedirect = /<meta\b[^>]*http-equiv=["']refresh["'][^>]*>/i.test(html);
   const label = path.relative(root, absolute);
 
   record(/^<!DOCTYPE html>/i.test(html), `${label}: missing HTML5 doctype`);
@@ -46,6 +91,70 @@ for (const file of htmlFiles) {
   if (!isRedirect) {
     record(/<meta[^>]+name="description"/i.test(html), `${label}: missing meta description`);
     record((html.match(/<h1(?:\s|>)/gi) || []).length === 1, `${label}: expected exactly one h1`);
+    record(/<a\b[^>]*class=["'][^"']*\bskip-link\b[^"']*["'][^>]*href=["']#[^"']+["'][^>]*>/i.test(html), `${label}: missing skip link to main content`);
+  }
+
+  const canonicalMatches = [...html.matchAll(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/gi)];
+  if (indexablePages.includes(file)) {
+    const expectedCanonical = file === "index.html" ? `${siteOrigin}/` : `${siteOrigin}/${file}`;
+    const documentTitle = html.match(/<title>([^<]+)<\/title>/i)?.[1];
+    const canonical = canonicalMatches[0]?.[1];
+    const ogType = html.match(/<meta\b[^>]*property=["']og:type["'][^>]*content=["']([^"']+)["'][^>]*>/i)?.[1];
+    const ogTitle = html.match(/<meta\b[^>]*property=["']og:title["'][^>]*content=["']([^"']+)["'][^>]*>/i)?.[1];
+    const ogDescription = html.match(/<meta\b[^>]*property=["']og:description["'][^>]*content=["']([^"']+)["'][^>]*>/i)?.[1];
+    const ogUrl = html.match(/<meta\b[^>]*property=["']og:url["'][^>]*content=["']([^"']+)["'][^>]*>/i)?.[1];
+    const ogImage = html.match(/<meta\b[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["'][^>]*>/i)?.[1];
+    const ogImageAlt = html.match(/<meta\b[^>]*property=["']og:image:alt["'][^>]*content=["']([^"']+)["'][^>]*>/i)?.[1];
+    const twitterCard = html.match(/<meta\b[^>]*name=["']twitter:card["'][^>]*content=["']([^"']+)["'][^>]*>/i)?.[1];
+
+    record(canonicalMatches.length === 1, `${label}: expected exactly one canonical link`);
+    record(canonical === expectedCanonical, `${label}: canonical must be ${expectedCanonical}`);
+    record(["website", "article", "profile"].includes(ogType), `${label}: og:type must be website, article, or profile`);
+    record(ogTitle === documentTitle, `${label}: og:title must match the document title`);
+    record(Boolean(ogDescription), `${label}: missing og:description`);
+    record(ogUrl === expectedCanonical, `${label}: og:url must match the canonical URL`);
+    record(Boolean(ogImage), `${label}: missing og:image`);
+    record(Boolean(ogImageAlt), `${label}: missing og:image:alt`);
+    record(twitterCard === "summary_large_image", `${label}: twitter:card must be summary_large_image`);
+
+    if (ogImage) {
+      let parsedOgImage;
+      try {
+        parsedOgImage = new URL(ogImage);
+      } catch {
+        parsedOgImage = null;
+      }
+      record(parsedOgImage?.origin === siteOrigin, `${label}: og:image must be an absolute same-origin URL`);
+      if (parsedOgImage?.origin === siteOrigin) {
+        const imagePath = decodeURIComponent(parsedOgImage.pathname.replace(/^\/+/, ""));
+        record(await exists(path.join(root, imagePath)), `${label}: og:image target does not exist (${ogImage})`);
+      }
+    }
+  }
+
+  if (isRedirect) {
+    const refreshTarget = html.match(/<meta\b[^>]*http-equiv=["']refresh["'][^>]*content=["'][^"']*url=([^"';\s>]+)[^"']*["'][^>]*>/i)?.[1];
+    const canonical = canonicalMatches[0]?.[1];
+    const expectedCanonical = refreshTarget
+      ? new URL(refreshTarget, `${siteOrigin}/${file}`).href
+      : null;
+
+    record(/<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex[^"']*follow[^"']*["'][^>]*>/i.test(html), `${label}: redirect must use noindex,follow`);
+    record(Boolean(refreshTarget), `${label}: redirect is missing a refresh destination`);
+    record(canonicalMatches.length === 1, `${label}: redirect must have exactly one canonical link`);
+    record(Boolean(expectedCanonical) && canonical === expectedCanonical, `${label}: redirect canonical must match its destination`);
+  }
+
+  if (file === "404.html") {
+    record(/<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex[^"']*["'][^>]*>/i.test(html), `${label}: 404 page must be noindex`);
+  }
+
+  for (const match of html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    try {
+      JSON.parse(match[1]);
+    } catch (error) {
+      record(false, `${label}: invalid JSON-LD (${error.message})`);
+    }
   }
 
   if (file === "contact.html") {
@@ -90,8 +199,51 @@ for (const file of htmlFiles) {
     if (!cleanReference) {
       continue;
     }
-    const target = path.resolve(path.dirname(absolute), cleanReference);
+    const target = cleanReference.startsWith("/")
+      ? path.join(root, cleanReference.replace(/^\/+/, ""))
+      : path.resolve(path.dirname(absolute), cleanReference);
     record(await exists(target), `${label}: missing local target ${reference}`);
+  }
+}
+
+for (const file of [
+  "assets/social-preview.png",
+  "assets/market-dashboard-preview.png",
+  "assets/market-discovery-preview.png"
+]) {
+  const target = path.join(root, file);
+  if (await exists(target)) {
+    const signature = (await readFile(target)).subarray(0, 8).toString("hex");
+    record(signature === "89504e470d0a1a0a", `${file}: .png asset does not contain PNG data`);
+  }
+}
+
+const cnamePath = path.join(root, "CNAME");
+if (await exists(cnamePath)) {
+  record((await readFile(cnamePath, "utf8")).trim() === "jan.kazimierczak.eu", "CNAME: expected jan.kazimierczak.eu");
+}
+
+const robotsPath = path.join(root, "robots.txt");
+if (await exists(robotsPath)) {
+  const robots = await readFile(robotsPath, "utf8");
+  const sitemapLines = robots.match(/^Sitemap:\s*.+$/gim) || [];
+  record(sitemapLines.length === 1, "robots.txt: expected exactly one Sitemap directive");
+  record(sitemapLines[0]?.trim() === `Sitemap: ${siteOrigin}/sitemap.xml`, "robots.txt: Sitemap directive must use the production URL");
+}
+
+const sitemapPath = path.join(root, "sitemap.xml");
+if (await exists(sitemapPath)) {
+  const sitemap = await readFile(sitemapPath, "utf8");
+  const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  const expectedUrls = indexablePages.map((file) => file === "index.html" ? `${siteOrigin}/` : `${siteOrigin}/${file}`);
+  const duplicates = sitemapUrls.filter((url, index) => sitemapUrls.indexOf(url) !== index);
+
+  record(duplicates.length === 0, `sitemap.xml: duplicate URL(s): ${[...new Set(duplicates)].join(", ")}`);
+  for (const url of expectedUrls) {
+    record(sitemapUrls.includes(url), `sitemap.xml: missing indexable URL ${url}`);
+  }
+  for (const url of sitemapUrls) {
+    record(expectedUrls.includes(url), `sitemap.xml: includes a redirect, 404, or unknown URL ${url}`);
   }
 }
 
@@ -128,5 +280,5 @@ if (errors.length || (strict && warnings.length)) {
   process.exitCode = 1;
 } else {
   console.log(`Validated ${htmlFiles.length} HTML routes in ${root}`);
-  console.log("Local targets, document structure, link safety, CSS safeguards, and factual guardrails passed.");
+  console.log("Structure, metadata, sitemap, local targets, link safety, CSS safeguards, and factual guardrails passed.");
 }

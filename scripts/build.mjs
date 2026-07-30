@@ -6,6 +6,10 @@ const output = path.resolve("dist");
 const files = [
   "index.html",
   "projects.html",
+  "class-projects.html",
+  "individual-projects.html",
+  "market-dashboard-project.html",
+  "portfolio-system.html",
   "about.html",
   "contact.html",
   "design.html",
@@ -17,13 +21,23 @@ const files = [
   "control-project.html",
   "arch-project.html",
   "praxis-project.html",
+  "market-dashboard.html",
+  "stocks.html",
+  "discover.html",
+  "404.html",
   "site.css",
   "site.js",
+  "stocks.css",
+  "stocks.js",
+  "stocks-extra.js",
+  "discover.js",
   "jk-favicon.svg",
   "Picture.jpeg",
   "Praxis-1-basket.png",
   "Praxispositionstatementflowchart.png",
-  "robots.txt"
+  "robots.txt",
+  "sitemap.xml",
+  "CNAME"
 ];
 
 const directories = [
@@ -64,12 +78,18 @@ if (siteUrl) {
   const sitemapPages = [
     "",
     "projects.html",
+    "class-projects.html",
+    "individual-projects.html",
+    "market-dashboard-project.html",
+    "portfolio-system.html",
     "about.html",
     "contact.html",
     "design.html",
     "praxis-I.html",
     "praxis-II.html",
-    "CIV102Bridge.html"
+    "CIV102Bridge.html",
+    "stocks.html",
+    "discover.html"
   ];
   const urls = sitemapPages
     .map((page) => `  <url><loc>${siteUrl}/${page}</loc></url>`)
@@ -79,8 +99,9 @@ if (siteUrl) {
 
   const robotsPath = path.join(output, "robots.txt");
   const robots = await readFile(robotsPath, "utf8");
-  await writeFile(robotsPath, `${robots.trimEnd()}\nSitemap: ${siteUrl}/sitemap.xml\n`);
+  const robotsWithoutSitemap = robots.replace(/^Sitemap:.*$/gim, "").trimEnd();
+  await writeFile(robotsPath, `${robotsWithoutSitemap}\n\nSitemap: ${siteUrl}/sitemap.xml\n`);
 }
 
 console.log(`Production build created at ${output}`);
-console.log(siteUrl ? `Sitemap generated for ${siteUrl}` : "Sitemap skipped: set SITE_URL to a verified production origin.");
+console.log(siteUrl ? `Sitemap generated for ${siteUrl}` : "Checked-in sitemap copied to the production build.");

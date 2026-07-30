@@ -3,11 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JK | Discover Stocks</title>
+  <title>Market Discovery Scanner | Jan Kazimierczak</title>
   <meta
     name="description"
-    content="Scanner-style stock discovery page with filtered movers, active names, pullback candidates, earnings radar, value watchlists, and catalyst news."
+    content="Market discovery scanner by Jan Kazimierczak with movers, activity, earnings, pullback, value, IPO, catalyst, and focus views."
   >
+  <link rel="canonical" href="https://jan.kazimierczak.eu/discover.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jan.kazimierczak.eu/discover.html">
+  <meta property="og:title" content="Market Discovery Scanner | Jan Kazimierczak">
+  <meta property="og:description" content="A browser-based scanner connecting broad market signals to a focused symbol dashboard.">
+  <meta property="og:image" content="https://jan.kazimierczak.eu/assets/market-discovery-preview.png">
+  <meta property="og:image:alt" content="Dark market scanner with movers, active names, earnings, pullback, value, IPO, catalyst, and focus panels">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="jk-favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,14 +23,15 @@
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap"
     rel="stylesheet"
   >
-  <link rel="stylesheet" href="stocks.css?v=20260324d">
+  <link rel="stylesheet" href="stocks.css?v=20260730a">
 </head>
 <body class="market-page">
+  <a class="skip-link" href="#market-main">Skip to market content</a>
   <div class="market-shell">
     <aside class="market-side-rail" aria-label="Navigation and discovery summary">
       <section class="panel rail-nav-panel" aria-label="Page navigation">
         <div class="rail-brand">
-          <a class="market-home-link" href="index.html" aria-label="Return home">
+          <a class="market-home-link" href="index.html" aria-label="Return to portfolio">
             <span class="market-home-mark">JK</span>
           </a>
           <nav class="rail-nav-links" aria-label="Stocks pages">
@@ -64,9 +73,14 @@
           </div>
         </div>
       </section>
+      <section class="panel market-disclaimer-panel" aria-label="Data and use notice">
+        <strong>Educational prototype</strong>
+        <p>External data can be delayed or unavailable. This interface is not investment advice.</p>
+        <a href="market-dashboard-project.html">Read case study</a>
+      </section>
     </aside>
 
-    <main class="market-main">
+    <main class="market-main" id="market-main">
       <div class="market-container">
         <section class="quote-strip-panel" aria-labelledby="discover-markets-title">
           <div class="section-bar">
@@ -82,10 +96,10 @@
           <header class="discover-hero panel">
             <div class="discover-hero-copy">
               <span class="section-label">Stock Discovery</span>
-              <h1>Find names worth opening right now.</h1>
+              <h1>Scan market activity before opening a symbol.</h1>
               <p class="discover-hero-note">
-                Track real top movers, broad volume leaders, earnings setups, IPOs, pullbacks, value resets,
-                and live catalyst flow. Open the dashboard only when a name is worth drilling into.
+                Compare movers, volume leaders, earnings and IPO headlines, pullback and value screens,
+                and catalyst news. Open the dashboard to inspect a selected symbol in more context.
               </p>
             </div>
 
@@ -225,6 +239,6 @@
     </div>
   </noscript>
 
-  <script src="discover.js?v=20260324b"></script>
+  <script src="discover.js?v=20260730a"></script>
 </body>
 </html>

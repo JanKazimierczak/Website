@@ -3,11 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JK | Stocks</title>
+  <title>Market Dashboard | Jan Kazimierczak</title>
   <meta
     name="description"
-    content="Public stock market dashboard with compact key-market quotes, projected price analytics, charting, and headline feeds."
+    content="Browser-based market dashboard by Jan Kazimierczak with quote context, custom multi-range charting, company information, and headline feeds."
   >
+  <link rel="canonical" href="https://jan.kazimierczak.eu/stocks.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jan.kazimierczak.eu/stocks.html">
+  <meta property="og:title" content="Market Dashboard | Jan Kazimierczak">
+  <meta property="og:description" content="A browser-based market-research interface with custom charting, quote context, company information, and news.">
+  <meta property="og:image" content="https://jan.kazimierczak.eu/assets/market-dashboard-preview.png">
+  <meta property="og:image:alt" content="Dark market dashboard showing quote metrics and a custom price chart">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="jk-favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,14 +23,15 @@
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap"
     rel="stylesheet"
   >
-  <link rel="stylesheet" href="stocks.css?v=20260327a">
+  <link rel="stylesheet" href="stocks.css?v=20260730a">
 </head>
 <body class="market-page">
+  <a class="skip-link" href="#market-main">Skip to market content</a>
   <div class="market-shell">
     <aside class="market-side-rail" aria-label="Navigation and quote metrics">
       <section class="panel rail-nav-panel" aria-label="Page navigation">
         <div class="rail-brand">
-          <a class="market-home-link" href="index.html" aria-label="Return home">
+          <a class="market-home-link" href="index.html" aria-label="Return to portfolio">
             <span class="market-home-mark">JK</span>
           </a>
           <nav class="rail-nav-links" aria-label="Stocks pages">
@@ -72,9 +81,14 @@
           </div>
         </div>
       </section>
+      <section class="panel market-disclaimer-panel" aria-label="Data and use notice">
+        <strong>Educational prototype</strong>
+        <p>External data can be delayed or unavailable. This interface is not investment advice.</p>
+        <a href="market-dashboard-project.html">Read case study</a>
+      </section>
     </aside>
 
-    <main class="market-main">
+    <main class="market-main" id="market-main">
       <div class="market-container">
         <section class="quote-strip-panel" aria-labelledby="key-markets-title">
           <div class="section-bar">
@@ -279,7 +293,7 @@
     </div>
   </noscript>
 
-  <script src="stocks.js?v=20260327a"></script>
-  <script src="stocks-extra.js?v=20260327a"></script>
+  <script src="stocks.js?v=20260730a"></script>
+  <script src="stocks-extra.js?v=20260730a"></script>
 </body>
 </html>

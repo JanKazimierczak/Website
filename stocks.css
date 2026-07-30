@@ -53,6 +53,25 @@ body::before {
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), transparent 98%);
 }
 
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  padding: 12px 16px;
+  border: 1px solid var(--accent);
+  background: var(--bg-panel-strong);
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform 140ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -632,7 +651,7 @@ button {
 }
 
 .symbol-chip {
-  height: 22px;
+  min-height: 32px;
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.7rem;
   font-weight: 600;
@@ -703,7 +722,7 @@ button {
 }
 
 .view-tab {
-  height: 20px;
+  min-height: 28px;
   padding: 0 7px;
   border: 1px solid var(--line);
   background: linear-gradient(180deg, #121821, #0a0e13);
@@ -1410,7 +1429,7 @@ button {
 }
 
 .range-tab {
-  height: 24px;
+  min-height: 30px;
   padding: 0 7px;
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.66rem;
@@ -1549,6 +1568,30 @@ button {
     flex-wrap: wrap;
   }
 
+  .symbol-chip,
+  .view-tab,
+  .range-tab {
+    min-height: 44px;
+    padding-inline: 12px;
+  }
+
+  .button,
+  .button-ghost,
+  .field input {
+    height: 44px;
+  }
+
+  .market-home-link,
+  .rail-nav-link,
+  .market-disclaimer-panel a {
+    min-height: 44px;
+  }
+
+  .market-disclaimer-panel a {
+    display: inline-flex;
+    align-items: center;
+  }
+
   .security-row {
     flex-direction: column;
     align-items: flex-start;
@@ -1556,5 +1599,89 @@ button {
 
   .security-price {
     justify-items: start;
+  }
+}
+
+@media (pointer: coarse) {
+  .symbol-chip,
+  .view-tab,
+  .range-tab {
+    min-height: 44px;
+    padding-inline: 12px;
+  }
+
+  .button,
+  .button-ghost,
+  .field input {
+    height: 44px;
+  }
+
+  .market-home-link,
+  .rail-nav-link,
+  .market-disclaimer-panel a {
+    min-height: 44px;
+  }
+
+  .market-disclaimer-panel a {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+.market-side-rail {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.market-disclaimer-panel {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 5px;
+  padding: 9px 10px;
+  border-color: rgba(241, 190, 67, 0.24);
+}
+
+.market-disclaimer-panel strong,
+.market-disclaimer-panel a {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.market-disclaimer-panel strong {
+  color: var(--accent);
+}
+
+.market-disclaimer-panel p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.62rem;
+  line-height: 1.35;
+}
+
+.market-disclaimer-panel a {
+  width: fit-content;
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: rgba(241, 190, 67, 0.52);
+  text-underline-offset: 0.22em;
+}
+
+@media (max-width: 1240px) {
+  .market-side-rail {
+    grid-template-columns: auto minmax(0, 1fr) minmax(190px, 0.36fr);
+    grid-template-rows: none;
+  }
+
+  .market-disclaimer-panel {
+    align-self: stretch;
+  }
+}
+
+@media (max-width: 720px) {
+  .market-side-rail {
+    grid-template-columns: 1fr;
   }
 }

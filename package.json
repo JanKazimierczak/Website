@@ -7,8 +7,8 @@
     "dev": "python3 -m http.server 4173",
     "format": "node scripts/format-site.mjs",
     "lint": "node scripts/validate-site.mjs --strict",
-    "typecheck": "node --check site.js && node --check scripts/build.mjs && node --check scripts/format-site.mjs && node --check scripts/validate-site.mjs",
-    "test": "node scripts/validate-site.mjs --strict",
+    "typecheck": "node --check site.js && node --check stocks.js && node --check stocks-extra.js && node --check discover.js && node --check scripts/build.mjs && node --check scripts/format-site.mjs && node --check scripts/validate-site.mjs",
+    "test": "npm run typecheck && node scripts/validate-site.mjs --strict",
     "build": "node scripts/build.mjs",
     "test:production": "node scripts/validate-site.mjs --strict dist"
   }

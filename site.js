@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navToggle.setAttribute("aria-expanded", "false");
       navToggle.setAttribute("aria-label", "Open menu");
       mobileNav.classList.remove("is-open");
+      mobileNav.setAttribute("aria-hidden", "true");
       if (restoreFocus) {
         navToggle.focus({ preventScroll: true });
       }
@@ -27,7 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
       navToggle.setAttribute("aria-expanded", "true");
       navToggle.setAttribute("aria-label", "Close menu");
       mobileNav.classList.add("is-open");
+      mobileNav.setAttribute("aria-hidden", "false");
     };
+
+    mobileNav.setAttribute("aria-hidden", "true");
 
     navToggle.addEventListener("click", () => {
       const expanded = navToggle.getAttribute("aria-expanded") === "true";
@@ -39,6 +43,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     navLinks.forEach((link) => link.addEventListener("click", () => closeMenu()));
+
+    document.addEventListener("click", (event) => {
+      if (
+        navToggle.getAttribute("aria-expanded") === "true"
+        && !navToggle.contains(event.target)
+        && !mobileNav.contains(event.target)
+      ) {
+        closeMenu();
+      }
+    });
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && navToggle.getAttribute("aria-expanded") === "true") {
