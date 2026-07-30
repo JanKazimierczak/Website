@@ -3,181 +3,159 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JK | About</title>
-  <meta name="description" content="Assignment placeholder page. The active submission is the design portfolio section.">
+  <title>About | Jan Kazimierczak</title>
+  <meta name="description" content="Background, project-grounded capabilities, and engineering design principles of University of Toronto Engineering Science student Jan Kazimierczak.">
+  <meta name="theme-color" content="#f4f0e8">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="About | Jan Kazimierczak">
+  <meta property="og:description" content="Engineering Science background, technical evidence, and design principles.">
+  <meta property="og:image" content="assets/social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="jk-favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20260716e">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell">
     <header class="site-header">
       <div class="container">
         <nav class="site-nav" aria-label="Primary">
-          <a class="brand" href="design.html">
-            <span class="brand-mark">JK</span>
-            <span class="brand-copy">
-              <span class="brand-name">Jan Kazimierczak</span>
-              <span class="brand-role">Engineering Portfolio</span>
-            </span>
+          <a class="brand" href="index.html" aria-label="Jan Kazimierczak, home">
+            <span class="brand-mark" aria-hidden="true">JK</span>
+            <span class="brand-copy"><span class="brand-name">Jan Kazimierczak</span><span class="brand-role">Engineering Science</span></span>
           </a>
           <ul class="nav-links">
-            <li><a href="design.html">Design</a></li>
+            <li><a href="projects.html">Work</a></li>
+            <li><a href="design.html">Approach</a></li>
+            <li><a class="active" aria-current="page" href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
-          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
-            <span></span><span></span><span></span>
-          </button>
+          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
         </nav>
-        <div class="mobile-nav" data-mobile-nav>
-          <a href="design.html">Design</a>
+        <div class="mobile-nav" id="mobile-menu" data-mobile-nav>
+          <a href="projects.html">Work</a><a href="design.html">Approach</a><a class="active" aria-current="page" href="about.html">About</a><a href="contact.html">Contact</a>
         </div>
       </div>
     </header>
 
-    <main>
+    <main id="main-content">
       <div class="container">
-        <section class="page-hero">
-          <div class="eyebrow">About</div>
-          <h1>Work in progress.</h1>
-          <p>This page is not part of the assignment version of the portfolio. Only the design page and its linked project pages are currently being shown.</p>
-          <div class="cta-row">
-            <a class="button" href="design.html">Open design portfolio</a>
+        <section class="about-hero">
+          <div class="about-hero-copy">
+            <div class="eyebrow">About</div>
+            <h1>Precision matters before the test—and after it.</h1>
+            <p>I’m Jan Kazimierczak, an Engineering Science student at the University of Toronto. I’m developing an engineering practice grounded in careful planning, technical analysis, physical evidence, and direct communication about what did and did not work.</p>
+            <div class="cta-row">
+              <a class="button" href="projects.html">See the evidence</a>
+              <a class="button-secondary" href="contact.html">Get in touch</a>
+            </div>
+          </div>
+          <figure class="about-portrait">
+            <img src="assets/jan-kazimierczak.jpg" width="800" height="800" alt="Portrait of Jan Kazimierczak" fetchpriority="high" decoding="async">
+            <figcaption>University of Toronto · Engineering Science</figcaption>
+          </figure>
+        </section>
+
+        <section class="origin-section">
+          <div class="section-heading section-heading-split">
+            <div><div class="eyebrow">Background</div><h2>Why engineering became the direction.</h2></div>
+            <div class="prose-stack">
+              <p>My interest in engineering began around age 13 with the first Falcon Heavy launch. Watching both boosters land with precision made engineering feel tangible: careful reasoning could produce something difficult, coordinated, and real.</p>
+              <p>The project work documented here is smaller in scale, but it reflects the same attraction to systems where analysis, design choices, physical constraints, and testing have to agree.</p>
+            </div>
           </div>
         </section>
 
-        <section class="split-grid">
-          <article class="note-card">
-            <div class="small-label">Available now</div>
-            <h2 class="panel-title">The design section remains the main public section</h2>
-            <ul class="list">
-              <li>Position statement on engineering design</li>
-              <li>Praxis I design project</li>
-              <li>Praxis II design project</li>
-              <li>CIV102 bridge design project</li>
-            </ul>
-          </article>
-          <article class="note-card">
-            <div class="small-label">Status</div>
-            <p class="panel-copy">The background page has been simplified for the submission and will be restored later.</p>
-          </article>
+        <section class="principles-section">
+          <div class="section-heading">
+            <div class="eyebrow">Design principles</div>
+            <h2>Three commitments that recur across the work.</h2>
+          </div>
+          <div class="principle-grid">
+            <article>
+              <span class="principle-index">01</span>
+              <h3>Plan before committing.</h3>
+              <p>I spend time defining the problem, identifying constraints, and checking assumptions before treating a concept as a solution.</p>
+            </article>
+            <article>
+              <span class="principle-index">02</span>
+              <h3>Raise concerns clearly.</h3>
+              <p>When a method appears unsafe, weak, or insufficiently supported, I believe the concern should be voiced and investigated.</p>
+            </article>
+            <article>
+              <span class="principle-index">03</span>
+              <h3>Compromise without hiding trade-offs.</h3>
+              <p>Team decisions benefit from different perspectives, but the reasons, uncertainties, and sacrifices behind a decision should remain visible.</p>
+            </article>
+          </div>
+          <a class="text-link" href="design.html">Read the complete design position <span aria-hidden="true">→</span></a>
+        </section>
+
+        <section class="evidence-capabilities">
+          <div class="section-heading section-heading-split">
+            <div><div class="eyebrow">Technical toolkit</div><h2>Capabilities tied to project evidence.</h2></div>
+            <p>No proficiency bars or detached logo wall: each capability below points to a documented use in the portfolio.</p>
+          </div>
+          <div class="evidence-capability-list">
+            <article>
+              <div class="capability-heading"><span>01</span><h3>Programming and analysis</h3></div>
+              <p>Python supported rapid bridge-design iteration and train-position simulation. MATLAB processed and visualized proxy-test data for BikePack Buddy.</p>
+              <div class="tag-row"><span class="tag">Python</span><span class="tag">MATLAB</span><span class="tag">Structural analysis</span></div>
+              <a href="CIV102Bridge.html">View structural-analysis evidence</a>
+            </article>
+            <article>
+              <div class="capability-heading"><span>02</span><h3>CAD and mechanism design</h3></div>
+              <p>The screw-sorting project documents CAD concept development and the selection of feeder, head-classification, and length-sorting subsystems.</p>
+              <div class="tag-row"><span class="tag">CAD</span><span class="tag">Mechanism design</span><span class="tag">Concept selection</span></div>
+              <a href="praxis-II.html">View mechanism evidence</a>
+            </article>
+            <article>
+              <div class="capability-heading"><span>03</span><h3>Machine vision</h3></div>
+              <p>A Raspberry Pi camera system and CNN classifier were tested for screw-head classification, with the reported accuracy and shortfall kept explicit.</p>
+              <div class="tag-row"><span class="tag">Raspberry Pi</span><span class="tag">CNN classification</span><span class="tag">Image augmentation</span></div>
+              <a href="praxis-II.html#screw-components">View classification evidence</a>
+            </article>
+            <article>
+              <div class="capability-heading"><span>04</span><h3>Prototyping and validation</h3></div>
+              <p>Across the case studies, design decisions were examined through calculations, low-fidelity prototypes, subsystem prototypes, fabrication, and physical tests.</p>
+              <div class="tag-row"><span class="tag">Prototyping</span><span class="tag">Proxy testing</span><span class="tag">Fabrication</span></div>
+              <a href="projects.html">Compare validation methods</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="education-section">
+          <div class="education-card">
+            <div>
+              <div class="eyebrow">Education</div>
+              <h2>University of Toronto</h2>
+              <p>Engineering Science student</p>
+            </div>
+            <div class="education-note">
+              <span>Portfolio scope</span>
+              <p>Course-based engineering design, structural analysis, physical prototyping, and documented technical reflection.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="contact-band compact-contact-band">
+          <div><div class="eyebrow">Next</div><h2>Start with the projects—or start a conversation.</h2><p>The project pages contain the technical depth; email and professional profiles are collected on the contact page.</p></div>
+          <div class="contact-band-actions"><a class="button" href="projects.html">Selected work</a><a class="button-secondary" href="contact.html">Contact</a></div>
         </section>
       </div>
     </main>
-
-    <!-- Previous full page content backup
-    <main>
-      <div class="container">
-        <section class="page-hero">
-          <div class="eyebrow">About</div>
-          <h1>Background, interests, and working direction.</h1>
-          <p>I am currently building my foundation as a student engineer with the goal of moving deeper into aerospace, propulsion, structural analysis, and rigorous engineering design.</p>
-        </section>
-
-        <section class="split-grid">
-          <article class="card">
-            <div class="card-kicker">Current position</div>
-            <h2 class="card-title">Engineering Science student building aerospace depth</h2>
-            <p class="card-copy">
-              I am a first-year Engineering Science student at the University of Toronto with a focus on aerospace engineering. My work so far has centered on propulsion, structural thinking, design process, and the technical discipline needed to move from concept to tested result.
-            </p>
-            <p class="card-copy">
-              Outside coursework, I am involved with UTAT on the liquid propulsion side. That environment has made it clear to me that I want to keep developing both analytical skills and the ability to contribute effectively within technically demanding teams.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-kicker">What I value</div>
-            <h2 class="card-title">Technical clarity over presentation noise</h2>
-            <ul class="list">
-              <li>Careful planning before execution.</li>
-              <li>Direct communication when a design choice looks weak or risky.</li>
-              <li>Design work that is defendable, not just visually appealing.</li>
-              <li>Steady improvement through hands-on engineering work.</li>
-            </ul>
-          </article>
-        </section>
-
-        <section>
-          <div class="section-heading">
-            <div class="eyebrow">Skills</div>
-            <h2>Working toolkit</h2>
-          </div>
-          <div class="skills-grid">
-            <article class="card skill-group">
-              <h3>Programming</h3>
-              <div class="skill-stack">
-                <span class="tag">Python</span>
-                <span class="tag">MATLAB</span>
-                <span class="tag">C</span>
-                <span class="tag">LaTeX</span>
-              </div>
-            </article>
-            <article class="card skill-group">
-              <h3>CAD and software</h3>
-              <div class="skill-stack">
-                <span class="tag">Onshape</span>
-                <span class="tag">Fusion 360</span>
-                <span class="tag">PrusaSlicer</span>
-                <span class="tag">VS Code</span>
-              </div>
-            </article>
-            <article class="card skill-group">
-              <h3>Engineering areas</h3>
-              <div class="skill-stack">
-                <span class="tag">Mechanics</span>
-                <span class="tag">Structural analysis</span>
-                <span class="tag">Propulsion</span>
-                <span class="tag">Circuits</span>
-              </div>
-            </article>
-            <article class="card skill-group">
-              <h3>Interests</h3>
-              <div class="skill-stack">
-                <span class="tag">Aerospace</span>
-                <span class="tag">Simulation</span>
-                <span class="tag">Research</span>
-                <span class="tag">Design process</span>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section>
-          <div class="section-heading">
-            <div class="eyebrow">At a glance</div>
-            <h2>Key context</h2>
-          </div>
-          <div class="cards-grid">
-            <article class="card">
-              <div class="small-label">Institution</div>
-              <h3 class="card-title">University of Toronto</h3>
-              <p class="card-copy">Engineering Science program, building toward aerospace-focused work.</p>
-            </article>
-            <article class="card">
-              <div class="small-label">Academic standing</div>
-              <h3 class="card-title">3.63 GPA</h3>
-              <p class="card-copy">Early-stage academic performance with room to build stronger project evidence over time.</p>
-            </article>
-            <article class="card">
-              <div class="small-label">Team environment</div>
-              <h3 class="card-title">UTAT Liquid Propulsion</h3>
-              <p class="card-copy">Hands-on team involvement that aligns directly with long-term technical interests.</p>
-            </article>
-          </div>
-        </section>
-      </div>
-    </main>
-    -->
 
     <footer class="site-footer">
-      <div class="container footer-row">
-        <span>&copy; <span data-year></span> Jan Kazimierczak</span>
-        <a href="design.html">Design</a>
+      <div class="container footer-grid">
+        <div><span class="footer-name">Jan Kazimierczak</span><p>Engineering Science portfolio · University of Toronto</p></div>
+        <nav aria-label="Footer"><a href="projects.html">Work</a><a href="design.html">Approach</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+        <p class="footer-meta">© <span data-year></span> Jan Kazimierczak</p>
       </div>
     </footer>
   </div>
-  <script src="site.js"></script>
+  <script src="site.js?v=20260716e"></script>
 </body>
 </html>

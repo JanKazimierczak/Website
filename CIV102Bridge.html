@@ -3,49 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JK | CIV102 Bridge</title>
+  <title>CIV102 Bridge Case Study | Jan Kazimierczak</title>
+  <meta name="description" content="CIV102 team bridge case study: Python-aided structural iteration, manual checks, fabrication, predicted capacity, physical testing, and splice failure analysis.">
+  <meta name="theme-color" content="#f4f0e8">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="CIV102 Bridge Case Study | Jan Kazimierczak">
+  <meta property="og:description" content="A bridge project connecting structural modelling, manual verification, fabrication, and physical failure analysis.">
+  <meta property="og:image" content="assets/bridge-overview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="jk-favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20260716e">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell">
     <header class="site-header">
       <div class="container">
         <nav class="site-nav" aria-label="Primary">
-          <a class="brand" href="design.html">
-            <span class="brand-mark">JK</span>
+          <a class="brand" href="index.html" aria-label="Jan Kazimierczak, home">
+            <span class="brand-mark" aria-hidden="true">JK</span>
             <span class="brand-copy">
               <span class="brand-name">Jan Kazimierczak</span>
-              <span class="brand-role">Engineering Portfolio</span>
+              <span class="brand-role">Engineering Science</span>
             </span>
           </a>
           <ul class="nav-links">
-            <li><a class="active" href="design.html">Design</a></li>
+            <li><a class="active" aria-current="page" href="projects.html">Work</a></li>
+            <li><a href="design.html">Approach</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
-          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle>
             <span></span><span></span><span></span>
           </button>
         </nav>
-        <div class="mobile-nav" data-mobile-nav>
-          <a class="active" href="design.html">Design</a>
+        <div class="mobile-nav" id="mobile-menu" data-mobile-nav>
+          <a class="active" aria-current="page" href="projects.html">Work</a>
+          <a href="design.html">Approach</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
         </div>
       </div>
     </header>
 
-    <main>
+    <main id="main-content">
       <div class="container">
         <section class="page-hero">
           <div class="page-meta-row">
             <div class="eyebrow">CIV102</div>
-            <a class="back-link" href="design.html"><span>Back to design</span></a>
+            <a class="back-link" href="projects.html"><span>Back to work</span></a>
           </div>
           <h1>Bridge design and analysis</h1>
-          <p>A bridge design project where we had to use engineering knowledge and our engineering jugment to design and build a bridge.</p>
+          <p>A team bridge project connecting structural modelling, manual verification, fabrication planning, physical construction, and failure analysis.</p>
           <div class="cta-row report-link-row">
             <a class="button-secondary" href="reports/civ102-design-report.pdf" target="_blank" rel="noopener">Open final report (PDF)</a>
+            <a class="button-ghost" href="https://github.com/JanKazimierczak/CIV102bridge" target="_blank" rel="noopener noreferrer">View bridge code <span class="sr-only">on GitHub, opens in a new tab</span></a>
           </div>
         </section>
 
@@ -53,37 +68,45 @@
           <div class="design-content">
             <section id="bridge-summary" class="support-grid" data-section-track>
               <div class="image-frame">
-                <img src="BEEM.png" alt="Bridge project image">
+                <img loading="lazy" decoding="async" src="assets/bridge-overview.jpg" width="1600" height="1200" alt="Top view of the completed CIV102 bridge">
               </div>
               <article class="card">
                 <div class="card-kicker">Project summary</div>
-                <h2 class="card-title">A strong case study for rigorous engineering reasoning</h2>
+                <h2 class="card-title">Analysis, construction, and a failure mode the model did not predict.</h2>
                 <p class="card-copy">
-                  The project consisted on designing and building a bridge that would support weight. We 
-                  were given a base design that we had to iterate on to achieve maximum weight/strength ratio.
-                  We had to use knowledge and skills learned in class about not only construction and handling of materials, but also technical 
-                  analysis, beam structural analysis, and everything that derives from there. 
+                  The team was given a base bridge design to analyze and iterate. The work combined material handling, beam structural analysis, geometry decisions, and construction planning.
                 </p>
-                <p>
-                  At first we calculated all the parameters and the maximum strength of design 0, which is the design givem by the teaching team.
-                  Around this design we developed a python code, that allowed the user to introduce parameters such as number of side panels, or 
-                  height of the beam, and the program would run simulations of the train moving along the track and would caclulate the maximum amount
-                  of weight that would be supported. Using this code we were able to perform multiple simulations and therefore arrive at the best design 
-                  for us to build. 
-                </p>
-                <p>
-                  When we had the final design chosen, we started with the building process. As the material being used was just a thick piece of paper, we 
-                  had to plan the cutting very carefully. When we had everything prepared we began the cutting. The individual pieces of paper were then taken
-                  and assembled together using the provided glue. Safety measures where used in the process of building the bridge. When the parts were assembled 
-                  together the bridge was left to dry for 24 hours before the testing. Weight was placed on the bridge, to ensure that the construction is secure.
-
-                </p>
+                <p class="card-copy">Python code accepted geometry inputs and simulated the train moving along the bridge to compare predicted failure loads. Three hand calculations were then used to check the code outputs before the team committed to fabrication.</p>
+                <p class="card-copy">The bridge was cut from the provided matboard, assembled with the provided glue, allowed to cure, and physically tested. The sources conflict on the exact cure duration, so no duration is asserted here.</p>
                 <div class="tag-row">
                   <span class="status-chip live">CIV102</span>
                   <span class="tag">Structures</span>
                   <span class="tag">Testing</span>
                 </div>
               </article>
+            </section>
+
+            <section class="result-ledger" aria-labelledby="bridge-results-title">
+              <div class="result-ledger-heading">
+                <div class="eyebrow">Prediction vs. physical result</div>
+                <h2 id="bridge-results-title">The strongest lesson was the mismatch.</h2>
+              </div>
+              <div class="result-ledger-grid">
+                <article><span>Base-design prediction</span><strong>240 N</strong><p>Calculated predicted failure load for Design 0.</p></article>
+                <article><span>Final-design prediction</span><strong>869.5 N</strong><p>Calculated minimum predicted failure load after four documented iterations—not a measured test load.</p></article>
+                <article><span>Observed failure mode</span><strong>Splice / glue connection</strong><p>The calculations predicted flexural-compression failure, but the physical bridge failed at the splice. The measured failure load is not available.</p></article>
+              </div>
+              <div class="table-scroll" tabindex="0" aria-label="Scrollable bridge load comparison table">
+                <table class="comparison-table">
+                  <thead><tr><th scope="col">Item</th><th scope="col">Value</th><th scope="col">Evidence type</th><th scope="col">Qualification</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Load Case 1</th><td>400 N, three-car train</td><td>Required load case</td><td>Requirement, not a measured result</td></tr>
+                    <tr><th scope="row">Load Case 2</th><td>452 N over 1200 mm</td><td>Required load case</td><td>Requirement, not a measured result</td></tr>
+                    <tr><th scope="row">Final design</th><td>869.5 N</td><td>Calculated prediction</td><td>Minimum predicted failure load</td></tr>
+                    <tr><th scope="row">Physical test</th><td>Measured load unavailable</td><td>Observed failure location</td><td>Splice / glue rather than predicted flexural compression</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </section>
             <section id="bridge-gallery" class="gallery-canvas" data-section-track>
               <div class="section-heading">
@@ -94,42 +117,42 @@
               <div class="gallery-grid">
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="civ102-assets/bridge-plan.png" data-zoom-alt="Bridge design plan drawing" data-zoom-title="Cutting Plan" data-zoom-caption="Plan drawing showing the cutting plan and key dimensions.">
-                <img src="civ102-assets/bridge-plan.png" alt="Bridge design plan drawing">
+                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-bridge-plan.jpg" alt="Bridge design plan drawing">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="civ102-assets/sheet-layout-markup.png" data-zoom-alt="Marked sheet layout for bridge fabrication" data-zoom-title="Sheet cutting plan" data-zoom-caption="The picture shows the cutting part of the construction process.">
-                <img src="civ102-assets/sheet-layout-markup.png" alt="Marked sheet layout for bridge fabrication">
+                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-sheet-layout-markup.jpg" alt="Marked sheet layout for bridge fabrication">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="civ102-assets/material-cut-layout.png" data-zoom-alt="Material cut layout for bridge pieces" data-zoom-title="Individual bridge components" data-zoom-caption="The picture shows the individual pieces of the bridge before assembly.">
-                <img src="civ102-assets/material-cut-layout.png" alt="Material cut layout for bridge pieces">
+                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-material-cut-layout.jpg" alt="Material cut layout for bridge pieces">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="civ102-assets/glued-bridge-component.png" data-zoom-alt="Bridge component during gluing and assembly" data-zoom-title="Weight on recently glued bridge." data-zoom-caption="The picture shows how weight was applied to the recently glued bridge, to ensure proper adhesion.">
-                <img src="civ102-assets/glued-bridge-component.png" alt="Bridge component during gluing and assembly">
+                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-glued-bridge-component.jpg" alt="Bridge component during gluing and assembly">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="civ102-assets/bridge-carrying-photo.png" data-zoom-alt="Team carrying the completed bridge" data-zoom-title="Gluing process" data-zoom-caption="The picture shows the team after applying the glue to the bridge, proper protective equipment is used.">
-                <img src="civ102-assets/bridge-carrying-photo.png" alt="Team carrying the completed bridge">
+                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-bridge-carrying-photo.jpg" alt="Team carrying the completed bridge">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="civ102-assets/team-work-session.png" data-zoom-alt="Team work session for bridge project" data-zoom-title="Team Work Session" data-zoom-caption="A project work session during the bridge construction process. We are waiting for the glue to settle.">
-                <img src="civ102-assets/team-work-session.png" alt="Team work session for bridge project">
+              <div class="image-frame" data-zoom-image="civ102-assets/team-work-session.png" data-zoom-alt="Teamwork session for bridge project" data-zoom-title="Teamwork Session" data-zoom-caption="A project work session during bridge construction while the adhesive cured.">
+                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-team-work-session.jpg" alt="Teamwork session for bridge project">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="civ102-assets/load-test-setup.png" data-zoom-alt="Bridge load test setup" data-zoom-title="Night before testing" data-zoom-caption="The night before testing weight was applied to the bridge, to ensure proper adhesion of the glue.">
-                <img src="civ102-assets/load-test-setup.png" alt="Bridge load test setup">
+                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-load-test-setup.jpg" alt="Bridge load test setup">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="civ102-assets/top-view-bridge.png" data-zoom-alt="Top view of completed bridge" data-zoom-title="Weight applied for glue adhesion" data-zoom-caption="A picture showing even more weight being applied to the bridge to ensure that the glue is properly set.">
-                <img src="civ102-assets/top-view-bridge.png" alt="Top view of completed bridge">
+                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-top-view-bridge.jpg" alt="Top view of completed bridge">
               </div>
             </div>
               </div>
@@ -149,7 +172,7 @@
                   <div class="small-label">CTMF 04</div>
                   <h3>Diverging</h3>
                   <p>
-                    This section will explain how the problem was framed by our group by the analysis of the Design 0.
+                    How the team framed the structural problem by analyzing the Design 0 baseline.
                   </p>
                   <div class="tag-row">
                     <span class="tag">Diverging</span>
@@ -160,8 +183,7 @@
                   <div class="small-label">CTMF 05</div>
                   <h3>Prototype by calculations</h3>
                   <p>
-                    When the team decided on one design it performed manual calculations to ensure
-                    that the design is valid and the code did not make any mistakes.
+                    After selecting one design, the team performed manual calculations as an independent check on the code outputs.
                   </p>
                   <div class="tag-row">
                     <span class="tag">Converging</span>
@@ -188,15 +210,14 @@
               <div class="section-heading">
                 <div class="eyebrow">Position statement reflection</div>
                 <h2>How this project contributed to my position on engineering design</h2>
- 
+
               </div>
               <div class="cards-grid">
                 <article class="card">
                   <div class="small-label">Planning and diligence</div>
                   <p class="card-copy">
                     The project required careful planning and execution as there was only one chance
-                    at the testing part. We had to ensure that all our calculations were correct, 
-                    that the construction quality was good and that all conditions were accounted for. This 
+                    at the testing stage. We had to check our calculations, manage construction quality, and consider the conditions represented in the analysis. This
                     connects to my statements about the importance of thorough preparation and validation in engineering design.
                   </p>
                 </article>
@@ -220,9 +241,10 @@
     </main>
 
     <footer class="site-footer">
-      <div class="container footer-row">
-        <span>&copy; <span data-year></span> Jan Kazimierczak</span>
-        <a href="design.html">Back to design</a>
+      <div class="container footer-grid">
+        <div><span class="footer-name">Jan Kazimierczak</span><p>Engineering Science portfolio · University of Toronto</p></div>
+        <nav aria-label="Footer"><a href="projects.html">Work</a><a href="design.html">Approach</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+        <p class="footer-meta">© <span data-year></span> Jan Kazimierczak</p>
       </div>
     </footer>
   </div>
@@ -243,46 +265,39 @@
         <div class="small-label">CTMF 04</div>
         <h3>Code for rapid iterations</h3>
         <p>
-          Python scripts were used to rapidly iterate on bridge designs to find the optimal one.
+          Python scripts were used to compare bridge alternatives and identify a preferred design under the model.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Explanation of the CTMF</div>
         <p>
-          To automate the process of calculations, and to be able to rapidly iterate on the designs of the 
-          different bridges we created a python script that gets the input on the dimensions and style of the bridge
-          and performs all the neccessary calculations. It also ouptuts the performance graphs for rapid visualizations.
+          To automate the process of calculations, and to be able to rapidly iterate on the designs of the
+          different bridges, we created a Python script that accepts the bridge dimensions and configuration,
+          performs the required calculations, and outputs performance graphs for rapid comparison.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
           <div class="image-frame" data-zoom-image="civ102-assets/ctmf4-base-load-case-2.png" data-zoom-alt="Bridge base load case 2 safety-check output" data-zoom-title="Base Load Case 2 Safety Check" data-zoom-caption="Code output from the bridge calculations showing the base load case results, stress values, and safety checks used to evaluate the design.">
-            <img src="civ102-assets/ctmf4-base-load-case-2.png" alt="Bridge base load case 2 safety-check output">
+            <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-ctmf4-base-load-case-2.jpg" alt="Bridge base load case 2 safety-check output">
           </div>
         </div>
-        <ul>
-          <p>
-            Code was used to automate the calculations and generate performance graphs for each design. 
-            The code was personalized to work exactly how we needed it to. It calculated basing the 
-            parameters on the inputs we gave it, and even calculated the safety factors for each type of
-            failure. It then outputed the max weight it supports if it showed structural failure.
-          </p>
-        </ul>
+        <p>
+            Code was used to automate the calculations and generate performance graphs for each design.
+            It calculated safety factors from the supplied geometry and material inputs and returned predicted failure loads for comparison.
+        </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Why it was useful</div>
         <p>
-          The use of code allowed the team to spend much less time performing manual calculations and 
-          it ensured that no "stupid" mistakes were done in the process, as it was all automatic.
+          The code reduced repetitive calculation and allowed the team to compare designs rapidly. Because it was not certified, its outputs still required independent manual checks.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Why it fits my position statement</div>
         <p>
-          The use of code allowed us to ensure that no "stupid" mistakes were done in the process of calculating
-          everything, therefore we could ensure that the final design was the best we could make it. This contributed
-          in the concept of due dilligence.
+          Using code alongside manual checks supported due diligence by making assumptions and outputs easier to compare without treating automation as proof of correctness.
         </p>
       </section>
     </div>
@@ -294,36 +309,33 @@
         <div class="small-label">CTMF 05</div>
         <h3>Prototype by calculations</h3>
         <p>
-          This CTMF consists in performing calculations to verify the design.
+          This CTMF uses calculations to estimate predicted performance and compare design alternatives.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Explanation of the CTMF</div>
         <p>
-          As said before a crucial process in engineering design is the concept of prototyping. You create
-          prototypes to verify that a design actually performs as expected. This specific CTMF consists of 
-          performing calculations to verify a design. These calculations must be performed accurately to ensure 
-          the proper verification of the design.
+          Analytical models can represent a design before fabrication and make alternatives easier to compare.
+          Here, calculations estimated predicted failure loads and safety factors under the stated assumptions.
+          Three hand calculations independently checked selected script outputs, but neither the model nor those
+          checks established the constructed bridge’s actual performance.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
           <div class="image-frame" data-zoom-image="civ102-assets/ctmf5-final-design-calculations.png" data-zoom-alt="Final bridge design calculations page" data-zoom-title="Final Design Calculations" data-zoom-caption="Handwritten final-design calculations showing the chosen cross-section geometry, centroid location, second moment of area, and safety-factor checks.">
-            <img src="civ102-assets/ctmf5-final-design-calculations.png" alt="Final bridge design calculations page">
+            <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-ctmf5-final-design-calculations.jpg" alt="Final bridge design calculations page">
           </div>
         </div>
         <p>
-          The calculations performed during this CTMF were crucial for the final verification of the design. The code served for rapid development
-          and divergence, but it was not certified to provide final results. We had to conduct manual calculations
-          to ensure that the bridge design was actually valid and that the code did not make any mistakes. This process was a crucial step in the project, as it was the final check before building the bridge. It was the point where we had to be sure that our design was actually good and that we were not missing any critical failure modes or risks.
+          The code supported rapid development and divergence, but it was not certified to provide final results. The team conducted three manual calculations to check the outputs before building. This reduced uncertainty without proving that every failure mode or construction risk had been captured.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Why it fits my position statement</div>
         <p>
-          This CTMF fits perfectly with my position statement because it emphasizes the importance of thorough verification and validation in the design process. By requiring manual calculations alongside automated tools, it ensures that all potential risks are identified and addressed before moving forward.
-          This is an important part of my care for due diligence.
+          This CTMF fits my position statement because it emphasizes verification in the design process. Manual calculations alongside automated tools provided an independent check before moving forward, which supports due diligence while preserving the limits of the analysis.
         </p>
       </section>
     </div>
@@ -342,48 +354,37 @@
       <section class="ctmf-modal-section">
         <div class="small-label">Explanation of the CTMF</div>
         <p>
-          This consists in developing prototypes that are meant to fail to see how they behave under 
-          real world conditions and even under higher stresss than the one found in a real use case.
-          Similar to how SpaceX operates with its Star Ship program, where rapid iteration and testing
-          are key to identifying potential failure modes early in the design process. They launch rockets
-          knowing they will fail, just to see how the design behaves. 
+          This consists of developing prototypes that can be tested to failure, revealing how they behave
+          under real-world conditions and loads beyond their intended use. Destructive testing can identify
+          failure modes that are difficult to predict from analysis alone.
         </p>
         <p>
-          This is a very important step in engineering design, and I would say neccessary if you have 
-          the means of doing it.
+          When it can be performed safely and responsibly, this is an important step in engineering design.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
           <div class="image-frame" data-zoom-image="civ102-assets/ctmf6-bridge-teardown.jpg" data-zoom-alt="Top view of the bridge during failure analysis" data-zoom-title="Bridge Failure Analysis View" data-zoom-caption="A top-down picture during the process of construction showing the internal diaphragm distribution and the location of the splice where the design failed during testing.">
-            <img src="civ102-assets/ctmf6-bridge-teardown.jpg" alt="Top view of the bridge during failure analysis">
+            <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-ctmf6-bridge-teardown.jpg" alt="Top view of the bridge during failure analysis">
           </div>
         </div>
         <p>
-          This CTMF appeared in the project during the testing phase. When the design was chosen,
-          the calculations performed and the design built we had to test our bridge. The tests were
-          performed by professor Bentz. They consisted in applying various loads to the bridge
-          under the form of a train passing by, therefore loads were changing and the stress was 
-          different all along the bridge. After our design failed we could clearly see that the breaking
-          point was the splice location.
+          After concept selection, analysis, and fabrication, the bridge was tested under a moving train load.
+          As the load moved, its distribution and the resulting internal forces changed along the span.
+          The constructed bridge ultimately failed at the splice location.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Why it was useful</div>
         <p>
-          This post testing analysis was really useful, because it allowed us to identify the failure
-          mode of our bridge, and learn that even though the calculations performed for a "perfect" construction
-          showed that the bridge would fail under compression, the actual failure being glue failure at the splice
-          showed that the design can be really good, but if the construction quality is not good enough, it can lead to
-          catastrophic failures.
+          The post-test analysis identified a mismatch between the analytical prediction and the physical failure. The calculations predicted flexural-compression failure, while the built bridge failed at the splice/glue connection. The result showed that construction details can govern performance even when the idealized structural model indicates another mode.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Why it fits my position statement</div>
         <p>
-          This CTMF connects to my position statement by emphasizing the importance of rigorous testing and analysis in the engineering design process. It highlights the need to not only rely on theoretical calculations but also to validate designs through
-          real world testing to ensure that they perform as the theory shows, and that there arent any unexpected failure modes. 
+          This CTMF connects to my position statement by emphasizing the importance of rigorous testing and analysis in engineering design. It shows why theoretical calculations should be compared with physical evidence: unexpected construction-related failure modes can remain outside the model.
         </p>
       </section>
     </div>
@@ -392,7 +393,7 @@
   <div class="lightbox" data-lightbox aria-hidden="true">
     <div class="lightbox-panel">
       <div class="lightbox-media">
-        <img src="" alt="" data-lightbox-image>
+        <img loading="lazy" decoding="async" alt="" data-lightbox-image>
       </div>
       <div class="lightbox-footer">
         <div class="lightbox-copy">
@@ -404,6 +405,6 @@
     </div>
   </div>
 
-  <script src="site.js"></script>
+  <script src="site.js?v=20260716e"></script>
 </body>
 </html>

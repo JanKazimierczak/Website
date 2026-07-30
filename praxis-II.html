@@ -3,47 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JK | Praxis II</title>
+  <title>Automated Screw Sorter Case Study | Jan Kazimierczak</title>
+  <meta name="description" content="Praxis II team case study for an automated screw sorter: CAD architecture, subsystem prototypes, CNN classification results, piano-box testing, and limitations.">
+  <meta name="theme-color" content="#f4f0e8">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Automated Screw Sorter Case Study | Jan Kazimierczak">
+  <meta property="og:description" content="A team system concept combining drum feeding, camera classification, and mechanical length sorting.">
+  <meta property="og:image" content="assets/screw-sorter-overview.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="jk-favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20260716e">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell">
     <header class="site-header">
       <div class="container">
         <nav class="site-nav" aria-label="Primary">
-          <a class="brand" href="design.html">
-            <span class="brand-mark">JK</span>
+          <a class="brand" href="index.html" aria-label="Jan Kazimierczak, home">
+            <span class="brand-mark" aria-hidden="true">JK</span>
             <span class="brand-copy">
               <span class="brand-name">Jan Kazimierczak</span>
-              <span class="brand-role">Engineering Portfolio</span>
+              <span class="brand-role">Engineering Science</span>
             </span>
           </a>
           <ul class="nav-links">
-            <li><a class="active" href="design.html">Design</a></li>
+            <li><a class="active" aria-current="page" href="projects.html">Work</a></li>
+            <li><a href="design.html">Approach</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
-          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle>
             <span></span><span></span><span></span>
           </button>
         </nav>
-        <div class="mobile-nav" data-mobile-nav>
-          <a class="active" href="design.html">Design</a>
+        <div class="mobile-nav" id="mobile-menu" data-mobile-nav>
+          <a class="active" aria-current="page" href="projects.html">Work</a>
+          <a href="design.html">Approach</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
         </div>
       </div>
     </header>
 
-    <main>
+    <main id="main-content">
       <div class="container">
         <section class="page-hero">
           <div class="page-meta-row">
             <div class="eyebrow">Praxis II</div>
-            <a class="back-link" href="design.html"><span>Back to design</span></a>
+            <a class="back-link" href="projects.html"><span>Back to work</span></a>
           </div>
-          <h1>Screwed.</h1>
-          <p>A device that automatically sorts screws by size and head shape.</p>
+          <h1>Automated screw sorter</h1>
+          <p><em>Screwed.</em> is a team system concept with CAD and subsystem prototypes for sorting screws by head shape and length.</p>
           <div class="cta-row report-link-row">
             <a class="button-ghost" href="One-pagers/praxis-ii-screw-sorting-one-pager.pdf" target="_blank" rel="noopener">Open one-pager (PDF)</a>
             <a class="button-secondary" href="reports/praxis-ii-rfp-e.pdf" target="_blank" rel="noopener">Open RFP (PDF)</a>
@@ -55,27 +69,20 @@
             <section id="screw-summary" class="support-grid" data-section-track>
               <article class="card">
                 <div class="card-kicker">Project summary</div>
-                <h2 class="card-title">Screwed.</h2>
-                <p class="card-copy">
-                  The final design consists of a box smaller than the required 30x30x30 cm. Inside the mechanism
-                  is divided into 3 different sections:
-                  <ol>
+                <h2 class="card-title">Three subsystems in one CAD architecture.</h2>
+                <p class="card-copy">The CAD concept divides the mechanism into three sections. Its reported envelope is 28.5 × 28.5 × 29.2; the source leaves the unit implicit, so compliance with the 30 × 30 × 30 cm requirement is treated as CAD-derived rather than physically verified.</p>
+                  <ol class="list numbered-list">
                     <li>A feed system to introduce screws into the device. The user dumps batches of unorganized
                       screws and the feeder orients them for the sorting mechanism.
                     </li>
-                    <li>A head shape sorting mechanism, that sorts the screws one by one into the corresponding
-                      head shape: flat head, oval head and round washer.
+                    <li>A head-shape sorting mechanism intended to direct screws one by one according to
+                      head shape: flat head, oval head, or round washer.
                     </li>
-                    <li>A length sorting mechanism that receives the corresponding head shape and sorts 
+                    <li>A length sorting mechanism that receives the corresponding head shape and sorts
                       these screws by length into different bins.
                     </li>
                   </ol>
-                  For the feeder we chose to use a drum feeder that we verified by comparison. We found a reference design that 
-                  worked exactly as we wanted, therefore we knew that this is a valid approach. For the head shape sorting
-                  we used a raspberry pi module with a camera, we trained a machine learning model and tested it with various screw samples to ensure accuracy. 
-                  For the length sorting we used a "piano box" design, where screws would roll down a slope and fall 
-                  into their respective hole, depending on the screw length.  
-                </p>
+                <p class="card-copy">The team selected a drum feeder through reference comparison. Head-shape sorting used a Raspberry Pi camera and CNN classifier, while the “piano box” length sorter used a slope and graduated openings. Available evidence covers these subsystems separately; it does not establish integrated full-system performance.</p>
                 <div class="tag-row">
                   <span class="status-chip live">Praxis II</span>
                   <span class="tag">Machine learning</span>
@@ -84,7 +91,29 @@
                 </div>
               </article>
               <div class="image-frame">
-                <img src="praxis2-assets/summary-cad-enclosure.png" alt="CAD enclosure view of the automated screw sorting device">
+                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-summary-cad-enclosure.jpg" alt="CAD enclosure view of the automated screw sorting device">
+              </div>
+            </section>
+
+            <section class="result-ledger" aria-labelledby="sorter-results-title">
+              <div class="result-ledger-heading">
+                <div class="eyebrow">Subsystem results</div>
+                <h2 id="sorter-results-title">Requirements and results remain distinct.</h2>
+              </div>
+              <div class="result-ledger-grid">
+                <article><span>CNN classification</span><strong>≈70% training-session test · ≈80% manual test</strong><p>The manual test used 34 screws. Both results remained below the ≥97.5% classification requirement.</p></article>
+                <article><span>Piano-box length sorter</span><strong>≈98% at 5° and 10°</strong><p>Three batches of 20 screws were tested at each angle. The 10° setup was approximately 30% faster than 5°.</p></article>
+                <article><span>System status</span><strong>CAD concept + subsystem prototypes</strong><p>No measured integrated-system accuracy or throughput is available in the project sources.</p></article>
+              </div>
+              <div class="table-scroll" tabindex="0" aria-label="Scrollable screw sorter results table">
+                <table class="comparison-table">
+                  <thead><tr><th scope="col">Evidence</th><th scope="col">Requirement or setup</th><th scope="col">Reported result</th><th scope="col">Interpretation</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">CNN classifier</th><td>≥97.5% accuracy target</td><td>≈70% at epoch 25; ≈80% on 34-screw manual test</td><td>Target not met</td></tr>
+                    <tr><th scope="row">Piano box</th><td>3 × 20-screw batches at 5°, 10°, 15°, and 20°</td><td>≈98%, ≈98%, 85%, and 5%</td><td>10° selected; ≈30% faster than 5°</td></tr>
+                    <tr><th scope="row">CAD envelope</th><td>≤30 × 30 × 30 cm</td><td>28.5 × 28.5 × 29.2 (unit implied as cm)</td><td>CAD-derived envelope; prototype measurement not established</td></tr>
+                  </tbody>
+                </table>
               </div>
             </section>
 
@@ -97,7 +126,7 @@
                 <article class="card">
                   <div class="small-label">Need</div>
                   <p class="card-copy">
-                    The need presented in the RFP was to sort a mixed batch of screws for 
+                    The need presented in the RFP was to sort a mixed batch of screws for
                     Mr. Ginsberg's workshop. The screws had to be sorted by head shape and length.
                   </p>
                 </article>
@@ -109,15 +138,13 @@
                 </article>
                 <article class="card">
                   <div class="small-label">Design constraints</div>
-                  <p class="card-copy">
-                    The main constraints were:
-                    <ul>
+                  <p class="card-copy">The main constraints were:</p>
+                    <ul class="list">
                       <li>Reliability: The system must consistently sort screws without failure.</li>
                       <li>Sorting accuracy: The system must accurately identify and sort screws by head shape and length.</li>
                       <li>Simple usage: The device had to work without human interaction apart from introducing the screws.</li>
                       <li>Economic: The device had to be cost-effective to build and operate.</li>
                     </ul>
-                  </p>
                 </article>
               </div>
             </section>
@@ -131,57 +158,57 @@
               <div class="gallery-grid">
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="praxis2-assets/cad-sorter-wheel.png" data-zoom-alt="CAD concept for the rotating screw sorter wheel" data-zoom-title="Drum feeder CAD" data-zoom-caption="A CAD concept showing the drum feeder mechanism used to orient and separate screws within the system.">
-                <img src="praxis2-assets/cad-sorter-wheel.png" alt="CAD concept for the rotating screw sorter wheel">
+                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-cad-sorter-wheel.jpg" alt="CAD concept for the rotating screw sorter wheel">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="praxis2-assets/cad-sorter-assembly.png" data-zoom-alt="CAD assembly of the screw sorting concept" data-zoom-title="Vibratory bowl CAD" data-zoom-caption="An assembly-level CAD view of another feeder concept.">
-                <img src="praxis2-assets/cad-sorter-assembly.png" alt="CAD assembly of the screw sorting concept">
+                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-cad-sorter-assembly.jpg" alt="CAD assembly of the screw sorting concept">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/summary-cad-enclosure.png" data-zoom-alt="CAD enclosure view of the automated screw sorting device" data-zoom-title="Final design CAD View" data-zoom-caption="A CAD render of the enclosed screw sorting system showing the internal drum, camera sorting, electronics, and piano box. This shows how everything fits together nicely.">
-                <img src="praxis2-assets/summary-cad-enclosure.png" alt="CAD enclosure view of the automated screw sorting device">
+              <div class="image-frame" data-zoom-image="praxis2-assets/summary-cad-enclosure.png" data-zoom-alt="CAD enclosure view of the automated screw sorting device" data-zoom-title="System CAD view" data-zoom-caption="A CAD render integrating the proposed drum, camera sorting, electronics, and piano box within the documented envelope. Integrated physical performance was not measured.">
+                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-summary-cad-enclosure.jpg" alt="CAD enclosure view of the automated screw sorting device">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/screw-profile-sketch.png" data-zoom-alt="Sketch of screw profile sorting logic" data-zoom-title="Screw head shape sorting concept" data-zoom-caption="One of the ideas to sort screws by head shape, when the screw hits the detector it closes the circuit powering a servo motor. This works because of the different height of each head shape.">
-                <img src="praxis2-assets/screw-profile-sketch.png" alt="Sketch of screw profile sorting logic">
+              <div class="image-frame" data-zoom-image="praxis2-assets/screw-profile-sketch.png" data-zoom-alt="Sketch of screw profile sorting logic" data-zoom-title="Screw head shape sorting concept" data-zoom-caption="A concept for sorting by head shape: contact with the detector closes a circuit that powers a servo, using differences in head height as the distinguishing feature.">
+                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-screw-profile-sketch.jpg" alt="Sketch of screw profile sorting logic">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/switching-layout-sketch.png" data-zoom-alt="Sketch of the screw switching layout" data-zoom-title="Rail divider sketch" data-zoom-caption="This sketch showcases how a rail divider would work, to separate each of the screws by head shape, receiving information from the sorting system.">
-                <img src="praxis2-assets/switching-layout-sketch.png" alt="Sketch of the screw switching layout">
+              <div class="image-frame" data-zoom-image="praxis2-assets/switching-layout-sketch.png" data-zoom-alt="Sketch of the screw switching layout" data-zoom-title="Rail divider sketch" data-zoom-caption="A rail-divider concept intended to route screws by head shape using a signal from the classification subsystem.">
+                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-switching-layout-sketch.jpg" alt="Sketch of the screw switching layout">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/vision-detection-grid.png" data-zoom-alt="Computer-vision detection views for screw classification" data-zoom-title="Detection by contour output" data-zoom-caption="This showcases the team trying to sort the head shapes by contour detection. This approach did not end up working.">
-                <img src="praxis2-assets/vision-detection-grid.png" alt="Computer-vision detection views for screw classification">
+              <div class="image-frame" data-zoom-image="praxis2-assets/vision-detection-grid.png" data-zoom-alt="Computer-vision detection views for screw classification" data-zoom-title="Detection by contour output" data-zoom-caption="An unsuccessful contour-detection approach explored before the CNN classifier.">
+                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-vision-detection-grid.jpg" alt="Computer-vision detection views for screw classification">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/physical-prototype.jpg" data-zoom-alt="Physical prototype of the screw sorting device" data-zoom-title="Physical Prototype" data-zoom-caption="Prototype used to detect screw head shapes. This prototype was used for verification testing.">
-                <img src="praxis2-assets/physical-prototype.jpg" alt="Physical prototype of the screw sorting device">
+              <div class="image-frame" data-zoom-image="praxis2-assets/physical-prototype.jpg" data-zoom-alt="Head-classification subsystem prototype" data-zoom-title="Classification subsystem prototype" data-zoom-caption="Prototype used to capture and classify screw-head images during subsystem testing.">
+                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-physical-prototype.jpg" alt="Head-classification subsystem prototype">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/head-type-comparison.png" data-zoom-alt="Final screw-head comparison" data-zoom-title="Head Type Comparison" data-zoom-caption="This picture shows the difference between two of the different head shapes in a real case scenario.">
-                <img src="praxis2-assets/head-type-comparison.png" alt="Final screw-head comparison used by the sorter">
+              <div class="image-frame" data-zoom-image="praxis2-assets/head-type-comparison.png" data-zoom-alt="Final screw-head comparison" data-zoom-title="Head Type Comparison" data-zoom-caption="A physical comparison of two screw-head types used in subsystem development.">
+                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-head-type-comparison.jpg" alt="Final screw-head comparison used by the sorter">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/live-classification-round.jpg" data-zoom-alt="Live screw classification output highlighting a round part" data-zoom-title="Live Classification Output" data-zoom-caption="This was the used live classification script, the team used machine learning to detect the screws, the output is round washer.">
-                <img src="praxis2-assets/live-classification-round.jpg" alt="Live screw classification output highlighting a round part">
+              <div class="image-frame" data-zoom-image="praxis2-assets/live-classification-round.jpg" data-zoom-alt="Live screw classification output highlighting a round part" data-zoom-title="Live Classification Output" data-zoom-caption="The live machine-learning classifier labels the visible part as a round washer.">
+                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-live-classification-round.jpg" alt="Live screw classification output highlighting a round part">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/live-classification-oval.jpg" data-zoom-alt="Live screw classification output highlighting an oval part" data-zoom-title="Live Classification Variant" data-zoom-caption="This was the used live classification script, the team used machine learning to detect the screws, the output is oval.">
-                <img src="praxis2-assets/live-classification-oval.jpg" alt="Live screw classification output highlighting an oval part">
+              <div class="image-frame" data-zoom-image="praxis2-assets/live-classification-oval.jpg" data-zoom-alt="Live screw classification output highlighting an oval part" data-zoom-title="Live Classification Variant" data-zoom-caption="The live machine-learning classifier labels the visible screw head as oval.">
+                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-live-classification-oval.jpg" alt="Live screw classification output highlighting an oval part">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="praxis2-assets/team-poster-photo.png" data-zoom-alt="Praxis II team presenting their screw sorting poster" data-zoom-title="Showcase Presentation" data-zoom-caption="The project team presenting the screw sorting system alongside the final poster during showcase.">
-                <img src="praxis2-assets/team-poster-photo.png" alt="Praxis II team presenting their screw sorting poster">
+                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-team-poster-photo.jpg" alt="Praxis II team presenting their screw sorting poster">
               </div>
             </div>
               </div>
@@ -196,28 +223,19 @@
                 <article class="card">
                   <div class="small-label">Feeder</div>
                   <p class="card-copy">
-                   The final design uses a drum feeder to feed the screws into the system.
-                   The feeder orients the screws and delivers them one by one into the next stage.
-                   It works by having a rotating bowl that drops the screws into a v-shaped channel that
-                   orients them upright.
+                   The final CAD concept specifies a drum feeder to orient screws and deliver them one by one to the next stage. Reference comparison supported this selection; the available sources do not report integrated feeder performance.
                   </p>
                 </article>
                 <article class="card">
                   <div class="small-label">Camera sorting</div>
                   <p class="card-copy">
-                    For the head shape sorting we bought a raspberry pi and a camera. We used this system to 
-                    capture images of the screws and process them to detect the shape. To classify the screws
-                    we created a machine learning model that used a CNN classifier. We trained the model by taking
-                    pictures of the screws sitting on the prototype and processing them using synthetic image
-                    augmentation algorithms for data diversification.
+                    For head-shape sorting, the team used a Raspberry Pi and camera with a CNN classifier. The dataset contained 51 source images per head type—153 originals total—followed by synthetic augmentation. The best training-session test result was approximately 70%, while a separate 34-screw manual test was approximately 80%.
                   </p>
                 </article>
                 <article class="card">
                   <div class="small-label">Length sorting</div>
                   <p class="card-copy">
-                    The length sorting was achieved using a simple mechanical solution. We designed a "piano box"
-                    system, where the screws would roll down a slope and fall into their respective hole, depending on the screw length.
-                    The angles at which it is most efficient is at around 10 degrees.
+                    The “piano box” subsystem allowed screws to roll down a slope and fall through openings corresponding to length. Three 20-screw batches were tested at each angle. Accuracy was approximately 98% at 5° and 10°, 85% at 15°, and 5% at 20°; 10° was selected because it was approximately 30% faster than 5°.
                   </p>
                 </article>
               </div>
@@ -244,7 +262,7 @@
                 </button>
                 <button class="card ctmf-trigger" type="button" data-ctmf-open="screw-ctmf-morph" data-ctmf-title="Praxis II - Pugh Chart">
                   <div class="small-label">CTMF 08</div>
-                  <h3>Pugh chart</h3>
+                  <h3>Pugh Chart</h3>
                   <p>
                     How the team compared candidate concepts against defined criteria in order to
                     justify the final design choice.
@@ -258,8 +276,8 @@
                   <div class="small-label">CTMF 09</div>
                   <h3>Verification testing</h3>
                   <p>
-                    How the physical and software tests were used to represent system performance and
-                    confirm whether the selected concept actually worked.
+                    How physical and software tests measured the performance of selected subsystems and
+                    exposed the gap between their results and the full-system requirement.
                   </p>
                   <div class="tag-row">
                     <span class="tag">Representing</span>
@@ -280,15 +298,15 @@
                   <div class="small-label">Exploring all designs</div>
                   <p class="card-copy">
                     Especially due to the use of the morph chart, the team explored a wide range of
-                    designs and ideas, taking into account various factors and potential solutions. This is 
+                    designs and ideas, taking into account various factors and potential solutions. This is
                     core to my ideal of careful planning and intentional execution.
                   </p>
                 </article>
                 <article class="card">
                   <div class="small-label">Compromise in a team</div>
                   <p class="card-copy">
-                    By working in a team of high achieving people, everyone had different ideas and 
-                    considerations on how the design should work, and what approaches to take. This 
+                    By working in a team of high-achieving people, everyone had different ideas and
+                    considerations on how the design should work, and what approaches to take. This
                     experience allowed me to grow as an engineer and appreciate the value of diverse perspectives.
                   </p>
                 </article>
@@ -314,9 +332,10 @@
     </main>
 
     <footer class="site-footer">
-      <div class="container footer-row">
-        <span>&copy; <span data-year></span> Jan Kazimierczak</span>
-        <a href="design.html">Back to design</a>
+      <div class="container footer-grid">
+        <div><span class="footer-name">Jan Kazimierczak</span><p>Engineering Science portfolio · University of Toronto</p></div>
+        <nav aria-label="Footer"><a href="projects.html">Work</a><a href="design.html">Approach</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+        <p class="footer-meta">© <span data-year></span> Jan Kazimierczak</p>
       </div>
     </footer>
   </div>
@@ -344,24 +363,21 @@
         <div class="small-label">Explanation of the CTMF</div>
         <p>
           A morph chart is used in the diverging stage of a project to explore and generate a wide
-          range of ideas. It consists in dividing up the problem space into its components and
-          examining each one in relation to the others. By dividing up the design into each component, 
-          you have more freedom to iterate on each one without being influenced by the whole design. It
-          makes the process of iteration much simpler and efficient. It also allows you to explore designs, 
-          that maybe at first glance do not look possible for the project, but later on they become good.
+          range of ideas. It divides the problem space into components and examines candidate approaches
+          for each one. This makes it easier to explore subsystem alternatives before committing to a
+          complete architecture.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
           <div class="image-frame" data-zoom-image="praxis2-assets/morph-chart.png" data-zoom-alt="Hand-drawn morph chart for the screw sorting system" data-zoom-title="Morph Chart" data-zoom-caption="The hand-drawn morph chart used to compare subsystem options for organization, length sorting, head sorting, transportation, and communication.">
-            <img src="praxis2-assets/morph-chart.png" alt="Hand-drawn morph chart for the screw sorting system">
+            <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-morph-chart.jpg" alt="Hand-drawn morph chart for the screw sorting system">
           </div>
         </div>
         <p>
-          The morph chart CTMF was one of the most important CTMFs used in this project, because it 
-          allowed us to divide the problem into 7 different design spaces, thus allowing us to really 
-          explore all posibilities.
+          The morph chart CTMF was one of the most important CTMFs used in this project, because it
+          allowed us to divide the problem into seven design spaces and explore a broader range of possibilities.
         </p>
       </section>
     </div>
@@ -371,7 +387,7 @@
     <div class="ctmf-modal-copy">
       <section class="ctmf-modal-section">
         <div class="small-label">CTMF 08</div>
-        <h3>Pugh chart</h3>
+        <h3>Pugh Chart</h3>
         <p>
           This CTMF explains the converging stage. It is how the team compared alternatives against
           clear criteria in order to select the strongest overall concept.
@@ -380,33 +396,30 @@
       <section class="ctmf-modal-section">
         <div class="small-label">Explanation of the CTMF</div>
         <p>
-          A pugh chart is a tool used to compare different designs against each other, to 
-          determine what the strongest one is. It consists of a table where each design is scored
-          against a set of criteria. Each design receives a score, either a 1,0 or -1 depending on how 
-          good it compares amongst the other designs. When the table is complete, with all evaluation 
-          criteria considered then you can identify the strongest concept.
+          A Pugh chart compares candidate designs against a reference concept using explicit criteria.
+          Each alternative receives a score of 1, 0, or −1 for each criterion, indicating better,
+          equal, or worse performance relative to the reference. The completed table structures the
+          team’s judgment; it does not remove uncertainty or bias.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
           <div class="image-frame" data-zoom-image="praxis2-assets/pugh-chart-head-shape.png" data-zoom-alt="Pugh chart comparing head-shape sorting concepts" data-zoom-title="Pugh Chart - Head Shape" data-zoom-caption="The Pugh chart used to compare head-shape sorting approaches, including Raspberry Pi classification, thickness detection, and fit-shape methods.">
-            <img src="praxis2-assets/pugh-chart-head-shape.png" alt="Pugh chart comparing head-shape sorting concepts">
+            <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-pugh-chart-head-shape.jpg" alt="Pugh chart comparing head-shape sorting concepts">
           </div>
         </div>
         <p>
-          The pugh chart was used to compare different concepts for the 3 main parts, the feeder, 
-          the camera sorting and the length sorting. It was an essential part in the process of 
-          convergence, because it allowed us to compare the different concepts without bias 
-          against each other, basing the comparison on the requirements and the evaluation criteria.
+          The Pugh chart compared concepts for the three main subsystems: feeding, head-shape
+          classification, and length sorting. It supported convergence by making the team compare
+          alternatives against documented requirements and evaluation criteria.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Why it was useful</div>
         <p>
-          The pugh chart was useful, because it allowed the team to systematically evaluate and compare 
-          different designs in relation to their performance against the established criteria. This allowed
-          us to make crucial decisions with minimal bias.
+          The Pugh chart helped the team compare alternatives systematically against established criteria
+          and make the assumptions behind concept selection more explicit.
         </p>
       </section>
     </div>
@@ -419,39 +432,37 @@
         <h3>Verification testing</h3>
         <p>
           This CTMF explains the representing stage of the screw sorting project. It shows how the
-          team used testing evidence to represent whether the selected concept actually worked.
+          team used testing evidence to measure selected subsystems without claiming integrated-system performance.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Explanation of the CTMF</div>
         <p>
-          Verification testing comes after the final design is chosen (altough it can still be iterated 
-          on) and it serves the purpose of verifying a design. To achieve this oftern times a prototype
-          is built and the system is tested against the requirements. Often the device is divided into
-          many subsystems, each of which can be tested individually.
+          Verification testing follows concept selection, although iteration can continue. A prototype
+          can then be tested against defined requirements. Complex devices are often divided into
+          subsystems that can be tested individually, while integrated performance still requires a
+          separate full-system test.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
           <div class="image-frame" data-zoom-image="praxis2-assets/live-classification-oval.jpg" data-zoom-alt="Live classification result for oval screw head" data-zoom-title="Verification Testing Output" data-zoom-caption="A live verification-testing output from the classification system, showing the model identifying an oval screw head.">
-            <img src="praxis2-assets/live-classification-oval.jpg" alt="Live classification result for oval screw head">
+            <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-live-classification-oval.jpg" alt="Live classification result for oval screw head">
           </div>
         </div>
         <p>
-          The team designed a physical prototype and coded python scripts to run a machine learning model
+          The team designed a classification subsystem prototype and coded Python scripts to run a machine-learning model
           for classifying screw heads. This involved collecting data, training the model, and testing it
-          against the requirements. The process of training included self testing using the synthetic images.
-          After training we manually tested the model ourselves. This was done to ensure that the current
-          system works as intended and that the approach is robust.
+          against the requirements. The training-session test reported approximately 70% at epoch 25 after
+          augmentation. A separate manual test on 34 screws achieved approximately 80% accuracy. Both results
+          remained below the ≥97.5% requirement, so the tests exposed a shortfall rather than validating a robust system.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Why it was useful</div>
         <p>
-          The use of this CTMF allowed us to ground our design decisions in real evidence, and 
-          empirical data. Also it allowed the team to not only verify that the design meeths the 
-          requirements, but also passed the validation requirements from the stakeholders.
+          This CTMF grounded design decisions in empirical data and showed where subsystem performance did not yet meet the requirements. The available evidence does not establish stakeholder validation or integrated-system performance.
         </p>
       </section>
     </div>
@@ -460,7 +471,7 @@
   <div class="lightbox" data-lightbox aria-hidden="true">
     <div class="lightbox-panel">
       <div class="lightbox-media">
-        <img src="" alt="" data-lightbox-image>
+        <img loading="lazy" decoding="async" alt="" data-lightbox-image>
       </div>
       <div class="lightbox-footer">
         <div class="lightbox-copy">
@@ -472,6 +483,6 @@
     </div>
   </div>
 
-  <script src="site.js"></script>
+  <script src="site.js?v=20260716e"></script>
 </body>
 </html>

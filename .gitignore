@@ -1,0 +1,11 @@
+# macOS metadata
+.DS_Store
+
+# Generated build output and working files
+dist/
+tmp/
+output/
+tmp_bikepack_figures/
+
+# Local development dependencies
+node_modules/

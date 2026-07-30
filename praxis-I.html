@@ -3,49 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JK | BikePack Buddy</title>
+  <title>BikePack Buddy Case Study | Jan Kazimierczak</title>
+  <meta name="description" content="BikePack Buddy team case study: stakeholder analysis, concept generation, MATLAB-processed proxy tests, recommendation data, and limitations.">
+  <meta name="theme-color" content="#f4f0e8">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="BikePack Buddy Case Study | Jan Kazimierczak">
+  <meta property="og:description" content="A proxy-tested front-basket extension concept developed through stakeholder analysis and design convergence.">
+  <meta property="og:image" content="assets/bikepack-overview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="jk-favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20260716e">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell">
     <header class="site-header">
       <div class="container">
         <nav class="site-nav" aria-label="Primary">
-          <a class="brand" href="design.html">
-            <span class="brand-mark">JK</span>
+          <a class="brand" href="index.html" aria-label="Jan Kazimierczak, home">
+            <span class="brand-mark" aria-hidden="true">JK</span>
             <span class="brand-copy">
               <span class="brand-name">Jan Kazimierczak</span>
-              <span class="brand-role">Engineering Portfolio</span>
+              <span class="brand-role">Engineering Science</span>
             </span>
           </a>
           <ul class="nav-links">
-            <li><a class="active" href="design.html">Design</a></li>
+            <li><a class="active" aria-current="page" href="projects.html">Work</a></li>
+            <li><a href="design.html">Approach</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
-          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle>
             <span></span><span></span><span></span>
           </button>
         </nav>
-        <div class="mobile-nav" data-mobile-nav>
-          <a class="active" href="design.html">Design</a>
+        <div class="mobile-nav" id="mobile-menu" data-mobile-nav>
+          <a class="active" aria-current="page" href="projects.html">Work</a>
+          <a href="design.html">Approach</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
         </div>
       </div>
     </header>
 
-    <main>
+    <main id="main-content">
       <div class="container">
         <section class="page-hero">
           <div class="page-meta-row">
             <div class="eyebrow">Praxis I</div>
-            <a class="back-link" href="design.html"><span>Back to design</span></a>
+            <a class="back-link" href="projects.html"><span>Back to work</span></a>
           </div>
           <h1>BikePack Buddy</h1>
-          <p>A student commuting problem translated into a tested front-basket concept through stakeholder analysis, and the processes of divergence, calculations, and convergence to reach at a single design.</p>
+          <p>A student commuting problem translated into a proxy-tested front-basket concept through stakeholder analysis, divergent concepts, calculations, and convergence.</p>
           <div class="cta-row report-link-row">
             <a class="button-secondary" href="reports/bikepack-buddy-report.pdf" target="_blank" rel="noopener">Open full report (PDF)</a>
+            <a class="button-ghost" href="https://drive.google.com/file/d/1HfNWP344uCpoidUXvCjlOw1ZBPIPjT4A/view" target="_blank" rel="noopener noreferrer">Prototype demonstration <span class="sr-only">video on Google Drive, opens in a new tab</span></a>
           </div>
         </section>
 
@@ -53,21 +68,21 @@
           <div class="design-content">
             <section id="bikepack-summary" class="support-grid" data-section-track>
               <div class="image-frame bikepack-hero-frame">
-                <img src="bikepack-assets/page10_img1.png" alt="BikePack Buddy Design 1 Natural Fit concept">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page10_img1.jpg" alt="BikePack Buddy Design 1 Natural Fit concept">
               </div>
               <article class="card">
                 <div class="card-kicker">Project summary</div>
                 <h2 class="card-title">A student commuter problem translated into an engineering design concept.</h2>
                 <p class="card-copy">
-                  Our group started from a specific splartz: Engineering Science students often use
+                  Our group started from a specific design opportunity—a “splartz” in the course terminology: Engineering Science students often use
                   Toronto Bike Share bikes to get to class, but the stock front basket is too small for
                   a full backpack. That forces the rider to keep the load on their back even though the
-                  ride posture already increases spinal stress. 
+                  ride posture already increases spinal stress.
                 </p>
                 <p class="card-copy">
-                  The report recommends a foldable front basket extension that mounts to the existing
+                  The report recommends a foldable front-basket extension that mounts to the existing
                   basket, carries the bag in front of the rider, and stores at roughly laptop scale.
-                  This solves the problem of back pain and improves overall ride stability.
+                  It was selected as the team’s preferred concept; the proxy tests do not establish a medical outcome or full-product performance.
                 </p>
                 <div class="tag-row">
                   <span class="status-chip live">Praxis I</span>
@@ -77,6 +92,18 @@
                   <span class="tag">Prototyping</span>
                 </div>
               </article>
+            </section>
+
+            <section class="result-ledger" aria-labelledby="bikepack-evidence-title">
+              <div class="result-ledger-heading">
+                <div class="eyebrow">Evidence at a glance</div>
+                <h2 id="bikepack-evidence-title">What the testing supports—and what it does not.</h2>
+              </div>
+              <div class="result-ledger-grid">
+                <article><span>Measured proxy-test pattern</span><strong>Lowest recorded acceleration and angular speed</strong><p>The front-basket position recorded 58.7 m/s² and 6.7 rad/s, the lowest values among the four tested positions.</p></article>
+                <article><span>Test condition</span><strong>One trial per position at 5 ± 1 km/h</strong><p>The report treats these as positional proxy tests, not validation of a finished product.</p></article>
+                <article><span>Explicit limitation</span><strong>Recommendation remains qualified</strong><p>Team experience, implicit assumptions, and unmodelled bag deformation limit confidence in the result.</p></article>
+              </div>
             </section>
 
             <section id="bikepack-need" class="split-grid" data-section-track>
@@ -91,7 +118,7 @@
                 <p class="card-copy">
                   The report also highlights the need for a solution that is easy to use and does not interfere with the normal operation of the bike-share system.
                   All domains of road safety must be considered, including the impact on visibility, stability, and predictability of the bicycle.
-                  With all these considerations and after having performed multiple tests, the front attachment is recommended as the best overall solution to the problem.
+                  Based on the team’s comparison and limited proxy tests, the report recommends the front attachment as a qualified preferred concept; the available evidence does not establish full-product or medical performance.
                 </p>
               </article>
 
@@ -121,7 +148,7 @@ requirements and evaluation criteria listed below to determine which designs out
                   <h3 class="card-title">Must fit in a standard backpack</h3>
                   <p class="card-copy">
                     The device must be portable to meet the stakeholders’ needs. To achieve this, the
-device must fit in a standard backpack. The achievment of this requirement is evaluated by
+device must fit in a standard backpack. The achievement of this requirement is evaluated by
 how close the dimensions are to those of a standard laptop.
                   </p>
                 </article>
@@ -161,62 +188,62 @@ how close the dimensions are to those of a standard laptop.
               <div class="gallery-grid">
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="bikepack-assets/page03_img1.jpg" data-zoom-alt="Backpack in the existing Toronto Bike Share basket" data-zoom-title="Existing Basket Limitation" data-zoom-caption="The starting point was simple: the standard Toronto Bike Share basket does not comfortably hold a large student backpack.">
-                <img src="bikepack-assets/page03_img1.jpg" alt="Backpack in the existing Toronto Bike Share basket">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page03_img1.jpg" alt="Backpack in the existing Toronto Bike Share basket">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="bikepack-assets/page04_img1.png" data-zoom-alt="Tangerine bike usage" data-zoom-title="Tangerine bike usage" data-zoom-caption="Explanation of how the bikeshare Toronto system works so the report and design are in context.">
-                <img src="bikepack-assets/page04_img1.png" alt="Toronto Bike Share context from the report">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page04_img1.jpg" alt="Toronto Bike Share context from the report">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="bikepack-assets/page08_img1.png" data-zoom-alt="Recommended front basket extension design" data-zoom-title="Recommended Design" data-zoom-caption="The selected concept is a foldable front basket extension that mounts to the existing basket and stores close to laptop dimensions.">
-                <img src="bikepack-assets/page08_img1.png" alt="Recommended front basket extension design">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page08_img1.jpg" alt="Recommended front basket extension design">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="bikepack-assets/page09_img1.jpg" data-zoom-alt="Morph chart from BikePack Buddy report" data-zoom-title="Morph Chart" data-zoom-caption="The morph allowed the team to separate the design into functions, allowing us to explore different configurations and solutions.">
-                <img src="bikepack-assets/page09_img1.jpg" alt="Morph chart from BikePack Buddy report">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page09_img1.jpg" alt="Morph chart from BikePack Buddy report">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="bikepack-assets/page10_img1.png" data-zoom-alt="Candidate Design 1 front basket concept" data-zoom-title="Candidate Design 1 - Front Basket" data-zoom-caption="Candidate Design 1 attaches to the existing front basket and secures the bag with straps and the bike's elastic band. This is the final chosen design.">
-                <img src="bikepack-assets/page10_img1.png" alt="Candidate Design 1 front basket concept">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page10_img1.jpg" alt="Candidate Design 1 front basket concept">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="bikepack-assets/page10_img2.png" data-zoom-alt="Candidate Design 2 electromagnetic suspension" data-zoom-title="Candidate Design 2 - Electromagnetic Suspension" data-zoom-caption="Candidate Design 2 explored magnetic repulsion as the support mechanism, but later calculations showed the power requirement was impractical.">
-                <img src="bikepack-assets/page10_img2.png" alt="Candidate Design 2 electromagnetic suspension">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page10_img2.jpg" alt="Candidate Design 2 electromagnetic suspension">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="bikepack-assets/page11_img1.png" data-zoom-alt="Candidate Design 3 back axle cart" data-zoom-title="Candidate Design 3 - Back Axle Trailer" data-zoom-caption="Candidate Design 3 transported the backpack separately from the bike using an axle-mounted trailer/cart concept.">
-                <img src="bikepack-assets/page11_img1.png" alt="Candidate Design 3 back axle cart">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page11_img1.jpg" alt="Candidate Design 3 back axle cart">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="bikepack-assets/page11_img2.png" data-zoom-alt="Candidate Design 4 seat clamp cantilever" data-zoom-title="Candidate Design 4 - Seat Clamp Cantilever" data-zoom-caption="Candidate Design 4 provided the best portability, but because it was only attached with one clamp, it was too unstable to meet the requirements.">
-                <img src="bikepack-assets/page11_img2.png" alt="Candidate Design 4 seat clamp cantilever">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page11_img2.jpg" alt="Candidate Design 4 seat clamp cantilever">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="bikepack-assets/page12_img1.png" data-zoom-alt="Candidate Design 5 truss concept" data-zoom-title="Candidate Design 5" data-zoom-caption="Candidate Design 5 added more structure and stability but worsened ease of attachment and portability.">
-                <img src="bikepack-assets/page12_img1.png" alt="Candidate Design 5 truss concept">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page12_img1.jpg" alt="Candidate Design 5 truss concept">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="bikepack-assets/page12_img2.png" data-zoom-alt="Electromagnetic feasibility calculations from the report" data-zoom-title="Electromagnetic Feasibility Calculations" data-zoom-caption="Simplified Maxwell-based calculations were used to show that the electromagnetic concept required too much stored energy to be practical.">
-                <img src="bikepack-assets/page12_img2.png" alt="Electromagnetic feasibility calculations from the report">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page12_img2.jpg" alt="Electromagnetic feasibility calculations from the report">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="bikepack-assets/testing_results_combo.png" data-zoom-alt="Combined angular speed and acceleration testing results" data-zoom-title="Proxy Testing Results" data-zoom-caption="Gyroscope and accelerometer results gave the team comparative evidence for stability and deformability.">
-                <img src="bikepack-assets/testing_results_combo.png" alt="Combined angular speed and acceleration testing results">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-testing_results_combo.jpg" alt="Combined angular speed and acceleration testing results">
               </div>
             </div>
             <div class="gallery-item gallery-tile">
               <div class="image-frame" data-zoom-image="bikepack-assets/page15_img1.png" data-zoom-alt="Pugh chart convergence for the BikePack Buddy report" data-zoom-title="Pugh Chart Convergence" data-zoom-caption="The final selection used a measurement matrix and four Pugh charts to compare the candidates against each other and against requirements.">
-                <img src="bikepack-assets/page15_img1.png" alt="Pugh chart convergence for the BikePack Buddy report">
+                <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page15_img1.jpg" alt="Pugh chart convergence for the BikePack Buddy report">
               </div>
             </div>
               </div>
@@ -227,35 +254,41 @@ how close the dimensions are to those of a standard laptop.
                 <div class="eyebrow">Recommendation</div>
                 <h2>Why the front basket extension was recommended over the other candidates</h2>
                 <p>
-                  Testing showed that the front basket extension provided the best balance of
-                  stability, compactness, and ease of use among the candidates.
+                  The team recommended the front-basket extension after comparing compactness, proxy-test motion data, setup, part count, and stakeholder considerations.
                 </p>
               </div>
+              <div class="table-scroll" tabindex="0" aria-label="Scrollable BikePack Buddy comparison table">
+                <table class="comparison-table">
+                  <thead><tr><th scope="col">Tested position</th><th scope="col">Storage dimensions</th><th scope="col">Mass</th><th scope="col">Acceleration</th><th scope="col">Angular speed</th><th scope="col">Steps</th><th scope="col">Parts</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Trailer</th><td>45.0 × 72.0 × 40.0 cm</td><td>3.66 kg</td><td>72.6 m/s²</td><td>9.8 rad/s</td><td>8</td><td>12</td></tr>
+                    <tr><th scope="row">Front basket</th><td>22.6 × 15.3 × 6.6 cm</td><td>1.60 kg</td><td>58.7 m/s²</td><td>6.7 rad/s</td><td>8</td><td>6</td></tr>
+                    <tr><th scope="row">Cantilever</th><td>35.9 × 4.85 × 80.9 cm</td><td>1.01 kg</td><td>87.2 m/s²</td><td>12.2 rad/s</td><td>11</td><td>9</td></tr>
+                    <tr><th scope="row">Truss</th><td>35.9 × 3.00 × 80.9 cm</td><td>0.714 kg</td><td>97.4 m/s²</td><td>17.6 rad/s</td><td>5</td><td>3</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="data-note">Measured in one proxy trial per position at 5 ± 1 km/h. Angular speed—not angular momentum—was recorded. The front-basket concept was not the lightest design.</p>
               <div class="cards-grid">
                 <article class="card">
                   <div class="small-label">Why it won</div>
                   <p class="card-copy">
-                    The recommended design delivers the lowest
-                    self-weight, volume, angular momentum, and acceleration experienced by the backpack
-                    among the candidate designs, while also taking advantage of the elastics already
-                    present on the front of the bike. This makes it stand out in terms of overall
-                    performance and user experience among the other candidates.
+                    Among the four tested positions, the front-basket concept had the smallest storage volume and the lowest recorded acceleration and angular speed. It also used the elastics already present on the front of the bike.
                   </p>
                 </article>
                 <article class="card">
                   <div class="small-label">What it still traded away</div>
                   <p class="card-copy">
-                    The front basket design was not the best on every single metric, but it provided an acceptable
-                    compromise in the areas of stability, compactness, and ease of use. The design met the most important
-                    requirements while still allowing for some trade-offs in less critical areas. Overall, the design
-                    was able to balance competing demands effectively. Therefore the team felt confident in its recommendation.
+                    The front-basket concept was not best on every metric. The team judged its compactness,
+                    recorded motion, existing elastic retention, and ease-of-use assumptions to offer a useful
+                    compromise. Because the evidence came from limited proxy tests, that judgment remains a
+                    design recommendation rather than verified product performance.
                   </p>
                 </article>
                 <article class="card">
                   <div class="small-label">Why the recommendation is qualified</div>
                   <p class="card-copy">
-                    The final decision was based on a thorough evaluation of the design's performance across all key metrics, as well as its alignment with stakeholder needs and preferences.
-                    We evaluated this basing our analysis on data gathered through testing as well as stakeholder analysis.
+                    The report explicitly limits the recommendation because the tests used one trial per position and did not account for bag deformation. Team experience and implicit assumptions also reduce confidence in the conclusion.
                   </p>
                 </article>
               </div>
@@ -266,7 +299,7 @@ how close the dimensions are to those of a standard laptop.
                 <div class="eyebrow">Annotated process</div>
                 <h2>Three CTMFs that best explain the BikePack Buddy process</h2>
                 <p>
-                  The assignment asks for three distinct CTMFs. For this project, I will provide one framing CTMF, one divergence CTMF, and one convergence CTMF. Each one will be explained in terms of what it is, how it appeared in the project, why it was useful, and how it connects to my position statement.
+                  The assignment asks for three distinct CTMFs. This review presents one framing CTMF, one divergence CTMF, and one convergence CTMF, explaining how each appeared in the project, why it was useful, and how it connects to my position statement.
                 </p>
               </div>
               <div class="ctmf-overview-grid">
@@ -274,7 +307,7 @@ how close the dimensions are to those of a standard laptop.
                   <div class="small-label">CTMF 01</div>
                   <h3>Stakeholder analysis</h3>
                   <p>
-                    Here the team decided who where the primary, secondary and tertiary stakeholders.
+                    How the team identified the primary, secondary, and tertiary stakeholders.
                   </p>
                   <div class="tag-row">
                     <span class="tag">Scoping</span>
@@ -298,7 +331,7 @@ how close the dimensions are to those of a standard laptop.
                   <div class="small-label">CTMF 03</div>
                   <h3>Prototyping and convergence</h3>
                   <p>
-                    How low-fidelity prototypes allowed us to verify concepts and arrive at a design.
+                    How low-fidelity prototypes helped the team compare selected assumptions and converge on a concept.
                   </p>
                   <div class="tag-row">
                     <span class="tag">Converging</span>
@@ -314,24 +347,20 @@ how close the dimensions are to those of a standard laptop.
                 <div class="eyebrow">Position statement reflection</div>
                 <h2>How BikePack Buddy contributed to my position on engineering design</h2>
                 <p>
-                  These section explains how this project affected my position to engineering design.
+                  This section explains how the project affected my position on engineering design.
                 </p>
               </div>
               <div class="cards-grid">
                 <article class="card">
                   <div class="small-label">Careful planning</div>
                   <p class="card-copy">
-                    BikePack buddy was the first project where I had to carefully design everything before going into the next step, with proper
-                    due dilligence. For example we had to take into account every stakeholder and how our device will affect them. We had to find secondary 
-                    research for every claim to make sure that they are not made up, and think of every scenario, before recommending the final design.
+                    BikePack Buddy was the first project in which I had to plan each stage carefully before moving to the next. The team considered the stakeholders and how the device might affect them, and used secondary research to support its claims before recommending a concept.
                   </p>
                 </article>
                 <article class="card">
-                  <div class="small-label">Compromising and working with "autorities</div>
+                  <div class="small-label">Compromise and shared authority</div>
                   <p class="card-copy">
-                    As explained in my position statement working on the Praxis I project exposed me to working with "autorities". Before this I was always either 
-                    the director of the team, or there was one clear "Authority", but here the full groyp just had "authorities" of equal standing. This was a real 
-                    growing experience as a person and as an engineer.
+                    As explained in my position statement, Praxis I exposed me to a team in which authority and responsibility were shared. Before this, I had either directed the team or worked under one clear authority. Working with peers of equal standing became an important experience for my development as a person and engineer.
                   </p>
                 </article>
               </div>
@@ -357,9 +386,10 @@ how close the dimensions are to those of a standard laptop.
     </main>
 
     <footer class="site-footer">
-      <div class="container footer-row">
-        <span>&copy; <span data-year></span> Jan Kazimierczak</span>
-        <a href="design.html">Back to design</a>
+      <div class="container footer-grid">
+        <div><span class="footer-name">Jan Kazimierczak</span><p>Engineering Science portfolio · University of Toronto</p></div>
+        <nav aria-label="Footer"><a href="projects.html">Work</a><a href="design.html">Approach</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+        <p class="footer-meta">© <span data-year></span> Jan Kazimierczak</p>
       </div>
     </footer>
   </div>
@@ -382,7 +412,7 @@ how close the dimensions are to those of a standard laptop.
         <p>
           This CTMF focuses on identifying and understanding the key stakeholders involved in the
           BikePack Buddy project. By mapping out their needs, concerns, and interactions with the
-          design, the team was able to create a more user centered solution.
+          design, the team was able to pursue a more user-centred concept.
         </p>
       </section>
       <section class="ctmf-modal-section">
@@ -393,19 +423,17 @@ how close the dimensions are to those of a standard laptop.
           design. Also we broke them down into primary, secondary, and tertiary stakeholders.
         </p>
         <p>
-          First you start by identifying a need you are trying to solve. Having the need you can go into identifying the
-          specific stakeholders that will be affected by your solution. You start from identifying the primary stakeholders, which
-          are the ones directly affected by your design. Having the primary stakeholders identified we start to look at the secondary, this
-          can expand similarily to a lotus blossom graph, but not neccesarily, this means that you can also explore stakeholders that are indirectly affected or have a more peripheral interest in the project.
-          You start thinking more and more about the relationships between these stakeholders and how their needs might intersect or conflict and how the design
-          how affect people who do not come in contact with your design.
+          The process begins by defining the need and identifying the people directly affected by a
+          proposed response. From those primary stakeholders, the analysis expands to secondary and
+          tertiary groups with indirect or peripheral interests. Mapping relationships among these groups
+          helps expose where needs may align, conflict, or affect people who never interact directly with the design.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">CTMF use in the project</div>
         <div class="ctmf-modal-figure-grid">
           <div class="image-frame" data-zoom-image="bikepack-assets/bikepack-stakeholder-analysis.png" data-zoom-alt="BikePack Buddy stakeholder analysis diagram" data-zoom-title="Stakeholder Analysis" data-zoom-caption="Stakeholder analysis for BikePack Buddy, rebuilt from the sketch reference using the actual primary, secondary, and tertiary groups named in the report.">
-            <img src="bikepack-assets/bikepack-stakeholder-analysis.png" alt="BikePack Buddy stakeholder analysis diagram">
+            <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-bikepack-stakeholder-analysis.jpg" alt="BikePack Buddy stakeholder analysis diagram">
           </div>
         </div>
         <ul class="ctmf-modal-list">
@@ -448,8 +476,7 @@ how close the dimensions are to those of a standard laptop.
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Explanation of the CTMF</div>
-        <p>
-          SCAMPER stands for:
+        <p>SCAMPER stands for:</p>
           <ul>
             <li><strong>S</strong>ubstitute</li>
             <li><strong>C</strong>ombine</li>
@@ -459,28 +486,27 @@ how close the dimensions are to those of a standard laptop.
             <li><strong>E</strong>liminate</li>
             <li><strong>R</strong>everse</li>
           </ul>
-        </p>
         <p>
           By using SCAMPER, you basically divide the design into different pieces, and you modify
-          them to explore new possibilities. You can either substitute them for other approaches, 
-          straightly eliminate them or combine them with other components to create new concepts.
+          them to explore new possibilities. You can substitute other approaches, eliminate elements,
+          or combine components to create new concepts.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
           <div class="image-frame" data-zoom-image="bikepack-assets/page40_img1.png" data-zoom-alt="BikePack Buddy SCAMPER " data-zoom-title="SCAMPER example" data-zoom-caption="The team used SCAMPER in the divergence process of the design process.">
-            <img src="bikepack-assets/page40_img1.png" alt="BikePack Buddy SCAMPER example">
+            <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page40_img1.jpg" alt="BikePack Buddy SCAMPER example">
           </div>
         </div>
         <p>
           As it is shown in the figure, the team used SCAMPER to generate new concepts around the front basket design.
-          First we combined the use of magnets into the natural fit design. We not only used the "Combine"  method, but we also adapted the 
+          First we combined the use of magnets into the natural fit design. We not only used the "Combine"  method, but we also adapted the
           magnets so they don't "stick" to the bike, but so they strengthen the hold that the base design had.
         </p>
         <p>
-          At first the natural fit design would've been a simple one piece basket, but through SCAMPER we modified it to be a foldable modular design.
-          With the "Put to another use" method, we explored the possibility of using the main attachment as a storage box for the 
+          At first the Natural Fit design would have been a simple one-piece basket, but through SCAMPER we modified it into a foldable, modular design.
+          With the "Put to another use" method, we explored the possibility of using the main attachment as a storage box for the
           actual holder, which would make the design more compact and easier to store when not in use. This was a key modification that made the design more practical for the stakeholders.
         </p>
       </section>
@@ -509,17 +535,16 @@ how close the dimensions are to those of a standard laptop.
         <div class="small-label">CTMF 03</div>
         <h3>Prototyping</h3>
         <p>
-          We used prototyping to verify deisgn concepts.
+          We used prototyping to compare selected design assumptions.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Explanation of the CTMF</div>
         <p>
-          Prototypes are an essential part of engineering design. The goal of prototyping as explained in Praxis I/II 
-          is to showcase the most "unbeliveable" part of the design. It aims to validate early concepts, to facilitate 
-          communication between teammates and stakeholders and also it helps the team converge into a better design. It consists
-          in designing a simple, low-fidelity device that would "prove" that the basic idea is valid and that the concept would work
-          in later high-fidelity prototypes and in the final design.
+          Prototypes are an important part of engineering design. In Praxis I and II, they are used to
+          represent the most uncertain part of a concept, support communication among teammates and
+          stakeholders, and help the team converge on a preferred direction. A simple, low-fidelity
+          representation can expose weaknesses in an idea before later development.
         </p>
         <p>
           Prototypes can consist of both physical low-fidelity devices, 3D CAD models that would showcase a feature or even
@@ -530,29 +555,25 @@ how close the dimensions are to those of a standard laptop.
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
           <div class="image-frame" data-zoom-image="bikepack-assets/page08_img1.png" data-zoom-alt="BikePack Buddy Design 1 prototype and 3D model" data-zoom-title="Design 1 Prototype and Model" data-zoom-caption="On the left we see the prototype we used to showcase Design 1 as a concept and for proxy testing. On the right we have the 3D CAD model of Design 1.">
-            <img src="bikepack-assets/page08_img1.png" alt="BikePack Buddy Design 1 prototype and 3D model">
+            <img loading="lazy" decoding="async" src="assets/thumbs/bikepack-assets-page08_img1.jpg" alt="BikePack Buddy Design 1 prototype and 3D model">
           </div>
         </div>
         <p>
-          The team believed that the final design that would meet the Stakeholders' need best was Design 1, the "natural fit" design. To showcase that the concept 
-          was valid and that it would work in later stages we decided to develop a prototype that was later used in proxy testing. It was created using scrap wood from
-          Myhal, thus it was a low-fidelity prototype, but it allowed the team to learn useful things about the design, such as the fact that it folded well into the 
-          size of a laptop or that the design has the lowest vibrations of all 5 designs.
+          The team believed that Design 1, the “natural fit” design, best balanced the identified requirements. A low-fidelity prototype made from scrap wood in Myhal was used for proxy testing. It showed the folding concept and, in one positional trial, recorded the lowest acceleration and angular speed among the four tested positions.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Why it was useful</div>
         <p>
-          The prototype allowed the team to go from only "theoretical" information used for convergence to see the design in real life and in real situations. By this we 
-          could see that all stakeholders' needs were achieved, for example that it folded into the size of a laptop, or that the bike showed no scratches after the usage.
+          The prototype moved the team beyond theoretical comparison and made parts of the concept observable. It did not establish that every stakeholder need was achieved: the report identifies unmodelled bag deformation, implicit assumptions, team experience, and limited proxy testing as important limitations.
         </p>
       </section>
       <section class="ctmf-modal-section">
         <div class="small-label">Why it fits my position statement</div>
         <p>
-          This approach fits perfectly with the "iterate" section of my approach to engineering design flowchart. Inspired by SpaceX's rapid iteration I believe that 
-          early stage prototyping is essential to creating a good design. As they say in the movie "Oppenheimer", theory will only take you so far. Therefore I believe 
-          that early prototypes are essential to the design process. But they must be carefully designed with due dilligence so they do not cause harm.
+          This approach connects to the “iterate” section of my engineering design flowchart. Early-stage
+          prototypes can expose issues that theory alone does not reveal, but they must be scoped and built
+          with due diligence so that testing does not create avoidable harm.
         </p>
       </section>
     </div>
@@ -561,7 +582,7 @@ how close the dimensions are to those of a standard laptop.
   <div class="lightbox" data-lightbox aria-hidden="true">
     <div class="lightbox-panel">
       <div class="lightbox-media">
-        <img src="" alt="" data-lightbox-image>
+        <img loading="lazy" decoding="async" alt="" data-lightbox-image>
       </div>
       <div class="lightbox-footer">
         <div class="lightbox-copy">
@@ -573,6 +594,6 @@ how close the dimensions are to those of a standard laptop.
     </div>
   </div>
 
-  <script src="site.js"></script>
+  <script src="site.js?v=20260716e"></script>
 </body>
 </html>
