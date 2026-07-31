@@ -8,6 +8,7 @@ const files = [
   "projects.html",
   "class-projects.html",
   "individual-projects.html",
+  "orbital-booster-aerodynamics.html",
   "market-dashboard-project.html",
   "portfolio-system.html",
   "about.html",
@@ -51,6 +52,7 @@ const artifacts = [
   "reports/bikepack-buddy-report.pdf",
   "reports/civ102-design-report.pdf",
   "reports/praxis-ii-rfp-e.pdf",
+  "reports/orbital-booster-aerodynamics-final-report.pdf",
   "One-pagers/praxis-ii-screw-sorting-one-pager.pdf"
 ];
 
@@ -80,16 +82,13 @@ if (siteUrl) {
     "projects.html",
     "class-projects.html",
     "individual-projects.html",
-    "market-dashboard-project.html",
-    "portfolio-system.html",
+    "orbital-booster-aerodynamics.html",
     "about.html",
     "contact.html",
     "design.html",
     "praxis-I.html",
     "praxis-II.html",
-    "CIV102Bridge.html",
-    "stocks.html",
-    "discover.html"
+    "CIV102Bridge.html"
   ];
   const urls = sitemapPages
     .map((page) => `  <url><loc>${siteUrl}/${page}</loc></url>`)

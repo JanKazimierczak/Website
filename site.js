@@ -153,19 +153,25 @@ document.addEventListener("DOMContentLoaded", () => {
   let lastHeroMotionTime = 0;
 
   const activateProject = (index) => {
-    if (!projectSteps.length || index === activeProjectIndex && projectSteps[index]?.classList.contains("is-active")) {
+    if (!projectSteps.length) {
+      return;
+    }
+
+    const countLabel = `${String(index + 1).padStart(2, "0")} / ${String(projectSteps.length).padStart(2, "0")}`;
+    if (projectCount) {
+      projectCount.textContent = countLabel;
+    }
+    if (projectPinnedCount) {
+      projectPinnedCount.textContent = countLabel;
+    }
+
+    if (index === activeProjectIndex && projectSteps[index]?.classList.contains("is-active")) {
       return;
     }
 
     activeProjectIndex = index;
     projectSteps.forEach((step, stepIndex) => step.classList.toggle("is-active", stepIndex === index));
     projectPanels.forEach((panel, panelIndex) => panel.classList.toggle("is-active", panelIndex === index));
-    if (projectCount) {
-      projectCount.textContent = `${String(index + 1).padStart(2, "0")} / ${String(projectSteps.length).padStart(2, "0")}`;
-    }
-    if (projectPinnedCount) {
-      projectPinnedCount.textContent = `${String(index + 1).padStart(2, "0")} / ${String(projectSteps.length).padStart(2, "0")}`;
-    }
   };
 
   const clearHeroMotion = () => {

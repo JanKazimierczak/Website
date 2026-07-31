@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Orbital booster aerodynamics project</title>
+  <desc id="desc">A technical title card beside photographs of the custom wind tunnel and fabricated grid-fin variants.</desc>
+  <defs>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" fill="none" stroke="#101c26" stroke-opacity=".08"/>
+    </pattern>
+    <clipPath id="tunnel-crop"><rect x="714" y="0" width="486" height="382"/></clipPath>
+    <clipPath id="fins-crop"><rect x="714" y="394" width="486" height="236"/></clipPath>
+  </defs>
+  <rect width="1200" height="630" fill="#101c26"/>
+  <rect width="690" height="630" fill="#f4f0e8"/>
+  <rect width="690" height="630" fill="url(#grid)"/>
+  <path d="M64 76h54" stroke="#b45d34" stroke-width="4"/>
+  <text x="138" y="84" fill="#0d4650" font-family="IBM Plex Mono, monospace" font-size="19" font-weight="600" letter-spacing="2.6">TEAM EXPERIMENTAL STUDY</text>
+  <text x="62" y="216" fill="#101c26" font-family="Space Grotesk, Arial, sans-serif" font-size="72" font-weight="700" letter-spacing="-3">
+    <tspan x="62" dy="0">Orbital-booster</tspan>
+    <tspan x="62" dy="78">aerodynamics</tspan>
+  </text>
+  <text x="64" y="368" fill="#46535c" font-family="IBM Plex Sans, Arial, sans-serif" font-size="25">
+    18 grid-fin variants in one model-scale test matrix.
+  </text>
+  <line x1="64" y1="438" x2="626" y2="438" stroke="#101c26" stroke-opacity=".26"/>
+  <text x="64" y="486" fill="#101c26" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="600">WIND TUNNEL</text>
+  <text x="254" y="486" fill="#101c26" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="600">ARDUINO + PYTHON</text>
+  <text x="502" y="486" fill="#101c26" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="600">R</text>
+  <text x="64" y="558" fill="#8a4d31" font-family="IBM Plex Mono, monospace" font-size="17" font-weight="600">JAN KAZIMIERCZAK · NAMED CO-AUTHOR</text>
+  <g clip-path="url(#tunnel-crop)">
+    <image href="wind-tunnel-team.jpg" x="714" y="0" width="486" height="382" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <g clip-path="url(#fins-crop)">
+    <image href="grid-fin-matrix.jpg" x="714" y="394" width="486" height="648" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <rect x="698" y="0" width="16" height="630" fill="#b45d34"/>
+</svg>

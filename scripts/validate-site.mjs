@@ -12,20 +12,21 @@ const indexablePages = [
   "projects.html",
   "class-projects.html",
   "individual-projects.html",
-  "market-dashboard-project.html",
-  "portfolio-system.html",
+  "orbital-booster-aerodynamics.html",
   "about.html",
   "contact.html",
   "design.html",
   "praxis-I.html",
   "praxis-II.html",
-  "CIV102Bridge.html",
-  "stocks.html",
-  "discover.html"
+  "CIV102Bridge.html"
 ];
 
 const requiredFiles = [
   ...indexablePages,
+  "market-dashboard-project.html",
+  "portfolio-system.html",
+  "stocks.html",
+  "discover.html",
   "404.html",
   "bridge-project.html",
   "praxis-project.html",
@@ -42,9 +43,21 @@ const requiredFiles = [
   "assets/social-preview.png",
   "assets/market-dashboard-preview.png",
   "assets/market-discovery-preview.png",
+  "assets/orbital-booster/wind-tunnel-team.jpg",
+  "assets/orbital-booster/grid-fin-matrix.jpg",
+  "assets/orbital-booster/model-rocket-test.jpg",
+  "assets/orbital-booster/load-cell-setup.jpg",
+  "assets/orbital-booster/all-fin-results.png",
+  "assets/orbital-booster/project-preview.png",
+  "reports/orbital-booster-aerodynamics-final-report.pdf",
   "CNAME",
   "robots.txt",
   "sitemap.xml"
+];
+
+const unlistedPages = [
+  "stocks.html",
+  "discover.html"
 ];
 
 const htmlFiles = (await readdir(root))
@@ -149,6 +162,10 @@ for (const file of htmlFiles) {
     record(/<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex[^"']*["'][^>]*>/i.test(html), `${label}: 404 page must be noindex`);
   }
 
+  if (unlistedPages.includes(file)) {
+    record(/<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex[^"']*follow[^"']*["'][^>]*>/i.test(html), `${label}: unlisted utility must use noindex,follow`);
+  }
+
   for (const match of html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
     try {
       JSON.parse(match[1]);
@@ -165,6 +182,26 @@ for (const file of htmlFiles) {
     record(/data-form-status[^>]*role="status"[^>]*aria-live="polite"/is.test(html), `${label}: contact form needs an aria-live status region`);
     record(/<button\b[^>]*type="submit"[^>]*data-submit-button/is.test(html), `${label}: contact form needs a submit button`);
     record(/name="_honey"/i.test(html), `${label}: contact form is missing its spam honeypot`);
+  }
+
+  if (file === "class-projects.html" || file === "individual-projects.html") {
+    const collectionProjectCount = [...html.matchAll(/\bclass=["']([^"']*)["']/gi)]
+      .filter((match) => match[1].split(/\s+/).includes("project-card"))
+      .length;
+    record(collectionProjectCount >= 1, `${label}: project collection must expose at least one reusable project card`);
+    record(html.includes("project-card-grid"), `${label}: project collection is missing the shared responsive card grid`);
+  }
+
+  if (file === "individual-projects.html") {
+    record(html.includes("orbital-booster-aerodynamics.html"), `${label}: missing the orbital-booster case-study link`);
+    record(html.includes("reports/orbital-booster-aerodynamics-final-report.pdf"), `${label}: missing the final-report link`);
+    record(!/market-dashboard-project\.html|portfolio-system\.html/i.test(html), `${label}: archived projects remain visible on the personal project page`);
+    record(!/currently contains one project|one experiment, documented/i.test(html), `${label}: personal project collection exposes stale single-project copy`);
+  }
+
+  if (file === "orbital-booster-aerodynamics.html") {
+    record(html.includes("reports/orbital-booster-aerodynamics-final-report.pdf"), `${label}: missing the final-report link`);
+    record(/three named co-authors/i.test(html), `${label}: missing team-authorship context`);
   }
 
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
@@ -209,7 +246,9 @@ for (const file of htmlFiles) {
 for (const file of [
   "assets/social-preview.png",
   "assets/market-dashboard-preview.png",
-  "assets/market-discovery-preview.png"
+  "assets/market-discovery-preview.png",
+  "assets/orbital-booster/all-fin-results.png",
+  "assets/orbital-booster/project-preview.png"
 ]) {
   const target = path.join(root, file);
   if (await exists(target)) {

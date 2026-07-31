@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbital Booster Aerodynamics | Jan Kazimierczak</title>
+  <meta name="description" content="A three-person experimental study of 18 model-scale grid-fin designs using a custom wind tunnel, Arduino data acquisition, Python, and statistical analysis in R.">
+  <meta name="theme-color" content="#f4f0e8">
+  <link rel="canonical" href="https://jan.kazimierczak.eu/orbital-booster-aerodynamics.html">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jan.kazimierczak.eu/orbital-booster-aerodynamics.html">
+  <meta property="og:title" content="Orbital Booster Aerodynamics | Jan Kazimierczak">
+  <meta property="og:description" content="A model-scale experiment comparing the load-cell response of 18 grid-fin designs for orbital-booster landing.">
+  <meta property="og:image" content="https://jan.kazimierczak.eu/assets/orbital-booster/project-preview.png">
+  <meta property="og:image:alt" content="Orbital-booster aerodynamics project title card with the custom wind tunnel and grid-fin variants">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="jk-favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20260730c">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Report",
+    "name": "Aerodynamics of different control surfaces for orbital booster landing",
+    "url": "https://jan.kazimierczak.eu/orbital-booster-aerodynamics.html",
+    "author": [
+      {"@type": "Person", "name": "Jan Kazimierczak"},
+      {"@type": "Person", "name": "Tobias Van Bavel"},
+      {"@type": "Person", "name": "Oscar Canals Estirado"}
+    ],
+    "description": "A model-scale experimental comparison of 18 grid-fin variants using a custom wind tunnel and load-cell data acquisition."
+  }
+  </script>
+</head>
+<body class="project-case-page booster-case-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container">
+        <nav class="site-nav" aria-label="Primary">
+          <a class="brand" href="index.html" aria-label="Jan Kazimierczak, home">
+            <span class="brand-mark" aria-hidden="true">JK</span>
+            <span class="brand-copy"><span class="brand-name">Jan Kazimierczak</span><span class="brand-role">Engineering Science</span></span>
+          </a>
+          <ul class="nav-links">
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="class-projects.html">Coursework</a></li>
+            <li><a class="active" aria-current="page" href="individual-projects.html">Personal</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a class="nav-contact" href="contact.html">Contact</a></li>
+          </ul>
+          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+        </nav>
+        <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile" data-mobile-nav>
+          <a href="projects.html">Projects</a><a href="class-projects.html">Coursework</a><a class="active" aria-current="page" href="individual-projects.html">Personal</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <div class="container">
+        <section class="page-hero project-case-hero">
+          <div class="page-meta-row">
+            <div class="eyebrow">Personal project · Team experimental study</div>
+            <a class="back-link" href="individual-projects.html"><span>Back to personal projects</span></a>
+          </div>
+          <h1>Aerodynamics of different control surfaces for orbital booster landing</h1>
+          <p>A model-scale experiment testing how outer outline, hole geometry, and hole size changed the measured load-cell response of 18 3D-printed grid-fin designs.</p>
+          <div class="cta-row report-link-row">
+            <a class="button" href="reports/orbital-booster-aerodynamics-final-report.pdf" target="_blank" rel="noopener">Open final report <span aria-hidden="true">↗</span><span class="sr-only">PDF, opens in a new tab</span></a>
+            <a class="button-secondary" href="#study-result">See the result</a>
+          </div>
+        </section>
+
+        <section class="case-study-opening">
+          <figure class="case-study-hero-media booster-hero-media">
+            <img src="assets/orbital-booster/wind-tunnel-team.jpg" width="495" height="370" alt="Jan Kazimierczak and teammate Tobias Van Bavel standing behind the custom wind tunnel" fetchpriority="high" decoding="async">
+            <figcaption><span>Built test infrastructure / Wind tunnel</span><span>Jan Kazimierczak is pictured at right; Tobias Van Bavel is at left.</span></figcaption>
+          </figure>
+          <aside class="case-fact-panel" aria-label="Project facts">
+            <div><span>Team</span><strong>Three named co-authors</strong></div>
+            <div><span>Test matrix</span><strong>18 grid-fin variants</strong></div>
+            <div><span>Acquisition</span><strong>Load cell · HX711 · Arduino Uno · Python</strong></div>
+            <div><span>Analysis</span><strong>R · ANOVA · Tukey HSD</strong></div>
+            <div><span>Strongest tested response</span><strong>Simple outline · 6 mm square holes</strong></div>
+          </aside>
+        </section>
+
+        <section class="case-narrative-section">
+          <div class="section-heading section-heading-split">
+            <div><div class="eyebrow">Brief</div><h2>Hold the rig constant. Change the geometry.</h2></div>
+            <div class="prose-stack">
+              <p>The team set out to compare grid-fin geometries under a common model-scale airflow. The experiment varied two outer outlines, three hole shapes, and three nominal hole sizes.</p>
+              <p>Jan Kazimierczak is a named co-author of the three-person report with Tobias Van Bavel and Oscar Canals Estirado. The report documents team-level work and does not assign individual responsibilities.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="system-section">
+          <div class="section-heading">
+            <div class="eyebrow">Experimental system</div>
+            <h2>One physical rig, one controlled design matrix.</h2>
+          </div>
+          <ol class="system-flow">
+            <li><span>01</span><h3>Construct</h3><p>Build an approximately three-metre wind tunnel with a honeycomb straightener, contraction, 30 cm test section, diffuser, and fan.</p></li>
+            <li><span>02</span><h3>Fabricate</h3><p>Design in Fusion 360 and 3D print 18 PLA fins: 2 outlines × 3 hole shapes × 3 hole sizes.</p></li>
+            <li><span>03</span><h3>Acquire</h3><p>Read the TAL-220 load cell through an HX711 and Arduino Uno; use Python to capture serial output as CSV.</p></li>
+            <li><span>04</span><h3>Compare</h3><p>Use R boxplots, omnibus ANOVA, and Tukey HSD follow-up to examine differences across the tested designs.</p></li>
+          </ol>
+        </section>
+
+        <section id="study-result" class="result-ledger booster-result-ledger" aria-labelledby="booster-results-title">
+          <div class="result-ledger-heading">
+            <div class="eyebrow">Reported result</div>
+            <h2 id="booster-results-title">Geometry changed the measured response.</h2>
+          </div>
+          <div class="result-ledger-grid">
+            <article><span>Design matrix</span><strong>18 variants</strong><p>Two outer outlines, three hole shapes, and 2, 4, or 6 mm nominal holes.</p></article>
+            <article><span>Sensor data</span><strong>&gt;180,000 observations</strong><p>The report states roughly 10,000 load-cell observations per design—not 180,000 independent trials.</p></article>
+            <article><span>Omnibus comparison</span><strong>p ≈ 2 × 10<sup>−16</sup></strong><p>Reported ANOVA result, followed by Tukey HSD comparisons.</p></article>
+            <article><span>Highest response</span><strong>Simple · square · 6 mm</strong><p>The 4 mm version ranked second within the tested matrix.</p></article>
+          </div>
+        </section>
+
+        <section class="case-gallery-section booster-gallery-section">
+          <div class="section-heading section-heading-split">
+            <div><div class="eyebrow">Physical + analytical evidence</div><h2>From fabricated variants to one comparative result.</h2></div>
+            <p>The images below come directly from the final report and keep the test hardware, parameter matrix, and measured output visible.</p>
+          </div>
+          <div class="case-gallery-grid booster-gallery-grid">
+            <figure>
+              <img src="assets/orbital-booster/grid-fin-matrix.jpg" width="640" height="853" alt="Eighteen 3D-printed grid fins arranged by outer outline, hole shape, and hole size" loading="lazy" decoding="async">
+              <figcaption><span>01</span><strong>Full design matrix</strong><p>Eighteen PLA fins span two outlines, three hole shapes, and three nominal hole sizes.</p></figcaption>
+            </figure>
+            <figure>
+              <img src="assets/orbital-booster/model-rocket-test.jpg" width="598" height="798" alt="Model rocket with a red grid fin installed inside the wind-tunnel test section" loading="lazy" decoding="async">
+              <figcaption><span>02</span><strong>Model installation</strong><p>A replaceable grid fin is mounted to the model rocket inside the test section.</p></figcaption>
+            </figure>
+            <figure>
+              <img src="assets/orbital-booster/load-cell-setup.jpg" width="747" height="420" alt="Load-cell, amplifier, and Arduino instrumentation mounted beneath the wind tunnel" loading="lazy" decoding="async">
+              <figcaption><span>03</span><strong>Acquisition hardware</strong><p>The load-cell linkage feeds an HX711 and Arduino before Python writes serial data to CSV.</p></figcaption>
+            </figure>
+            <figure>
+              <img src="assets/orbital-booster/all-fin-results.png" width="1800" height="2550" alt="Boxplot comparing the reported load-cell response of all 18 grid-fin variants" loading="lazy" decoding="async">
+              <figcaption><span>04</span><strong>All-design comparison</strong><p>The report’s combined boxplot places the simple-outline 6 mm square-hole fin highest.</p></figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="limitations-panel" aria-labelledby="booster-limitations-title">
+          <div>
+            <div class="eyebrow">What the evidence supports</div>
+            <h2 id="booster-limitations-title">A comparative model-scale result—not flight validation.</h2>
+          </div>
+          <ul>
+            <li>The measured variable is reported as load-cell output rather than a calibrated aerodynamic coefficient or validated efficiency measure.</li>
+            <li>The observations come from a custom model-scale rig; Reynolds-number scaling alone does not establish full landing-environment equivalence.</li>
+            <li>The report does not document independent repeat trials, randomized test order, sensor-calibration uncertainty, or full flow-uniformity validation.</li>
+            <li>The strongest next step is to increase the square-hole size gradually and locate the point where the measured response begins to fall.</li>
+          </ul>
+        </section>
+
+        <section class="contact-band compact-contact-band">
+          <div><div class="eyebrow">Primary source</div><h2>Read the complete 29-page final report.</h2><p>The report contains the wind-tunnel build, Reynolds-number calculation, all 18 designs, acquisition method, boxplots, statistical analysis, conclusions, and future work.</p></div>
+          <a class="button" href="reports/orbital-booster-aerodynamics-final-report.pdf" target="_blank" rel="noopener">Open final report <span aria-hidden="true">↗</span><span class="sr-only">PDF, opens in a new tab</span></a>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div><span class="footer-name">Jan Kazimierczak</span><p>Engineering Science portfolio · University of Toronto</p></div>
+        <nav aria-label="Footer"><a href="projects.html">Projects</a><a href="class-projects.html">Coursework</a><a href="individual-projects.html">Personal</a><a href="design.html">Design philosophy</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+        <p class="footer-meta">© <span data-year></span> Jan Kazimierczak</p>
+      </div>
+    </footer>
+  </div>
+  <script src="site.js?v=20260730c"></script>
+</body>
+</html>

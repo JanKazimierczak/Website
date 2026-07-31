@@ -10,7 +10,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jan.kazimierczak.eu/class-projects.html">
   <meta property="og:title" content="Course Projects | Jan Kazimierczak">
-  <meta property="og:description" content="Three evidence-rich Engineering Science case studies spanning structures, mechanisms, machine vision, and human-centred design.">
+  <meta property="og:description" content="Engineering Science coursework documented through design decisions, analysis, prototypes, test evidence, and explicit limitations.">
   <meta property="og:image" content="https://jan.kazimierczak.eu/assets/social-preview.png">
   <meta property="og:image:alt" content="Jan Kazimierczak Engineering Science portfolio">
   <meta name="twitter:card" content="summary_large_image">
@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20260730a">
+  <link rel="stylesheet" href="site.css?v=20260730c">
 </head>
 <body class="portfolio-index-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -33,14 +33,14 @@
           <ul class="nav-links">
             <li><a href="projects.html">Projects</a></li>
             <li><a class="active" aria-current="page" href="class-projects.html">Coursework</a></li>
-            <li><a href="individual-projects.html">Independent</a></li>
+            <li><a href="individual-projects.html">Personal</a></li>
             <li><a href="about.html">About</a></li>
             <li><a class="nav-contact" href="contact.html">Contact</a></li>
           </ul>
           <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
         </nav>
         <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile" data-mobile-nav>
-          <a href="projects.html">Projects</a><a class="active" aria-current="page" href="class-projects.html">Coursework</a><a href="individual-projects.html">Independent</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+          <a href="projects.html">Projects</a><a class="active" aria-current="page" href="class-projects.html">Coursework</a><a href="individual-projects.html">Personal</a><a href="about.html">About</a><a href="contact.html">Contact</a>
         </nav>
       </div>
     </header>
@@ -48,107 +48,111 @@
     <main id="main-content">
       <div class="container">
         <section class="page-hero page-hero-editorial">
-          <div class="eyebrow">University of Toronto · Course projects</div>
-          <h1>Coursework documented beyond the grade.</h1>
+          <div class="eyebrow">University of Toronto · Coursework</div>
+          <h1>Team engineering work, documented in full context.</h1>
           <div class="page-hero-grid">
-            <p>Three team projects show the full engineering record: problem framing, trade-offs, calculations, prototypes, physical evidence, and the limitations that remain after testing.</p>
-            <div class="page-index" aria-label="Course project index">
-              <span>01 · CIV102 / Structures</span>
-              <span>02 · Praxis II / Mechanism + vision</span>
-              <span>03 · Praxis I / Human-centred design</span>
+            <p>These projects were completed within course requirements and shared team responsibility. The case studies preserve the design brief, methods, calculations, prototypes, test evidence, and unresolved limitations without assigning individual credit beyond what the record supports.</p>
+            <div class="page-index" aria-label="Coursework documentation">
+              <span>Context · Requirements and team constraints</span>
+              <span>Process · Analysis, decisions, and prototypes</span>
+              <span>Evidence · Tests, reports, and limitations</span>
             </div>
           </div>
           <div class="integrity-note">
-            <span class="integrity-note-label">Documentation standard</span>
-            <p>These are team projects. The case studies describe team-level work and avoid assigning individual credit where the available record does not verify it.</p>
+            <span class="integrity-note-label">Attribution</span>
+            <p>Coursework is presented at the team level unless the available record verifies an individual contribution.</p>
           </div>
         </section>
 
-        <section class="project-index-list" aria-label="Course project case studies">
-          <article class="project-index-item">
-            <div class="project-index-number">01</div>
-            <a class="project-index-image" href="CIV102Bridge.html">
+        <section class="project-collection" aria-labelledby="coursework-collection-title">
+          <div class="section-heading section-heading-split collection-heading">
+            <div><div class="eyebrow">Project collection</div><h2 id="coursework-collection-title">Open a project, then inspect the evidence.</h2></div>
+            <p>Each entry leads to a full case study with the artifacts and caveats appropriate to that work. New projects can join the same system without implying identical methods, maturity, or evidence.</p>
+          </div>
+
+          <div class="project-card-grid" aria-label="Course project case studies">
+            <!-- Add future coursework by duplicating one complete .project-card article. -->
+            <article class="project-card">
+              <a class="project-card-media" href="CIV102Bridge.html">
               <img src="assets/bridge-overview.jpg" width="1600" height="1200" alt="Top view of the completed CIV102 bridge" loading="eager" decoding="async">
-            </a>
-            <div class="project-index-copy">
-              <div class="project-kicker">CIV102 · Team design and build</div>
-              <h2><a href="CIV102Bridge.html">Bridge design and analysis</a></h2>
-              <p>Python-aided iteration, manual verification, fabrication, and a physical failure that exposed a connection the analytical model did not predict.</p>
-              <ul class="evidence-list" aria-label="Evidence included">
-                <li>240 N → 869.5 N calculated prediction</li>
-                <li>Structural calculations and code</li>
-                <li>Fabrication and teardown evidence</li>
-              </ul>
-              <div class="project-links">
-                <a class="button" href="CIV102Bridge.html">Read case study</a>
-                <a class="button-secondary" href="reports/civ102-design-report.pdf" target="_blank" rel="noopener">Final report <span class="sr-only">PDF, opens in a new tab</span></a>
+                <span class="project-card-type">Course · Structures</span>
+              </a>
+              <div class="project-card-body">
+                <div class="project-kicker">CIV102 · Team design and build</div>
+                <h3><a href="CIV102Bridge.html">Bridge design and analysis</a></h3>
+                <p>Python-aided iteration, manual verification, fabrication, and a physical failure that exposed a connection the analytical model did not predict.</p>
+                <ul class="evidence-list" aria-label="Evidence included">
+                  <li>Structural calculations and code</li>
+                  <li>Fabrication and teardown evidence</li>
+                </ul>
+                <p class="project-card-result"><span>Key evidence</span>Calculated prediction increased from 240 N to 869.5 N; physical testing failed at a splice.</p>
+                <div class="project-card-actions">
+                  <a class="button" href="CIV102Bridge.html">Read case study</a>
+                  <a class="button-secondary" href="reports/civ102-design-report.pdf" target="_blank" rel="noopener">Final report <span class="sr-only">PDF, opens in a new tab</span></a>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="project-index-item">
-            <div class="project-index-number">02</div>
-            <a class="project-index-image project-index-image-light" href="praxis-II.html">
-              <img src="assets/screw-sorter-overview.png" width="1200" height="973" alt="CAD enclosure of the automated screw sorting device" loading="lazy" decoding="async">
-            </a>
-            <div class="project-index-copy">
-              <div class="project-kicker">Praxis II · Three-person team</div>
-              <h2><a href="praxis-II.html">Automated screw sorter</a></h2>
-              <p>A system concept combining drum feeding, Raspberry Pi camera classification, and a mechanical length sorter—with subsystem results kept separate from system-level claims.</p>
-              <ul class="evidence-list" aria-label="Evidence included">
-                <li>≈98% piano-box length-sorting accuracy at 5° and 10°</li>
-                <li>CAD and subsystem prototypes</li>
-                <li>Classifier result below target</li>
-              </ul>
-              <div class="project-links">
-                <a class="button" href="praxis-II.html">Read case study</a>
-                <a class="button-secondary" href="One-pagers/praxis-ii-screw-sorting-one-pager.pdf" target="_blank" rel="noopener">One-pager <span class="sr-only">PDF, opens in a new tab</span></a>
+            <article class="project-card">
+              <a class="project-card-media is-contain" href="praxis-II.html">
+                <img src="assets/screw-sorter-overview.png" width="1200" height="973" alt="CAD enclosure of the automated screw sorting device" loading="lazy" decoding="async">
+                <span class="project-card-type">Course · Mechanisms + vision</span>
+              </a>
+              <div class="project-card-body">
+                <div class="project-kicker">Praxis II · Three-person team</div>
+                <h3><a href="praxis-II.html">Automated screw sorter</a></h3>
+                <p>A system concept combining drum feeding, Raspberry Pi camera classification, and a mechanical length sorter—with subsystem results kept separate from system-level claims.</p>
+                <ul class="evidence-list" aria-label="Evidence included">
+                  <li>CAD and subsystem prototypes</li>
+                  <li>Classifier result below target</li>
+                </ul>
+                <p class="project-card-result"><span>Key evidence</span>The mechanical length sorter reached approximately 98% at the tested angles; the classifier missed its target.</p>
+                <div class="project-card-actions">
+                  <a class="button" href="praxis-II.html">Read case study</a>
+                  <a class="button-secondary" href="One-pagers/praxis-ii-screw-sorting-one-pager.pdf" target="_blank" rel="noopener">One-pager <span class="sr-only">PDF, opens in a new tab</span></a>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="project-index-item">
-            <div class="project-index-number">03</div>
-            <a class="project-index-image" href="praxis-I.html">
-              <img src="assets/bikepack-overview.jpg" width="1400" height="1050" alt="BikePack Buddy front-basket extension concept" loading="lazy" decoding="async">
-            </a>
-            <div class="project-index-copy">
-              <div class="project-kicker">Praxis I · Team design concept</div>
-              <h2><a href="praxis-I.html">BikePack Buddy</a></h2>
-              <p>A student commuting problem translated into a foldable front-basket concept through stakeholder analysis, divergent concepts, calculations, proxy testing, and convergence.</p>
-              <ul class="evidence-list" aria-label="Evidence included">
-                <li>Four-position proxy test</li>
-                <li>Stakeholder and requirement framing</li>
-                <li>Qualified recommendation</li>
-              </ul>
-              <div class="project-links">
-                <a class="button" href="praxis-I.html">Read case study</a>
-                <a class="button-secondary" href="reports/bikepack-buddy-report.pdf" target="_blank" rel="noopener">Full report <span class="sr-only">PDF, opens in a new tab</span></a>
+            <article class="project-card">
+              <a class="project-card-media" href="praxis-I.html">
+                <img src="assets/bikepack-overview.jpg" width="1400" height="1050" alt="BikePack Buddy front-basket extension concept" loading="lazy" decoding="async">
+                <span class="project-card-type">Course · Human-centred design</span>
+              </a>
+              <div class="project-card-body">
+                <div class="project-kicker">Praxis I · Team design concept</div>
+                <h3><a href="praxis-I.html">BikePack Buddy</a></h3>
+                <p>A student commuting problem translated into a foldable front-basket concept through stakeholder analysis, divergent concepts, calculations, proxy testing, and convergence.</p>
+                <ul class="evidence-list" aria-label="Evidence included">
+                  <li>Stakeholder and requirement framing</li>
+                  <li>Calculations and proxy testing</li>
+                </ul>
+                <p class="project-card-result"><span>Key evidence</span>A four-position proxy test informed a qualified preferred concept, not a validated product claim.</p>
+                <div class="project-card-actions">
+                  <a class="button" href="praxis-I.html">Read case study</a>
+                  <a class="button-secondary" href="reports/bikepack-buddy-report.pdf" target="_blank" rel="noopener">Full report <span class="sr-only">PDF, opens in a new tab</span></a>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </div>
         </section>
 
-        <section class="comparison-section">
+        <section class="comparison-section documentation-standard">
           <div class="section-heading section-heading-split">
-            <div><div class="eyebrow">Evidence map</div><h2>Three projects, three kinds of proof.</h2></div>
-            <p>The portfolio gives each project weight according to the evidence available instead of forcing identical success stories.</p>
+            <div><div class="eyebrow">Documentation standard</div><h2>Keep claims, evidence, and limits distinct.</h2></div>
+            <p>Available reports, code, calculations, images, and test records stay close to the claims they support. Missing evidence is identified rather than inferred.</p>
           </div>
-          <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable course project comparison table">
-            <table class="comparison-table">
-              <thead><tr><th scope="col">Project</th><th scope="col">Primary question</th><th scope="col">Methods shown</th><th scope="col">What the evidence supports</th></tr></thead>
-              <tbody>
-                <tr><th scope="row">CIV102 bridge</th><td>How should a constrained matboard bridge carry a moving load?</td><td>Python iteration, manual calculations, fabrication planning</td><td>Calculated improvement plus an observed connection failure</td></tr>
-                <tr><th scope="row">Screw sorter</th><td>Can mixed screws be sorted by head shape and length?</td><td>CAD, concept selection, CNN classification, mechanism testing</td><td>Subsystem results; no integrated-system claim</td></tr>
-                <tr><th scope="row">BikePack Buddy</th><td>How can a bike-share rider carry a full backpack?</td><td>Stakeholder analysis, MATLAB, concept generation, proxy testing</td><td>A qualified preferred concept, not a validated product</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <ol class="system-flow project-standard-flow">
+            <li><span>Brief</span><h3>State the context</h3><p>Define the problem, requirements, assumptions, team setting, and constraints shaping the work.</p></li>
+            <li><span>Method</span><h3>Expose decisions</h3><p>Show the calculations, concepts, prototypes, tools, and trade-offs behind the chosen direction.</p></li>
+            <li><span>Evidence</span><h3>Support the result</h3><p>Keep reports, code, images, measurements, and observations close to the claims they justify.</p></li>
+            <li><span>Limits</span><h3>Qualify the outcome</h3><p>Separate predictions from observations and identify unresolved risk, missing tests, or incomplete integration.</p></li>
+          </ol>
         </section>
 
         <section class="contact-band compact-contact-band">
-          <div><div class="eyebrow">Beyond coursework</div><h2>Independent builds show a different system scope.</h2><p>See the browser-based market interface and the portfolio system built around this project evidence.</p></div>
-          <a class="button" href="individual-projects.html">Explore independent work</a>
+          <div><div class="eyebrow">Personal projects</div><h2>Explore work beyond course briefs.</h2><p>The personal collection extends the same evidence-led approach into self-directed experiments, software, and technical systems.</p></div>
+          <a class="button" href="individual-projects.html">Explore personal projects</a>
         </section>
       </div>
     </main>
@@ -156,11 +160,11 @@
     <footer class="site-footer">
       <div class="container footer-grid">
         <div><span class="footer-name">Jan Kazimierczak</span><p>Engineering Science portfolio · University of Toronto</p></div>
-        <nav aria-label="Footer"><a href="projects.html">Projects</a><a href="class-projects.html">Coursework</a><a href="individual-projects.html">Independent</a><a href="design.html">Design philosophy</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+        <nav aria-label="Footer"><a href="projects.html">Projects</a><a href="class-projects.html">Coursework</a><a href="individual-projects.html">Personal</a><a href="design.html">Design philosophy</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
         <p class="footer-meta">© <span data-year></span> Jan Kazimierczak</p>
       </div>
     </footer>
   </div>
-  <script src="site.js?v=20260730a"></script>
+  <script src="site.js?v=20260730c"></script>
 </body>
 </html>
