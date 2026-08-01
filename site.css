@@ -1809,11 +1809,11 @@ body::before {
   width: 42px;
   height: 42px;
   border-radius: 8px;
-  border-color: var(--text);
-  background: var(--text);
-  box-shadow: 6px 6px 0 rgba(180, 93, 52, 0.2);
-  font-family: "IBM Plex Mono", monospace;
-  letter-spacing: 0.08em;
+  border: 0;
+  background: url("assets/jk-orbital-mark.png") center / cover no-repeat;
+  box-shadow: 6px 6px 0 rgba(180, 93, 52, 0.16);
+  color: transparent;
+  font-size: 0;
 }
 
 .brand-name {
