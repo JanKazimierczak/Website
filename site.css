@@ -2627,6 +2627,7 @@ section {
   gap: clamp(3rem, 8vw, 8rem);
   align-items: center;
   min-height: min(620px, calc(100svh - 9rem));
+  margin-bottom: clamp(3.5rem, 6vw, 6rem);
 }
 
 .about-hero h1,
@@ -2677,6 +2678,28 @@ section {
 .prose-stack p {
   margin: 0;
   color: var(--text-soft);
+}
+
+.origin-section {
+  margin-bottom: clamp(3.5rem, 6vw, 6rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--line-strong);
+}
+
+.origin-section .section-heading-split {
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.7fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.origin-section .section-heading h2 {
+  max-width: 15ch;
+}
+
+.origin-section .prose-stack {
+  gap: 1.15rem;
+  padding: 0.15rem 0 0.15rem clamp(1.25rem, 2.4vw, 2rem);
+  border-left: 2px solid var(--accent);
 }
 
 .principle-grid {
@@ -3255,6 +3278,7 @@ section {
   .about-hero,
   .contact-hero,
   .section-heading-split,
+  .origin-section .section-heading-split,
   .page-hero-grid,
   .education-card,
   .contact-band {
