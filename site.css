@@ -128,7 +128,7 @@ textarea {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 0.72rem;
   text-decoration: none;
 }
 
@@ -1806,24 +1806,29 @@ body::before {
 }
 
 .brand-mark {
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
   border: 0;
-  background: url("assets/jk-orbital-mark.png") center / cover no-repeat;
-  box-shadow: 6px 6px 0 rgba(180, 93, 52, 0.16);
+  background: url("assets/jk-orbital-mark.png") center / 115% no-repeat;
+  box-shadow: 0 3px 10px rgba(17, 35, 50, 0.16);
   color: transparent;
   font-size: 0;
 }
 
+.brand-copy {
+  gap: 0.14rem;
+}
+
 .brand-name {
-  font-size: 0.94rem;
+  font-size: 0.92rem;
+  letter-spacing: 0.015em;
 }
 
 .brand-role {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
+  font-size: 0.66rem;
+  letter-spacing: 0.075em;
   text-transform: uppercase;
 }
 
@@ -3615,10 +3620,10 @@ section {
 }
 
 .theme-dark .site-header .brand-mark {
-  border-color: rgba(255, 255, 255, 0.8);
-  background: #f4f7f5;
-  box-shadow: 6px 6px 0 rgba(95, 214, 222, 0.18);
-  color: #07141b;
+  border: 0;
+  background: url("assets/jk-orbital-mark.png") center / 115% no-repeat;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
+  color: transparent;
 }
 
 .theme-dark .site-header .nav-links a:hover,
