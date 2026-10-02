@@ -3,22 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CIV102 Bridge Case Study | JK Engineering</title>
+  <title>CIV102 Bridge Case Study — Jan Kazimierczak</title>
   <meta name="description" content="CIV102 team bridge case study: Python-aided structural iteration, manual checks, fabrication, predicted capacity, physical testing, and splice failure analysis.">
-  <meta name="theme-color" content="#f4f0e8">
+  <meta name="theme-color" content="#f8f7f4">
   <link rel="canonical" href="https://jan.kazimierczak.eu/CIV102Bridge.html">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://jan.kazimierczak.eu/CIV102Bridge.html">
-  <meta property="og:title" content="CIV102 Bridge Case Study | JK Engineering">
+  <meta property="og:title" content="CIV102 Bridge Case Study — Jan Kazimierczak">
   <meta property="og:description" content="A bridge project connecting structural modelling, manual verification, fabrication, and physical failure analysis.">
   <meta property="og:image" content="https://jan.kazimierczak.eu/assets/bridge-overview.jpg">
   <meta property="og:image:alt" content="Top view of the completed CIV102 bridge">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/png" href="assets/jk-orbital-mark.png?v=20260801">
+  <link rel="icon" href="assets/favicon-32.png?v=20260821" sizes="32x32" type="image/png">
+  <link rel="icon" href="jk-favicon.svg?v=20260821" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20260821">
+  <link rel="manifest" href="site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20260730c">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20261001">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "CIV102 Bridge Design and Analysis",
+    "description": "Python-aided structural analysis, fabrication, and load testing of a matboard bridge, including the splice failure that ended the test.",
+    "url": "https://jan.kazimierczak.eu/CIV102Bridge.html",
+    "image": "https://jan.kazimierczak.eu/assets/bridge-overview.jpg",
+    "author": {
+      "@type": "Person",
+      "name": "Jan Kazimierczak",
+      "url": "https://jan.kazimierczak.eu/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Jan Kazimierczak",
+      "url": "https://jan.kazimierczak.eu/"
+    },
+    "inLanguage": "en",
+    "about": "Structural analysis",
+    "keywords": "structural analysis, Python, load testing, matboard bridge"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://jan.kazimierczak.eu/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://jan.kazimierczak.eu/projects.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Coursework",
+        "item": "https://jan.kazimierczak.eu/class-projects.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Bridge design and analysis",
+        "item": "https://jan.kazimierczak.eu/CIV102Bridge.html"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -34,22 +92,18 @@
             </span>
           </a>
           <ul class="nav-links">
-            <li><a href="projects.html">Projects</a></li>
-            <li><a class="active" aria-current="page" href="class-projects.html">Coursework</a></li>
-            <li><a href="individual-projects.html">Personal</a></li>
+            <li><a class="active" aria-current="true" href="projects.html">Projects</a></li>
             <li><a href="about.html">About</a></li>
             <li><a class="nav-contact" href="contact.html">Contact</a></li>
           </ul>
-          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle>
-            <span></span><span></span><span></span>
-          </button>
+          <div class="nav-actions">
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          </div>
         </nav>
         <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile" data-mobile-nav>
-          <a href="projects.html">Projects</a>
-          <a class="active" aria-current="page" href="class-projects.html">Coursework</a>
-          <a href="individual-projects.html">Personal</a>
+          <a class="active" aria-current="true" href="projects.html">Projects</a>
           <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <a class="nav-contact" href="contact.html">Contact</a>
         </nav>
       </div>
     </header>
@@ -73,7 +127,7 @@
           <div class="design-content">
             <section id="bridge-summary" class="support-grid" data-section-track>
               <div class="image-frame">
-                <img loading="lazy" decoding="async" src="assets/bridge-overview.jpg" width="1600" height="1200" alt="Top view of the completed CIV102 bridge">
+                <picture><source srcset="assets/bridge-overview.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/bridge-overview.jpg" width="1600" height="1200" alt="Top view of the completed CIV102 bridge"></picture>
               </div>
               <article class="card">
                 <div class="card-kicker">Project summary</div>
@@ -121,43 +175,43 @@
               </div>
               <div class="gallery-grid">
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="civ102-assets/bridge-plan.png" data-zoom-alt="Bridge design plan drawing" data-zoom-title="Cutting Plan" data-zoom-caption="Plan drawing showing the cutting plan and key dimensions.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-bridge-plan.jpg" alt="Bridge design plan drawing">
+              <div class="image-frame" data-zoom-image="civ102-assets/bridge-plan.png" data-zoom-image-webp="civ102-assets/bridge-plan.webp" data-zoom-alt="Bridge design plan drawing" data-zoom-title="Cutting Plan" data-zoom-caption="Plan drawing showing the cutting plan and key dimensions.">
+                <picture><source srcset="assets/thumbs/civ102-assets-bridge-plan.webp" type="image/webp"><img loading="lazy" decoding="async" width="723" height="900" src="assets/thumbs/civ102-assets-bridge-plan.jpg" alt="Bridge design plan drawing"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="civ102-assets/sheet-layout-markup.png" data-zoom-alt="Marked sheet layout for bridge fabrication" data-zoom-title="Sheet cutting plan" data-zoom-caption="The picture shows the cutting part of the construction process.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-sheet-layout-markup.jpg" alt="Marked sheet layout for bridge fabrication">
+              <div class="image-frame" data-zoom-image="civ102-assets/sheet-layout-markup.png" data-zoom-image-webp="civ102-assets/sheet-layout-markup.webp" data-zoom-alt="Marked sheet layout for bridge fabrication" data-zoom-title="Sheet cutting plan" data-zoom-caption="The picture shows the cutting part of the construction process.">
+                <picture><source srcset="assets/thumbs/civ102-assets-sheet-layout-markup.webp" type="image/webp"><img loading="lazy" decoding="async" width="675" height="900" src="assets/thumbs/civ102-assets-sheet-layout-markup.jpg" alt="Marked sheet layout for bridge fabrication"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="civ102-assets/material-cut-layout.png" data-zoom-alt="Material cut layout for bridge pieces" data-zoom-title="Individual bridge components" data-zoom-caption="The picture shows the individual pieces of the bridge before assembly.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-material-cut-layout.jpg" alt="Material cut layout for bridge pieces">
+              <div class="image-frame" data-zoom-image="civ102-assets/material-cut-layout.png" data-zoom-image-webp="civ102-assets/material-cut-layout.webp" data-zoom-alt="Material cut layout for bridge pieces" data-zoom-title="Individual bridge components" data-zoom-caption="The picture shows the individual pieces of the bridge before assembly.">
+                <picture><source srcset="assets/thumbs/civ102-assets-material-cut-layout.webp" type="image/webp"><img loading="lazy" decoding="async" width="675" height="900" src="assets/thumbs/civ102-assets-material-cut-layout.jpg" alt="Material cut layout for bridge pieces"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="civ102-assets/glued-bridge-component.png" data-zoom-alt="Bridge component during gluing and assembly" data-zoom-title="Weight on recently glued bridge." data-zoom-caption="The picture shows how weight was applied to the recently glued bridge, to ensure proper adhesion.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-glued-bridge-component.jpg" alt="Bridge component during gluing and assembly">
+              <div class="image-frame" data-zoom-image="civ102-assets/glued-bridge-component.png" data-zoom-image-webp="civ102-assets/glued-bridge-component.webp" data-zoom-alt="Bridge component during gluing and assembly" data-zoom-title="Weight on recently glued bridge." data-zoom-caption="The picture shows how weight was applied to the recently glued bridge, to ensure proper adhesion.">
+                <picture><source srcset="assets/thumbs/civ102-assets-glued-bridge-component.webp" type="image/webp"><img loading="lazy" decoding="async" width="675" height="900" src="assets/thumbs/civ102-assets-glued-bridge-component.jpg" alt="Bridge component during gluing and assembly"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="civ102-assets/bridge-carrying-photo.png" data-zoom-alt="Team carrying the completed bridge" data-zoom-title="Gluing process" data-zoom-caption="The picture shows the team after applying the glue to the bridge, proper protective equipment is used.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-bridge-carrying-photo.jpg" alt="Team carrying the completed bridge">
+              <div class="image-frame" data-zoom-image="civ102-assets/bridge-carrying-photo.png" data-zoom-image-webp="civ102-assets/bridge-carrying-photo.webp" data-zoom-alt="Team carrying the completed bridge" data-zoom-title="Gluing process" data-zoom-caption="The picture shows the team after applying the glue to the bridge, proper protective equipment is used.">
+                <picture><source srcset="assets/thumbs/civ102-assets-bridge-carrying-photo.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="675" src="assets/thumbs/civ102-assets-bridge-carrying-photo.jpg" alt="Team carrying the completed bridge"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="civ102-assets/team-work-session.png" data-zoom-alt="Teamwork session for bridge project" data-zoom-title="Teamwork Session" data-zoom-caption="A project work session during bridge construction while the adhesive cured.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-team-work-session.jpg" alt="Teamwork session for bridge project">
+              <div class="image-frame" data-zoom-image="civ102-assets/team-work-session.png" data-zoom-image-webp="civ102-assets/team-work-session.webp" data-zoom-alt="Teamwork session for bridge project" data-zoom-title="Teamwork Session" data-zoom-caption="A project work session during bridge construction while the adhesive cured.">
+                <picture><source srcset="assets/thumbs/civ102-assets-team-work-session.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="675" src="assets/thumbs/civ102-assets-team-work-session.jpg" alt="Teamwork session for bridge project"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="civ102-assets/load-test-setup.png" data-zoom-alt="Bridge load test setup" data-zoom-title="Night before testing" data-zoom-caption="The night before testing weight was applied to the bridge, to ensure proper adhesion of the glue.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-load-test-setup.jpg" alt="Bridge load test setup">
+              <div class="image-frame" data-zoom-image="civ102-assets/load-test-setup.png" data-zoom-image-webp="civ102-assets/load-test-setup.webp" data-zoom-alt="Bridge load test setup" data-zoom-title="Night before testing" data-zoom-caption="The night before testing weight was applied to the bridge, to ensure proper adhesion of the glue.">
+                <picture><source srcset="assets/thumbs/civ102-assets-load-test-setup.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="675" src="assets/thumbs/civ102-assets-load-test-setup.jpg" alt="Bridge load test setup"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="civ102-assets/top-view-bridge.png" data-zoom-alt="Top view of completed bridge" data-zoom-title="Weight applied for glue adhesion" data-zoom-caption="A picture showing even more weight being applied to the bridge to ensure that the glue is properly set.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-top-view-bridge.jpg" alt="Top view of completed bridge">
+              <div class="image-frame" data-zoom-image="civ102-assets/top-view-bridge.png" data-zoom-image-webp="civ102-assets/top-view-bridge.webp" data-zoom-alt="Top view of completed bridge" data-zoom-title="Weight applied for glue adhesion" data-zoom-caption="A picture showing even more weight being applied to the bridge to ensure that the glue is properly set.">
+                <picture><source srcset="assets/thumbs/civ102-assets-top-view-bridge.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="675" src="assets/thumbs/civ102-assets-top-view-bridge.jpg" alt="Top view of completed bridge"></picture>
               </div>
             </div>
               </div>
@@ -284,8 +338,8 @@
       <section class="ctmf-modal-section">
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
-          <div class="image-frame" data-zoom-image="civ102-assets/ctmf4-base-load-case-2.png" data-zoom-alt="Bridge base load case 2 safety-check output" data-zoom-title="Base Load Case 2 Safety Check" data-zoom-caption="Code output from the bridge calculations showing the base load case results, stress values, and safety checks used to evaluate the design.">
-            <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-ctmf4-base-load-case-2.jpg" alt="Bridge base load case 2 safety-check output">
+          <div class="image-frame" data-zoom-image="civ102-assets/ctmf4-base-load-case-2.png" data-zoom-image-webp="civ102-assets/ctmf4-base-load-case-2.webp" data-zoom-alt="Bridge base load case 2 safety-check output" data-zoom-title="Base Load Case 2 Safety Check" data-zoom-caption="Code output from the bridge calculations showing the base load case results, stress values, and safety checks used to evaluate the design.">
+            <picture><source srcset="assets/thumbs/civ102-assets-ctmf4-base-load-case-2.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="561" src="assets/thumbs/civ102-assets-ctmf4-base-load-case-2.jpg" alt="Bridge base load case 2 safety-check output"></picture>
           </div>
         </div>
         <p>
@@ -330,7 +384,7 @@
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
           <div class="image-frame" data-zoom-image="civ102-assets/ctmf5-final-design-calculations.png" data-zoom-alt="Final bridge design calculations page" data-zoom-title="Final Design Calculations" data-zoom-caption="Handwritten final-design calculations showing the chosen cross-section geometry, centroid location, second moment of area, and safety-factor checks.">
-            <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-ctmf5-final-design-calculations.jpg" alt="Final bridge design calculations page">
+            <picture><source srcset="assets/thumbs/civ102-assets-ctmf5-final-design-calculations.webp" type="image/webp"><img loading="lazy" decoding="async" width="771" height="900" src="assets/thumbs/civ102-assets-ctmf5-final-design-calculations.jpg" alt="Final bridge design calculations page"></picture>
           </div>
         </div>
         <p>
@@ -371,7 +425,7 @@
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
           <div class="image-frame" data-zoom-image="civ102-assets/ctmf6-bridge-teardown.jpg" data-zoom-alt="Top view of the bridge during failure analysis" data-zoom-title="Bridge Failure Analysis View" data-zoom-caption="A top-down picture during the process of construction showing the internal diaphragm distribution and the location of the splice where the design failed during testing.">
-            <img loading="lazy" decoding="async" src="assets/thumbs/civ102-assets-ctmf6-bridge-teardown.jpg" alt="Top view of the bridge during failure analysis">
+            <img loading="lazy" decoding="async" width="675" height="900" src="assets/thumbs/civ102-assets-ctmf6-bridge-teardown.jpg" alt="Top view of the bridge during failure analysis">
           </div>
         </div>
         <p>
@@ -410,6 +464,6 @@
     </div>
   </div>
 
-  <script src="site.js?v=20260730c"></script>
+  <script src="site.js?v=20261001"></script>
 </body>
 </html>

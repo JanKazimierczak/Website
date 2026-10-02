@@ -3,22 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orbital Booster Aerodynamics | JK Engineering</title>
+  <title>Orbital Booster Aerodynamics — Jan Kazimierczak</title>
   <meta name="description" content="A three-person experimental study of 18 model-scale grid-fin designs using a custom wind tunnel, Arduino data acquisition, Python, and statistical analysis in R.">
-  <meta name="theme-color" content="#f4f0e8">
+  <meta name="theme-color" content="#f8f7f4">
   <link rel="canonical" href="https://jan.kazimierczak.eu/orbital-booster-aerodynamics.html">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://jan.kazimierczak.eu/orbital-booster-aerodynamics.html">
-  <meta property="og:title" content="Orbital Booster Aerodynamics | JK Engineering">
+  <meta property="og:title" content="Orbital Booster Aerodynamics — Jan Kazimierczak">
   <meta property="og:description" content="A model-scale experiment comparing the load-cell response of 18 grid-fin designs for orbital-booster landing.">
   <meta property="og:image" content="https://jan.kazimierczak.eu/assets/orbital-booster/project-preview.png">
   <meta property="og:image:alt" content="Orbital-booster aerodynamics project title card with the custom wind tunnel and grid-fin variants">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/png" href="assets/jk-orbital-mark.png?v=20260801">
+  <link rel="icon" href="assets/favicon-32.png?v=20260821" sizes="32x32" type="image/png">
+  <link rel="icon" href="jk-favicon.svg?v=20260821" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20260821">
+  <link rel="manifest" href="site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20260730c">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20261001">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -33,6 +36,38 @@
     "description": "A model-scale experimental comparison of 18 grid-fin variants using a custom wind tunnel and load-cell data acquisition."
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://jan.kazimierczak.eu/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://jan.kazimierczak.eu/projects.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Personal projects",
+        "item": "https://jan.kazimierczak.eu/individual-projects.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Orbital-booster aerodynamics",
+        "item": "https://jan.kazimierczak.eu/orbital-booster-aerodynamics.html"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="project-case-page booster-case-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -45,16 +80,18 @@
             <span class="brand-copy"><span class="brand-name">Jan Kazimierczak</span><span class="brand-role">Engineering Science</span></span>
           </a>
           <ul class="nav-links">
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="class-projects.html">Coursework</a></li>
-            <li><a class="active" aria-current="page" href="individual-projects.html">Personal</a></li>
+            <li><a class="active" aria-current="true" href="projects.html">Projects</a></li>
             <li><a href="about.html">About</a></li>
             <li><a class="nav-contact" href="contact.html">Contact</a></li>
           </ul>
-          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          <div class="nav-actions">
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          </div>
         </nav>
         <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile" data-mobile-nav>
-          <a href="projects.html">Projects</a><a href="class-projects.html">Coursework</a><a class="active" aria-current="page" href="individual-projects.html">Personal</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+          <a class="active" aria-current="true" href="projects.html">Projects</a>
+          <a href="about.html">About</a>
+          <a class="nav-contact" href="contact.html">Contact</a>
         </nav>
       </div>
     </header>
@@ -76,7 +113,7 @@
 
         <section class="case-study-opening">
           <figure class="case-study-hero-media booster-hero-media">
-            <img src="assets/orbital-booster/wind-tunnel-team.jpg" width="495" height="370" alt="Jan Kazimierczak and teammate Tobias Van Bavel standing behind the custom wind tunnel" fetchpriority="high" decoding="async">
+            <picture><source srcset="assets/orbital-booster/wind-tunnel-team.webp" type="image/webp"><img src="assets/orbital-booster/wind-tunnel-team.jpg" width="495" height="370" alt="Jan Kazimierczak and teammate Tobias Van Bavel standing behind the custom wind tunnel" fetchpriority="high" decoding="async"></picture>
             <figcaption><span>Built test infrastructure / Wind tunnel</span><span>Jan Kazimierczak is pictured at right; Tobias Van Bavel is at left.</span></figcaption>
           </figure>
           <aside class="case-fact-panel" aria-label="Project facts">
@@ -131,19 +168,19 @@
           </div>
           <div class="case-gallery-grid booster-gallery-grid">
             <figure>
-              <img src="assets/orbital-booster/grid-fin-matrix.jpg" width="640" height="853" alt="Eighteen 3D-printed grid fins arranged by outer outline, hole shape, and hole size" loading="lazy" decoding="async">
+              <picture><source srcset="assets/orbital-booster/grid-fin-matrix.webp" type="image/webp"><img src="assets/orbital-booster/grid-fin-matrix.jpg" width="640" height="853" alt="Eighteen 3D-printed grid fins arranged by outer outline, hole shape, and hole size" loading="lazy" decoding="async"></picture>
               <figcaption><span>01</span><strong>Full design matrix</strong><p>Eighteen PLA fins span two outlines, three hole shapes, and three nominal hole sizes.</p></figcaption>
             </figure>
             <figure>
-              <img src="assets/orbital-booster/model-rocket-test.jpg" width="598" height="798" alt="Model rocket with a red grid fin installed inside the wind-tunnel test section" loading="lazy" decoding="async">
+              <picture><source srcset="assets/orbital-booster/model-rocket-test.webp" type="image/webp"><img src="assets/orbital-booster/model-rocket-test.jpg" width="598" height="798" alt="Model rocket with a red grid fin installed inside the wind-tunnel test section" loading="lazy" decoding="async"></picture>
               <figcaption><span>02</span><strong>Model installation</strong><p>A replaceable grid fin is mounted to the model rocket inside the test section.</p></figcaption>
             </figure>
             <figure>
-              <img src="assets/orbital-booster/load-cell-setup.jpg" width="747" height="420" alt="Load-cell, amplifier, and Arduino instrumentation mounted beneath the wind tunnel" loading="lazy" decoding="async">
+              <picture><source srcset="assets/orbital-booster/load-cell-setup.webp" type="image/webp"><img src="assets/orbital-booster/load-cell-setup.jpg" width="747" height="420" alt="Load-cell, amplifier, and Arduino instrumentation mounted beneath the wind tunnel" loading="lazy" decoding="async"></picture>
               <figcaption><span>03</span><strong>Acquisition hardware</strong><p>The load-cell linkage feeds an HX711 and Arduino before Python writes serial data to CSV.</p></figcaption>
             </figure>
             <figure>
-              <img src="assets/orbital-booster/all-fin-results.png" width="1800" height="2550" alt="Boxplot comparing the reported load-cell response of all 18 grid-fin variants" loading="lazy" decoding="async">
+              <picture><source srcset="assets/orbital-booster/all-fin-results.webp" type="image/webp"><img src="assets/orbital-booster/all-fin-results.png" width="1129" height="1600" alt="Boxplot comparing the reported load-cell response of all 18 grid-fin variants" loading="lazy" decoding="async"></picture>
               <figcaption><span>04</span><strong>All-design comparison</strong><p>The report’s combined boxplot places the simple-outline 6 mm square-hole fin highest.</p></figcaption>
             </figure>
           </div>
@@ -177,6 +214,6 @@
       </div>
     </footer>
   </div>
-  <script src="site.js?v=20260730c"></script>
+  <script src="site.js?v=20261001"></script>
 </body>
 </html>

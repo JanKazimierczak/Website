@@ -3,22 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Projects | JK Engineering</title>
+  <title>Personal Projects — Jan Kazimierczak</title>
   <meta name="description" content="Personal engineering projects by Jan Kazimierczak, documented through system structure, implementation, evidence, operating constraints, and next steps.">
-  <meta name="theme-color" content="#f4f0e8">
+  <meta name="theme-color" content="#f8f7f4">
   <link rel="canonical" href="https://jan.kazimierczak.eu/individual-projects.html">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jan.kazimierczak.eu/individual-projects.html">
-  <meta property="og:title" content="Personal Projects | JK Engineering">
+  <meta property="og:title" content="Personal Projects — Jan Kazimierczak">
   <meta property="og:description" content="Self-directed experiments, software, and technical systems documented from purpose through evidence and limitations.">
   <meta property="og:image" content="https://jan.kazimierczak.eu/assets/social-preview.png">
   <meta property="og:image:alt" content="Jan Kazimierczak Engineering Science portfolio">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/png" href="assets/jk-orbital-mark.png?v=20260801">
+  <link rel="icon" href="assets/favicon-32.png?v=20260821" sizes="32x32" type="image/png">
+  <link rel="icon" href="jk-favicon.svg?v=20260821" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20260821">
+  <link rel="manifest" href="site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20260730c">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20261001">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Personal Projects",
+    "description": "Software and experimental work pursued outside course briefs.",
+    "url": "https://jan.kazimierczak.eu/individual-projects.html",
+    "author": {
+      "@type": "Person",
+      "name": "Jan Kazimierczak",
+      "url": "https://jan.kazimierczak.eu/"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://jan.kazimierczak.eu/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://jan.kazimierczak.eu/projects.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Personal projects",
+        "item": "https://jan.kazimierczak.eu/individual-projects.html"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="portfolio-index-page independent-index-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -31,16 +74,18 @@
             <span class="brand-copy"><span class="brand-name">Jan Kazimierczak</span><span class="brand-role">Engineering Science</span></span>
           </a>
           <ul class="nav-links">
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="class-projects.html">Coursework</a></li>
-            <li><a class="active" aria-current="page" href="individual-projects.html">Personal</a></li>
+            <li><a class="active" aria-current="true" href="projects.html">Projects</a></li>
             <li><a href="about.html">About</a></li>
             <li><a class="nav-contact" href="contact.html">Contact</a></li>
           </ul>
-          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          <div class="nav-actions">
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          </div>
         </nav>
         <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile" data-mobile-nav>
-          <a href="projects.html">Projects</a><a href="class-projects.html">Coursework</a><a class="active" aria-current="page" href="individual-projects.html">Personal</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+          <a class="active" aria-current="true" href="projects.html">Projects</a>
+          <a href="about.html">About</a>
+          <a class="nav-contact" href="contact.html">Contact</a>
         </nav>
       </div>
     </header>
@@ -51,9 +96,9 @@
           <div class="eyebrow">Personal projects</div>
           <h1>Self-directed work, documented as systems.</h1>
           <div class="page-hero-grid">
-            <p>This collection extends beyond course briefs into software, experimentation, and technical publishing. Each case study connects the purpose of a project to its architecture, implementation, evidence, operating constraints, and next steps.</p>
+            <p>This collection covers work pursued outside course briefs — software I build and use, and experiments I run because I want the answer. Some is solo, some is with collaborators; each case study connects the purpose of a project to its architecture, implementation, evidence, operating constraints, and next steps.</p>
             <div class="page-index" aria-label="Personal project scope">
-              <span>Experiments · Built systems and measurement</span>
+              <span>Experiments · Built rigs and measurement</span>
               <span>Software · Architecture and observable behavior</span>
               <span>Documentation · Evidence, constraints, and next steps</span>
             </div>
@@ -74,7 +119,7 @@
             <!-- Add future personal work by duplicating one complete .project-card article. -->
             <article class="project-card">
               <a class="project-card-media" href="orbital-booster-aerodynamics.html">
-                <img src="assets/orbital-booster/wind-tunnel-team.jpg" width="495" height="370" alt="Jan Kazimierczak and a teammate standing behind their custom wind tunnel" loading="eager" decoding="async">
+                <picture><source srcset="assets/orbital-booster/wind-tunnel-team.webp" type="image/webp"><img src="assets/orbital-booster/wind-tunnel-team.jpg" width="495" height="370" alt="Jan Kazimierczak and a teammate standing behind their custom wind tunnel" loading="eager" decoding="async"></picture>
                 <span class="project-card-type">Personal · Experimental study</span>
               </a>
               <div class="project-card-body">
@@ -90,6 +135,28 @@
                 <div class="project-card-actions">
                   <a class="button" href="orbital-booster-aerodynamics.html">Read case study</a>
                   <a class="button-secondary" href="reports/orbital-booster-aerodynamics-final-report.pdf" target="_blank" rel="noopener">Final report <span class="sr-only">PDF, opens in a new tab</span></a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <a class="project-card-media" href="market-dashboard.html">
+                <picture><source srcset="assets/market-dashboard-preview.webp" type="image/webp"><img src="assets/market-dashboard-preview.png" width="1280" height="720" alt="The market dashboard showing a quote board, custom price chart, and news feed" loading="lazy" decoding="async"></picture>
+                <span class="project-card-type">Personal · Browser software</span>
+              </a>
+              <div class="project-card-body">
+                <div class="project-kicker">Solo build · Vanilla JavaScript · Client-side data</div>
+                <h3><a href="market-dashboard.html">A market dashboard with no build step and no dependencies</a></h3>
+                <p>Roughly 4,700 lines of vanilla JavaScript across two surfaces: a quote-and-chart dashboard and a nine-screen discovery scanner, sharing one data layer that expects its public sources to fail.</p>
+                <ul class="evidence-list" aria-label="Evidence included">
+                  <li>Hand-written SVG chart renderer</li>
+                  <li>Fallback-chained fetch layer with timeouts</li>
+                  <li>Zero third-party scripts</li>
+                </ul>
+                <p class="project-card-result"><span>Key evidence</span>The system runs entirely in the browser with no server or API key; that same constraint is what makes its data layer fragile, and the case study documents where it breaks.</p>
+                <div class="project-card-actions">
+                  <a class="button" href="market-dashboard.html">Read case study</a>
+                  <a class="button-secondary" href="stocks.html">Open live demo</a>
                 </div>
               </div>
             </article>
@@ -124,6 +191,6 @@
       </div>
     </footer>
   </div>
-  <script src="site.js?v=20260730c"></script>
+  <script src="site.js?v=20261001"></script>
 </body>
 </html>

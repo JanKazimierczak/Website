@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener("resize", () => {
-      if (window.innerWidth > 820) {
+      if (window.innerWidth > 920) {
         closeMenu();
       }
     });
@@ -72,14 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const heroMotionQuery = window.matchMedia("(min-width: 981px) and (min-height: 720px)");
-  const root = document.documentElement;
-  const clamp = (value, minimum = 0, maximum = 1) => Math.min(maximum, Math.max(minimum, value));
-  const smoothstep = (minimum, maximum, value) => {
-    const normalized = clamp((value - minimum) / (maximum - minimum));
-    return normalized * normalized * (3 - 2 * normalized);
-  };
-
   document.querySelectorAll("[data-reveal-group]").forEach((group) => {
     Array.from(group.children).forEach((child, index) => {
       if (!child.hasAttribute("data-reveal")) {
@@ -133,196 +125,14 @@ document.addEventListener("DOMContentLoaded", () => {
     revealAll();
   }
 
-  const heroScene = document.querySelector("[data-hero-motion]");
-  const projectScroll = document.querySelector("[data-project-scroll]");
-  const projectSteps = Array.from(document.querySelectorAll("[data-project-step]"));
-  const projectPanels = Array.from(document.querySelectorAll("[data-project-panel]"));
-  const projectCount = document.querySelector("[data-project-count]");
-  const projectPinnedCount = document.querySelector("[data-project-pinned-count]");
-  const projectStageSticky = document.querySelector(".project-stage-sticky");
-  const themedSections = Array.from(document.querySelectorAll("[data-page-theme]"));
-  const heroCopyLayer = heroScene?.querySelector("[data-hero-layer='copy']");
-  const heroVisualLayer = heroScene?.querySelector("[data-hero-layer='visual']");
-  let activeProjectIndex = 0;
-  let homeMotionFrame = 0;
-  let renderedHeroProgress = 0;
-  let renderedHeroHandoff = 0;
-  let renderedHeroCopyHold = 0;
-  let renderedHeroVisualHold = 0;
-  let heroProgressInitialized = false;
-  let lastHeroMotionTime = 0;
-
-  const activateProject = (index) => {
-    if (!projectSteps.length) {
-      return;
-    }
-
-    const countLabel = `${String(index + 1).padStart(2, "0")} / ${String(projectSteps.length).padStart(2, "0")}`;
-    if (projectCount) {
-      projectCount.textContent = countLabel;
-    }
-    if (projectPinnedCount) {
-      projectPinnedCount.textContent = countLabel;
-    }
-
-    if (index === activeProjectIndex && projectSteps[index]?.classList.contains("is-active")) {
-      return;
-    }
-
-    activeProjectIndex = index;
-    projectSteps.forEach((step, stepIndex) => step.classList.toggle("is-active", stepIndex === index));
-    projectPanels.forEach((panel, panelIndex) => panel.classList.toggle("is-active", panelIndex === index));
-  };
-
-  const clearHeroMotion = () => {
-    if (!heroScene) {
-      return;
-    }
-    renderedHeroProgress = 0;
-    renderedHeroHandoff = 0;
-    renderedHeroCopyHold = 0;
-    renderedHeroVisualHold = 0;
-    heroProgressInitialized = false;
-    lastHeroMotionTime = 0;
-    ["--hero-copy-y", "--hero-copy-opacity", "--hero-visual-y", "--hero-visual-scale", "--hero-visual-opacity", "--hero-prompt-opacity"].forEach((property) => {
-      heroScene.style.removeProperty(property);
-    });
-  };
-
-  const updatePageTheme = () => {
-    const trackingLine = Math.min(96, window.innerHeight * 0.14);
-    const activeTheme = themedSections.find((section) => {
-      const rect = section.getBoundingClientRect();
-      return rect.top <= trackingLine && rect.bottom > trackingLine;
-    })?.getAttribute("data-page-theme");
-    body.classList.toggle("theme-dark", activeTheme === "dark");
-  };
-
-  const updateHomeMotion = (timestamp = window.performance.now()) => {
-    homeMotionFrame = 0;
-    let continueHeroMotion = false;
-    syncHeaderState();
-    updatePageTheme();
-    const projectRect = projectScroll?.getBoundingClientRect();
-
-    if (heroScene && heroMotionQuery.matches && !motionPreference.matches) {
-      const heroRect = heroScene.getBoundingClientRect();
-      const startLine = Math.min(112, window.innerHeight * 0.14);
-      const travel = Math.max(320, heroRect.height - window.innerHeight + startLine);
-      const rawProgress = clamp((startLine - heroRect.top) / travel);
-      const targetProgress = smoothstep(0.1, 0.96, rawProgress);
-      const targetHandoff = projectRect
-        ? 1 - smoothstep(window.innerHeight * 0.35, window.innerHeight * 0.75, projectRect.top)
-        : 0;
-      const stickyTop = clamp(window.innerHeight * 0.135, 116, 140);
-      const heroPaddingBottom = Number.parseFloat(window.getComputedStyle(heroScene).paddingBottom) || 0;
-      const heroLayerBoundary = heroRect.bottom - heroPaddingBottom;
-      const targetCopyHold = heroCopyLayer
-        ? Math.max(0, stickyTop + heroCopyLayer.offsetHeight - heroLayerBoundary)
-        : 0;
-      const targetVisualHold = heroVisualLayer
-        ? Math.max(0, stickyTop + heroVisualLayer.offsetHeight - heroLayerBoundary)
-        : 0;
-
-      if (!heroProgressInitialized) {
-        renderedHeroProgress = targetProgress;
-        renderedHeroHandoff = targetHandoff;
-        renderedHeroCopyHold = targetCopyHold;
-        renderedHeroVisualHold = targetVisualHold;
-        heroProgressInitialized = true;
-      } else {
-        const elapsed = clamp(timestamp - lastHeroMotionTime, 8, 34);
-        const easing = 1 - Math.exp(-elapsed / 92);
-        const progressDifference = targetProgress - renderedHeroProgress;
-        const handoffDifference = targetHandoff - renderedHeroHandoff;
-
-        renderedHeroProgress += progressDifference * easing;
-        renderedHeroHandoff += handoffDifference * easing;
-        renderedHeroCopyHold = targetCopyHold;
-        renderedHeroVisualHold = targetVisualHold;
-
-        if (Math.abs(progressDifference) < 0.0005) {
-          renderedHeroProgress = targetProgress;
-        }
-        if (Math.abs(handoffDifference) < 0.0005) {
-          renderedHeroHandoff = targetHandoff;
-        }
-
-        if (
-          Math.abs(progressDifference) >= 0.0005
-          || Math.abs(handoffDifference) >= 0.0005
-        ) {
-          continueHeroMotion = true;
-        }
-      }
-
-      lastHeroMotionTime = timestamp;
-      const progress = renderedHeroProgress;
-      const handoffVisibility = 1 - renderedHeroHandoff;
-      const holdVisibility = 1 - smoothstep(0.92, 1, renderedHeroHandoff);
-      heroScene.style.setProperty("--hero-copy-y", `${(-progress * 22 + renderedHeroCopyHold * holdVisibility).toFixed(2)}px`);
-      heroScene.style.setProperty("--hero-copy-opacity", handoffVisibility.toFixed(3));
-      heroScene.style.setProperty("--hero-visual-y", `${(progress * 14 + renderedHeroVisualHold * holdVisibility).toFixed(2)}px`);
-      heroScene.style.setProperty("--hero-visual-scale", (1 + progress * 0.024).toFixed(4));
-      heroScene.style.setProperty("--hero-visual-opacity", handoffVisibility.toFixed(3));
-      heroScene.style.setProperty("--hero-prompt-opacity", (1 - clamp(progress / 0.22)).toFixed(3));
-    } else {
-      clearHeroMotion();
-    }
-
-    if (projectScroll && projectSteps.length && projectRect) {
-      const sectionRect = projectRect;
-      const projectProgress = clamp((window.innerHeight - sectionRect.top) / (sectionRect.height + window.innerHeight));
-      projectScroll.style.setProperty("--project-scroll-progress", projectProgress.toFixed(4));
-      if (sectionRect.top < window.innerHeight && sectionRect.bottom > 0) {
-        const stageRect = projectStageSticky?.getBoundingClientRect();
-        const targetLine = stageRect && stageRect.width > 0
-          ? clamp(stageRect.top + stageRect.height * 0.52, window.innerHeight * 0.38, window.innerHeight * 0.62)
-          : window.innerHeight * 0.5;
-        let closestIndex = 0;
-        let closestDistance = Number.POSITIVE_INFINITY;
-        projectSteps.forEach((step, index) => {
-          const rect = step.getBoundingClientRect();
-          const distance = Math.abs(rect.top + rect.height / 2 - targetLine);
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestIndex = index;
-          }
-        });
-        activateProject(closestIndex);
-      }
-    }
-
-    if (continueHeroMotion) {
-      requestHomeMotion();
-    }
-  };
-
-  const requestHomeMotion = () => {
-    if (!homeMotionFrame) {
-      homeMotionFrame = window.requestAnimationFrame(updateHomeMotion);
-    }
-  };
-
-  projectSteps.forEach((step, index) => {
-    step.addEventListener("focus", () => activateProject(index));
-    step.addEventListener("mouseenter", () => activateProject(index));
-  });
-
   const syncMotionPreference = () => {
-    root.classList.toggle("motion-ready", !motionPreference.matches);
-    if (motionPreference.matches) {
-      revealAll();
-    }
-    requestHomeMotion();
+    document.documentElement.classList.toggle("motion-ready", !motionPreference.matches);
+    if (motionPreference.matches) revealAll();
   };
-
   syncMotionPreference();
-  requestHomeMotion();
-  window.addEventListener("scroll", requestHomeMotion, { passive: true });
-  window.addEventListener("resize", requestHomeMotion);
+  syncHeaderState();
+  window.addEventListener("scroll", syncHeaderState, { passive: true });
   motionPreference.addEventListener?.("change", syncMotionPreference);
-  heroMotionQuery.addEventListener?.("change", requestHomeMotion);
 
   const focusableSelector = [
     "a[href]",
@@ -393,9 +203,19 @@ document.addEventListener("DOMContentLoaded", () => {
       lightboxTitle.id = "lightbox-dialog-title";
     }
 
+    // WebP versions exist for most zoom targets; fall back to the original on decode failure.
+    lightboxImage.addEventListener("error", () => {
+      const original = lightboxImage.getAttribute("data-fallback-src");
+      if (original && !lightboxImage.src.endsWith(original)) {
+        lightboxImage.src = original;
+      }
+    });
+
     const openLightbox = (target) => {
       lightboxOpener = target;
-      lightboxImage.src = target.getAttribute("data-zoom-image") || "";
+      const original = target.getAttribute("data-zoom-image") || "";
+      lightboxImage.setAttribute("data-fallback-src", original);
+      lightboxImage.src = target.getAttribute("data-zoom-image-webp") || original;
       lightboxImage.alt = target.getAttribute("data-zoom-alt") || "";
       if (lightboxTitle) {
         lightboxTitle.textContent = target.getAttribute("data-zoom-title") || "Expanded project image";
@@ -413,6 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeLightbox = () => {
       lightbox.classList.remove("is-open");
       lightbox.setAttribute("aria-hidden", "true");
+      lightboxImage.removeAttribute("data-fallback-src");
       lightboxImage.removeAttribute("src");
       lightboxImage.alt = "";
       body.classList.remove("modal-locked");

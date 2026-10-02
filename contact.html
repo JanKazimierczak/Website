@@ -3,22 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | JK Engineering</title>
+  <title>Contact Jan Kazimierczak</title>
   <meta name="description" content="Contact Jan Kazimierczak about engineering projects, research, technical collaboration, or student opportunities.">
-  <meta name="theme-color" content="#f4f0e8">
+  <meta name="theme-color" content="#f8f7f4">
   <link rel="canonical" href="https://jan.kazimierczak.eu/contact.html">
   <meta property="og:type" content="profile">
   <meta property="og:url" content="https://jan.kazimierczak.eu/contact.html">
-  <meta property="og:title" content="Contact | JK Engineering">
+  <meta property="og:title" content="Contact Jan Kazimierczak">
   <meta property="og:description" content="Email and professional links for Jan Kazimierczak.">
   <meta property="og:image" content="https://jan.kazimierczak.eu/assets/social-preview.png">
   <meta property="og:image:alt" content="Jan Kazimierczak Engineering Science portfolio">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/png" href="assets/jk-orbital-mark.png?v=20260801">
+  <link rel="icon" href="assets/favicon-32.png?v=20260821" sizes="32x32" type="image/png">
+  <link rel="icon" href="jk-favicon.svg?v=20260821" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20260821">
+  <link rel="manifest" href="site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20260730c">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20261001">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Jan Kazimierczak",
+    "url": "https://jan.kazimierczak.eu/contact.html",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Jan Kazimierczak",
+      "url": "https://jan.kazimierczak.eu/"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://jan.kazimierczak.eu/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Contact",
+        "item": "https://jan.kazimierczak.eu/contact.html"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -32,15 +68,17 @@
           </a>
           <ul class="nav-links">
             <li><a href="projects.html">Projects</a></li>
-            <li><a href="class-projects.html">Coursework</a></li>
-            <li><a href="individual-projects.html">Personal</a></li>
             <li><a href="about.html">About</a></li>
             <li><a class="nav-contact active" aria-current="page" href="contact.html">Contact</a></li>
           </ul>
-          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          <div class="nav-actions">
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          </div>
         </nav>
         <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile" data-mobile-nav>
-          <a href="projects.html">Projects</a><a href="class-projects.html">Coursework</a><a href="individual-projects.html">Personal</a><a href="about.html">About</a><a class="active" aria-current="page" href="contact.html">Contact</a>
+          <a href="projects.html">Projects</a>
+          <a href="about.html">About</a>
+          <a class="nav-contact active" aria-current="page" href="contact.html">Contact</a>
         </nav>
       </div>
     </header>
@@ -51,7 +89,7 @@
           <div class="contact-hero-copy">
             <div class="eyebrow">Contact</div>
             <h1>Let’s talk engineering.</h1>
-            <p>Send a project, research, collaboration, or student-opportunity enquiry without opening another page or email app.</p>
+            <p>Have a project in mind, a research question, or a student opportunity? I’d be glad to hear from you.</p>
             <div class="contact-topics" aria-label="Good reasons to reach out">
               <span class="small-label">Good reasons to reach out</span>
               <ul>
@@ -62,14 +100,14 @@
               </ul>
             </div>
             <a class="contact-email" href="mailto:jan.kazimierczak.alicante@gmail.com">
-              <span>Direct email fallback</span>
+              <span>Prefer email?</span>
               <strong>jan.kazimierczak.alicante@gmail.com</strong>
               <span aria-hidden="true">↗</span>
             </a>
           </div>
           <div class="contact-form-panel" data-form-panel>
             <div class="contact-form-topline">
-              <span>New message / 01</span>
+              <span>Get in touch</span>
               <span>* Required</span>
             </div>
             <form
@@ -81,7 +119,7 @@
             >
               <div class="contact-form-heading">
                 <div class="eyebrow">Write to me</div>
-                <h2 id="contact-form-title">Send the message from here.</h2>
+                <h2 id="contact-form-title">Send a message.</h2>
               </div>
 
               <input type="hidden" name="_subject" value="New message from the engineering portfolio">
@@ -199,6 +237,6 @@
       </div>
     </footer>
   </div>
-  <script src="site.js?v=20260730c"></script>
+  <script src="site.js?v=20261001"></script>
 </body>
 </html>

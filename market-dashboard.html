@@ -2,14 +2,190 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=stocks.html">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex,follow">
-  <title>Market dashboard moved | JK Engineering</title>
-  <link rel="icon" type="image/png" href="assets/jk-orbital-mark.png?v=20260801">
-  <link rel="canonical" href="https://jan.kazimierczak.eu/stocks.html">
+  <title>Market Dashboard Case Study — Jan Kazimierczak</title>
+  <meta name="description" content="A dependency-free browser market dashboard: custom SVG charting, a multi-source data layer built on public proxies, and an honest account of what breaks.">
+  <meta name="theme-color" content="#f8f7f4">
+  <link rel="canonical" href="https://jan.kazimierczak.eu/market-dashboard.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jan.kazimierczak.eu/market-dashboard.html">
+  <meta property="og:title" content="Market Dashboard Case Study — Jan Kazimierczak">
+  <meta property="og:description" content="Roughly 4,700 lines of vanilla JavaScript: custom SVG charting, a fallback-chained data layer, and the operating limits that come with public proxies.">
+  <meta property="og:image" content="https://jan.kazimierczak.eu/assets/market-dashboard-preview.png">
+  <meta property="og:image:alt" content="Dark market dashboard showing quote metrics and a custom price chart">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon-32.png?v=20260821" sizes="32x32" type="image/png">
+  <link rel="icon" href="jk-favicon.svg?v=20260821" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20260821">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20260821">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Market Dashboard",
+    "headline": "Market Dashboard Case Study",
+    "description": "A dependency-free browser market dashboard with custom SVG charting and a fallback-chained public-proxy data layer.",
+    "url": "https://jan.kazimierczak.eu/market-dashboard.html",
+    "image": "https://jan.kazimierczak.eu/assets/market-dashboard-preview.png",
+    "programmingLanguage": "JavaScript",
+    "author": { "@type": "Person", "name": "Jan Kazimierczak", "url": "https://jan.kazimierczak.eu/" },
+    "isPartOf": { "@type": "CollectionPage", "name": "Personal projects", "url": "https://jan.kazimierczak.eu/individual-projects.html" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jan.kazimierczak.eu/" },
+      { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://jan.kazimierczak.eu/projects.html" },
+      { "@type": "ListItem", "position": 3, "name": "Personal projects", "item": "https://jan.kazimierczak.eu/individual-projects.html" },
+      { "@type": "ListItem", "position": 4, "name": "Market Dashboard", "item": "https://jan.kazimierczak.eu/market-dashboard.html" }
+    ]
+  }
+  </script>
 </head>
-<body>
-  <main><p>The market dashboard has moved to <a href="stocks.html">the live dashboard</a>.</p></main>
+<body class="project-detail-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container">
+        <nav class="site-nav" aria-label="Primary">
+          <a class="brand" href="index.html" aria-label="Jan Kazimierczak, home">
+            <span class="brand-mark" aria-hidden="true">JK</span>
+            <span class="brand-copy"><span class="brand-name">Jan Kazimierczak</span><span class="brand-role">Engineering Science</span></span>
+          </a>
+          <ul class="nav-links">
+            <li><a class="active" aria-current="true" href="projects.html">Projects</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a class="nav-contact" href="contact.html">Contact</a></li>
+          </ul>
+          <div class="nav-actions">
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          </div>
+        </nav>
+        <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile" data-mobile-nav>
+          <a class="active" aria-current="true" href="projects.html">Projects</a>
+          <a href="about.html">About</a>
+          <a class="nav-contact" href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <div class="container">
+        <section class="page-hero project-case-hero">
+          <div class="page-meta-row">
+            <div class="eyebrow">Personal project · Browser software</div>
+            <a class="back-link" href="individual-projects.html"><span>Back to personal projects</span></a>
+          </div>
+          <h1>A market dashboard with no build step and no dependencies</h1>
+          <p>Roughly 4,700 lines of vanilla JavaScript that pull public market data through a chain of fallbacks, draw their own charts in SVG, and degrade in the open when a source goes down.</p>
+          <div class="cta-row report-link-row">
+            <a class="button" href="stocks.html">Open the live dashboard <span aria-hidden="true">↗</span></a>
+            <a class="button-secondary" href="discover.html">Open the discovery scanner</a>
+            <a class="button-secondary" href="#dashboard-limits">Read the limits first</a>
+          </div>
+        </section>
+
+        <section class="case-study-opening">
+          <figure class="case-study-hero-media">
+            <picture><source srcset="assets/market-dashboard-preview.webp" type="image/webp"><img src="assets/market-dashboard-preview.png" width="1280" height="720" alt="The dashboard showing a quote board, custom price chart, and news feed on a dark layout" fetchpriority="high" decoding="async"></picture>
+            <figcaption><span>Dashboard / Quote board, chart, news</span><span>Every panel is rendered from data fetched at run time in the browser.</span></figcaption>
+          </figure>
+          <aside class="case-fact-panel" aria-label="Project facts">
+            <div><span>Scope</span><strong>Two pages, one shared data layer</strong></div>
+            <div><span>Implementation</span><strong>~4,700 lines of vanilla JS</strong></div>
+            <div><span>Dependencies</span><strong>None — no framework, no build</strong></div>
+            <div><span>Charting</span><strong>Hand-written SVG renderer</strong></div>
+            <div><span>Status</span><strong>Personal tool · source-dependent</strong></div>
+          </aside>
+        </section>
+
+        <section class="case-narrative-section">
+          <div class="section-heading section-heading-split">
+            <div><div class="eyebrow">Brief</div><h2>Read the market without handing over an account.</h2></div>
+            <div class="prose-stack">
+              <p>Most market interfaces want a login, ship a megabyte of framework, and rent you the chart. I wanted the opposite: a page I could open from a bookmark, that stored nothing about me, and whose entire behaviour I could read in one file.</p>
+              <p>That constraint drove the whole design. No account means no server, which means no API keys, which means the data has to come from public endpoints reachable from a browser. No server also means no backend to cache in, so the caching, the retries, and the failure handling all had to live in the client.</p>
+              <p>The project is useful to me as a tool. It is on this site because the interesting part is not the finance — it is what a browser can be made to do with no dependencies and no privileged access, and where that approach runs out.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="system-section">
+          <div class="section-heading">
+            <div class="eyebrow">System</div>
+            <h2>Four layers, all running in the tab.</h2>
+          </div>
+          <ol class="system-flow">
+            <li><span>01</span><h3>Fetch</h3><p>Quotes, histories, and profiles are requested from public endpoints. Because none of them send CORS headers to a static site, each request is routed through a public reader proxy.</p></li>
+            <li><span>02</span><h3>Fall back</h3><p>Every source is a chain rather than a single call: alternate proxies, alternate response shapes, then an alternate provider. A dead link degrades one panel instead of the page.</p></li>
+            <li><span>03</span><h3>Cache</h3><p>Responses are held in <code>sessionStorage</code> with per-source expiry, so switching symbols and ranges re-renders from memory instead of re-requesting.</p></li>
+            <li><span>04</span><h3>Render</h3><p>Panels are rendered from plain template strings. Price history is drawn by a hand-written SVG renderer — axes, gridlines, path, and hover read-out — with no charting library.</p></li>
+          </ol>
+        </section>
+
+        <section id="dashboard-result" class="result-ledger" aria-labelledby="dashboard-results-title">
+          <div class="result-ledger-heading">
+            <div class="eyebrow">What is built</div>
+            <h2 id="dashboard-results-title">Two working surfaces over one data layer.</h2>
+          </div>
+          <div class="result-ledger-grid">
+            <article><span>Dashboard</span><strong>Quote board · chart · news</strong><p>Open, VWAP, previous close and related metrics, a seven-range price chart, company profile, and a headline feed on a timed refresh.</p></article>
+            <article><span>Discovery scanner</span><strong>Nine screens</strong><p>Top movers, most active, earnings radar, pullback watch, value watch, IPO watch, catalyst news, focus list, and a combined summary.</p></article>
+            <article><span>Chart</span><strong>7 ranges, 1D to 5Y</strong><p>Intraday through five years, each range mapped to the interval the upstream source actually serves.</p></article>
+            <article><span>Payload</span><strong>0 third-party scripts</strong><p>No CDN, no framework, no bundler. The pages load their own CSS and JS and nothing else.</p></article>
+          </div>
+        </section>
+
+        <section class="case-narrative-section">
+          <div class="section-heading section-heading-split">
+            <div><div class="eyebrow">The hard part</div><h2>Making an unreliable data layer fail quietly.</h2></div>
+            <div class="prose-stack">
+              <p>A public proxy is not a service you have a relationship with. It rate-limits without warning, changes response envelopes, and sometimes just stops. Early versions of this dashboard showed that honestly and unhelpfully: one bad request and a panel would sit empty with no explanation.</p>
+              <p>The fix was to treat every fetch as expected-to-fail. Requests carry an abort timeout so a hanging proxy cannot stall a panel. Each source is tried through more than one transport, and where two providers publish comparable data, the second is tried before the panel gives up. Panels that cannot resolve say so, and the rest of the page keeps working.</p>
+              <p>That is the part I would defend in a review. The finance is incidental; the structure is a client-side system designed around the assumption that its inputs are not dependable.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="dashboard-limits" class="limitations-panel" aria-labelledby="dashboard-limitations-title">
+          <div>
+            <div class="eyebrow">What this does not claim</div>
+            <h2 id="dashboard-limitations-title">A personal tool, not a financial product.</h2>
+          </div>
+          <ul>
+            <li>It is not investment advice and carries no guarantee of accuracy. Figures are whatever the upstream sources return, unaudited and unreconciled.</li>
+            <li>Data reaches the page through public reader proxies that can rate-limit, change format, or disappear. When that happens the affected panel will report that it could not load, and the page may look incomplete through no fault of the code.</li>
+            <li>Quotes are delayed and depend entirely on the upstream provider. Nothing here is real-time or exchange-grade.</li>
+            <li>There is no test suite and no error reporting. Failures are visible in the interface but are not recorded anywhere.</li>
+            <li>The honest next step is a small cached backend of my own. That would remove the proxy dependency and make the data layer something I actually control — at the cost of the "no server" constraint the project was built around.</li>
+          </ul>
+        </section>
+
+        <section class="contact-band compact-contact-band">
+          <div><div class="eyebrow">See it running</div><h2>Open the dashboard and watch what loads.</h2><p>Both pages are unlisted and provided as-is. If a panel reports that it could not load, that is the proxy layer described above, behaving exactly as documented.</p></div>
+          <div class="contact-band-actions">
+            <a class="button" href="stocks.html">Live dashboard</a>
+            <a class="button-secondary" href="individual-projects.html">Back to personal projects</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div><span class="footer-name">Jan Kazimierczak</span><p>Engineering Science portfolio · University of Toronto</p></div>
+        <nav aria-label="Footer"><a href="projects.html">Projects</a><a href="class-projects.html">Coursework</a><a href="individual-projects.html">Personal</a><a href="design.html">Design philosophy</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+        <p class="footer-meta">© <span data-year></span> Jan Kazimierczak</p>
+      </div>
+    </footer>
+  </div>
+  <script src="site.js?v=20260821"></script>
 </body>
 </html>

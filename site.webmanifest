@@ -1,0 +1,15 @@
+{
+  "name": "Jan Kazimierczak — Engineering Science Portfolio",
+  "short_name": "JK Engineering",
+  "description": "Coursework and personal engineering projects, carried from engineering decisions through inspectable evidence.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#f4f0e8",
+  "theme_color": "#f4f0e8",
+  "icons": [
+    { "src": "/assets/favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

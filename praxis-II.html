@@ -3,22 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Automated Screw Sorter Case Study | JK Engineering</title>
+  <title>Automated Screw Sorter Case Study — Jan Kazimierczak</title>
   <meta name="description" content="Praxis II team case study for an automated screw sorter: CAD architecture, subsystem prototypes, CNN classification results, piano-box testing, and limitations.">
-  <meta name="theme-color" content="#f4f0e8">
+  <meta name="theme-color" content="#f8f7f4">
   <link rel="canonical" href="https://jan.kazimierczak.eu/praxis-II.html">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://jan.kazimierczak.eu/praxis-II.html">
-  <meta property="og:title" content="Automated Screw Sorter Case Study | JK Engineering">
+  <meta property="og:title" content="Automated Screw Sorter Case Study — Jan Kazimierczak">
   <meta property="og:description" content="A team system concept combining drum feeding, camera classification, and mechanical length sorting.">
   <meta property="og:image" content="https://jan.kazimierczak.eu/assets/screw-sorter-overview.png">
   <meta property="og:image:alt" content="CAD enclosure of the automated screw sorting device">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/png" href="assets/jk-orbital-mark.png?v=20260801">
+  <link rel="icon" href="assets/favicon-32.png?v=20260821" sizes="32x32" type="image/png">
+  <link rel="icon" href="jk-favicon.svg?v=20260821" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20260821">
+  <link rel="manifest" href="site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20260730c">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20261001">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Automated Screw Sorting Device",
+    "description": "CAD, Raspberry Pi machine vision, and mechanical sorting for an automated Robertson screw sorter, with the classifier shortfall documented.",
+    "url": "https://jan.kazimierczak.eu/praxis-II.html",
+    "image": "https://jan.kazimierczak.eu/assets/screw-sorter-overview.png",
+    "author": {
+      "@type": "Person",
+      "name": "Jan Kazimierczak",
+      "url": "https://jan.kazimierczak.eu/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Jan Kazimierczak",
+      "url": "https://jan.kazimierczak.eu/"
+    },
+    "inLanguage": "en",
+    "about": "Mechanism design",
+    "keywords": "mechanism design, machine vision, Raspberry Pi, CNN classification"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://jan.kazimierczak.eu/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://jan.kazimierczak.eu/projects.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Coursework",
+        "item": "https://jan.kazimierczak.eu/class-projects.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Automated screw sorter",
+        "item": "https://jan.kazimierczak.eu/praxis-II.html"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -34,22 +92,18 @@
             </span>
           </a>
           <ul class="nav-links">
-            <li><a href="projects.html">Projects</a></li>
-            <li><a class="active" aria-current="page" href="class-projects.html">Coursework</a></li>
-            <li><a href="individual-projects.html">Personal</a></li>
+            <li><a class="active" aria-current="true" href="projects.html">Projects</a></li>
             <li><a href="about.html">About</a></li>
             <li><a class="nav-contact" href="contact.html">Contact</a></li>
           </ul>
-          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle>
-            <span></span><span></span><span></span>
-          </button>
+          <div class="nav-actions">
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          </div>
         </nav>
         <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile" data-mobile-nav>
-          <a href="projects.html">Projects</a>
-          <a class="active" aria-current="page" href="class-projects.html">Coursework</a>
-          <a href="individual-projects.html">Personal</a>
+          <a class="active" aria-current="true" href="projects.html">Projects</a>
           <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <a class="nav-contact" href="contact.html">Contact</a>
         </nav>
       </div>
     </header>
@@ -66,6 +120,7 @@
           <div class="cta-row report-link-row">
             <a class="button-ghost" href="One-pagers/praxis-ii-screw-sorting-one-pager.pdf" target="_blank" rel="noopener">Open one-pager (PDF)</a>
             <a class="button-secondary" href="reports/praxis-ii-rfp-e.pdf" target="_blank" rel="noopener">Open RFP (PDF)</a>
+                <a class="button-secondary" href="reports/praxis-ii-screw-sorting-report.pdf" target="_blank" rel="noopener">Open full report (PDF) <span class="sr-only">opens in a new tab</span></a>
           </div>
         </section>
 
@@ -96,7 +151,7 @@
                 </div>
               </article>
               <div class="image-frame">
-                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-summary-cad-enclosure.jpg" alt="CAD enclosure view of the automated screw sorting device">
+                <picture><source srcset="assets/thumbs/praxis2-assets-summary-cad-enclosure.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="730" src="assets/thumbs/praxis2-assets-summary-cad-enclosure.jpg" alt="CAD enclosure view of the automated screw sorting device"></picture>
               </div>
             </section>
 
@@ -162,58 +217,58 @@
               </div>
               <div class="gallery-grid">
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/cad-sorter-wheel.png" data-zoom-alt="CAD concept for the rotating screw sorter wheel" data-zoom-title="Drum feeder CAD" data-zoom-caption="A CAD concept showing the drum feeder mechanism used to orient and separate screws within the system.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-cad-sorter-wheel.jpg" alt="CAD concept for the rotating screw sorter wheel">
+              <div class="image-frame" data-zoom-image="praxis2-assets/cad-sorter-wheel.png" data-zoom-image-webp="praxis2-assets/cad-sorter-wheel.webp" data-zoom-alt="CAD concept for the rotating screw sorter wheel" data-zoom-title="Drum feeder CAD" data-zoom-caption="A CAD concept showing the drum feeder mechanism used to orient and separate screws within the system.">
+                <picture><source srcset="assets/thumbs/praxis2-assets-cad-sorter-wheel.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="584" src="assets/thumbs/praxis2-assets-cad-sorter-wheel.jpg" alt="CAD concept for the rotating screw sorter wheel"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/cad-sorter-assembly.png" data-zoom-alt="CAD assembly of the screw sorting concept" data-zoom-title="Vibratory bowl CAD" data-zoom-caption="An assembly-level CAD view of another feeder concept.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-cad-sorter-assembly.jpg" alt="CAD assembly of the screw sorting concept">
+              <div class="image-frame" data-zoom-image="praxis2-assets/cad-sorter-assembly.png" data-zoom-image-webp="praxis2-assets/cad-sorter-assembly.webp" data-zoom-alt="CAD assembly of the screw sorting concept" data-zoom-title="Vibratory bowl CAD" data-zoom-caption="An assembly-level CAD view of another feeder concept.">
+                <picture><source srcset="assets/thumbs/praxis2-assets-cad-sorter-assembly.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="808" src="assets/thumbs/praxis2-assets-cad-sorter-assembly.jpg" alt="CAD assembly of the screw sorting concept"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/summary-cad-enclosure.png" data-zoom-alt="CAD enclosure view of the automated screw sorting device" data-zoom-title="System CAD view" data-zoom-caption="A CAD render integrating the proposed drum, camera sorting, electronics, and piano box within the documented envelope. Integrated physical performance was not measured.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-summary-cad-enclosure.jpg" alt="CAD enclosure view of the automated screw sorting device">
+              <div class="image-frame" data-zoom-image="praxis2-assets/summary-cad-enclosure.png" data-zoom-image-webp="praxis2-assets/summary-cad-enclosure.webp" data-zoom-alt="CAD enclosure view of the automated screw sorting device" data-zoom-title="System CAD view" data-zoom-caption="A CAD render integrating the proposed drum, camera sorting, electronics, and piano box within the documented envelope. Integrated physical performance was not measured.">
+                <picture><source srcset="assets/thumbs/praxis2-assets-summary-cad-enclosure.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="730" src="assets/thumbs/praxis2-assets-summary-cad-enclosure.jpg" alt="CAD enclosure view of the automated screw sorting device"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/screw-profile-sketch.png" data-zoom-alt="Sketch of screw profile sorting logic" data-zoom-title="Screw head shape sorting concept" data-zoom-caption="A concept for sorting by head shape: contact with the detector closes a circuit that powers a servo, using differences in head height as the distinguishing feature.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-screw-profile-sketch.jpg" alt="Sketch of screw profile sorting logic">
+              <div class="image-frame" data-zoom-image="praxis2-assets/screw-profile-sketch.png" data-zoom-image-webp="praxis2-assets/screw-profile-sketch.webp" data-zoom-alt="Sketch of screw profile sorting logic" data-zoom-title="Screw head shape sorting concept" data-zoom-caption="A concept for sorting by head shape: contact with the detector closes a circuit that powers a servo, using differences in head height as the distinguishing feature.">
+                <picture><source srcset="assets/thumbs/praxis2-assets-screw-profile-sketch.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="451" src="assets/thumbs/praxis2-assets-screw-profile-sketch.jpg" alt="Sketch of screw profile sorting logic"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/switching-layout-sketch.png" data-zoom-alt="Sketch of the screw switching layout" data-zoom-title="Rail divider sketch" data-zoom-caption="A rail-divider concept intended to route screws by head shape using a signal from the classification subsystem.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-switching-layout-sketch.jpg" alt="Sketch of the screw switching layout">
+              <div class="image-frame" data-zoom-image="praxis2-assets/switching-layout-sketch.png" data-zoom-image-webp="praxis2-assets/switching-layout-sketch.webp" data-zoom-alt="Sketch of the screw switching layout" data-zoom-title="Rail divider sketch" data-zoom-caption="A rail-divider concept intended to route screws by head shape using a signal from the classification subsystem.">
+                <picture><source srcset="assets/thumbs/praxis2-assets-switching-layout-sketch.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="406" src="assets/thumbs/praxis2-assets-switching-layout-sketch.jpg" alt="Sketch of the screw switching layout"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/vision-detection-grid.png" data-zoom-alt="Computer-vision detection views for screw classification" data-zoom-title="Detection by contour output" data-zoom-caption="An unsuccessful contour-detection approach explored before the CNN classifier.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-vision-detection-grid.jpg" alt="Computer-vision detection views for screw classification">
+              <div class="image-frame" data-zoom-image="praxis2-assets/vision-detection-grid.png" data-zoom-image-webp="praxis2-assets/vision-detection-grid.webp" data-zoom-alt="Computer-vision detection views for screw classification" data-zoom-title="Detection by contour output" data-zoom-caption="An unsuccessful contour-detection approach explored before the CNN classifier.">
+                <picture><source srcset="assets/thumbs/praxis2-assets-vision-detection-grid.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="513" src="assets/thumbs/praxis2-assets-vision-detection-grid.jpg" alt="Computer-vision detection views for screw classification"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/physical-prototype.jpg" data-zoom-alt="Head-classification subsystem prototype" data-zoom-title="Classification subsystem prototype" data-zoom-caption="Prototype used to capture and classify screw-head images during subsystem testing.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-physical-prototype.jpg" alt="Head-classification subsystem prototype">
+              <div class="image-frame" data-zoom-image="praxis2-assets/physical-prototype.jpg" data-zoom-image-webp="praxis2-assets/physical-prototype.webp" data-zoom-alt="Head-classification subsystem prototype" data-zoom-title="Classification subsystem prototype" data-zoom-caption="Prototype used to capture and classify screw-head images during subsystem testing.">
+                <picture><source srcset="assets/thumbs/praxis2-assets-physical-prototype.webp" type="image/webp"><img loading="lazy" decoding="async" width="675" height="900" src="assets/thumbs/praxis2-assets-physical-prototype.jpg" alt="Head-classification subsystem prototype"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/head-type-comparison.png" data-zoom-alt="Final screw-head comparison" data-zoom-title="Head Type Comparison" data-zoom-caption="A physical comparison of two screw-head types used in subsystem development.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-head-type-comparison.jpg" alt="Final screw-head comparison used by the sorter">
+              <div class="image-frame" data-zoom-image="praxis2-assets/head-type-comparison.png" data-zoom-image-webp="praxis2-assets/head-type-comparison.webp" data-zoom-alt="Final screw-head comparison" data-zoom-title="Head Type Comparison" data-zoom-caption="A physical comparison of two screw-head types used in subsystem development.">
+                <picture><source srcset="assets/thumbs/praxis2-assets-head-type-comparison.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="455" src="assets/thumbs/praxis2-assets-head-type-comparison.jpg" alt="Final screw-head comparison used by the sorter"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/live-classification-round.jpg" data-zoom-alt="Live screw classification output highlighting a round part" data-zoom-title="Live Classification Output" data-zoom-caption="The live machine-learning classifier labels the visible part as a round washer.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-live-classification-round.jpg" alt="Live screw classification output highlighting a round part">
+              <div class="image-frame" data-zoom-image="praxis2-assets/live-classification-round.jpg" data-zoom-image-webp="praxis2-assets/live-classification-round.webp" data-zoom-alt="Live screw classification output highlighting a round part" data-zoom-title="Live Classification Output" data-zoom-caption="The live machine-learning classifier labels the visible part as a round washer.">
+                <picture><source srcset="assets/thumbs/praxis2-assets-live-classification-round.webp" type="image/webp"><img loading="lazy" decoding="async" width="506" height="900" src="assets/thumbs/praxis2-assets-live-classification-round.jpg" alt="Live screw classification output highlighting a round part"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/live-classification-oval.jpg" data-zoom-alt="Live screw classification output highlighting an oval part" data-zoom-title="Live Classification Variant" data-zoom-caption="The live machine-learning classifier labels the visible screw head as oval.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-live-classification-oval.jpg" alt="Live screw classification output highlighting an oval part">
+              <div class="image-frame" data-zoom-image="praxis2-assets/live-classification-oval.jpg" data-zoom-image-webp="praxis2-assets/live-classification-oval.webp" data-zoom-alt="Live screw classification output highlighting an oval part" data-zoom-title="Live Classification Variant" data-zoom-caption="The live machine-learning classifier labels the visible screw head as oval.">
+                <picture><source srcset="assets/thumbs/praxis2-assets-live-classification-oval.webp" type="image/webp"><img loading="lazy" decoding="async" width="506" height="900" src="assets/thumbs/praxis2-assets-live-classification-oval.jpg" alt="Live screw classification output highlighting an oval part"></picture>
               </div>
             </div>
             <div class="gallery-item gallery-tile">
-              <div class="image-frame" data-zoom-image="praxis2-assets/team-poster-photo.png" data-zoom-alt="Praxis II team presenting their screw sorting poster" data-zoom-title="Showcase Presentation" data-zoom-caption="The project team presenting the screw sorting system alongside the final poster during showcase.">
-                <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-team-poster-photo.jpg" alt="Praxis II team presenting their screw sorting poster">
+              <div class="image-frame" data-zoom-image="praxis2-assets/team-poster-photo.png" data-zoom-image-webp="praxis2-assets/team-poster-photo.webp" data-zoom-alt="Praxis II team presenting their screw sorting poster" data-zoom-title="Showcase Presentation" data-zoom-caption="The project team presenting the screw sorting system alongside the final poster during showcase.">
+                <picture><source srcset="assets/thumbs/praxis2-assets-team-poster-photo.webp" type="image/webp"><img loading="lazy" decoding="async" width="675" height="900" src="assets/thumbs/praxis2-assets-team-poster-photo.jpg" alt="Praxis II team presenting their screw sorting poster"></picture>
               </div>
             </div>
               </div>
@@ -376,8 +431,8 @@
       <section class="ctmf-modal-section">
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
-          <div class="image-frame" data-zoom-image="praxis2-assets/morph-chart.png" data-zoom-alt="Hand-drawn morph chart for the screw sorting system" data-zoom-title="Morph Chart" data-zoom-caption="The hand-drawn morph chart used to compare subsystem options for organization, length sorting, head sorting, transportation, and communication.">
-            <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-morph-chart.jpg" alt="Hand-drawn morph chart for the screw sorting system">
+          <div class="image-frame" data-zoom-image="praxis2-assets/morph-chart.png" data-zoom-image-webp="praxis2-assets/morph-chart.webp" data-zoom-alt="Hand-drawn morph chart for the screw sorting system" data-zoom-title="Morph Chart" data-zoom-caption="The hand-drawn morph chart used to compare subsystem options for organization, length sorting, head sorting, transportation, and communication.">
+            <picture><source srcset="assets/thumbs/praxis2-assets-morph-chart.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="652" src="assets/thumbs/praxis2-assets-morph-chart.jpg" alt="Hand-drawn morph chart for the screw sorting system"></picture>
           </div>
         </div>
         <p>
@@ -410,8 +465,8 @@
       <section class="ctmf-modal-section">
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
-          <div class="image-frame" data-zoom-image="praxis2-assets/pugh-chart-head-shape.png" data-zoom-alt="Pugh chart comparing head-shape sorting concepts" data-zoom-title="Pugh Chart - Head Shape" data-zoom-caption="The Pugh chart used to compare head-shape sorting approaches, including Raspberry Pi classification, thickness detection, and fit-shape methods.">
-            <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-pugh-chart-head-shape.jpg" alt="Pugh chart comparing head-shape sorting concepts">
+          <div class="image-frame" data-zoom-image="praxis2-assets/pugh-chart-head-shape.png" data-zoom-image-webp="praxis2-assets/pugh-chart-head-shape.webp" data-zoom-alt="Pugh chart comparing head-shape sorting concepts" data-zoom-title="Pugh Chart - Head Shape" data-zoom-caption="The Pugh chart used to compare head-shape sorting approaches, including Raspberry Pi classification, thickness detection, and fit-shape methods.">
+            <picture><source srcset="assets/thumbs/praxis2-assets-pugh-chart-head-shape.webp" type="image/webp"><img loading="lazy" decoding="async" width="900" height="506" src="assets/thumbs/praxis2-assets-pugh-chart-head-shape.jpg" alt="Pugh chart comparing head-shape sorting concepts"></picture>
           </div>
         </div>
         <p>
@@ -452,8 +507,8 @@
       <section class="ctmf-modal-section">
         <div class="small-label">How it appeared in the project</div>
         <div class="ctmf-modal-figure-grid">
-          <div class="image-frame" data-zoom-image="praxis2-assets/live-classification-oval.jpg" data-zoom-alt="Live classification result for oval screw head" data-zoom-title="Verification Testing Output" data-zoom-caption="A live verification-testing output from the classification system, showing the model identifying an oval screw head.">
-            <img loading="lazy" decoding="async" src="assets/thumbs/praxis2-assets-live-classification-oval.jpg" alt="Live classification result for oval screw head">
+          <div class="image-frame" data-zoom-image="praxis2-assets/live-classification-oval.jpg" data-zoom-image-webp="praxis2-assets/live-classification-oval.webp" data-zoom-alt="Live classification result for oval screw head" data-zoom-title="Verification Testing Output" data-zoom-caption="A live verification-testing output from the classification system, showing the model identifying an oval screw head.">
+            <picture><source srcset="assets/thumbs/praxis2-assets-live-classification-oval.webp" type="image/webp"><img loading="lazy" decoding="async" width="506" height="900" src="assets/thumbs/praxis2-assets-live-classification-oval.jpg" alt="Live classification result for oval screw head"></picture>
           </div>
         </div>
         <p>
@@ -488,6 +543,6 @@
     </div>
   </div>
 
-  <script src="site.js?v=20260730c"></script>
+  <script src="site.js?v=20261001"></script>
 </body>
 </html>

@@ -3,22 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Course Projects | JK Engineering</title>
+  <title>Coursework Projects — Jan Kazimierczak</title>
   <meta name="description" content="University of Toronto Engineering Science course projects by Jan Kazimierczak, with reports, calculations, prototypes, testing evidence, and explicit limitations.">
-  <meta name="theme-color" content="#f4f0e8">
+  <meta name="theme-color" content="#f8f7f4">
   <link rel="canonical" href="https://jan.kazimierczak.eu/class-projects.html">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jan.kazimierczak.eu/class-projects.html">
-  <meta property="og:title" content="Course Projects | JK Engineering">
+  <meta property="og:title" content="Coursework Projects — Jan Kazimierczak">
   <meta property="og:description" content="Engineering Science coursework documented through design decisions, analysis, prototypes, test evidence, and explicit limitations.">
   <meta property="og:image" content="https://jan.kazimierczak.eu/assets/social-preview.png">
   <meta property="og:image:alt" content="Jan Kazimierczak Engineering Science portfolio">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/png" href="assets/jk-orbital-mark.png?v=20260801">
+  <link rel="icon" href="assets/favicon-32.png?v=20260821" sizes="32x32" type="image/png">
+  <link rel="icon" href="jk-favicon.svg?v=20260821" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20260821">
+  <link rel="manifest" href="site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20260730c">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20261001">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Coursework Projects",
+    "description": "Course-based engineering work developed under shared requirements, schedules, and team responsibility.",
+    "url": "https://jan.kazimierczak.eu/class-projects.html",
+    "author": {
+      "@type": "Person",
+      "name": "Jan Kazimierczak",
+      "url": "https://jan.kazimierczak.eu/"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://jan.kazimierczak.eu/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://jan.kazimierczak.eu/projects.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Coursework",
+        "item": "https://jan.kazimierczak.eu/class-projects.html"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="portfolio-index-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -31,16 +74,18 @@
             <span class="brand-copy"><span class="brand-name">Jan Kazimierczak</span><span class="brand-role">Engineering Science</span></span>
           </a>
           <ul class="nav-links">
-            <li><a href="projects.html">Projects</a></li>
-            <li><a class="active" aria-current="page" href="class-projects.html">Coursework</a></li>
-            <li><a href="individual-projects.html">Personal</a></li>
+            <li><a class="active" aria-current="true" href="projects.html">Projects</a></li>
             <li><a href="about.html">About</a></li>
             <li><a class="nav-contact" href="contact.html">Contact</a></li>
           </ul>
-          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          <div class="nav-actions">
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          </div>
         </nav>
         <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile" data-mobile-nav>
-          <a href="projects.html">Projects</a><a class="active" aria-current="page" href="class-projects.html">Coursework</a><a href="individual-projects.html">Personal</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+          <a class="active" aria-current="true" href="projects.html">Projects</a>
+          <a href="about.html">About</a>
+          <a class="nav-contact" href="contact.html">Contact</a>
         </nav>
       </div>
     </header>
@@ -74,7 +119,7 @@
             <!-- Add future coursework by duplicating one complete .project-card article. -->
             <article class="project-card">
               <a class="project-card-media" href="CIV102Bridge.html">
-              <img src="assets/bridge-overview.jpg" width="1600" height="1200" alt="Top view of the completed CIV102 bridge" loading="eager" decoding="async">
+              <picture><source srcset="assets/bridge-overview.webp" type="image/webp"><img src="assets/bridge-overview.jpg" width="1600" height="1200" alt="Top view of the completed CIV102 bridge" loading="eager" decoding="async"></picture>
                 <span class="project-card-type">Course · Structures</span>
               </a>
               <div class="project-card-body">
@@ -95,7 +140,7 @@
 
             <article class="project-card">
               <a class="project-card-media is-contain" href="praxis-II.html">
-                <img src="assets/screw-sorter-overview.png" width="1200" height="973" alt="CAD enclosure of the automated screw sorting device" loading="lazy" decoding="async">
+                <picture><source srcset="assets/screw-sorter-overview.webp" type="image/webp"><img src="assets/screw-sorter-overview.png" width="1200" height="973" alt="CAD enclosure of the automated screw sorting device" loading="lazy" decoding="async"></picture>
                 <span class="project-card-type">Course · Mechanisms + vision</span>
               </a>
               <div class="project-card-body">
@@ -116,7 +161,7 @@
 
             <article class="project-card">
               <a class="project-card-media" href="praxis-I.html">
-                <img src="assets/bikepack-overview.jpg" width="1400" height="1050" alt="BikePack Buddy front-basket extension concept" loading="lazy" decoding="async">
+                <picture><source srcset="assets/bikepack-overview.webp" type="image/webp"><img src="assets/bikepack-overview.jpg" width="1400" height="1050" alt="BikePack Buddy front-basket extension concept" loading="lazy" decoding="async"></picture>
                 <span class="project-card-type">Course · Human-centred design</span>
               </a>
               <div class="project-card-body">
@@ -165,6 +210,6 @@
       </div>
     </footer>
   </div>
-  <script src="site.js?v=20260730c"></script>
+  <script src="site.js?v=20261001"></script>
 </body>
 </html>

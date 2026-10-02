@@ -3,22 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Engineering Projects | JK Engineering</title>
+  <title>Engineering Projects — Jan Kazimierczak</title>
   <meta name="description" content="Explore Jan Kazimierczak's University of Toronto Engineering Science coursework and personal projects, each documented with inspectable evidence.">
-  <meta name="theme-color" content="#f4f0e8">
+  <meta name="theme-color" content="#f8f7f4">
   <link rel="canonical" href="https://jan.kazimierczak.eu/projects.html">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jan.kazimierczak.eu/projects.html">
-  <meta property="og:title" content="Engineering Projects | JK Engineering">
+  <meta property="og:title" content="Engineering Projects — Jan Kazimierczak">
   <meta property="og:description" content="Course and personal engineering projects, documented from problem framing through evidence and limitations.">
   <meta property="og:image" content="https://jan.kazimierczak.eu/assets/social-preview.png">
   <meta property="og:image:alt" content="Jan Kazimierczak Engineering Science portfolio">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/png" href="assets/jk-orbital-mark.png?v=20260801">
+  <link rel="icon" href="assets/favicon-32.png?v=20260821" sizes="32x32" type="image/png">
+  <link rel="icon" href="jk-favicon.svg?v=20260821" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20260821">
+  <link rel="manifest" href="site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20260730c">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20261001">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Engineering Projects",
+    "description": "Coursework and personal engineering projects, each documented with inspectable evidence.",
+    "url": "https://jan.kazimierczak.eu/projects.html",
+    "author": {
+      "@type": "Person",
+      "name": "Jan Kazimierczak",
+      "url": "https://jan.kazimierczak.eu/"
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Jan Kazimierczak",
+      "url": "https://jan.kazimierczak.eu/"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://jan.kazimierczak.eu/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://jan.kazimierczak.eu/projects.html"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="work-overview-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -32,15 +74,17 @@
           </a>
           <ul class="nav-links">
             <li><a class="active" aria-current="page" href="projects.html">Projects</a></li>
-            <li><a href="class-projects.html">Coursework</a></li>
-            <li><a href="individual-projects.html">Personal</a></li>
             <li><a href="about.html">About</a></li>
             <li><a class="nav-contact" href="contact.html">Contact</a></li>
           </ul>
-          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          <div class="nav-actions">
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-nav-toggle><span></span><span></span><span></span></button>
+          </div>
         </nav>
         <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile" data-mobile-nav>
-          <a class="active" aria-current="page" href="projects.html">Projects</a><a href="class-projects.html">Coursework</a><a href="individual-projects.html">Personal</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+          <a class="active" aria-current="page" href="projects.html">Projects</a>
+          <a href="about.html">About</a>
+          <a class="nav-contact" href="contact.html">Contact</a>
         </nav>
       </div>
     </header>
@@ -49,9 +93,9 @@
       <div class="container">
         <section class="page-hero page-hero-editorial work-library-hero">
           <div class="eyebrow">Project library</div>
-          <h1>Engineering work, organized by context.</h1>
+          <h1>Engineering projects.</h1>
           <div class="page-hero-grid">
-            <p>Explore team-based coursework and personal projects across physical systems, software, analysis, prototyping, and technical communication. Each case study preserves the problem, decisions, evidence, and limits needed for careful review.</p>
+            <p>Coursework and personal projects across structures, mechanisms, aerodynamics, and software. Each case study brings together the problem, design decisions, and results.</p>
             <div class="page-index" aria-label="Project categories">
               <span>Coursework · Team engineering under shared constraints</span>
               <span>Personal · Self-directed experiments and technical systems</span>
@@ -62,7 +106,7 @@
         <section class="work-track-grid" aria-label="Project categories">
           <article class="work-track-card work-track-course">
             <a class="work-track-media" href="class-projects.html" aria-label="Explore coursework">
-              <img src="assets/bridge-overview.jpg" width="1600" height="1200" alt="Top view of the completed CIV102 bridge" loading="eager" decoding="async">
+              <picture><source srcset="assets/bridge-overview.webp" type="image/webp"><img src="assets/bridge-overview.jpg" width="1600" height="1200" alt="Top view of the completed CIV102 bridge" loading="eager" decoding="async"></picture>
               <span>Coursework</span>
             </a>
             <div class="work-track-copy">
@@ -80,7 +124,7 @@
 
           <article class="work-track-card work-track-independent">
             <a class="work-track-media work-track-media-booster" href="individual-projects.html" aria-label="Explore personal projects">
-              <img src="assets/orbital-booster/wind-tunnel-team.jpg" width="495" height="370" alt="Jan Kazimierczak and a teammate standing behind their custom wind tunnel" loading="lazy" decoding="async">
+              <picture><source srcset="assets/orbital-booster/wind-tunnel-team.webp" type="image/webp"><img src="assets/orbital-booster/wind-tunnel-team.jpg" width="495" height="370" alt="Jan Kazimierczak and a teammate standing behind their custom wind tunnel" loading="lazy" decoding="async"></picture>
               <span>Personal work</span>
             </a>
             <div class="work-track-copy">
@@ -99,8 +143,8 @@
 
         <section class="proof-section">
           <div class="section-heading section-heading-split">
-            <div><div class="eyebrow">Selected proof</div><h2>Results worth opening.</h2></div>
-            <p>A quick route to the evidence that best represents the portfolio. Each row leads to the full context, including what the result does not establish.</p>
+            <div><div class="eyebrow">Selected proof</div><h2>Explore the results.</h2></div>
+            <p>Go directly to a case study for calculations, test results, and the full project context.</p>
           </div>
           <div class="proof-list">
             <a href="CIV102Bridge.html">
@@ -124,8 +168,15 @@
               <span class="proof-result">≈98% mechanical subsystem result; classifier shortfall documented</span>
               <span class="proof-arrow" aria-hidden="true">↗</span>
             </a>
-            <a href="praxis-I.html">
+            <a href="market-dashboard.html">
               <span class="proof-index">04</span>
+              <span class="proof-type">Personal · Browser software</span>
+              <strong>Market dashboard</strong>
+              <span class="proof-result">~4,700 lines of vanilla JS; runs with no server, and documents where that breaks</span>
+              <span class="proof-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a href="praxis-I.html">
+              <span class="proof-index">05</span>
               <span class="proof-type">Course · Human-centred design</span>
               <strong>BikePack Buddy</strong>
               <span class="proof-result">Stakeholder framing, four-position proxy test, and qualified recommendation</span>
@@ -149,6 +200,6 @@
       </div>
     </footer>
   </div>
-  <script src="site.js?v=20260730c"></script>
+  <script src="site.js?v=20261001"></script>
 </body>
 </html>
