@@ -4966,3 +4966,80 @@ picture > source { display: none; }
 @media (max-width: 560px) {
   .contact-hero-form .contact-hero-copy h1 { font-size: var(--step-4); }
 }
+
+/* Student-team involvement, with interests separate from completed work. */
+.team-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
+  gap: var(--space-xl);
+  align-items: center;
+  padding: var(--space-xl);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-strong);
+  scroll-margin-top: 110px;
+}
+
+.team-section h2 {
+  margin: var(--space-sm) 0 var(--space-xs);
+  font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  font-size: var(--step-3);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.team-section-copy > p {
+  max-width: 58ch;
+  margin: var(--space-sm) 0 0;
+  color: var(--text-soft);
+  font-size: var(--step-0);
+}
+
+.team-section-copy > .team-role {
+  margin: 0 0 var(--space-md);
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+.team-section-copy > .team-current-focus {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.team-interests h3 {
+  margin: 0 0 var(--space-sm);
+  color: var(--text-muted);
+  font-size: var(--step--1);
+  font-weight: 500;
+}
+
+.team-interests ul {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.team-interests li {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: var(--space-xs);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--step--1);
+}
+
+.team-interests li > span {
+  color: var(--text-muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: var(--step--2);
+}
+
+@media (max-width: 760px) {
+  .team-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+  }
+}
