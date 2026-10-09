@@ -5,7 +5,9 @@ const args = process.argv.slice(2);
 const strict = args.includes("--strict");
 const rootArg = args.find((arg) => !arg.startsWith("--")) || ".";
 const root = path.resolve(rootArg);
-const siteOrigin = "https://jan.kazimierczak.eu";
+const siteUrl = "https://jankazimierczak.github.io/Website";
+const siteOrigin = new URL(siteUrl).origin;
+const sitePath = `${new URL(siteUrl).pathname}/`;
 
 const indexablePages = [
   "index.html",
@@ -59,7 +61,6 @@ const requiredFiles = [
   "reports/orbital-booster-aerodynamics-final-report.pdf",
   "reports/praxis-ii-screw-sorting-report.pdf",
   "One-pagers/praxis-ii-screw-sorting-one-pager.pdf",
-  "CNAME",
   "robots.txt",
   "sitemap.xml"
 ];
@@ -118,7 +119,7 @@ for (const file of htmlFiles) {
 
   const canonicalMatches = [...html.matchAll(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/gi)];
   if (indexablePages.includes(file)) {
-    const expectedCanonical = file === "index.html" ? `${siteOrigin}/` : `${siteOrigin}/${file}`;
+    const expectedCanonical = file === "index.html" ? `${siteUrl}/` : `${siteUrl}/${file}`;
     const documentTitle = html.match(/<title>([^<]+)<\/title>/i)?.[1];
     const canonical = canonicalMatches[0]?.[1];
     const ogType = html.match(/<meta\b[^>]*property=["']og:type["'][^>]*content=["']([^"']+)["'][^>]*>/i)?.[1];
@@ -146,9 +147,9 @@ for (const file of htmlFiles) {
       } catch {
         parsedOgImage = null;
       }
-      record(parsedOgImage?.origin === siteOrigin, `${label}: og:image must be an absolute same-origin URL`);
-      if (parsedOgImage?.origin === siteOrigin) {
-        const imagePath = decodeURIComponent(parsedOgImage.pathname.replace(/^\/+/, ""));
+      record(parsedOgImage?.origin === siteOrigin && parsedOgImage.pathname.startsWith(sitePath), `${label}: og:image must be an absolute same-origin URL`);
+      if (parsedOgImage?.origin === siteOrigin && parsedOgImage.pathname.startsWith(sitePath)) {
+        const imagePath = decodeURIComponent(parsedOgImage.pathname.slice(sitePath.length));
         record(await exists(path.join(root, imagePath)), `${label}: og:image target does not exist (${ogImage})`);
       }
     }
@@ -158,7 +159,7 @@ for (const file of htmlFiles) {
     const refreshTarget = html.match(/<meta\b[^>]*http-equiv=["']refresh["'][^>]*content=["'][^"']*url=([^"';\s>]+)[^"']*["'][^>]*>/i)?.[1];
     const canonical = canonicalMatches[0]?.[1];
     const expectedCanonical = refreshTarget
-      ? new URL(refreshTarget, `${siteOrigin}/${file}`).href
+      ? new URL(refreshTarget, `${siteUrl}/${file}`).href
       : null;
 
     record(/<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex[^"']*follow[^"']*["'][^>]*>/i.test(html), `${label}: redirect must use noindex,follow`);
@@ -245,8 +246,9 @@ for (const file of htmlFiles) {
     if (!cleanReference) {
       continue;
     }
+    record(!cleanReference.startsWith("/") || cleanReference.startsWith(sitePath), `${label}: local URL must stay within ${sitePath} (${reference})`);
     const target = cleanReference.startsWith("/")
-      ? path.join(root, cleanReference.replace(/^\/+/, ""))
+      ? path.join(root, cleanReference.slice(sitePath.length))
       : path.resolve(path.dirname(absolute), cleanReference);
     record(await exists(target), `${label}: missing local target ${reference}`);
   }
@@ -270,23 +272,21 @@ for (const file of [
 }
 
 const cnamePath = path.join(root, "CNAME");
-if (await exists(cnamePath)) {
-  record((await readFile(cnamePath, "utf8")).trim() === "jan.kazimierczak.eu", "CNAME: expected jan.kazimierczak.eu");
-}
+record(!(await exists(cnamePath)), "CNAME: default GitHub Pages hosting must not redirect to a custom domain");
 
 const robotsPath = path.join(root, "robots.txt");
 if (await exists(robotsPath)) {
   const robots = await readFile(robotsPath, "utf8");
   const sitemapLines = robots.match(/^Sitemap:\s*.+$/gim) || [];
   record(sitemapLines.length === 1, "robots.txt: expected exactly one Sitemap directive");
-  record(sitemapLines[0]?.trim() === `Sitemap: ${siteOrigin}/sitemap.xml`, "robots.txt: Sitemap directive must use the production URL");
+  record(sitemapLines[0]?.trim() === `Sitemap: ${siteUrl}/sitemap.xml`, "robots.txt: Sitemap directive must use the production URL");
 }
 
 const sitemapPath = path.join(root, "sitemap.xml");
 if (await exists(sitemapPath)) {
   const sitemap = await readFile(sitemapPath, "utf8");
   const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  const expectedUrls = indexablePages.map((file) => file === "index.html" ? `${siteOrigin}/` : `${siteOrigin}/${file}`);
+  const expectedUrls = indexablePages.map((file) => file === "index.html" ? `${siteUrl}/` : `${siteUrl}/${file}`);
   const duplicates = sitemapUrls.filter((url, index) => sitemapUrls.indexOf(url) !== index);
 
   record(duplicates.length === 0, `sitemap.xml: duplicate URL(s): ${[...new Set(duplicates)].join(", ")}`);

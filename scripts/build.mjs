@@ -39,8 +39,7 @@ const files = [
   "Praxispositionstatementflowchart.png",
   "Praxispositionstatementflowchart.webp",
   "robots.txt",
-  "sitemap.xml",
-  "CNAME"
+  "sitemap.xml"
 ];
 
 const directories = [

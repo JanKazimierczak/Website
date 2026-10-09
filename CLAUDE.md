@@ -96,6 +96,11 @@ and a `BreadcrumbList`. Copy the pattern from an existing case study.
 
 ## Deployment
 
+The public address is **https://jankazimierczak.github.io/Website/**. Keep
+absolute site URLs under `/Website/`; do not add a `CNAME` file unless a custom
+domain is intentionally configured. The web manifest uses relative paths,
+and the 404 page uses `/Website/` paths so nested missing URLs recover correctly.
+
 Pages is currently set to **deploy from the `main` branch root**, so committing
 to `main` publishes. `.github/workflows/ci.yml` validates every push but does
 not deploy.

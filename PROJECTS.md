@@ -41,7 +41,7 @@ Run:
 
 ```sh
 npm test
-SITE_URL=https://jan.kazimierczak.eu npm run build
+SITE_URL=https://jankazimierczak.github.io/Website npm run build
 npm run test:production
 ```
 
